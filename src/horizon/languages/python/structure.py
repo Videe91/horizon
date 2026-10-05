@@ -36,6 +36,7 @@ class PythonStructureFact:
     line_end: int
     byte_start: int
     byte_end: int
+    structural_parent_id: str | None
     source_evidence_id: str
     evidence_id: str
 
@@ -171,6 +172,7 @@ def _fact_identity(
     module: str | None,
     alias: str | None,
     scope: tuple[str, ...],
+    structural_parent_id: str | None,
     line_start: int,
     line_end: int,
     byte_start: int,
@@ -189,6 +191,7 @@ def _fact_identity(
         module or "",
         alias or "",
         "/".join(scope),
+        structural_parent_id or "",
         str(line_start),
         str(line_end),
         str(byte_start),
@@ -226,6 +229,8 @@ class _StructureVisitor(
 
         self._scope: list[str] = []
 
+        self._structural_parent_ids: list[str] = []
+
         self.facts: list[
             PythonStructureFact
         ] = []
@@ -239,10 +244,19 @@ class _StructureVisitor(
         module: str | None = None,
         alias: str | None = None,
         scope: tuple[str, ...] | None = None,
-    ) -> None:
+        structural_parent_id: str | None = None,
+    ) -> PythonStructureFact:
         if scope is None:
             scope = tuple(
                 self._scope
+            )
+
+        if (
+            structural_parent_id is None
+            and self._structural_parent_ids
+        ):
+            structural_parent_id = (
+                self._structural_parent_ids[-1]
             )
 
         if node is None:
@@ -280,40 +294,55 @@ class _StructureVisitor(
             module=module,
             alias=alias,
             scope=scope,
+            structural_parent_id=(
+                structural_parent_id
+            ),
             line_start=line_start,
             line_end=line_end,
             byte_start=byte_start,
             byte_end=byte_end,
         )
 
-        self.facts.append(
-            PythonStructureFact(
-                kind=kind,
-                name=name,
-                module=module,
-                alias=alias,
-                scope=scope,
-                line_start=line_start,
-                line_end=line_end,
-                byte_start=byte_start,
-                byte_end=byte_end,
-                source_evidence_id=(
-                    self._blob.evidence_id
-                ),
-                evidence_id=evidence_id,
-            )
+        fact = PythonStructureFact(
+            kind=kind,
+            name=name,
+            module=module,
+            alias=alias,
+            scope=scope,
+            line_start=line_start,
+            line_end=line_end,
+            byte_start=byte_start,
+            byte_end=byte_end,
+            structural_parent_id=(
+                structural_parent_id
+            ),
+            source_evidence_id=(
+                self._blob.evidence_id
+            ),
+            evidence_id=evidence_id,
         )
+
+        self.facts.append(
+            fact
+        )
+
+        return fact
 
     def add_module(
         self,
     ) -> None:
-        self._add_fact(
+        fact = self._add_fact(
             kind=(
                 PythonStructureKind.MODULE
             ),
             name=self._blob.path,
             node=None,
             scope=(),
+            structural_parent_id=None,
+        )
+
+        self._structural_parent_ids.append(
+            fact.evidence_id
         )
 
     def visit_Import(
@@ -354,6 +383,7 @@ class _StructureVisitor(
         self,
         decorators: list[ast.expr],
         decorated_scope: tuple[str, ...],
+        definition_id: str,
     ) -> None:
         for decorator in decorators:
             name = _qualified_name(
@@ -363,18 +393,28 @@ class _StructureVisitor(
             if name is None:
                 name = "<dynamic>"
 
-            self._add_fact(
+            decorator_fact = self._add_fact(
                 kind=(
                     PythonStructureKind.DECORATOR
                 ),
                 name=name,
                 node=decorator,
                 scope=decorated_scope,
+                structural_parent_id=(
+                    definition_id
+                ),
             )
 
-            self.visit(
-                decorator
+            self._structural_parent_ids.append(
+                decorator_fact.evidence_id
             )
+
+            try:
+                self.visit(
+                    decorator
+                )
+            finally:
+                self._structural_parent_ids.pop()
 
     def visit_ClassDef(
         self,
@@ -384,7 +424,7 @@ class _StructureVisitor(
             self._scope
         )
 
-        self._add_fact(
+        class_fact = self._add_fact(
             kind=(
                 PythonStructureKind.CLASS_DEFINITION
             ),
@@ -401,10 +441,15 @@ class _StructureVisitor(
         self._visit_decorators(
             node.decorator_list,
             decorated_scope,
+            class_fact.evidence_id,
         )
 
         self._scope.append(
             node.name
+        )
+
+        self._structural_parent_ids.append(
+            class_fact.evidence_id
         )
 
         try:
@@ -413,6 +458,7 @@ class _StructureVisitor(
                     statement
                 )
         finally:
+            self._structural_parent_ids.pop()
             self._scope.pop()
 
     def visit_FunctionDef(
@@ -442,7 +488,7 @@ class _StructureVisitor(
             self._scope
         )
 
-        self._add_fact(
+        function_fact = self._add_fact(
             kind=kind,
             name=node.name,
             node=node,
@@ -457,10 +503,15 @@ class _StructureVisitor(
         self._visit_decorators(
             node.decorator_list,
             decorated_scope,
+            function_fact.evidence_id,
         )
 
         self._scope.append(
             node.name
+        )
+
+        self._structural_parent_ids.append(
+            function_fact.evidence_id
         )
 
         try:
@@ -469,6 +520,7 @@ class _StructureVisitor(
                     statement
                 )
         finally:
+            self._structural_parent_ids.pop()
             self._scope.pop()
 
     def visit_Call(
@@ -482,7 +534,7 @@ class _StructureVisitor(
         if name is None:
             name = "<dynamic>"
 
-        self._add_fact(
+        call_fact = self._add_fact(
             kind=(
                 PythonStructureKind.CALL
             ),
@@ -490,9 +542,16 @@ class _StructureVisitor(
             node=node,
         )
 
-        self.generic_visit(
-            node
+        self._structural_parent_ids.append(
+            call_fact.evidence_id
         )
+
+        try:
+            self.generic_visit(
+                node
+            )
+        finally:
+            self._structural_parent_ids.pop()
 
 
 def _analysis_identity(
