@@ -1,9 +1,11 @@
 from __future__ import annotations
 
 import ast
+import tokenize
 from dataclasses import dataclass
 from enum import Enum
 from hashlib import sha256
+from io import BytesIO
 
 from horizon.repository.git_blob import (
     GitBlobEvidence,
@@ -31,6 +33,12 @@ class PythonStructureFact:
     name: str
     module: str | None
     alias: str | None
+
+    callee_expression: str | None
+    callee_byte_start: int | None
+    callee_byte_end: int | None
+    callee_evidence_id: str | None
+
     scope: tuple[str, ...]
     line_start: int
     line_end: int
@@ -213,6 +221,41 @@ def _fact_identity(
     )
 
 
+def _callee_identity(
+    *,
+    source_evidence_id: str,
+    call_evidence_id: str,
+    expression: str,
+    byte_start: int,
+    byte_end: int,
+) -> str:
+    digest = sha256()
+
+    digest.update(
+        b"horizon.python-callee-expression.v1\\0"
+    )
+
+    for value in (
+        source_evidence_id,
+        call_evidence_id,
+        expression,
+        str(byte_start),
+        str(byte_end),
+    ):
+        digest.update(
+            value.encode(
+                "utf-8",
+                errors="surrogateescape",
+            )
+        )
+        digest.update(b"\\0")
+
+    return (
+        "python-callee-expression:"
+        + digest.hexdigest()
+    )
+
+
 class _StructureVisitor(
     ast.NodeVisitor,
 ):
@@ -227,6 +270,47 @@ class _StructureVisitor(
             blob.content
         )
 
+        try:
+            (
+                self._encoding,
+                _,
+            ) = tokenize.detect_encoding(
+                BytesIO(
+                    blob.content
+                ).readline
+            )
+
+            self._source_text = (
+                blob.content.decode(
+                    self._encoding
+                )
+            )
+
+            self._source_lines = (
+                self._source_text.splitlines(
+                    keepends=True
+                )
+            )
+
+            self._tokens = tuple(
+                tokenize.tokenize(
+                    BytesIO(
+                        blob.content
+                    ).readline
+                )
+            )
+
+        except (
+            SyntaxError,
+            UnicodeDecodeError,
+            LookupError,
+            tokenize.TokenError,
+        ) as exc:
+            raise PythonSyntaxEvidenceError(
+                "unable to tokenize Python evidence "
+                f"{blob.path!r}: {exc}"
+            ) from exc
+
         self._scope: list[str] = []
 
         self._structural_parent_ids: list[str] = []
@@ -234,6 +318,185 @@ class _StructureVisitor(
         self.facts: list[
             PythonStructureFact
         ] = []
+
+    def _position_to_byte(
+        self,
+        position: tuple[int, int],
+    ) -> int:
+        row, column = position
+
+        if row <= 0:
+            raise PythonSyntaxEvidenceError(
+                "invalid Python token position"
+            )
+
+        line = self._source_lines[
+            row - 1
+        ]
+
+        fragment_encoding = (
+            "utf-8"
+            if self._encoding.lower().replace(
+                "_",
+                "-",
+            )
+            == "utf-8-sig"
+            else self._encoding
+        )
+
+        base = self._starts[
+            row - 1
+        ]
+
+        if (
+            row == 1
+            and self._encoding.lower().replace(
+                "_",
+                "-",
+            )
+            == "utf-8-sig"
+            and self._blob.content.startswith(
+                b"\\xef\\xbb\\xbf"
+            )
+        ):
+            base += 3
+
+        prefix = line[
+            :column
+        ].encode(
+            fragment_encoding
+        )
+
+        return (
+            base
+            + len(prefix)
+        )
+
+    def _callee_source(
+        self,
+        node: ast.Call,
+    ) -> tuple[
+        str,
+        int,
+        int,
+    ]:
+        (
+            _,
+            _,
+            call_start,
+            call_end,
+        ) = _node_span(
+            node,
+            self._starts,
+        )
+
+        (
+            _,
+            _,
+            _,
+            semantic_end,
+        ) = _node_span(
+            node.func,
+            self._starts,
+        )
+
+        trivia = {
+            tokenize.ENCODING,
+            tokenize.ENDMARKER,
+            tokenize.NEWLINE,
+            tokenize.NL,
+            tokenize.INDENT,
+            tokenize.DEDENT,
+            tokenize.COMMENT,
+        }
+
+        significant: list[
+            tuple[
+                tokenize.TokenInfo,
+                int,
+                int,
+            ]
+        ] = []
+
+        argument_open: int | None = None
+
+        for token in self._tokens:
+            if token.type in trivia:
+                continue
+
+            start = self._position_to_byte(
+                token.start
+            )
+
+            end = self._position_to_byte(
+                token.end
+            )
+
+            if start < call_start:
+                continue
+
+            if start >= call_end:
+                break
+
+            if (
+                token.type == tokenize.OP
+                and token.string == "("
+                and start >= semantic_end
+            ):
+                argument_open = start
+                break
+
+            significant.append(
+                (
+                    token,
+                    start,
+                    end,
+                )
+            )
+
+        if (
+            argument_open is None
+            or not significant
+        ):
+            raise PythonSyntaxEvidenceError(
+                "unable to preserve exact "
+                "Python callee expression"
+            )
+
+        callee_start = (
+            significant[0][1]
+        )
+
+        callee_end = (
+            significant[-1][2]
+        )
+
+        if callee_end > argument_open:
+            raise PythonSyntaxEvidenceError(
+                "invalid Python callee span"
+            )
+
+        raw = self._blob.content[
+            callee_start:
+            callee_end
+        ]
+
+        try:
+            expression = raw.decode(
+                self._encoding
+            )
+
+        except UnicodeDecodeError as exc:
+            raise PythonSyntaxEvidenceError(
+                "unable to decode Python "
+                "callee expression"
+            ) from exc
+
+        return (
+            expression,
+            callee_start,
+            callee_end,
+        )
 
     def _add_fact(
         self,
@@ -243,6 +506,9 @@ class _StructureVisitor(
         node: ast.AST | None,
         module: str | None = None,
         alias: str | None = None,
+        callee_expression: str | None = None,
+        callee_byte_start: int | None = None,
+        callee_byte_end: int | None = None,
         scope: tuple[str, ...] | None = None,
         structural_parent_id: str | None = None,
     ) -> PythonStructureFact:
@@ -303,11 +569,56 @@ class _StructureVisitor(
             byte_end=byte_end,
         )
 
+        callee_evidence_id: str | None = None
+
+        if kind == PythonStructureKind.CALL:
+            if (
+                callee_expression is None
+                or callee_byte_start is None
+                or callee_byte_end is None
+            ):
+                raise PythonSyntaxEvidenceError(
+                    "call fact is missing its "
+                    "callee expression evidence"
+                )
+
+            callee_evidence_id = (
+                _callee_identity(
+                    source_evidence_id=(
+                        self._blob.evidence_id
+                    ),
+                    call_evidence_id=(
+                        evidence_id
+                    ),
+                    expression=(
+                        callee_expression
+                    ),
+                    byte_start=(
+                        callee_byte_start
+                    ),
+                    byte_end=(
+                        callee_byte_end
+                    ),
+                )
+            )
+
         fact = PythonStructureFact(
             kind=kind,
             name=name,
             module=module,
             alias=alias,
+            callee_expression=(
+                callee_expression
+            ),
+            callee_byte_start=(
+                callee_byte_start
+            ),
+            callee_byte_end=(
+                callee_byte_end
+            ),
+            callee_evidence_id=(
+                callee_evidence_id
+            ),
             scope=scope,
             line_start=line_start,
             line_end=line_end,
@@ -527,6 +838,14 @@ class _StructureVisitor(
         self,
         node: ast.Call,
     ) -> None:
+        (
+            callee_expression,
+            callee_byte_start,
+            callee_byte_end,
+        ) = self._callee_source(
+            node
+        )
+
         name = _qualified_name(
             node.func
         )
@@ -540,6 +859,15 @@ class _StructureVisitor(
             ),
             name=name,
             node=node,
+            callee_expression=(
+                callee_expression
+            ),
+            callee_byte_start=(
+                callee_byte_start
+            ),
+            callee_byte_end=(
+                callee_byte_end
+            ),
         )
 
         self._structural_parent_ids.append(
