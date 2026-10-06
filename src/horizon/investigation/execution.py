@@ -23,7 +23,13 @@ from horizon.investigation.plan import (
     InspectSymbolOperation,
     InvestigationOperation,
     ReadSourceOperation,
+    ResolveCallOperation,
     SearchSourceOperation,
+)
+from horizon.languages.python.pyright_callee import (
+    PythonPyrightCalleeEvidenceError,
+    PythonPyrightCalleeTypeEvidence,
+    analyze_pyright_callee_type,
 )
 from horizon.languages.python.structure import (
     PythonStructureAnalysis,
@@ -129,6 +135,28 @@ class InvestigationSymbolObservation:
         PythonStructureFact,
         ...,
     ]
+
+    observation_id: str
+
+
+@dataclass(
+    frozen=True,
+    slots=True,
+)
+class InvestigationCallObservation:
+    path: str
+    line: int
+    character: int
+
+    commit_sha: str
+    repository_observation_id: str
+
+    source_blob_evidence_id: str
+    source_object_id: str
+    structure_analysis_id: str
+
+    call: PythonStructureFact
+    semantic_evidence: PythonPyrightCalleeTypeEvidence
 
     observation_id: str
 
@@ -707,14 +735,320 @@ def _execute_inspect_symbol(
     )
 
 
+def _source_line_byte_start(
+    content: bytes,
+    line: int,
+) -> int:
+    if line <= 0:
+        raise InvestigationExecutionError(
+            "source line must be positive"
+        )
+
+    current_line = 1
+    offset = 0
+
+    if line == 1:
+        return 0
+
+    for index, value in enumerate(
+        content
+    ):
+        if value != 10:
+            continue
+
+        current_line += 1
+        offset = index + 1
+
+        if current_line == line:
+            return offset
+
+    raise InvestigationExecutionError(
+        "requested source line does not exist"
+    )
+
+
+def _source_line_content(
+    content: bytes,
+    line_start: int,
+) -> bytes:
+    newline = content.find(
+        b"\n",
+        line_start,
+    )
+
+    if newline < 0:
+        raw = content[
+            line_start:
+        ]
+    else:
+        raw = content[
+            line_start:newline
+        ]
+
+    if raw.endswith(
+        b"\r"
+    ):
+        raw = raw[
+            :-1
+        ]
+
+    return raw
+
+
+def _call_at_position(
+    *,
+    analysis: PythonStructureAnalysis,
+    blob_content: bytes,
+    line: int,
+    character: int,
+) -> PythonStructureFact:
+    line_start = (
+        _source_line_byte_start(
+            blob_content,
+            line,
+        )
+    )
+
+    line_content = (
+        _source_line_content(
+            blob_content,
+            line_start,
+        )
+    )
+
+    if (
+        character < 0
+        or character
+        >= len(
+            line_content
+        )
+    ):
+        raise InvestigationExecutionError(
+            "requested source character does not exist"
+        )
+
+    absolute_position = (
+        line_start
+        + character
+    )
+
+    matches = tuple(
+        fact
+        for fact
+        in analysis.facts
+        if (
+            fact.kind
+            is PythonStructureKind.CALL
+            and fact.callee_byte_start
+            is not None
+            and fact.callee_byte_end
+            is not None
+            and fact.callee_byte_start
+            <= absolute_position
+            < fact.callee_byte_end
+        )
+    )
+
+    if not matches:
+        raise InvestigationExecutionError(
+            "no CALL fact exists at requested source position"
+        )
+
+    if len(
+        matches
+    ) != 1:
+        raise InvestigationExecutionError(
+            "requested source position is ambiguous across CALL facts"
+        )
+
+    return matches[
+        0
+    ]
+
+
+def _call_observation_identity(
+    *,
+    operation: ResolveCallOperation,
+    observation: GitCommitObservation,
+    source_blob_evidence_id: str,
+    source_object_id: str,
+    structure_analysis_id: str,
+    call: PythonStructureFact,
+    semantic_evidence: PythonPyrightCalleeTypeEvidence,
+) -> str:
+    payload = {
+        "operation_kind": (
+            operation.kind.value
+        ),
+        "path": operation.path,
+        "line": operation.line,
+        "character": (
+            operation.character
+        ),
+        "commit_sha": (
+            observation.commit_sha
+        ),
+        "repository_observation_id": (
+            observation.observation_id
+        ),
+        "source_blob_evidence_id": (
+            source_blob_evidence_id
+        ),
+        "source_object_id": (
+            source_object_id
+        ),
+        "structure_analysis_id": (
+            structure_analysis_id
+        ),
+        "call_evidence_id": (
+            call.evidence_id
+        ),
+        "callee_evidence_id": (
+            call.callee_evidence_id
+        ),
+        "semantic_evidence_id": (
+            semantic_evidence.evidence_id
+        ),
+    }
+
+    encoded = json.dumps(
+        payload,
+        sort_keys=True,
+        separators=(
+            ",",
+            ":",
+        ),
+        ensure_ascii=True,
+    ).encode(
+        "utf-8"
+    )
+
+    return (
+        "investigation-call-observation:"
+        + hashlib.sha256(
+            encoded
+        ).hexdigest()
+    )
+
+
+def _execute_resolve_call(
+    repository: Path,
+    observation: GitCommitObservation,
+    operation: ResolveCallOperation,
+    *,
+    pyright_typeserver: str | Path | None,
+) -> InvestigationCallObservation:
+    if pyright_typeserver is None:
+        raise InvestigationExecutionError(
+            "trusted Pyright type server configuration is required"
+        )
+
+    try:
+        blob = read_observed_blob(
+            repository,
+            observation,
+            operation.path,
+        )
+    except GitBlobError as exc:
+        raise InvestigationExecutionError(
+            "call path is not an observed Git blob"
+        ) from exc
+
+    try:
+        analysis = analyze_python_blob(
+            blob
+        )
+    except PythonSyntaxEvidenceError as exc:
+        raise InvestigationExecutionError(
+            "observed source could not produce Python structure evidence"
+        ) from exc
+
+    call = _call_at_position(
+        analysis=analysis,
+        blob_content=(
+            blob.content
+        ),
+        line=operation.line,
+        character=(
+            operation.character
+        ),
+    )
+
+    try:
+        semantic_evidence = (
+            analyze_pyright_callee_type(
+                repository=repository,
+                observation=observation,
+                blob=blob,
+                call_fact=call,
+                pyright_typeserver=str(
+                    pyright_typeserver
+                ),
+            )
+        )
+    except PythonPyrightCalleeEvidenceError as exc:
+        raise InvestigationExecutionError(
+            "Pyright call resolution failed"
+        ) from exc
+
+    return InvestigationCallObservation(
+        path=operation.path,
+        line=operation.line,
+        character=(
+            operation.character
+        ),
+        commit_sha=(
+            observation.commit_sha
+        ),
+        repository_observation_id=(
+            observation.observation_id
+        ),
+        source_blob_evidence_id=(
+            blob.evidence_id
+        ),
+        source_object_id=(
+            blob.object_id
+        ),
+        structure_analysis_id=(
+            analysis.analysis_id
+        ),
+        call=call,
+        semantic_evidence=(
+            semantic_evidence
+        ),
+        observation_id=(
+            _call_observation_identity(
+                operation=operation,
+                observation=observation,
+                source_blob_evidence_id=(
+                    blob.evidence_id
+                ),
+                source_object_id=(
+                    blob.object_id
+                ),
+                structure_analysis_id=(
+                    analysis.analysis_id
+                ),
+                call=call,
+                semantic_evidence=(
+                    semantic_evidence
+                ),
+            )
+        ),
+    )
+
+
 def execute_investigation_operation(
     repository: str | Path,
     observation: GitCommitObservation,
     operation: InvestigationOperation,
+    *,
+    pyright_typeserver: str | Path | None = None,
 ) -> (
     InvestigationSearchObservation
     | InvestigationSourceObservation
     | InvestigationSymbolObservation
+    | InvestigationCallObservation
 ):
     """Execute one supported typed operation against one observed repo."""
 
@@ -763,6 +1097,19 @@ def execute_investigation_operation(
             repository_path,
             observation,
             operation,
+        )
+
+    if isinstance(
+        operation,
+        ResolveCallOperation,
+    ):
+        return _execute_resolve_call(
+            repository_path,
+            observation,
+            operation,
+            pyright_typeserver=(
+                pyright_typeserver
+            ),
         )
 
     kind = getattr(

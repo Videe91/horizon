@@ -19,7 +19,7 @@ from horizon.investigation.execution import (
     execute_investigation_operation,
 )
 from horizon.investigation.plan import (
-    ResolveCallOperation,
+    ResolveTypeOperation,
     SearchSourceOperation,
 )
 from horizon.repository.git_observation import (
@@ -579,7 +579,7 @@ def test_unimplemented_typed_operation_is_explicitly_rejected(
         commit,
     )
 
-    operation = ResolveCallOperation(
+    operation = ResolveTypeOperation(
         path="src/pkg/engine.py",
         line=2,
         character=4,
@@ -587,7 +587,7 @@ def test_unimplemented_typed_operation_is_explicitly_rejected(
 
     with pytest.raises(
         UnsupportedInvestigationOperationError,
-        match="RESOLVE_CALL",
+        match="RESOLVE_TYPE",
     ):
         execute_investigation_operation(
             repository,
