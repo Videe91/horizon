@@ -420,7 +420,9 @@ def test_adapter_uses_strict_structured_output_wrapper() -> None:
         ][
             "type"
         ][
-            "const"
+            "enum"
+        ][
+            0
         ]
         for variant
         in proposal_schema[
@@ -837,3 +839,81 @@ def test_strict_output_schema_contains_no_unsupported_unique_items() -> None:
     )
 
     assert "uniqueItems" not in keys
+
+
+def test_proposal_type_discriminators_use_supported_singleton_enums() -> None:
+    invocation = _invocation()
+
+    client = FakeOpenAIClient(
+        _completed_response(
+            request=invocation.request
+        )
+    )
+
+    adapter = _adapter(
+        client
+    )
+
+    adapter.invoke(
+        invocation
+    )
+
+    schema = (
+        client.responses.calls[0]
+        ["text"]
+        ["format"]
+        ["schema"]
+    )
+
+    proposal_variants = (
+        schema[
+            "properties"
+        ][
+            "proposal"
+        ][
+            "anyOf"
+        ]
+    )
+
+    expected = {
+        "PROPOSE_INVESTIGATION",
+        "PROPOSE_HYPOTHESIS",
+        "REFINE_OBJECT",
+        "DECLARE_INSUFFICIENT_EVIDENCE",
+    }
+
+    actual = set()
+
+    for variant in proposal_variants:
+        type_schema = (
+            variant[
+                "properties"
+            ][
+                "type"
+            ]
+        )
+
+        assert "const" not in type_schema
+
+        assert type_schema[
+            "type"
+        ] == "string"
+
+        enum = type_schema[
+            "enum"
+        ]
+
+        assert isinstance(
+            enum,
+            list,
+        )
+
+        assert len(
+            enum
+        ) == 1
+
+        actual.add(
+            enum[0]
+        )
+
+    assert actual == expected

@@ -295,7 +295,9 @@ def _proposal_schema() -> dict[str, object]:
             **_COMMON_PROPERTIES,
             "type": {
                 "type": "string",
-                "const": "PROPOSE_INVESTIGATION",
+                "enum": [
+                    "PROPOSE_INVESTIGATION",
+                ],
             },
             "investigation_questions": {
                 "type": "array",
@@ -316,7 +318,9 @@ def _proposal_schema() -> dict[str, object]:
             **_COMMON_PROPERTIES,
             "type": {
                 "type": "string",
-                "const": "PROPOSE_HYPOTHESIS",
+                "enum": [
+                    "PROPOSE_HYPOTHESIS",
+                ],
             },
             "hypothesis": {
                 "type": "string",
@@ -356,7 +360,9 @@ def _proposal_schema() -> dict[str, object]:
             **_COMMON_PROPERTIES,
             "type": {
                 "type": "string",
-                "const": "REFINE_OBJECT",
+                "enum": [
+                    "REFINE_OBJECT",
+                ],
             },
             "candidates": {
                 "type": "array",
@@ -383,7 +389,9 @@ def _proposal_schema() -> dict[str, object]:
             **_COMMON_PROPERTIES,
             "type": {
                 "type": "string",
-                "const": "DECLARE_INSUFFICIENT_EVIDENCE",
+                "enum": [
+                    "DECLARE_INSUFFICIENT_EVIDENCE",
+                ],
             },
             "missing_evidence_questions": {
                 "type": "array",
