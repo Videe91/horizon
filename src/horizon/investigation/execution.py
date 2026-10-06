@@ -20,9 +20,17 @@ from dataclasses import dataclass
 from pathlib import Path
 
 from horizon.investigation.plan import (
+    InspectSymbolOperation,
     InvestigationOperation,
     ReadSourceOperation,
     SearchSourceOperation,
+)
+from horizon.languages.python.structure import (
+    PythonStructureAnalysis,
+    PythonStructureFact,
+    PythonStructureKind,
+    PythonSyntaxEvidenceError,
+    analyze_python_blob,
 )
 from horizon.repository.git_blob import (
     GitBlobError,
@@ -95,6 +103,30 @@ class InvestigationSourceObservation:
 
     lines: tuple[
         InvestigationSourceLine,
+        ...,
+    ]
+
+    observation_id: str
+
+
+@dataclass(
+    frozen=True,
+    slots=True,
+)
+class InvestigationSymbolObservation:
+    path: str
+    symbol: str
+
+    commit_sha: str
+    repository_observation_id: str
+
+    source_blob_evidence_id: str
+    source_object_id: str
+    structure_analysis_id: str
+
+    definition: PythonStructureFact
+    facts: tuple[
+        PythonStructureFact,
         ...,
     ]
 
@@ -427,6 +459,254 @@ def _execute_read_source(
     )
 
 
+_DEFINITION_KINDS = {
+    PythonStructureKind.CLASS_DEFINITION,
+    PythonStructureKind.FUNCTION_DEFINITION,
+    PythonStructureKind.ASYNC_FUNCTION_DEFINITION,
+}
+
+
+def _resolve_symbol_definition(
+    analysis: PythonStructureAnalysis,
+    symbol: str,
+) -> PythonStructureFact:
+    parts = tuple(
+        symbol.split(
+            "."
+        )
+    )
+
+    if (
+        not parts
+        or any(
+            not part
+            for part in parts
+        )
+    ):
+        raise InvestigationExecutionError(
+            "symbol must be a dotted lexical name"
+        )
+
+    expected_scope = parts[
+        :-1
+    ]
+
+    expected_name = parts[
+        -1
+    ]
+
+    matches = tuple(
+        fact
+        for fact
+        in analysis.facts
+        if (
+            fact.kind
+            in _DEFINITION_KINDS
+            and fact.name
+            == expected_name
+            and fact.scope
+            == expected_scope
+        )
+    )
+
+    if not matches:
+        raise InvestigationExecutionError(
+            f"symbol not found in observed Python structure: {symbol!r}"
+        )
+
+    if len(
+        matches
+    ) != 1:
+        raise InvestigationExecutionError(
+            f"symbol is ambiguous in observed Python structure: {symbol!r}"
+        )
+
+    return matches[
+        0
+    ]
+
+
+def _structural_subtree(
+    analysis: PythonStructureAnalysis,
+    definition: PythonStructureFact,
+) -> tuple[
+    PythonStructureFact,
+    ...,
+]:
+    selected_ids = {
+        definition.evidence_id
+    }
+
+    changed = True
+
+    while changed:
+        changed = False
+
+        for fact in analysis.facts:
+            if (
+                fact.evidence_id
+                in selected_ids
+            ):
+                continue
+
+            if (
+                fact.structural_parent_id
+                in selected_ids
+            ):
+                selected_ids.add(
+                    fact.evidence_id
+                )
+
+                changed = True
+
+    return tuple(
+        fact
+        for fact
+        in analysis.facts
+        if fact.evidence_id
+        in selected_ids
+    )
+
+
+def _symbol_observation_identity(
+    *,
+    operation: InspectSymbolOperation,
+    observation: GitCommitObservation,
+    source_blob_evidence_id: str,
+    source_object_id: str,
+    structure_analysis_id: str,
+    definition: PythonStructureFact,
+    facts: tuple[
+        PythonStructureFact,
+        ...,
+    ],
+) -> str:
+    payload = {
+        "operation_kind": (
+            operation.kind.value
+        ),
+        "path": operation.path,
+        "symbol": operation.symbol,
+        "commit_sha": (
+            observation.commit_sha
+        ),
+        "repository_observation_id": (
+            observation.observation_id
+        ),
+        "source_blob_evidence_id": (
+            source_blob_evidence_id
+        ),
+        "source_object_id": (
+            source_object_id
+        ),
+        "structure_analysis_id": (
+            structure_analysis_id
+        ),
+        "definition_evidence_id": (
+            definition.evidence_id
+        ),
+        "fact_evidence_ids": [
+            fact.evidence_id
+            for fact
+            in facts
+        ],
+    }
+
+    encoded = json.dumps(
+        payload,
+        sort_keys=True,
+        separators=(
+            ",",
+            ":",
+        ),
+        ensure_ascii=True,
+    ).encode(
+        "utf-8"
+    )
+
+    return (
+        "investigation-symbol-observation:"
+        + hashlib.sha256(
+            encoded
+        ).hexdigest()
+    )
+
+
+def _execute_inspect_symbol(
+    repository: Path,
+    observation: GitCommitObservation,
+    operation: InspectSymbolOperation,
+) -> InvestigationSymbolObservation:
+    try:
+        blob = read_observed_blob(
+            repository,
+            observation,
+            operation.path,
+        )
+    except GitBlobError as exc:
+        raise InvestigationExecutionError(
+            "symbol path is not an observed Git blob"
+        ) from exc
+
+    try:
+        analysis = analyze_python_blob(
+            blob
+        )
+    except PythonSyntaxEvidenceError as exc:
+        raise InvestigationExecutionError(
+            "observed source could not produce Python structure evidence"
+        ) from exc
+
+    definition = _resolve_symbol_definition(
+        analysis,
+        operation.symbol,
+    )
+
+    facts = _structural_subtree(
+        analysis,
+        definition,
+    )
+
+    return InvestigationSymbolObservation(
+        path=operation.path,
+        symbol=operation.symbol,
+        commit_sha=(
+            observation.commit_sha
+        ),
+        repository_observation_id=(
+            observation.observation_id
+        ),
+        source_blob_evidence_id=(
+            blob.evidence_id
+        ),
+        source_object_id=(
+            blob.object_id
+        ),
+        structure_analysis_id=(
+            analysis.analysis_id
+        ),
+        definition=definition,
+        facts=facts,
+        observation_id=(
+            _symbol_observation_identity(
+                operation=operation,
+                observation=observation,
+                source_blob_evidence_id=(
+                    blob.evidence_id
+                ),
+                source_object_id=(
+                    blob.object_id
+                ),
+                structure_analysis_id=(
+                    analysis.analysis_id
+                ),
+                definition=definition,
+                facts=facts,
+            )
+        ),
+    )
+
+
 def execute_investigation_operation(
     repository: str | Path,
     observation: GitCommitObservation,
@@ -434,6 +714,7 @@ def execute_investigation_operation(
 ) -> (
     InvestigationSearchObservation
     | InvestigationSourceObservation
+    | InvestigationSymbolObservation
 ):
     """Execute one supported typed operation against one observed repo."""
 
@@ -469,6 +750,16 @@ def execute_investigation_operation(
         ReadSourceOperation,
     ):
         return _execute_read_source(
+            repository_path,
+            observation,
+            operation,
+        )
+
+    if isinstance(
+        operation,
+        InspectSymbolOperation,
+    ):
+        return _execute_inspect_symbol(
             repository_path,
             observation,
             operation,
