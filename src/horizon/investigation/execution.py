@@ -21,7 +21,12 @@ from pathlib import Path
 
 from horizon.investigation.plan import (
     InvestigationOperation,
+    ReadSourceOperation,
     SearchSourceOperation,
+)
+from horizon.repository.git_blob import (
+    GitBlobError,
+    read_observed_blob,
 )
 from horizon.repository.git_observation import (
     GitCommitObservation,
@@ -58,6 +63,38 @@ class InvestigationSearchObservation:
     source_search_id: str
     matches: tuple[
         GitTextMatch,
+        ...,
+    ]
+
+    observation_id: str
+
+
+@dataclass(
+    frozen=True,
+    slots=True,
+)
+class InvestigationSourceLine:
+    line_number: int
+    content: bytes
+
+
+@dataclass(
+    frozen=True,
+    slots=True,
+)
+class InvestigationSourceObservation:
+    path: str
+    start_line: int
+    end_line: int
+
+    commit_sha: str
+    repository_observation_id: str
+
+    source_blob_evidence_id: str
+    source_object_id: str
+
+    lines: tuple[
+        InvestigationSourceLine,
         ...,
     ]
 
@@ -254,11 +291,150 @@ def _execute_search_source(
     )
 
 
+def _source_observation_identity(
+    *,
+    operation: ReadSourceOperation,
+    observation: GitCommitObservation,
+    source_blob_evidence_id: str,
+    source_object_id: str,
+) -> str:
+    payload = {
+        "operation_kind": (
+            operation.kind.value
+        ),
+        "path": operation.path,
+        "start_line": (
+            operation.start_line
+        ),
+        "end_line": (
+            operation.end_line
+        ),
+        "commit_sha": (
+            observation.commit_sha
+        ),
+        "repository_observation_id": (
+            observation.observation_id
+        ),
+        "source_blob_evidence_id": (
+            source_blob_evidence_id
+        ),
+        "source_object_id": (
+            source_object_id
+        ),
+    }
+
+    encoded = json.dumps(
+        payload,
+        sort_keys=True,
+        separators=(
+            ",",
+            ":",
+        ),
+        ensure_ascii=True,
+    ).encode(
+        "utf-8"
+    )
+
+    return (
+        "investigation-source-observation:"
+        + hashlib.sha256(
+            encoded
+        ).hexdigest()
+    )
+
+
+def _execute_read_source(
+    repository: Path,
+    observation: GitCommitObservation,
+    operation: ReadSourceOperation,
+) -> InvestigationSourceObservation:
+    try:
+        blob = read_observed_blob(
+            repository,
+            observation,
+            operation.path,
+        )
+    except GitBlobError as exc:
+        raise InvestigationExecutionError(
+            "source path is not an observed Git blob"
+        ) from exc
+
+    source_lines = (
+        blob.content.splitlines()
+    )
+
+    if (
+        operation.end_line
+        > len(
+            source_lines
+        )
+    ):
+        raise InvestigationExecutionError(
+            "requested line window exceeds observed source"
+        )
+
+    lines = tuple(
+        InvestigationSourceLine(
+            line_number=(
+                line_number
+            ),
+            content=(
+                source_lines[
+                    line_number - 1
+                ]
+            ),
+        )
+        for line_number
+        in range(
+            operation.start_line,
+            operation.end_line + 1,
+        )
+    )
+
+    return InvestigationSourceObservation(
+        path=operation.path,
+        start_line=(
+            operation.start_line
+        ),
+        end_line=(
+            operation.end_line
+        ),
+        commit_sha=(
+            observation.commit_sha
+        ),
+        repository_observation_id=(
+            observation.observation_id
+        ),
+        source_blob_evidence_id=(
+            blob.evidence_id
+        ),
+        source_object_id=(
+            blob.object_id
+        ),
+        lines=lines,
+        observation_id=(
+            _source_observation_identity(
+                operation=operation,
+                observation=observation,
+                source_blob_evidence_id=(
+                    blob.evidence_id
+                ),
+                source_object_id=(
+                    blob.object_id
+                ),
+            )
+        ),
+    )
+
+
 def execute_investigation_operation(
     repository: str | Path,
     observation: GitCommitObservation,
     operation: InvestigationOperation,
-) -> InvestigationSearchObservation:
+) -> (
+    InvestigationSearchObservation
+    | InvestigationSourceObservation
+):
     """Execute one supported typed operation against one observed repo."""
 
     repository_path = Path(
@@ -283,6 +459,16 @@ def execute_investigation_operation(
         SearchSourceOperation,
     ):
         return _execute_search_source(
+            repository_path,
+            observation,
+            operation,
+        )
+
+    if isinstance(
+        operation,
+        ReadSourceOperation,
+    ):
+        return _execute_read_source(
             repository_path,
             observation,
             operation,

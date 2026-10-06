@@ -19,7 +19,7 @@ from horizon.investigation.execution import (
     execute_investigation_operation,
 )
 from horizon.investigation.plan import (
-    ReadSourceOperation,
+    InspectSymbolOperation,
     SearchSourceOperation,
 )
 from horizon.repository.git_observation import (
@@ -579,15 +579,14 @@ def test_unimplemented_typed_operation_is_explicitly_rejected(
         commit,
     )
 
-    operation = ReadSourceOperation(
+    operation = InspectSymbolOperation(
         path="src/pkg/policy.py",
-        start_line=1,
-        end_line=2,
+        symbol="RetryFailedFlows",
     )
 
     with pytest.raises(
         UnsupportedInvestigationOperationError,
-        match="READ_SOURCE",
+        match="INSPECT_SYMBOL",
     ):
         execute_investigation_operation(
             repository,
