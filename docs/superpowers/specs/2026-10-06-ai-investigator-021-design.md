@@ -11,7 +11,11 @@ The investigator is provider-neutral. The first adapter is **Anthropic Opus 5.5*
 
 ## Contract
 
-The investigator receives one `InvestigationRequest` containing the open question, relationship, relevant assertions, claims, assessments, and evidence references. Existing identifiers form a closed reference set: any assertion, claim, assessment, evidence, relationship, or question ID emitted by the model that was not present in the request causes the entire proposal to be rejected and the rejection recorded.
+The investigator receives one `InvestigationRequest` containing the open question, relationship, relevant assertions, claims, assessments, evidence references, and the canonical evidence record for every referenced evidence item. The model therefore receives the evidence content Horizon actually has, not only opaque IDs. The canonical request is deterministic and content-addressed.
+
+Existing identifiers form a closed reference set: any assertion, claim, assessment, evidence, relationship, or question ID emitted by the model that was not present in the request causes the entire proposal to be rejected and the rejection recorded. New `REFINE_OBJECT` candidates are the only exception, and they are candidate definitions rather than pre-existing world-model IDs.
+
+For certification, leave-one-evidence-record-out ablations are recorded for the referenced evidence set so Horizon can measure which evidence materially affects the proposal. Ablation results are evidence about context usefulness; they may not be used to cherry-pick a more favorable certification request.
 
 The output is a strict discriminated schema with exactly four proposal types:
 
@@ -38,13 +42,15 @@ The investigator has **one semantic instruction file and no instruction layering
 
 No new context field enters `InvestigationRequest` without an ablation demonstrating that the field changes the investigator's proposal on a registered case. A changed instruction or context contract requires a new hash and recertification.
 
-Every model call produces an immutable run record containing at minimum: provider, the exact model ID returned by the API, temperature, instruction hash, canonical input hash, canonical output hash, token usage, monetary cost, API/request identity when available, validation result, and rejection reason when invalid.
+Every model call produces an immutable run record whose first operational fields are the monetary cost and the pre-registered per-run cost cap, followed by provider, the exact model ID returned by the API, temperature, instruction hash, canonical input hash, canonical output hash, token usage, API/request identity when available, validation result, and rejection reason when invalid. The cost cap is fixed before the call; a certification run that cannot be made within that cap must not be started and is recorded as not run rather than silently raising the budget.
 
 ## Provider boundary
 
 The domain depends on an `InvestigatorModel` port, not Anthropic APIs. Opus 5.5 is the first adapter because it performed strongly in the preceding card investigations. A second investigator vendor is not added yet.
 
-A separate second-vendor model may be used as **certification adjudicator only**; it is test infrastructure, not another production investigator adapter. Multi-vendor investigator convergence becomes relevant when a proposal is eligible, after evidence gathering, to drive a world-model change.
+A separate second-vendor model is used as **certification adjudicator only**; it is test infrastructure, not another production investigator adapter. Before any live certification run, the adjudication rubric and the adjudicator's single semantic instruction are separately sealed and hashed. Both hashes are stored with every adjudication result. The adjudicator may not receive hidden semantic instruction layers.
+
+Multi-vendor investigator convergence becomes relevant when a proposal is eligible, after evidence gathering, to drive a world-model change.
 
 ## Pre-registered Prefect certification
 
@@ -59,6 +65,10 @@ Before the investigator run, the expected proposal class is registered as `REFIN
 
 and its missing-evidence questions must identify the unresolved distinction between **who schedules the state transition** and **who triggers the next user-code attempt**.
 
-The live Opus 5.5 result is scored by a fixed rubric through a second model from another vendor. The adjudicator judges semantic equivalence; substring or phrase matching is forbidden. The investigator receives one registered instruction/context contract and one scored run. Failure is preserved as evidence and investigated; there is no hidden repair prompt, prompt stacking, or cherry-picked retry.
+Certification uses exactly three independent Opus 5.5 runs at temperature `0`, all with the same sealed investigator instruction, canonical request, model configuration, and pre-registered per-run cost cap. Temperature zero is a variance-control setting, not a determinism claim. All three runs are retained, validated, scored, and reported; no run may be discarded or replaced because another result is preferable. Proposal-class or semantic instability across the three runs is itself a certification finding.
 
-Successful certification proves only that 021 can generate a valid, evidence-grounded next-step proposal for this frozen question. It does not certify that the proposal is true.
+Each live result is scored against the pre-sealed rubric by the second-vendor adjudicator using the pre-sealed adjudicator instruction. The rubric hash and adjudicator-instruction hash are recorded with every score. The adjudicator judges semantic equivalence; substring or phrase matching is forbidden.
+
+The investigator receives one registered instruction/context contract. Failure is preserved as evidence and investigated; there is no hidden repair prompt, prompt stacking, or cherry-picked retry.
+
+Successful certification requires all three runs and all three adjudications to be reported. Certification proves only that 021 can generate and faithfully record evidence-grounded next-step proposals for this frozen question, including any observed variance. It does not certify that a proposal is true.
