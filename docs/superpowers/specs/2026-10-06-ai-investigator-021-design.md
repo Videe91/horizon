@@ -7,7 +7,11 @@
 
 021 introduces Horizon's first AI boundary. It consumes an unresolved `WorldModelOpenQuestion` plus a bounded, immutable evidence context and returns a **proposal for what Horizon should investigate or reconsider next**. The model never changes the world model directly.
 
-The investigator is provider-neutral. The first adapter is **Anthropic Opus 5.5**. No generic model runtime, routing layer, autonomous executor, or multi-agent system is introduced in 021.
+The investigator is provider-neutral. Capability 021 supports two production-capable model adapters: **Anthropic Opus 5.5** and **OpenAI GPT-6 Astra**. Both implement the same investigator contract behind one Horizon AI Middleware. No provider-specific semantics may enter the Horizon domain model.
+
+The Horizon AI Middleware is the only model-facing entrypoint. It may read bounded Horizon state required for an investigation request, compile the deterministic canonical request, invoke a selected provider adapter, validate the returned proposal, and record model-run provenance. Provider adapters do not receive unrestricted Horizon access and may not read or mutate Horizon state directly.
+
+No generic autonomous-agent runtime, hidden routing policy, unrestricted tool-use layer, or multi-agent system is introduced in 021.
 
 ## Contract
 
@@ -46,11 +50,22 @@ Every model call produces an immutable run record whose first operational fields
 
 ## Provider boundary
 
-The domain depends on an `InvestigatorModel` port, not Anthropic APIs. Opus 5.5 is the first adapter because it performed strongly in the preceding card investigations. A second investigator vendor is not added yet.
+The Horizon domain depends on one `InvestigatorModel` port and one provider-neutral Horizon AI Middleware, never directly on Anthropic or OpenAI APIs.
 
-A separate second-vendor model is used as **certification adjudicator only**; it is test infrastructure, not another production investigator adapter. Before any live certification run, the adjudication rubric and the adjudicator's single semantic instruction are separately sealed and hashed. Both hashes are stored with every adjudication result. The adjudicator may not receive hidden semantic instruction layers.
+Capability 021 has two production-capable adapters:
 
-Multi-vendor investigator convergence becomes relevant when a proposal is eligible, after evidence gathering, to drive a world-model change.
+- Anthropic Opus 5.5;
+- OpenAI GPT-6 Astra.
+
+Both adapters receive the same canonical `InvestigationRequest`, the same single semantic investigator instruction, the same closed identifier set, the same proposal schema, and the same validation boundary. Provider-specific request and response mechanics remain inside the adapters.
+
+The middleware chooses a provider only when explicitly instructed by the caller. Capability 021 does not introduce autonomous routing, model ranking, fallback retries, silent provider substitution, or winner selection.
+
+A failed or invalid Claude result may not be silently retried through OpenAI, and a failed or invalid OpenAI result may not be silently retried through Claude. Every attempted run remains first-class recorded evidence.
+
+For certification adjudication, the scoring model must be independent of the investigator run being scored. The adjudication rubric and adjudicator's single semantic instruction are separately sealed and hashed before live certification. Both hashes are stored with every adjudication result. The adjudicator may not receive hidden semantic instruction layers.
+
+Multi-provider agreement or disagreement is itself observable evidence. It does not directly promote, demote, replace, or prove a Horizon claim.
 
 ## Pre-registered Prefect certification
 
@@ -65,10 +80,12 @@ Before the investigator run, the expected proposal class is registered as `REFIN
 
 and its missing-evidence questions must identify the unresolved distinction between **who schedules the state transition** and **who triggers the next user-code attempt**.
 
-Certification uses exactly three independent Opus 5.5 runs at temperature `0`, all with the same sealed investigator instruction, canonical request, model configuration, and pre-registered per-run cost cap. Temperature zero is a variance-control setting, not a determinism claim. All three runs are retained, validated, scored, and reported; no run may be discarded or replaced because another result is preferable. Proposal-class or semantic instability across the three runs is itself a certification finding.
+Certification uses exactly three independent Anthropic Opus 5.5 investigator runs and exactly three independent OpenAI GPT-6 Astra investigator runs at temperature `0`, all with the same sealed investigator instruction, canonical request, provider-neutral semantic contract, and pre-registered per-run cost cap. Temperature zero is a variance-control setting, not a determinism claim.
 
-Each live result is scored against the pre-sealed rubric by the second-vendor adjudicator using the pre-sealed adjudicator instruction. The rubric hash and adjudicator-instruction hash are recorded with every score. The adjudicator judges semantic equivalence; substring or phrase matching is forbidden.
+All six investigator runs are retained, validated, scored, and reported; no run may be discarded, replaced, silently retried through the other provider, or omitted because another result is preferable. Proposal-class or semantic instability within one provider or disagreement across providers is itself a certification finding.
+
+Each live result is scored against the pre-sealed rubric by an adjudicator independent of the investigator run being scored, using the pre-sealed adjudicator instruction. The rubric hash and adjudicator-instruction hash are recorded with every score. The adjudicator judges semantic equivalence; substring or phrase matching is forbidden.
 
 The investigator receives one registered instruction/context contract. Failure is preserved as evidence and investigated; there is no hidden repair prompt, prompt stacking, or cherry-picked retry.
 
-Successful certification requires all three runs and all three adjudications to be reported. Certification proves only that 021 can generate and faithfully record evidence-grounded next-step proposals for this frozen question, including any observed variance. It does not certify that a proposal is true.
+Successful certification requires all six investigator runs and all six adjudications to be reported. Certification proves only that 021 can generate and faithfully record evidence-grounded next-step proposals for this frozen question through both supported providers, including any observed within-provider variance and cross-provider disagreement. It does not certify that a proposal is true.
