@@ -67,7 +67,7 @@ class ModelRunValidationResult(
 class InvestigatorModelInvocation:
     request: InvestigationRequest
     instruction: bytes
-    temperature: float
+    temperature: float | None
     cost_cap_usd: Decimal
 
     instruction_hash: str
@@ -101,7 +101,7 @@ class InvestigatorModelRun:
 
     provider: str
     model_id: str
-    temperature: float
+    temperature: float | None
 
     instruction_hash: str
     canonical_input_hash: str
@@ -336,8 +336,11 @@ def _validate_instruction(
 
 
 def _validate_temperature(
-    temperature: float,
+    temperature: float | None,
 ) -> None:
+    if temperature is None:
+        return
+
     if isinstance(
         temperature,
         bool,
@@ -349,7 +352,7 @@ def _validate_temperature(
         ),
     ):
         raise InvestigatorModelRunError(
-            "temperature must be numeric"
+            "temperature must be numeric or None"
         )
 
     if not math.isfinite(
@@ -393,7 +396,7 @@ def make_model_invocation(
     *,
     request: InvestigationRequest,
     instruction: bytes,
-    temperature: float,
+    temperature: float | None,
     cost_cap_usd: Decimal,
 ) -> InvestigatorModelInvocation:
     """Create one immutable pre-registered model invocation."""
@@ -414,8 +417,12 @@ def make_model_invocation(
         cost_cap_usd
     )
 
-    normalized_temperature = float(
-        temperature
+    normalized_temperature = (
+        None
+        if temperature is None
+        else float(
+            temperature
+        )
     )
 
     instruction_hash = _sha256(

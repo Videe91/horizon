@@ -46,7 +46,7 @@ The investigator has **one semantic instruction file and no instruction layering
 
 No new context field enters `InvestigationRequest` without an ablation demonstrating that the field changes the investigator's proposal on a registered case. A changed instruction or context contract requires a new hash and recertification.
 
-Every model call produces an immutable run record whose first operational fields are the monetary cost and the pre-registered per-run cost cap, followed by provider, the exact model ID returned by the API, temperature, instruction hash, canonical input hash, canonical output hash, token usage, API/request identity when available, validation result, and rejection reason when invalid. The cost cap is fixed before the call; a certification run that cannot be made within that cap must not be started and is recorded as not run rather than silently raising the budget.
+Every model call produces an immutable run record whose first operational fields are the monetary cost and the pre-registered per-run cost cap, followed by provider, the exact model ID returned by the API, the temperature parameter actually sent or null when omitted, instruction hash, canonical input hash, canonical output hash, token usage, API/request identity when available, validation result, and rejection reason when invalid. The cost cap is fixed before the call; a certification run that cannot be made within that cap must not be started and is recorded as not run rather than silently raising the budget.
 
 ## Provider boundary
 
@@ -80,7 +80,7 @@ Before the investigator run, the expected proposal class is registered as `REFIN
 
 and its missing-evidence questions must identify the unresolved distinction between **who schedules the state transition** and **who triggers the next user-code attempt**.
 
-Certification uses exactly three independent Anthropic Opus 5.5 investigator runs and exactly three independent OpenAI GPT-6 Astra investigator runs at temperature `0`, all with the same sealed investigator instruction, canonical request, provider-neutral semantic contract, and pre-registered per-run cost cap. Temperature zero is a variance-control setting, not a determinism claim.
+Certification uses exactly three independent Anthropic Opus 5.5 investigator runs and exactly three independent OpenAI GPT-6 Astra investigator runs, all with the same sealed investigator instruction, canonical request, provider-neutral semantic contract, and pre-registered per-run cost cap. Provider request controls are recorded exactly as sent. When a provider/model omits temperature, Horizon records temperature as null; when a supported numeric temperature is explicitly sent, Horizon records that exact value. Unsupported controls are never emulated or fabricated. Repeated certification runs measure observed stability, not determinism.
 
 All six investigator runs are retained, validated, scored, and reported; no run may be discarded, replaced, silently retried through the other provider, or omitted because another result is preferable. Proposal-class or semantic instability within one provider or disagreement across providers is itself a certification finding.
 
