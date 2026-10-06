@@ -247,7 +247,6 @@ _STRING_ARRAY = {
     "items": {
         "type": "string",
     },
-    "uniqueItems": True,
 }
 
 
@@ -304,7 +303,6 @@ def _proposal_schema() -> dict[str, object]:
                     "type": "string",
                 },
                 "minItems": 1,
-                "uniqueItems": True,
             },
         },
         required=[
@@ -329,7 +327,6 @@ def _proposal_schema() -> dict[str, object]:
                     "type": "string",
                 },
                 "minItems": 1,
-                "uniqueItems": True,
             },
         },
         required=[
@@ -372,7 +369,6 @@ def _proposal_schema() -> dict[str, object]:
                     "type": "string",
                 },
                 "minItems": 1,
-                "uniqueItems": True,
             },
         },
         required=[
@@ -395,7 +391,6 @@ def _proposal_schema() -> dict[str, object]:
                     "type": "string",
                 },
                 "minItems": 1,
-                "uniqueItems": True,
             },
         },
         required=[

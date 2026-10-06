@@ -782,3 +782,58 @@ def test_adapter_is_model_configurable_not_astra_hardwired() -> None:
     assert result.model_id == (
         "gpt-6.1-sol"
     )
+
+
+def test_strict_output_schema_contains_no_unsupported_unique_items() -> None:
+    invocation = _invocation()
+
+    client = FakeOpenAIClient(
+        _completed_response(
+            request=invocation.request
+        )
+    )
+
+    adapter = _adapter(
+        client
+    )
+
+    adapter.invoke(
+        invocation
+    )
+
+    schema = (
+        client.responses.calls[0]
+        ["text"]
+        ["format"]
+        ["schema"]
+    )
+
+    def walk(
+        value,
+    ):
+        if isinstance(
+            value,
+            dict,
+        ):
+            for key, item in value.items():
+                yield key
+                yield from walk(
+                    item
+                )
+
+        elif isinstance(
+            value,
+            list,
+        ):
+            for item in value:
+                yield from walk(
+                    item
+                )
+
+    keys = tuple(
+        walk(
+            schema
+        )
+    )
+
+    assert "uniqueItems" not in keys
