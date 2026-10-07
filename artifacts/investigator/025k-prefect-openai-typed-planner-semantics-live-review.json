@@ -1,0 +1,32 @@
+{
+  "authority": {
+    "investigation_operations_executed": 0,
+    "plan_execution_certified": false,
+    "world_model_mutations": 0
+  },
+  "capability": "025K",
+  "execution_verdict": "REJECTED_FOR_EXECUTION",
+  "findings": {
+    "canonical_expected_prefix": "src/prefect",
+    "current_executor_descendant_rule": "path == prefix OR path.startswith(prefix + '/')",
+    "effective_bad_descendant_prefix": "src/prefect//",
+    "path_prefixes": [
+      "src/prefect/",
+      "src/prefect/",
+      "src/prefect/"
+    ],
+    "regex_like_query_count": 0,
+    "regex_problem_from_025i": "RESOLVED",
+    "search_queries": [
+      "prefect.cli",
+      "class Task",
+      "class Flow"
+    ]
+  },
+  "live_run_result": "CANDIDATE_PASS_PENDING_PLAN_INSPECTION",
+  "next_required_change": "Canonicalize repository-relative path values at typed-operation construction before any 025K-derived search is permitted to execute.",
+  "reason_code": "SEARCH_PATH_PREFIX_TRAILING_SLASH_NOT_CANONICALIZED",
+  "review_kind": "POST_LIVE_PLAN_INSPECTION",
+  "source_artifact": "artifacts/investigator/025k-prefect-openai-typed-planner-semantics-live.json",
+  "source_artifact_sha256": "sha256:1de991d4c70401189860aad5768ecae8d6d4f30484b22fd7e232320f488e1f4e"
+}

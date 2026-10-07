@@ -1,0 +1,118 @@
+{
+  "capability": "025K",
+  "comparison_to_025i": {
+    "025i_queries": [
+      "^class (Flow|Task|[A-Za-z_]*Runner|[A-Za-z_]*Engine)\\b|^(async )?def (flow|task|run_flow|run_task)\\b",
+      "prefect\\.cli|^app\\s*=|app\\.command\\(",
+      "orchestrat|workflow|@flow|@task"
+    ],
+    "025k_queries": [
+      "prefect.cli",
+      "class Task",
+      "class Flow"
+    ],
+    "repeated_025i_queries": []
+  },
+  "compiled_plan": {
+    "plan_id": "investigation-plan:0e4ad8f899ea59c48f65d47bc67bc0b136615d2f93c6a02b6133751c8fc268f7",
+    "step_count": 3,
+    "steps": [
+      {
+        "depends_on_step_ids": [],
+        "expected_information": "Matching source paths and lines from which to select entry-point inspection targets in the next round.",
+        "max_seconds": 30,
+        "operation": {
+          "kind": "SEARCH_SOURCE",
+          "path_prefix": "src/prefect/",
+          "query": "prefect.cli"
+        },
+        "purpose": "Discover source locations referencing the module named in the observed console-script declaration.",
+        "source_step_key": "discover_cli_references",
+        "step_id": "investigation-step:4fe98b63349c4cfb60c23494821ae515e451c53eda7a9ef9f2970f4697fe1a3d"
+      },
+      {
+        "depends_on_step_ids": [],
+        "expected_information": "Matching declaration locations, if any, for selecting execution-abstraction inspections after discovery.",
+        "max_seconds": 30,
+        "operation": {
+          "kind": "SEARCH_SOURCE",
+          "path_prefix": "src/prefect/",
+          "query": "class Task"
+        },
+        "purpose": "Locate candidate task-related class declarations without assuming their paths or exact symbols.",
+        "source_step_key": "discover_task_classes",
+        "step_id": "investigation-step:b4b405999c3c32dc71e69c9f3bdd69e033a9667724f20f9e4c83deb7dc31e4d2"
+      },
+      {
+        "depends_on_step_ids": [],
+        "expected_information": "Matching declaration locations, if any, for selecting execution-abstraction inspections after discovery.",
+        "max_seconds": 30,
+        "operation": {
+          "kind": "SEARCH_SOURCE",
+          "path_prefix": "src/prefect/",
+          "query": "class Flow"
+        },
+        "purpose": "Locate candidate flow-related class declarations without assuming their paths or exact symbols.",
+        "source_step_key": "discover_flow_classes",
+        "step_id": "investigation-step:ddf1c8b76e412cc963916a3ce9380540302488c016b3b02b458e613f0306019b"
+      }
+    ]
+  },
+  "instruction": {
+    "utf8": "You are Horizon's typed investigation planner.\n\nTranslate the accepted PROPOSE_INVESTIGATION question into the minimum legal typed Horizon operations needed for the NEXT evidence-gathering round only.\n\nThe supplied operation_semantics contract is authoritative. Obey it exactly.\n\nSEARCH_SOURCE.query is an exact case-sensitive literal UTF-8 substring. It is NOT regex and NOT glob. Regex anchors, alternation, character classes, repetition syntax, grouping, or regex escapes have no special meaning.\n\nIf several literal searches are useful, emit separate SEARCH_SOURCE steps. Never encode alternatives into one query.\n\nDo not invent repository paths, symbols, line numbers, or character positions. If those must first be discovered, emit SEARCH_SOURCE discovery steps and stop. Horizon will re-plan after the search evidence exists.\n\nStep dependencies express ordering only. Outputs from an earlier step are NOT substituted into later operation arguments.\n\nDo not answer what Prefect is. Do not state conclusions. Do not create evidence or claims. Keep this first discovery round small and read-only."
+  },
+  "investigation_operations_executed": 0,
+  "live_contract": {
+    "automatic_retries": 0,
+    "configured_model": "gpt-6-astra",
+    "cost_cap_usd": "1.000000",
+    "investigation_operations_allowed": 0,
+    "max_output_tokens": 4096,
+    "provider": "OPENAI",
+    "provider_requests_allowed": 1,
+    "reasoning_effort": "high",
+    "world_model_mutations_allowed": 0
+  },
+  "live_model_calls": 1,
+  "operation_semantics": {
+    "contract_id": "typed-planner-operation-semantics:d2c7d2962cb7e7bad05367508a03c178e1ca8fcbd7a2149ed66ebff5c3681c2c",
+    "schema_version": 1
+  },
+  "planner_output_id": "semantic-gap-typed-planner-output:5f62f0702dede4e26058a20449086b26bb27d17ebbf11a598e5ba2d713ce6920",
+  "repository": {
+    "commit": "2338265f658845a9bef8ce7baf07519b89846dc8",
+    "repository_observation_id": "git-observation:735c214acf83e7b08e03886c558275f0aaa2c3d0d03d618be9e974edf4b52435",
+    "target": "Prefect",
+    "world_model_snapshot_id": "world-model-snapshot:754b63c7d710a879b18abb65c39750c14351b24f9a2c3ff67794f1bf0e2ed21d"
+  },
+  "result": "CANDIDATE_PASS_PENDING_PLAN_INSPECTION",
+  "review_flags": {
+    "regex_like_queries": [],
+    "regex_like_query_count": 0
+  },
+  "run": {
+    "api_request_id": "req_2e613e91f9524db5945c933356e47513",
+    "canonical_input_hash": "sha256:ccfc558631b513b594b8780fb204edf8e9f9819b5c7e6ec79977f6a930732e7f",
+    "canonical_output_hash": "sha256:d83b1b1a1397ab7759506182253dc11a2a250c581e66c523150b0ddb4169ae26",
+    "cost_cap_usd": "1.000000",
+    "cost_usd": "0.200442",
+    "input_tokens": 11540,
+    "instruction_hash": "sha256:3a205d59b9a3a8b960e4a71152b68bb538d9e5d1cac743ae4959326e66ec160d",
+    "invocation_id": "semantic-gap-typed-planner-invocation:7bf96f24c627da1627c22cda65b927f1bade133e81708df90a4bfdd9af0d698d",
+    "model_id": "gpt-6-astra",
+    "operation_semantics_id": "typed-planner-operation-semantics:d2c7d2962cb7e7bad05367508a03c178e1ca8fcbd7a2149ed66ebff5c3681c2c",
+    "output_tokens": 1124,
+    "provider": "OPENAI",
+    "rejection_reason": null,
+    "run_id": "semantic-gap-typed-planner-run:e010d230d52b86c3cfe252dcc6ef9463dde6c6059540d8bb4eee39c10ea9383c",
+    "schema_hash": "sha256:efee04989243a3b7745f1969d9f1701827143ebcee147f3411136ca536b05a03",
+    "temperature": null,
+    "validation_result": "VALID"
+  },
+  "semantic_gap": {
+    "gap_id": "repository-semantic-gap:422595e651bdc55ac8eb2c4818ff7342e6a919a6b3f57c7363a7d66618c8e163",
+    "question_id": "repository-semantic-gap-question:af7afaa11d8b7bdd25d6343180942b186c1b087a1cc35ae8f19442632f5eccb5",
+    "section": "WHAT_IT_IS"
+  },
+  "world_model_mutations": 0
+}
