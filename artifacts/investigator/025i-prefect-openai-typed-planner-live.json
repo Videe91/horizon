@@ -1,0 +1,217 @@
+{
+  "capability": "025I",
+  "certification": {
+    "automatic_retries": 0,
+    "compiled_plan": {
+      "plan_id": "investigation-plan:1211c71e4b57e6d425dd0d8c4a049d519c25c0311eff6b7e072d7e209ee63440",
+      "proposal_id": "investigation-proposal:7d41fa521aad7bf37d6ebb0103f024d522878100c814122ff09cd03c6074dd0d",
+      "question_id": "repository-semantic-gap-question:af7afaa11d8b7bdd25d6343180942b186c1b087a1cc35ae8f19442632f5eccb5",
+      "step_count": 3,
+      "steps": [
+        {
+          "depends_on_step_ids": [],
+          "expected_information": "Matching definitions, symbols, and source locations that can guide inspection of execution behavior.",
+          "max_seconds": 30,
+          "operation": {
+            "kind": "SEARCH_SOURCE",
+            "path_prefix": "src/prefect",
+            "query": "^class (Flow|Task|[A-Za-z_]*Runner|[A-Za-z_]*Engine)\\b|^(async )?def (flow|task|run_flow|run_task)\\b"
+          },
+          "purpose": "Search the established package root for candidate workflow and task APIs and execution abstractions without assuming their implementation paths.",
+          "source_step_key": "discover_execution_abstractions",
+          "step_id": "investigation-step:757af1bbdd0150ebe2ff136b9df9d885470bf5977669a3f980eeaf5fd4b0494c"
+        },
+        {
+          "depends_on_step_ids": [],
+          "expected_information": "Repository-relative locations for CLI app construction, exports, and command registration suitable for subsequent inspection.",
+          "max_seconds": 30,
+          "operation": {
+            "kind": "SEARCH_SOURCE",
+            "path_prefix": "src/prefect",
+            "query": "prefect\\.cli|^app\\s*=|app\\.command\\("
+          },
+          "purpose": "Locate implementation candidates for the declared prefect.cli:app console entry point and its command registration.",
+          "source_step_key": "discover_cli_entry",
+          "step_id": "investigation-step:d246af47af172a1d7c8420528680b6376d9f42db8ec0683dc82fc1c3069fea8d"
+        },
+        {
+          "depends_on_step_ids": [],
+          "expected_information": "README passages and locations that may describe intended use and demonstrate the public API.",
+          "max_seconds": 30,
+          "operation": {
+            "kind": "SEARCH_SOURCE",
+            "path_prefix": "README.md",
+            "query": "orchestrat|workflow|@flow|@task"
+          },
+          "purpose": "Locate purpose statements and usage examples in the README declared by pyproject.toml.",
+          "source_step_key": "discover_readme_purpose",
+          "step_id": "investigation-step:dc7c6163672f96f91e0107aed1a51061e534bb7cf6057cbbb923a33282e2015b"
+        }
+      ]
+    },
+    "investigation_operations_executed": 0,
+    "invocation": {
+      "canonical_input_hash": "sha256:e1dbda364b12c3f6d9f6c70263628a36a6fe35adadb252c79a8cd7d54d7d8325",
+      "instruction_hash": "sha256:b5c7006a78b7a9530e59dd56e3037bb40dea62bb1b2a3c41a64d83eae91921d1",
+      "invocation_id": "semantic-gap-typed-planner-invocation:8fdaf0f8546a710eabf81b087df417190f77fa7ca4cd4e6f6e3680471e9bf849",
+      "schema_hash": "sha256:efee04989243a3b7745f1969d9f1701827143ebcee147f3411136ca536b05a03"
+    },
+    "live_elapsed_ms": 27550.480916,
+    "live_model_calls": 1,
+    "raw_model_output": {
+      "bindings": [
+        {
+          "depends_on_keys": [],
+          "expected_information": "README passages and locations that may describe intended use and demonstrate the public API.",
+          "investigation_question": "Which frozen Prefect source locations, entry points, and execution abstractions should Horizon inspect to gather evidence for Prefect's primary software purpose?",
+          "max_seconds": 30,
+          "operation": {
+            "path_prefix": "README.md",
+            "query": "orchestrat|workflow|@flow|@task",
+            "type": "SEARCH_SOURCE"
+          },
+          "purpose": "Locate purpose statements and usage examples in the README declared by pyproject.toml.",
+          "step_key": "discover_readme_purpose"
+        },
+        {
+          "depends_on_keys": [],
+          "expected_information": "Repository-relative locations for CLI app construction, exports, and command registration suitable for subsequent inspection.",
+          "investigation_question": "Which frozen Prefect source locations, entry points, and execution abstractions should Horizon inspect to gather evidence for Prefect's primary software purpose?",
+          "max_seconds": 30,
+          "operation": {
+            "path_prefix": "src/prefect",
+            "query": "prefect\\.cli|^app\\s*=|app\\.command\\(",
+            "type": "SEARCH_SOURCE"
+          },
+          "purpose": "Locate implementation candidates for the declared prefect.cli:app console entry point and its command registration.",
+          "step_key": "discover_cli_entry"
+        },
+        {
+          "depends_on_keys": [],
+          "expected_information": "Matching definitions, symbols, and source locations that can guide inspection of execution behavior.",
+          "investigation_question": "Which frozen Prefect source locations, entry points, and execution abstractions should Horizon inspect to gather evidence for Prefect's primary software purpose?",
+          "max_seconds": 30,
+          "operation": {
+            "path_prefix": "src/prefect",
+            "query": "^class (Flow|Task|[A-Za-z_]*Runner|[A-Za-z_]*Engine)\\b|^(async )?def (flow|task|run_flow|run_task)\\b",
+            "type": "SEARCH_SOURCE"
+          },
+          "purpose": "Search the established package root for candidate workflow and task APIs and execution abstractions without assuming their implementation paths.",
+          "step_key": "discover_execution_abstractions"
+        }
+      ],
+      "proposal_id": "investigation-proposal:7d41fa521aad7bf37d6ebb0103f024d522878100c814122ff09cd03c6074dd0d",
+      "question_id": "repository-semantic-gap-question:af7afaa11d8b7bdd25d6343180942b186c1b087a1cc35ae8f19442632f5eccb5"
+    },
+    "result": "PASS",
+    "run": {
+      "api_request_id": "req_f4efcf326ea64122b974bb43f8aef32a",
+      "canonical_input_hash": "sha256:e1dbda364b12c3f6d9f6c70263628a36a6fe35adadb252c79a8cd7d54d7d8325",
+      "canonical_output_hash": "sha256:6d5be36e79100e4f90d77660c63e88d6ddcf55153a306eb04debf840af853dde",
+      "cost_cap_usd": "1.000000",
+      "cost_usd": "0.191305",
+      "input_tokens": 10929,
+      "instruction_hash": "sha256:b5c7006a78b7a9530e59dd56e3037bb40dea62bb1b2a3c41a64d83eae91921d1",
+      "invocation_id": "semantic-gap-typed-planner-invocation:8fdaf0f8546a710eabf81b087df417190f77fa7ca4cd4e6f6e3680471e9bf849",
+      "model_id": "gpt-6-astra",
+      "output_tokens": 1094,
+      "provider": "OPENAI",
+      "rejection_reason": null,
+      "run_id": "semantic-gap-typed-planner-run:cb114144509689a9293748cbc513e2e589567895083e81c1884e2c5c6d50c05f",
+      "schema_hash": "sha256:efee04989243a3b7745f1969d9f1701827143ebcee147f3411136ca536b05a03",
+      "temperature": null,
+      "validation_result": "VALID"
+    },
+    "total_elapsed_ms": 28059.876708,
+    "validated_planner_output": {
+      "bindings": [
+        {
+          "draft": {
+            "depends_on_keys": [],
+            "expected_information": "README passages and locations that may describe intended use and demonstrate the public API.",
+            "max_seconds": 30,
+            "operation": {
+              "path_prefix": "README.md",
+              "query": "orchestrat|workflow|@flow|@task"
+            },
+            "purpose": "Locate purpose statements and usage examples in the README declared by pyproject.toml.",
+            "step_key": "discover_readme_purpose"
+          },
+          "investigation_question": "Which frozen Prefect source locations, entry points, and execution abstractions should Horizon inspect to gather evidence for Prefect's primary software purpose?"
+        },
+        {
+          "draft": {
+            "depends_on_keys": [],
+            "expected_information": "Repository-relative locations for CLI app construction, exports, and command registration suitable for subsequent inspection.",
+            "max_seconds": 30,
+            "operation": {
+              "path_prefix": "src/prefect",
+              "query": "prefect\\.cli|^app\\s*=|app\\.command\\("
+            },
+            "purpose": "Locate implementation candidates for the declared prefect.cli:app console entry point and its command registration.",
+            "step_key": "discover_cli_entry"
+          },
+          "investigation_question": "Which frozen Prefect source locations, entry points, and execution abstractions should Horizon inspect to gather evidence for Prefect's primary software purpose?"
+        },
+        {
+          "draft": {
+            "depends_on_keys": [],
+            "expected_information": "Matching definitions, symbols, and source locations that can guide inspection of execution behavior.",
+            "max_seconds": 30,
+            "operation": {
+              "path_prefix": "src/prefect",
+              "query": "^class (Flow|Task|[A-Za-z_]*Runner|[A-Za-z_]*Engine)\\b|^(async )?def (flow|task|run_flow|run_task)\\b"
+            },
+            "purpose": "Search the established package root for candidate workflow and task APIs and execution abstractions without assuming their implementation paths.",
+            "step_key": "discover_execution_abstractions"
+          },
+          "investigation_question": "Which frozen Prefect source locations, entry points, and execution abstractions should Horizon inspect to gather evidence for Prefect's primary software purpose?"
+        }
+      ],
+      "planner_output_id": "semantic-gap-typed-planner-output:eb66bb9f41986aa68607d9a05be8b8d02e3df28b936917e0833b496b7a940fa7"
+    },
+    "world_model_mutations": 0
+  },
+  "instruction": {
+    "utf8": "You are Horizon's typed investigation planner.\n\nYour only task is to translate the accepted PROPOSE_INVESTIGATION questions into the minimum legal typed Horizon investigation steps needed to gather evidence.\n\nDo not answer the semantic question. Do not state conclusions. Do not claim that evidence exists unless the supplied context already establishes it.\n\nUse only operations allowed by the supplied strict schema. If an exact repository path, symbol, line, or call coordinate is not already established by the supplied context, do not invent it. Prefer SEARCH_SOURCE to discover locations first.\n\nEvery proposed investigation question must be covered by at least one typed step. Use dependencies only when a later typed step genuinely depends on an earlier step. Keep the plan small, read-only, evidence-seeking, and repository-relative.\n\nThe output is a proposed plan only. Horizon owns execution, evidence identities, epistemic status, and World Model truth."
+  },
+  "live_contract": {
+    "automatic_retries": 0,
+    "configured_model": "gpt-6-astra",
+    "cost_cap_usd": "1.000000",
+    "investigation_operations_allowed": 0,
+    "max_output_tokens": 8192,
+    "pricing": {
+      "cache_write_per_million": "12.50",
+      "cached_input_per_million": "1.00",
+      "input_per_million": "10.00",
+      "output_per_million": "50.00",
+      "short_context_token_limit": 272000
+    },
+    "provider": "OPENAI",
+    "provider_requests_allowed": 1,
+    "reasoning_effort": "high",
+    "timeout_seconds": 180.0,
+    "world_model_mutations_allowed": 0
+  },
+  "pre_registered_proposal": {
+    "investigation_questions": [
+      "Which frozen Prefect source locations, entry points, and execution abstractions should Horizon inspect to gather evidence for Prefect's primary software purpose?"
+    ],
+    "kind": "PROPOSE_INVESTIGATION",
+    "proposal_id": "investigation-proposal:7d41fa521aad7bf37d6ebb0103f024d522878100c814122ff09cd03c6074dd0d"
+  },
+  "purpose": "Controlled live OpenAI typed-planner certification on frozen Prefect WHAT_IT_IS gap",
+  "repository": {
+    "commit": "2338265f658845a9bef8ce7baf07519b89846dc8",
+    "repository_observation_id": "git-observation:735c214acf83e7b08e03886c558275f0aaa2c3d0d03d618be9e974edf4b52435",
+    "target": "Prefect",
+    "world_model_snapshot_id": "world-model-snapshot:754b63c7d710a879b18abb65c39750c14351b24f9a2c3ff67794f1bf0e2ed21d"
+  },
+  "semantic_gap": {
+    "gap_id": "repository-semantic-gap:422595e651bdc55ac8eb2c4818ff7342e6a919a6b3f57c7363a7d66618c8e163",
+    "question": "What is this repository's primary software purpose, and what evidence establishes it?",
+    "question_id": "repository-semantic-gap-question:af7afaa11d8b7bdd25d6343180942b186c1b087a1cc35ae8f19442632f5eccb5",
+    "section": "WHAT_IT_IS"
+  }
+}
