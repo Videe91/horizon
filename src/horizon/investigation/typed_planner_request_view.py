@@ -3,17 +3,14 @@
 The full InvestigationRequest remains Horizon's internal authority for
 validation, provenance, and planner-output parsing.
 
-The typed-planner model does not need complete evidence bodies merely to
-translate already-selected questions into legal repository operations.
-It receives stable evidence descriptors instead:
+Complete evidence bodies are never copied into the typed-planner model
+view. Every record retains a stable identity, kind, exact payload hash,
+and exact byte count. Recognized executed SEARCH_SOURCE and
+INSPECT_SYMBOL evidence may additionally expose a deterministic bounded
+operational projection so the planner can choose the next repository
+operation from what the previous operation actually discovered.
 
-- evidence identity,
-- evidence kind,
-- exact UTF-8 payload hash,
-- exact UTF-8 payload byte count.
-
-No evidence content is discarded from Horizon. It is omitted only from
-this model-facing planning projection.
+Full canonical evidence remains internal to Horizon.
 """
 
 from __future__ import annotations
@@ -21,8 +18,12 @@ from __future__ import annotations
 import hashlib
 import json
 
-from dataclasses import dataclass
+from dataclasses import asdict, dataclass
 
+from horizon.investigation.typed_planner_operational_evidence import (
+    TypedPlannerOperationalEvidenceView,
+    project_typed_planner_operational_evidence,
+)
 from horizon.investigator.middleware import (
     CanonicalEvidenceRecord,
     InvestigationRequest,
@@ -45,6 +46,11 @@ class TypedPlannerEvidenceRecordView:
 
     canonical_payload_sha256: str
     canonical_payload_bytes: int
+
+    operational_context: (
+        TypedPlannerOperationalEvidenceView
+        | None
+    )
 
 
 @dataclass(
@@ -197,6 +203,12 @@ def _evidence_view(
         )
     )
 
+    operational_context = (
+        project_typed_planner_operational_evidence(
+            record
+        )
+    )
+
     return TypedPlannerEvidenceRecordView(
         evidence_id=(
             record.evidence_id
@@ -214,8 +226,10 @@ def _evidence_view(
                 payload_bytes
             )
         ),
+        operational_context=(
+            operational_context
+        ),
     )
-
 
 def make_typed_planner_request_view(
     request: InvestigationRequest,
@@ -307,6 +321,18 @@ def make_typed_planner_request_view(
                 "canonical_payload_bytes": (
                     record
                     .canonical_payload_bytes
+                ),
+                "operational_context": (
+                    None
+                    if (
+                        record
+                        .operational_context
+                        is None
+                    )
+                    else asdict(
+                        record
+                        .operational_context
+                    )
                 ),
             }
             for record

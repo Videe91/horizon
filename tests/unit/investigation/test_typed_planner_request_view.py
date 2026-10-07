@@ -364,7 +364,15 @@ def test_model_input_uses_compact_request_view() -> None:
             "evidence_kind",
             "canonical_payload_sha256",
             "canonical_payload_bytes",
+            "operational_context",
         }
+
+        assert (
+            item[
+                "operational_context"
+            ]
+            is None
+        )
 
 
 def test_large_evidence_body_does_not_scale_provider_input() -> None:

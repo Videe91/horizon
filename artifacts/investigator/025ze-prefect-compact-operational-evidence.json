@@ -1,0 +1,251 @@
+{
+  "authority": {
+    "canonical_payload_sent_to_model": false,
+    "claims_created": 0,
+    "full_canonical_evidence_retained_internal": true,
+    "hypothesis_promoted": false,
+    "investigation_operations_executed": 0,
+    "live_model_calls": 0,
+    "what_it_is_closed": false,
+    "world_model_mutations": 0
+  },
+  "bounds": {
+    "max_search_line_characters": 240,
+    "max_visible_direct_definitions": 16,
+    "max_visible_search_matches": 20
+  },
+  "capability": "025ZE",
+  "certification_kind": "COMPACT_MODEL_FACING_OPERATIONAL_EVIDENCE",
+  "measurement": {
+    "bytes_not_sent_in_full": 386279,
+    "full_canonical_payload_bytes": 394280,
+    "model_evidence_projection_bytes": 8001
+  },
+  "prefect_visible_context": {
+    "flow": {
+      "definition_line_end": 2122,
+      "definition_line_start": 145,
+      "direct_definition_count": 30,
+      "direct_definitions": [
+        {
+          "kind": "FUNCTION_DEFINITION",
+          "line_end": 418,
+          "line_start": 205,
+          "name": "__init__"
+        },
+        {
+          "kind": "FUNCTION_DEFINITION",
+          "line_end": 422,
+          "line_start": 421,
+          "name": "ismethod"
+        },
+        {
+          "kind": "FUNCTION_DEFINITION",
+          "line_end": 426,
+          "line_start": 425,
+          "name": "isclassmethod"
+        },
+        {
+          "kind": "FUNCTION_DEFINITION",
+          "line_end": 430,
+          "line_start": 429,
+          "name": "isstaticmethod"
+        },
+        {
+          "kind": "FUNCTION_DEFINITION",
+          "line_end": 451,
+          "line_start": 432,
+          "name": "__get__"
+        },
+        {
+          "kind": "FUNCTION_DEFINITION",
+          "line_end": 589,
+          "line_start": 453,
+          "name": "with_options"
+        },
+        {
+          "kind": "FUNCTION_DEFINITION",
+          "line_end": 679,
+          "line_start": 591,
+          "name": "validate_parameters"
+        },
+        {
+          "kind": "FUNCTION_DEFINITION",
+          "line_end": 720,
+          "line_start": 681,
+          "name": "serialize_parameters"
+        },
+        {
+          "kind": "ASYNC_FUNCTION_DEFINITION",
+          "line_end": 860,
+          "line_start": 722,
+          "name": "ato_deployment"
+        },
+        {
+          "kind": "FUNCTION_DEFINITION",
+          "line_end": 1005,
+          "line_start": 863,
+          "name": "to_deployment"
+        },
+        {
+          "kind": "FUNCTION_DEFINITION",
+          "line_end": 1009,
+          "line_start": 1007,
+          "name": "on_completion"
+        },
+        {
+          "kind": "FUNCTION_DEFINITION",
+          "line_end": 1013,
+          "line_start": 1011,
+          "name": "on_cancellation"
+        },
+        {
+          "kind": "FUNCTION_DEFINITION",
+          "line_end": 1017,
+          "line_start": 1015,
+          "name": "on_crashed"
+        },
+        {
+          "kind": "FUNCTION_DEFINITION",
+          "line_end": 1021,
+          "line_start": 1019,
+          "name": "on_running"
+        },
+        {
+          "kind": "FUNCTION_DEFINITION",
+          "line_end": 1025,
+          "line_start": 1023,
+          "name": "on_failure"
+        },
+        {
+          "kind": "FUNCTION_DEFINITION",
+          "line_end": 1179,
+          "line_start": 1027,
+          "name": "serve"
+        }
+      ],
+      "omitted_direct_definition_count": 14,
+      "operation_kind": "INSPECT_SYMBOL",
+      "path": "src/prefect/flows.py",
+      "symbol": "Flow",
+      "visible_direct_definition_count": 16
+    },
+    "readme_code_fence_match_count": 10,
+    "readme_code_fence_visible_matches": 10,
+    "readme_purpose_match_count": 10,
+    "readme_purpose_visible_matches": 10,
+    "task": {
+      "definition_line_end": 1864,
+      "definition_line_start": 307,
+      "direct_definition_count": 40,
+      "direct_definitions": [
+        {
+          "kind": "FUNCTION_DEFINITION",
+          "line_end": 634,
+          "line_start": 384,
+          "name": "__init__"
+        },
+        {
+          "kind": "FUNCTION_DEFINITION",
+          "line_end": 638,
+          "line_start": 637,
+          "name": "ismethod"
+        },
+        {
+          "kind": "FUNCTION_DEFINITION",
+          "line_end": 642,
+          "line_start": 641,
+          "name": "isclassmethod"
+        },
+        {
+          "kind": "FUNCTION_DEFINITION",
+          "line_end": 646,
+          "line_start": 645,
+          "name": "isstaticmethod"
+        },
+        {
+          "kind": "FUNCTION_DEFINITION",
+          "line_end": 667,
+          "line_start": 648,
+          "name": "__get__"
+        },
+        {
+          "kind": "FUNCTION_DEFINITION",
+          "line_end": 850,
+          "line_start": 669,
+          "name": "with_options"
+        },
+        {
+          "kind": "FUNCTION_DEFINITION",
+          "line_end": 854,
+          "line_start": 852,
+          "name": "on_completion"
+        },
+        {
+          "kind": "FUNCTION_DEFINITION",
+          "line_end": 858,
+          "line_start": 856,
+          "name": "on_failure"
+        },
+        {
+          "kind": "FUNCTION_DEFINITION",
+          "line_end": 862,
+          "line_start": 860,
+          "name": "on_running"
+        },
+        {
+          "kind": "FUNCTION_DEFINITION",
+          "line_end": 868,
+          "line_start": 864,
+          "name": "on_commit"
+        },
+        {
+          "kind": "FUNCTION_DEFINITION",
+          "line_end": 874,
+          "line_start": 870,
+          "name": "on_rollback"
+        },
+        {
+          "kind": "ASYNC_FUNCTION_DEFINITION",
+          "line_end": 990,
+          "line_start": 876,
+          "name": "create_run"
+        },
+        {
+          "kind": "ASYNC_FUNCTION_DEFINITION",
+          "line_end": 1112,
+          "line_start": 992,
+          "name": "create_local_run"
+        },
+        {
+          "kind": "FUNCTION_DEFINITION",
+          "line_end": 1121,
+          "line_start": 1117,
+          "name": "__call__"
+        },
+        {
+          "kind": "FUNCTION_DEFINITION",
+          "line_end": 1128,
+          "line_start": 1124,
+          "name": "__call__"
+        },
+        {
+          "kind": "FUNCTION_DEFINITION",
+          "line_end": 1138,
+          "line_start": 1131,
+          "name": "__call__"
+        }
+      ],
+      "omitted_direct_definition_count": 24,
+      "operation_kind": "INSPECT_SYMBOL",
+      "path": "src/prefect/tasks.py",
+      "symbol": "Task",
+      "visible_direct_definition_count": 16
+    }
+  },
+  "result": "PASS",
+  "source": {
+    "025y_sha256": "sha256:",
+    "record_count": 4
+  }
+}
