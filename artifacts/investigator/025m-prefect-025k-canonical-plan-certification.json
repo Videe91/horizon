@@ -1,0 +1,91 @@
+{
+  "authority": {
+    "investigation_operations_executed": 0,
+    "live_model_calls": 0,
+    "world_model_mutations": 0
+  },
+  "canonical_plan": {
+    "max_steps": 8,
+    "max_total_seconds": 180,
+    "plan_id": "investigation-plan:d6eb81eb5109933600281f0acc84129f0e65d7472a95e51d96ac29a2df048856",
+    "proposal_id": "investigation-proposal:7d41fa521aad7bf37d6ebb0103f024d522878100c814122ff09cd03c6074dd0d",
+    "question_id": "repository-semantic-gap-question:af7afaa11d8b7bdd25d6343180942b186c1b087a1cc35ae8f19442632f5eccb5",
+    "step_count": 3,
+    "steps": [
+      {
+        "depends_on_step_ids": [],
+        "expected_information": "Matching declaration locations, if any, for selecting execution-abstraction inspections after discovery.",
+        "max_seconds": 30,
+        "operation": {
+          "kind": "SEARCH_SOURCE",
+          "path_prefix": "src/prefect",
+          "query": "class Task"
+        },
+        "purpose": "Locate candidate task-related class declarations without assuming their paths or exact symbols.",
+        "source_step_key": "discover_task_classes",
+        "step_id": "investigation-step:a26f5ec605a232853f2ccbe662a9144aec3f91a70d6edeae51c5b40b62dacf56"
+      },
+      {
+        "depends_on_step_ids": [],
+        "expected_information": "Matching declaration locations, if any, for selecting execution-abstraction inspections after discovery.",
+        "max_seconds": 30,
+        "operation": {
+          "kind": "SEARCH_SOURCE",
+          "path_prefix": "src/prefect",
+          "query": "class Flow"
+        },
+        "purpose": "Locate candidate flow-related class declarations without assuming their paths or exact symbols.",
+        "source_step_key": "discover_flow_classes",
+        "step_id": "investigation-step:f9c99d536619114928d5f7465fe4b9c2b7bc277a53b64ddaeb015d40f4aaec3f"
+      },
+      {
+        "depends_on_step_ids": [],
+        "expected_information": "Matching source paths and lines from which to select entry-point inspection targets in the next round.",
+        "max_seconds": 30,
+        "operation": {
+          "kind": "SEARCH_SOURCE",
+          "path_prefix": "src/prefect",
+          "query": "prefect.cli"
+        },
+        "purpose": "Discover source locations referencing the module named in the observed console-script declaration.",
+        "source_step_key": "discover_cli_references",
+        "step_id": "investigation-step:fc3dc16fa6930eb05f7dedc2685933e93758f267f23b1376d6108e05d7a7c552"
+      }
+    ]
+  },
+  "capability": "025M",
+  "certification_kind": "OFFLINE_CANONICAL_PLAN_EXECUTION_APPROVAL",
+  "checks": {
+    "all_operations_currently_executable": true,
+    "all_paths_canonical": true,
+    "only_path_representation_changed": true,
+    "prefix_scope_nonempty": true,
+    "regex_like_query_count": 0,
+    "same_live_expected_information": true,
+    "same_live_purposes": true,
+    "same_live_queries": true,
+    "same_live_step_time_limits": true
+  },
+  "repair": {
+    "canonical_prefix": "src/prefect",
+    "horizon_commit": "71b38d6f2549f3548ed16f8b25ac96fe297f252b",
+    "raw_prefix": "src/prefect/",
+    "rule": "repository-relative typed-operation paths are canonicalized at construction"
+  },
+  "repository": {
+    "commit": "2338265f658845a9bef8ce7baf07519b89846dc8",
+    "repository_observation_id": "git-observation:735c214acf83e7b08e03886c558275f0aaa2c3d0d03d618be9e974edf4b52435",
+    "scoped_blob_count": 896,
+    "target": "Prefect"
+  },
+  "result": "CERTIFIED_FOR_SEARCH_EXECUTION",
+  "source": {
+    "live_artifact": "artifacts/investigator/025k-prefect-openai-typed-planner-semantics-live.json",
+    "live_artifact_sha256": "sha256:1de991d4c70401189860aad5768ecae8d6d4f30484b22fd7e232320f488e1f4e",
+    "review_artifact": "artifacts/investigator/025k-prefect-openai-typed-planner-semantics-live-review.json",
+    "review_artifact_sha256": "sha256:c90e84ae8e96399179411260b05b8f7bd65e065f5c62ff233ae9faf5880b8fab",
+    "source_execution_verdict": "REJECTED_FOR_EXECUTION",
+    "source_plan_id": "investigation-plan:0e4ad8f899ea59c48f65d47bc67bc0b136615d2f93c6a02b6133751c8fc268f7",
+    "source_rejection_reason": "SEARCH_PATH_PREFIX_TRAILING_SLASH_NOT_CANONICALIZED"
+  }
+}
