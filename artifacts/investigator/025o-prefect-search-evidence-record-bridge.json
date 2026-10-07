@@ -1,0 +1,51 @@
+{
+  "authority": {
+    "claims_created": 0,
+    "epistemic_assessments_created": 0,
+    "live_model_calls": 0,
+    "new_investigation_operations_executed": 0,
+    "world_model_assertions_created": 0,
+    "world_model_mutations": 0
+  },
+  "bridge": {
+    "input_observation_count": 3,
+    "output_evidence_record_count": 3,
+    "records": [
+      {
+        "canonical_payload_bytes": 21052,
+        "canonical_payload_sha256": "sha256:019ad43a29dc608409ee525ef50d5441262a28329d45e19ae8e80579c3f5e8f6",
+        "evidence_id": "investigation-search-observation:3713e432387a9f05626c2e585d436369cdb4c666e5d5a2367961ff80d8f0f260",
+        "evidence_kind": "INVESTIGATION_SEARCH_OBSERVATION",
+        "match_count": 63,
+        "path_prefix": "src/prefect",
+        "query": "class Task"
+      },
+      {
+        "canonical_payload_bytes": 39814,
+        "canonical_payload_sha256": "sha256:00f27799b90e985568681ca92dc0e88b1e3fce8ed926018eecf3d545c90c187a",
+        "evidence_id": "investigation-search-observation:62e61aa0ac23787003927d461274a43991f3bdb828916d1b6aeed431d2dd1a2a",
+        "evidence_kind": "INVESTIGATION_SEARCH_OBSERVATION",
+        "match_count": 119,
+        "path_prefix": "src/prefect",
+        "query": "class Flow"
+      },
+      {
+        "canonical_payload_bytes": 327819,
+        "canonical_payload_sha256": "sha256:1dad81a6ea1a8e9a19eb3b93a2ce4a0b7f37bcee7a2dd77aa1dcb7ffc6bf95e2",
+        "evidence_id": "investigation-search-observation:448176ac27d25e504f62851646eb20a5ee096d4c798241ec635e382dd0140722",
+        "evidence_kind": "INVESTIGATION_SEARCH_OBSERVATION",
+        "match_count": 937,
+        "path_prefix": "src/prefect",
+        "query": "prefect.cli"
+      }
+    ],
+    "total_canonical_payload_bytes": 388685
+  },
+  "capability": "025O",
+  "result": "PASS",
+  "source": {
+    "artifact": "artifacts/investigator/025n-prefect-discovery-search-evidence.json",
+    "repository_commit": "2338265f658845a9bef8ce7baf07519b89846dc8",
+    "sha256": "sha256:07d58f1944e0f6f3d1d76904c2213b5c419e6580549c796e89121a06994db99c"
+  }
+}
