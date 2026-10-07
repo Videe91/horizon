@@ -23,6 +23,9 @@ from enum import Enum
 from horizon.claims.epistemic import (
     EpistemicStatus,
 )
+from horizon.languages.python.repository_modules import (
+    PythonPackageLayoutEvidence,
+)
 from horizon.repository.python_index import (
     PythonRepositoryIndex,
 )
@@ -252,11 +255,15 @@ def _revision_identity(
     card_id: str,
     index: PythonRepositoryIndex,
     phase: RepositoryCardPhase,
+    semantic_sections: tuple[
+        RepositoryCardSemanticState,
+        ...,
+    ],
 ) -> str:
     return _identity(
         "repository-card-revision:",
         {
-            "schema_version": 1,
+            "schema_version": 2,
             "card_id": (
                 card_id
             ),
@@ -272,12 +279,168 @@ def _revision_identity(
             "structure_cache_missing_count": (
                 index.cache_missing_count
             ),
+            "semantic_sections": [
+                {
+                    "section": (
+                        state.section.value
+                    ),
+                    "status": (
+                        state.status.value
+                    ),
+                    "reason": (
+                        state.reason
+                    ),
+                    "evidence_ids": list(
+                        state.evidence_ids
+                    ),
+                }
+                for state
+                in semantic_sections
+            ],
         },
+    )
+
+
+def _package_placement_state(
+    layout: PythonPackageLayoutEvidence,
+) -> RepositoryCardSemanticState:
+    if not isinstance(
+        layout,
+        PythonPackageLayoutEvidence,
+    ):
+        raise RepositoryCardError(
+            "package_layout must be PythonPackageLayoutEvidence"
+        )
+
+    if not layout.import_roots:
+        raise RepositoryCardError(
+            "package layout contains no import roots"
+        )
+
+    placements: list[str] = []
+
+    for root in layout.import_roots:
+        import_root = (
+            root.root_path
+            if root.root_path
+            else "<repository-root>"
+        )
+
+        placements.append(
+            (
+                "package path "
+                + repr(
+                    root.package_path
+                )
+                + ", import root "
+                + repr(
+                    import_root
+                )
+                + ", top-level package "
+                + repr(
+                    root.top_level_package
+                )
+            )
+        )
+
+    if len(
+        placements
+    ) == 1:
+        prefix = (
+            "Declared Python package placement: "
+        )
+    else:
+        prefix = (
+            "Declared Python package placements: "
+        )
+
+    evidence_ids = tuple(
+        dict.fromkeys(
+            (
+                layout.source_evidence_id,
+                layout.layout_id,
+                *(
+                    root.evidence_id
+                    for root
+                    in layout.import_roots
+                ),
+            )
+        )
+    )
+
+    return RepositoryCardSemanticState(
+        section=(
+            RepositorySemanticSection
+            .WHERE_IT_SITS
+        ),
+        status=(
+            EpistemicStatus.PROVEN
+        ),
+        reason=(
+            prefix
+            + "; ".join(
+                placements
+            )
+            + "."
+        ),
+        evidence_ids=(
+            evidence_ids
+        ),
+    )
+
+
+def _semantic_states(
+    package_layout: PythonPackageLayoutEvidence | None,
+) -> tuple[
+    RepositoryCardSemanticState,
+    ...,
+]:
+    states: list[
+        RepositoryCardSemanticState
+    ] = []
+
+    for section in RepositorySemanticSection:
+        if (
+            section
+            is RepositorySemanticSection.WHERE_IT_SITS
+            and package_layout
+            is not None
+        ):
+            states.append(
+                _package_placement_state(
+                    package_layout
+                )
+            )
+
+            continue
+
+        states.append(
+            RepositoryCardSemanticState(
+                section=section,
+                status=(
+                    EpistemicStatus.UNKNOWN
+                ),
+                reason=(
+                    _UNKNOWN_REASONS[
+                        section
+                    ]
+                ),
+                evidence_ids=(),
+            )
+        )
+
+    return tuple(
+        states
     )
 
 
 def build_repository_card(
     index: PythonRepositoryIndex,
+    *,
+    package_layout: (
+        PythonPackageLayoutEvidence
+        | None
+    ) = None,
 ) -> RepositoryCard:
     """Build the instant deterministic repository Card."""
 
@@ -338,21 +501,8 @@ def build_repository_card(
         )
     )
 
-    semantic_sections = tuple(
-        RepositoryCardSemanticState(
-            section=section,
-            status=(
-                EpistemicStatus.UNKNOWN
-            ),
-            reason=(
-                _UNKNOWN_REASONS[
-                    section
-                ]
-            ),
-            evidence_ids=(),
-        )
-        for section
-        in RepositorySemanticSection
+    semantic_sections = _semantic_states(
+        package_layout
     )
 
     return RepositoryCard(
@@ -367,6 +517,9 @@ def build_repository_card(
                 card_id=card_id,
                 index=index,
                 phase=phase,
+                semantic_sections=(
+                    semantic_sections
+                ),
             )
         ),
         source_commit=(
@@ -489,18 +642,28 @@ def render_repository_card(
             section
         ]
 
+        semantic_line = (
+            "["
+            + state.status.value
+            + "] "
+            + state.reason
+        )
+
+        if state.evidence_ids:
+            semantic_line += (
+                " | evidence="
+                + ",".join(
+                    state.evidence_ids
+                )
+            )
+
         lines.extend(
             (
                 "",
                 _SECTION_HEADINGS[
                     section
                 ],
-                (
-                    "["
-                    + state.status.value
-                    + "] "
-                    + state.reason
-                ),
+                semantic_line,
             )
         )
 
