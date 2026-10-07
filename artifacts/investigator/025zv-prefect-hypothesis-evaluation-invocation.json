@@ -1,0 +1,93 @@
+{
+  "authority": {
+    "claims_created": 0,
+    "epistemic_assessments_created": 0,
+    "evaluation_created": false,
+    "hypothesis_promoted": false,
+    "live_model_calls": 0,
+    "new_evidence_created": 0,
+    "repository_operations_executed": 0,
+    "what_it_is_closed": false,
+    "world_model_assertions_created": 0,
+    "world_model_mutations": 0
+  },
+  "capability": "025ZV",
+  "certification_kind": "PREFECT_HYPOTHESIS_EVALUATION_INVOCATION_PREREGISTRATION",
+  "invocation": {
+    "canonical_input_hash": "sha256:72350bf1967fa5beb4525a64b8381094c5f8b91be18bab71eabe2137a18e020b",
+    "cost_cap_usd": "0.200000",
+    "instruction": "Evaluate the supplied source hypothesis only against the evidence visible in the supplied hypothesis-evaluation request.\n\nUse the exact verdict vocabulary and structured-output schema supplied by Horizon.\n\nReturn SUPPORTED only when the visible evidence materially supports the hypothesis, resolves the supplied test questions for the semantic-gap question, contains no material contradiction, and leaves no material evidence question unresolved.\n\nReturn CONTRADICTED only when the visible evidence materially contradicts the hypothesis, supplies no supporting evidence that prevents that conclusion, and leaves no material evidence question unresolved.\n\nReturn STILL_INCOMPLETE whenever the evidence is mixed, insufficient, indirect, or leaves any material question unresolved. In that case, state the remaining evidence questions precisely.\n\nEvery supporting_evidence_id and contradicting_evidence_id must identify evidence present in this exact request.\n\nTreat source_excerpt as observed repository source evidence. Evidence records that expose only identity, kind, hash, and byte size are metadata-only in this invocation: do not invent, infer, or claim knowledge of their hidden canonical payload bodies.\n\nDo not create a claim, epistemic assessment, World Model assertion, semantic proposition, or semantic-gap closure. This output is a non-authoritative evidence evaluation only.\n\nReturn only the required structured evaluation output.\n",
+    "instruction_bytes": 1443,
+    "instruction_hash": "sha256:0d776662f5e4d17834dca18d9233df01ef7bcc8bf2b5d0e82a23043d2a22a896",
+    "invocation_id": "hypothesis-evaluation-model-invocation:6afffda72dba1089d1c0e905444cbebab639f754b2875d0c25e5ebdf37dca1ce",
+    "schema_hash": "sha256:386c3c6aefa9749216916d05041c035fdc59d73e6a62278b084d8e82db86ff82",
+    "temperature": null
+  },
+  "provider_pre_registration": {
+    "max_output_tokens": 4096,
+    "model_id": "gpt-6-astra",
+    "provider": "openai",
+    "reasoning_effort": "high",
+    "sdk_max_retries": 0,
+    "timeout_seconds": 60.0
+  },
+  "repository": {
+    "commit": "2338265f658845a9bef8ce7baf07519b89846dc8",
+    "repository_observation_id": "git-observation:735c214acf83e7b08e03886c558275f0aaa2c3d0d03d618be9e974edf4b52435",
+    "target": "Prefect",
+    "world_model_snapshot_id": "world-model-snapshot:754b63c7d710a879b18abb65c39750c14351b24f9a2c3ff67794f1bf0e2ed21d"
+  },
+  "request": {
+    "compression_ratio_full_evidence_to_model_input": 26.360116342483185,
+    "full_canonical_payload_sent_to_model": false,
+    "full_evidence_payload_bytes": 580028,
+    "full_evidence_record_count": 15,
+    "metadata_only_evidence_count": 11,
+    "model_input_json_bytes": 22004,
+    "request_id": "semantic-gap-followup-investigation-request:b22d2b8474573cf7334e5eed1292f463d01fff025e7c575ac32a0b79c86e2cdb",
+    "request_view_id": "hypothesis-evaluation-request-view:7270b3d7a923e912a56950a059d997775c2675b64e58f1a99a01c34ac6bab967",
+    "request_view_json_bytes": 21766,
+    "visible_source_excerpt_count": 4,
+    "visible_source_line_count": 163
+  },
+  "result": "PASS",
+  "semantic_gap": {
+    "gap_id": "repository-semantic-gap:422595e651bdc55ac8eb2c4818ff7342e6a919a6b3f57c7363a7d66618c8e163",
+    "question_id": "repository-semantic-gap-question:af7afaa11d8b7bdd25d6343180942b186c1b087a1cc35ae8f19442632f5eccb5",
+    "section": "WHAT_IT_IS"
+  },
+  "source_excerpts": {
+    "investigation-source-observation:1bbbba51000fb63886ea19a66e9cea0cca827eeb1e6077b79bc40e849cc0f4bb": {
+      "end_line": 383,
+      "line_count": 77,
+      "path": "src/prefect/tasks.py",
+      "start_line": 307
+    },
+    "investigation-source-observation:6e5a493e182a2d1c0fee65d24ac2a940606e21e026007aec30430ab1a56020f2": {
+      "end_line": 102,
+      "line_count": 24,
+      "path": "README.md",
+      "start_line": 79
+    },
+    "investigation-source-observation:d6a91a2dc5d8c5f67e09a85543403ad2654b7eb61f2894934bf104097522fce6": {
+      "end_line": 204,
+      "line_count": 60,
+      "path": "src/prefect/flows.py",
+      "start_line": 145
+    },
+    "investigation-source-observation:e4730dd25b7741d5a677881dc98c671db15f2ea96c0f1bc9fbfbfde25590bbc6": {
+      "end_line": 55,
+      "line_count": 2,
+      "path": "README.md",
+      "start_line": 54
+    }
+  },
+  "source_hypothesis": {
+    "hypothesis": "At frozen commit 2338265f658845a9bef8ce7baf07519b89846dc8, this repository primarily implements Prefect as Python software for workflow orchestration and management. This tentative interpretation follows pyproject.toml's description, \"Workflow orchestration and management.\", and is consistent with the visible Flow and Task class declarations; those declarations alone do not establish their operational roles.",
+    "proposal_id": "investigation-proposal:f7de5be6011e548868c8ffc118967b17056ce80c8fc2376f9fc8108a99879295",
+    "test_questions": [
+      "At the same frozen commit, do README.md's introductory purpose statement and first usage example corroborate or qualify workflow orchestration and management as the repository's primary purpose? Retrieve only those relevant passages.",
+      "What responsibilities do the class docstrings immediately following Flow in src/prefect/flows.py at line 145 and Task in src/prefect/tasks.py at line 307 describe, and do they corroborate or contradict this purpose? Retrieve those docstrings rather than additional repository-wide search matches."
+    ]
+  }
+}
