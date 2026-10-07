@@ -1,0 +1,65 @@
+{
+  "025r_comparison": {
+    "evidence_payload_measurement_changed": true,
+    "lineage_status": "SUPERSEDES_025R_AFTER_PRODUCTION_CANONICALIZATION",
+    "old_base_evidence_payload_bytes": 18029,
+    "old_base_request_id": "investigation-request:b1ea54522b82cd45277ed79dca0ceb6e66ccb46d2cb714c52af32d66b554ff20",
+    "request_identity_matches": false
+  },
+  "authority": {
+    "claims_created": 0,
+    "epistemic_assessments_created": 0,
+    "investigation_operations_executed": 0,
+    "live_model_calls": 0,
+    "new_repository_facts_created": 0,
+    "what_it_is_closed": false,
+    "world_model_assertions_created": 0,
+    "world_model_mutations": 0
+  },
+  "capability": "025ZK",
+  "certification_kind": "PRODUCTION_SEMANTIC_GAP_BASE_REQUEST",
+  "production_base_request": {
+    "evidence_payload_bytes": 22735,
+    "evidence_record_count": 4,
+    "records": [
+      {
+        "canonical_payload_bytes": 1900,
+        "canonical_payload_sha256": "sha256:7a999ebef861895ac1be9a89dd1499423fa754daa5cf04e7dc2d58c68241ce4d",
+        "evidence_id": "declared-python-dependency-set:81b9a8f175c04ae597c85e391a4c7b4a4dac4cdc7004ae08c83873f3a8730906",
+        "evidence_kind": "PYTHON_DECLARED_PROJECT_DEPENDENCIES_EVIDENCE"
+      },
+      {
+        "canonical_payload_bytes": 19924,
+        "canonical_payload_sha256": "sha256:42f70d0881c579a5fc8aa6be8eeab4c4cbe0900fe75d9361c3168f4f088b6b0b",
+        "evidence_id": "git-blob-evidence:927a4cb2a45fd9b51f47926c0484991876b47eaf1558de5b85d840f943d6a1d0",
+        "evidence_kind": "GIT_BLOB_EVIDENCE"
+      },
+      {
+        "canonical_payload_bytes": 330,
+        "canonical_payload_sha256": "sha256:620cfc34ef73db7326ec268bd44cd7bbb1956b58975a941346014270d7a2f720",
+        "evidence_id": "python-import-root:7ad6b0b4ddcd123b600b8b92a02204ae16882e05ebd3e18a5c6ae4765f105390",
+        "evidence_kind": "PYTHON_IMPORT_ROOT_EVIDENCE"
+      },
+      {
+        "canonical_payload_bytes": 581,
+        "canonical_payload_sha256": "sha256:6bd03006a0f962ce2dbc2c29eabc650e55906bd81e2aa6d11ccb1b7c68b2af63",
+        "evidence_id": "python-package-layout:215b8c791992a430b2285aff548a856d00d9401f63bda4e98e5c149e9db73667",
+        "evidence_kind": "PYTHON_PACKAGE_LAYOUT_EVIDENCE"
+      }
+    ],
+    "request_id": "investigation-request:4d91c1e5fc7810a0458739c0a1b73bf4ee02e564aeddd4ca1c52db70885e6fa5"
+  },
+  "repository": {
+    "commit": "2338265f658845a9bef8ce7baf07519b89846dc8",
+    "repository_observation_id": "git-observation:735c214acf83e7b08e03886c558275f0aaa2c3d0d03d618be9e974edf4b52435",
+    "target": "Prefect",
+    "world_model_snapshot_id": "world-model-snapshot:754b63c7d710a879b18abb65c39750c14351b24f9a2c3ff67794f1bf0e2ed21d"
+  },
+  "result": "PASS",
+  "semantic_gap": {
+    "gap_id": "repository-semantic-gap:422595e651bdc55ac8eb2c4818ff7342e6a919a6b3f57c7363a7d66618c8e163",
+    "question": "What is this repository's primary software purpose, and what evidence establishes it?",
+    "question_id": "repository-semantic-gap-question:af7afaa11d8b7bdd25d6343180942b186c1b087a1cc35ae8f19442632f5eccb5",
+    "section": "WHAT_IT_IS"
+  }
+}
