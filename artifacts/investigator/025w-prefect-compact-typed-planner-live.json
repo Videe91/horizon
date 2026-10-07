@@ -1,0 +1,198 @@
+{
+  "authority": {
+    "claims_created": 0,
+    "epistemic_assessments_created": 0,
+    "investigation_operations_executed": 0,
+    "live_model_calls": 1,
+    "world_model_assertions_created": 0,
+    "world_model_mutations": 0
+  },
+  "capability": "025W",
+  "certification_kind": "LIVE_COMPACT_TYPED_PLANNER_PREFECT",
+  "live_execution": {
+    "api_request_id": "req_5202d2413dcc48afb605fe925201246e",
+    "cost_usd": "0.127455",
+    "input_tokens": 2933,
+    "model_elapsed_ms": 45382.68529099878,
+    "output_tokens": 1816,
+    "parsed_planner_output": {
+      "bindings": [
+        {
+          "draft": {
+            "depends_on_keys": [],
+            "expected_information": "Observed README matches identifying candidate purpose statements and their locations, enabling a subsequent read restricted to the introductory passage.",
+            "max_seconds": 20,
+            "operation": {
+              "path_prefix": "README.md",
+              "query": "workflow"
+            },
+            "purpose": "Locate the introductory purpose statement within README.md. Its passage boundaries are not supplied, so discover evidence locations before replanning a bounded read.",
+            "step_key": "locate_readme_purpose"
+          },
+          "investigation_question": "At the same frozen commit, do README.md's introductory purpose statement and first usage example corroborate or qualify workflow orchestration and management as the repository's primary purpose? Retrieve only those relevant passages."
+        },
+        {
+          "draft": {
+            "depends_on_keys": [],
+            "expected_information": "Observed code-fence locations and language markers needed to identify the first usage example and establish a bounded follow-up read.",
+            "max_seconds": 20,
+            "operation": {
+              "path_prefix": "README.md",
+              "query": "```"
+            },
+            "purpose": "Discover fenced-example boundaries in README.md without guessing line ranges. Replan retrieval of only the first usage example after observing those boundaries.",
+            "step_key": "locate_readme_example"
+          },
+          "investigation_question": "At the same frozen commit, do README.md's introductory purpose statement and first usage example corroborate or qualify workflow orchestration and management as the repository's primary purpose? Retrieve only those relevant passages."
+        },
+        {
+          "draft": {
+            "depends_on_keys": [],
+            "expected_information": "The Flow class docstring describing its responsibilities, as evidence corroborating or contradicting workflow orchestration and management.",
+            "max_seconds": 20,
+            "operation": {
+              "path": "src/prefect/flows.py",
+              "symbol": "Flow"
+            },
+            "purpose": "Retrieve the known Flow definition directly to obtain its class docstring without repository-wide searching or guessed docstring line bounds. Use the docstring, not implementation details, for the purpose assessment.",
+            "step_key": "inspect_flow_docstring"
+          },
+          "investigation_question": "What responsibilities do the class docstrings immediately following Flow in src/prefect/flows.py at line 145 and Task in src/prefect/tasks.py at line 307 describe, and do they corroborate or contradict this purpose? Retrieve those docstrings rather than additional repository-wide search matches."
+        },
+        {
+          "draft": {
+            "depends_on_keys": [],
+            "expected_information": "The Task class docstring describing its responsibilities, as evidence corroborating or contradicting workflow orchestration and management.",
+            "max_seconds": 20,
+            "operation": {
+              "path": "src/prefect/tasks.py",
+              "symbol": "Task"
+            },
+            "purpose": "Retrieve the known Task definition directly to obtain its class docstring without repository-wide searching or guessed docstring line bounds. Use the docstring, not implementation details, for the purpose assessment.",
+            "step_key": "inspect_task_docstring"
+          },
+          "investigation_question": "What responsibilities do the class docstrings immediately following Flow in src/prefect/flows.py at line 145 and Task in src/prefect/tasks.py at line 307 describe, and do they corroborate or contradict this purpose? Retrieve those docstrings rather than additional repository-wide search matches."
+        }
+      ],
+      "planner_output_id": "semantic-gap-typed-planner-output:66801024fa5b240d0972222466b0e847efb0d61e627f9b6ff373a93a478e859a",
+      "proposal_id": "investigation-proposal:a73a99405fb0bc13e1590c564543e46108210a033a1f1c32b2ae1af6cc49bb74",
+      "question_id": "repository-semantic-gap-question:af7afaa11d8b7bdd25d6343180942b186c1b087a1cc35ae8f19442632f5eccb5"
+    },
+    "provider": "OPENAI",
+    "raw_output": {
+      "bindings": [
+        {
+          "depends_on_keys": [],
+          "expected_information": "Observed README matches identifying candidate purpose statements and their locations, enabling a subsequent read restricted to the introductory passage.",
+          "investigation_question": "At the same frozen commit, do README.md's introductory purpose statement and first usage example corroborate or qualify workflow orchestration and management as the repository's primary purpose? Retrieve only those relevant passages.",
+          "max_seconds": 20,
+          "operation": {
+            "path_prefix": "README.md",
+            "query": "workflow",
+            "type": "SEARCH_SOURCE"
+          },
+          "purpose": "Locate the introductory purpose statement within README.md. Its passage boundaries are not supplied, so discover evidence locations before replanning a bounded read.",
+          "step_key": "locate_readme_purpose"
+        },
+        {
+          "depends_on_keys": [],
+          "expected_information": "Observed code-fence locations and language markers needed to identify the first usage example and establish a bounded follow-up read.",
+          "investigation_question": "At the same frozen commit, do README.md's introductory purpose statement and first usage example corroborate or qualify workflow orchestration and management as the repository's primary purpose? Retrieve only those relevant passages.",
+          "max_seconds": 20,
+          "operation": {
+            "path_prefix": "README.md",
+            "query": "```",
+            "type": "SEARCH_SOURCE"
+          },
+          "purpose": "Discover fenced-example boundaries in README.md without guessing line ranges. Replan retrieval of only the first usage example after observing those boundaries.",
+          "step_key": "locate_readme_example"
+        },
+        {
+          "depends_on_keys": [],
+          "expected_information": "The Flow class docstring describing its responsibilities, as evidence corroborating or contradicting workflow orchestration and management.",
+          "investigation_question": "What responsibilities do the class docstrings immediately following Flow in src/prefect/flows.py at line 145 and Task in src/prefect/tasks.py at line 307 describe, and do they corroborate or contradict this purpose? Retrieve those docstrings rather than additional repository-wide search matches.",
+          "max_seconds": 20,
+          "operation": {
+            "path": "src/prefect/flows.py",
+            "symbol": "Flow",
+            "type": "INSPECT_SYMBOL"
+          },
+          "purpose": "Retrieve the known Flow definition directly to obtain its class docstring without repository-wide searching or guessed docstring line bounds. Use the docstring, not implementation details, for the purpose assessment.",
+          "step_key": "inspect_flow_docstring"
+        },
+        {
+          "depends_on_keys": [],
+          "expected_information": "The Task class docstring describing its responsibilities, as evidence corroborating or contradicting workflow orchestration and management.",
+          "investigation_question": "What responsibilities do the class docstrings immediately following Flow in src/prefect/flows.py at line 145 and Task in src/prefect/tasks.py at line 307 describe, and do they corroborate or contradict this purpose? Retrieve those docstrings rather than additional repository-wide search matches.",
+          "max_seconds": 20,
+          "operation": {
+            "path": "src/prefect/tasks.py",
+            "symbol": "Task",
+            "type": "INSPECT_SYMBOL"
+          },
+          "purpose": "Retrieve the known Task definition directly to obtain its class docstring without repository-wide searching or guessed docstring line bounds. Use the docstring, not implementation details, for the purpose assessment.",
+          "step_key": "inspect_task_docstring"
+        }
+      ],
+      "proposal_id": "investigation-proposal:a73a99405fb0bc13e1590c564543e46108210a033a1f1c32b2ae1af6cc49bb74",
+      "question_id": "repository-semantic-gap-question:af7afaa11d8b7bdd25d6343180942b186c1b087a1cc35ae8f19442632f5eccb5"
+    },
+    "rejection_reason": null,
+    "returned_model_id": "gpt-6-astra",
+    "run": {
+      "api_request_id": "req_5202d2413dcc48afb605fe925201246e",
+      "canonical_input_hash": "sha256:a306077e89d303f33329226ac11cf682fc624283565b11478113e74d6670614e",
+      "canonical_output_hash": "sha256:167bb4309f07ecce96de45a6704c5afc66c8f72a81a38685702e7c01de0d2605",
+      "cost_cap_usd": "1.000000",
+      "cost_usd": "0.127455",
+      "input_tokens": 2933,
+      "instruction_hash": "sha256:acca9def7e51707c2c0418c25734ec7a51a88d70583b232468caf44303d7a0c0",
+      "invocation_id": "semantic-gap-typed-planner-invocation:ee8d30c1a25fa4a18f43e9d69b350589e6d673bf6f67d1889d23f5e6529d3099",
+      "model_id": "gpt-6-astra",
+      "operation_semantics_id": "typed-planner-operation-semantics:d2c7d2962cb7e7bad05367508a03c178e1ca8fcbd7a2149ed66ebff5c3681c2c",
+      "output_tokens": 1816,
+      "provider": "OPENAI",
+      "rejection_reason": null,
+      "run_id": "semantic-gap-typed-planner-run:3b3cdb85bbf76c5d032212297206e1033a5f0f0083116d351a1475afec06124f",
+      "schema_hash": "sha256:efee04989243a3b7745f1969d9f1701827143ebcee147f3411136ca536b05a03",
+      "temperature": null,
+      "validation_result": "VALID"
+    },
+    "validation_result": "VALID"
+  },
+  "pre_registration": {
+    "canonical_input_hash": "sha256:a306077e89d303f33329226ac11cf682fc624283565b11478113e74d6670614e",
+    "cost_cap_usd": "1.000000",
+    "instruction_hash": "sha256:acca9def7e51707c2c0418c25734ec7a51a88d70583b232468caf44303d7a0c0",
+    "invocation_id": "semantic-gap-typed-planner-invocation:ee8d30c1a25fa4a18f43e9d69b350589e6d673bf6f67d1889d23f5e6529d3099",
+    "operation_semantics_id": "typed-planner-operation-semantics:d2c7d2962cb7e7bad05367508a03c178e1ca8fcbd7a2149ed66ebff5c3681c2c",
+    "provider_input_json_bytes": 7166,
+    "provider_input_sha256": "sha256:d3ba043190d9740fbf0f819b14ac6c26e7a82f8feb6f6f7b68896cd0dd7dff8e",
+    "schema_hash": "sha256:efee04989243a3b7745f1969d9f1701827143ebcee147f3411136ca536b05a03"
+  },
+  "provider_configuration": {
+    "max_output_tokens": 4096,
+    "model": "gpt-6-astra",
+    "pricing": {
+      "cache_write_per_million": "12.50",
+      "cached_input_per_million": "1.00",
+      "input_per_million": "10.00",
+      "output_per_million": "50.00"
+    },
+    "provider": "OPENAI",
+    "reasoning_effort": "high",
+    "sdk_max_retries": 0,
+    "timeout_seconds": 180.0
+  },
+  "repository": {
+    "commit": "2338265f658845a9bef8ce7baf07519b89846dc8",
+    "repository_observation_id": "git-observation:735c214acf83e7b08e03886c558275f0aaa2c3d0d03d618be9e974edf4b52435",
+    "target": "Prefect"
+  },
+  "result": "LIVE_CALL_COMPLETE",
+  "source": {
+    "025s_proposal_id": "investigation-proposal:f7de5be6011e548868c8ffc118967b17056ce80c8fc2376f9fc8108a99879295",
+    "025t_planning_proposal_id": "investigation-proposal:a73a99405fb0bc13e1590c564543e46108210a033a1f1c32b2ae1af6cc49bb74",
+    "025v_request_view_id": "typed-planner-request-view:23710cc12e6790714f35d7c6beaadbc3f515309f0c138dd16f88539ce6d7321d"
+  }
+}
