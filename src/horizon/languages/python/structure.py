@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import ast
 import tokenize
+from bisect import bisect_left
 from dataclasses import dataclass
 from enum import Enum
 from hashlib import sha256
@@ -311,6 +312,54 @@ class _StructureVisitor(
                 f"{blob.path!r}: {exc}"
             ) from exc
 
+        trivia = {
+            tokenize.ENCODING,
+            tokenize.ENDMARKER,
+            tokenize.NEWLINE,
+            tokenize.NL,
+            tokenize.INDENT,
+            tokenize.DEDENT,
+            tokenize.COMMENT,
+        }
+
+        significant_tokens: list[
+            tuple[
+                tokenize.TokenInfo,
+                int,
+                int,
+            ]
+        ] = []
+
+        for token in self._tokens:
+            if token.type in trivia:
+                continue
+
+            start = self._position_to_byte(
+                token.start
+            )
+
+            end = self._position_to_byte(
+                token.end
+            )
+
+            significant_tokens.append(
+                (
+                    token,
+                    start,
+                    end,
+                )
+            )
+
+        self._significant_tokens = tuple(
+            significant_tokens
+        )
+
+        self._significant_token_starts = tuple(
+            start
+            for _token, start, _end
+            in self._significant_tokens
+        )
+
         self._scope: list[str] = []
 
         self._structural_parent_ids: list[str] = []
@@ -400,16 +449,6 @@ class _StructureVisitor(
             self._starts,
         )
 
-        trivia = {
-            tokenize.ENCODING,
-            tokenize.ENDMARKER,
-            tokenize.NEWLINE,
-            tokenize.NL,
-            tokenize.INDENT,
-            tokenize.DEDENT,
-            tokenize.COMMENT,
-        }
-
         significant: list[
             tuple[
                 tokenize.TokenInfo,
@@ -420,20 +459,24 @@ class _StructureVisitor(
 
         argument_open: int | None = None
 
-        for token in self._tokens:
-            if token.type in trivia:
-                continue
+        first_token_index = bisect_left(
+            self._significant_token_starts,
+            call_start,
+        )
 
-            start = self._position_to_byte(
-                token.start
-            )
-
-            end = self._position_to_byte(
-                token.end
-            )
-
-            if start < call_start:
-                continue
+        for token_index in range(
+            first_token_index,
+            len(
+                self._significant_tokens
+            ),
+        ):
+            (
+                token,
+                start,
+                end,
+            ) = self._significant_tokens[
+                token_index
+            ]
 
             if start >= call_end:
                 break
