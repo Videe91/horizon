@@ -1,0 +1,53 @@
+{
+  "authority": {
+    "creates_claims": 0,
+    "creates_epistemic_assessments": 0,
+    "creates_new_repository_fact": false,
+    "creates_world_model_assertions": 0,
+    "investigation_operations_executed": 0,
+    "live_model_calls": 0,
+    "what_it_is_closed": false,
+    "world_model_mutations": 0
+  },
+  "capability": "025ZJ",
+  "certification_kind": "DETERMINISTIC_REPOSITORY_EVIDENCE_BRIDGE",
+  "deterministic_evidence": {
+    "declared_dependency_count": 57,
+    "import_root_count": 1,
+    "package_layout_id": "python-package-layout:215b8c791992a430b2285aff548a856d00d9401f63bda4e98e5c149e9db73667",
+    "pyproject_blob_evidence_id": "git-blob-evidence:927a4cb2a45fd9b51f47926c0484991876b47eaf1558de5b85d840f943d6a1d0",
+    "record_count": 4,
+    "records": [
+      {
+        "canonical_payload_bytes": 19924,
+        "canonical_payload_sha256": "sha256:42f70d0881c579a5fc8aa6be8eeab4c4cbe0900fe75d9361c3168f4f088b6b0b",
+        "evidence_id": "git-blob-evidence:927a4cb2a45fd9b51f47926c0484991876b47eaf1558de5b85d840f943d6a1d0",
+        "evidence_kind": "GIT_BLOB_EVIDENCE"
+      },
+      {
+        "canonical_payload_bytes": 581,
+        "canonical_payload_sha256": "sha256:6bd03006a0f962ce2dbc2c29eabc650e55906bd81e2aa6d11ccb1b7c68b2af63",
+        "evidence_id": "python-package-layout:215b8c791992a430b2285aff548a856d00d9401f63bda4e98e5c149e9db73667",
+        "evidence_kind": "PYTHON_PACKAGE_LAYOUT_EVIDENCE"
+      },
+      {
+        "canonical_payload_bytes": 330,
+        "canonical_payload_sha256": "sha256:620cfc34ef73db7326ec268bd44cd7bbb1956b58975a941346014270d7a2f720",
+        "evidence_id": "python-import-root:7ad6b0b4ddcd123b600b8b92a02204ae16882e05ebd3e18a5c6ae4765f105390",
+        "evidence_kind": "PYTHON_IMPORT_ROOT_EVIDENCE"
+      },
+      {
+        "canonical_payload_bytes": 1900,
+        "canonical_payload_sha256": "sha256:7a999ebef861895ac1be9a89dd1499423fa754daa5cf04e7dc2d58c68241ce4d",
+        "evidence_id": "declared-python-dependency-set:81b9a8f175c04ae597c85e391a4c7b4a4dac4cdc7004ae08c83873f3a8730906",
+        "evidence_kind": "PYTHON_DECLARED_PROJECT_DEPENDENCIES_EVIDENCE"
+      }
+    ]
+  },
+  "repository": {
+    "commit": "2338265f658845a9bef8ce7baf07519b89846dc8",
+    "repository_observation_id": "git-observation:735c214acf83e7b08e03886c558275f0aaa2c3d0d03d618be9e974edf4b52435",
+    "target": "Prefect"
+  },
+  "result": "PASS"
+}
