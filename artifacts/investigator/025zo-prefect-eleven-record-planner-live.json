@@ -1,0 +1,208 @@
+{
+  "authority": {
+    "claims_created": 0,
+    "epistemic_assessments_created": 0,
+    "live_model_calls": 1,
+    "new_investigation_operations_executed": 0,
+    "new_repository_facts_created": 0,
+    "planner_output_executed": false,
+    "what_it_is_closed": false,
+    "world_model_assertions_created": 0,
+    "world_model_mutations": 0
+  },
+  "capability": "025ZO",
+  "certification_kind": "ELEVEN_RECORD_TYPED_PLANNER_LIVE_REPLAN",
+  "live_execution": {
+    "api_request_id": "req_5357d79ee7da403790040cfe78b07f9a",
+    "cost_usd": "0.121805",
+    "input_tokens": 5165,
+    "output_tokens": 1145,
+    "parsed_planner_output": {
+      "bindings": [
+        {
+          "draft": {
+            "depends_on_keys": [],
+            "expected_information": "The exact introductory purpose statement from the frozen README.",
+            "max_seconds": 30,
+            "operation": {
+              "end_line": 55,
+              "path": "README.md",
+              "start_line": 54
+            },
+            "purpose": "Retrieve the introductory purpose statement at the observed matching lines.",
+            "step_key": "read_readme_purpose"
+          },
+          "investigation_question": "At the same frozen commit, do README.md's introductory purpose statement and first usage example corroborate or qualify workflow orchestration and management as the repository's primary purpose? Retrieve only those relevant passages."
+        },
+        {
+          "draft": {
+            "depends_on_keys": [],
+            "expected_information": "The first Python usage example and its introductory explanation, for comparison with the stated purpose.",
+            "max_seconds": 30,
+            "operation": {
+              "end_line": 102,
+              "path": "README.md",
+              "start_line": 79
+            },
+            "purpose": "Retrieve the observed usage introduction and its first Python example, through the observed closing code fence.",
+            "step_key": "read_readme_first_usage"
+          },
+          "investigation_question": "At the same frozen commit, do README.md's introductory purpose statement and first usage example corroborate or qualify workflow orchestration and management as the repository's primary purpose? Retrieve only those relevant passages."
+        },
+        {
+          "draft": {
+            "depends_on_keys": [],
+            "expected_information": "The Flow class docstring describing its responsibilities, without retrieving method implementations.",
+            "max_seconds": 30,
+            "operation": {
+              "end_line": 204,
+              "path": "src/prefect/flows.py",
+              "start_line": 145
+            },
+            "purpose": "Retrieve the Flow class opening and docstring, bounded by the observed class start and the line immediately before its first method at line 205.",
+            "step_key": "read_flow_class_docstring"
+          },
+          "investigation_question": "What responsibilities do the class docstrings immediately following Flow in src/prefect/flows.py at line 145 and Task in src/prefect/tasks.py at line 307 describe, and do they corroborate or contradict this purpose? Retrieve those docstrings rather than additional repository-wide search matches."
+        },
+        {
+          "draft": {
+            "depends_on_keys": [],
+            "expected_information": "The Task class docstring describing its responsibilities, without retrieving method implementations.",
+            "max_seconds": 30,
+            "operation": {
+              "end_line": 383,
+              "path": "src/prefect/tasks.py",
+              "start_line": 307
+            },
+            "purpose": "Retrieve the Task class opening and docstring, bounded by the observed class start and the line immediately before its first method at line 384.",
+            "step_key": "read_task_class_docstring"
+          },
+          "investigation_question": "What responsibilities do the class docstrings immediately following Flow in src/prefect/flows.py at line 145 and Task in src/prefect/tasks.py at line 307 describe, and do they corroborate or contradict this purpose? Retrieve those docstrings rather than additional repository-wide search matches."
+        }
+      ],
+      "planner_output_id": "semantic-gap-typed-planner-output:ffb31810009a1bdeb609483e50431b74c673091fae05e35a906119069a11e343",
+      "proposal_id": "investigation-proposal:a73a99405fb0bc13e1590c564543e46108210a033a1f1c32b2ae1af6cc49bb74",
+      "question_id": "repository-semantic-gap-question:af7afaa11d8b7bdd25d6343180942b186c1b087a1cc35ae8f19442632f5eccb5"
+    },
+    "raw_output": {
+      "bindings": [
+        {
+          "depends_on_keys": [],
+          "expected_information": "The exact introductory purpose statement from the frozen README.",
+          "investigation_question": "At the same frozen commit, do README.md's introductory purpose statement and first usage example corroborate or qualify workflow orchestration and management as the repository's primary purpose? Retrieve only those relevant passages.",
+          "max_seconds": 30,
+          "operation": {
+            "end_line": 55,
+            "path": "README.md",
+            "start_line": 54,
+            "type": "READ_SOURCE"
+          },
+          "purpose": "Retrieve the introductory purpose statement at the observed matching lines.",
+          "step_key": "read_readme_purpose"
+        },
+        {
+          "depends_on_keys": [],
+          "expected_information": "The first Python usage example and its introductory explanation, for comparison with the stated purpose.",
+          "investigation_question": "At the same frozen commit, do README.md's introductory purpose statement and first usage example corroborate or qualify workflow orchestration and management as the repository's primary purpose? Retrieve only those relevant passages.",
+          "max_seconds": 30,
+          "operation": {
+            "end_line": 102,
+            "path": "README.md",
+            "start_line": 79,
+            "type": "READ_SOURCE"
+          },
+          "purpose": "Retrieve the observed usage introduction and its first Python example, through the observed closing code fence.",
+          "step_key": "read_readme_first_usage"
+        },
+        {
+          "depends_on_keys": [],
+          "expected_information": "The Flow class docstring describing its responsibilities, without retrieving method implementations.",
+          "investigation_question": "What responsibilities do the class docstrings immediately following Flow in src/prefect/flows.py at line 145 and Task in src/prefect/tasks.py at line 307 describe, and do they corroborate or contradict this purpose? Retrieve those docstrings rather than additional repository-wide search matches.",
+          "max_seconds": 30,
+          "operation": {
+            "end_line": 204,
+            "path": "src/prefect/flows.py",
+            "start_line": 145,
+            "type": "READ_SOURCE"
+          },
+          "purpose": "Retrieve the Flow class opening and docstring, bounded by the observed class start and the line immediately before its first method at line 205.",
+          "step_key": "read_flow_class_docstring"
+        },
+        {
+          "depends_on_keys": [],
+          "expected_information": "The Task class docstring describing its responsibilities, without retrieving method implementations.",
+          "investigation_question": "What responsibilities do the class docstrings immediately following Flow in src/prefect/flows.py at line 145 and Task in src/prefect/tasks.py at line 307 describe, and do they corroborate or contradict this purpose? Retrieve those docstrings rather than additional repository-wide search matches.",
+          "max_seconds": 30,
+          "operation": {
+            "end_line": 383,
+            "path": "src/prefect/tasks.py",
+            "start_line": 307,
+            "type": "READ_SOURCE"
+          },
+          "purpose": "Retrieve the Task class opening and docstring, bounded by the observed class start and the line immediately before its first method at line 384.",
+          "step_key": "read_task_class_docstring"
+        }
+      ],
+      "proposal_id": "investigation-proposal:a73a99405fb0bc13e1590c564543e46108210a033a1f1c32b2ae1af6cc49bb74",
+      "question_id": "repository-semantic-gap-question:af7afaa11d8b7bdd25d6343180942b186c1b087a1cc35ae8f19442632f5eccb5"
+    },
+    "rejection_reason": null,
+    "returned_model_id": "gpt-6-astra",
+    "run": {
+      "api_request_id": "req_5357d79ee7da403790040cfe78b07f9a",
+      "canonical_input_hash": "sha256:0564f34057e2a57e2e3c75e8b97327eaec5640ffedddccc5d8bb116f2c02c1f0",
+      "canonical_output_hash": "sha256:2f8e7607a52362270f1d87a077fdb7a0908e3ac3c710713784b00d89b0b380e1",
+      "cost_cap_usd": "0.300000",
+      "cost_usd": "0.121805",
+      "input_tokens": 5165,
+      "instruction_hash": "sha256:353a981094293f9eb8a2eaf0411ec904e2ffa928227c08042480f0fd3c4fb8e5",
+      "invocation_id": "semantic-gap-typed-planner-invocation:92a29e7e216f720117734ef235dd5f93e028f51f524dc2fcbce63464f70ebad1",
+      "model_id": "gpt-6-astra",
+      "operation_semantics_id": "typed-planner-operation-semantics:d2c7d2962cb7e7bad05367508a03c178e1ca8fcbd7a2149ed66ebff5c3681c2c",
+      "output_tokens": 1145,
+      "provider": "OPENAI",
+      "rejection_reason": null,
+      "run_id": "semantic-gap-typed-planner-run:cac2862667fe8b1a21799eb3b01215daeacc45187c367589fe3389706a235f7f",
+      "schema_hash": "sha256:efee04989243a3b7745f1969d9f1701827143ebcee147f3411136ca536b05a03",
+      "temperature": null,
+      "validation_result": "VALID"
+    },
+    "validation_result": "VALID"
+  },
+  "pre_registration": {
+    "canonical_input_hash": "sha256:0564f34057e2a57e2e3c75e8b97327eaec5640ffedddccc5d8bb116f2c02c1f0",
+    "cost_cap_usd": "0.300000",
+    "instruction_hash": "sha256:353a981094293f9eb8a2eaf0411ec904e2ffa928227c08042480f0fd3c4fb8e5",
+    "invocation_id": "semantic-gap-typed-planner-invocation:92a29e7e216f720117734ef235dd5f93e028f51f524dc2fcbce63464f70ebad1",
+    "operation_semantics_id": "typed-planner-operation-semantics:d2c7d2962cb7e7bad05367508a03c178e1ca8fcbd7a2149ed66ebff5c3681c2c",
+    "planning_proposal_id": "investigation-proposal:a73a99405fb0bc13e1590c564543e46108210a033a1f1c32b2ae1af6cc49bb74",
+    "request_id": "semantic-gap-followup-investigation-request:4bd29f50a833a4f06b6718756009e556459ebac539cf8f9fc94eac7c50e10006",
+    "schema_hash": "sha256:efee04989243a3b7745f1969d9f1701827143ebcee147f3411136ca536b05a03",
+    "temperature": null
+  },
+  "provider_configuration": {
+    "max_output_tokens": 4096,
+    "model_id": "gpt-6-astra",
+    "pricing": {
+      "cache_write_per_million": "12.50",
+      "cached_input_per_million": "1.00",
+      "input_per_million": "10.00",
+      "output_per_million": "50.00"
+    },
+    "provider": "OPENAI",
+    "reasoning_effort": "high",
+    "sdk_max_retries": 0,
+    "store": false,
+    "timeout_seconds": 60.0
+  },
+  "repository": {
+    "commit": "2338265f658845a9bef8ce7baf07519b89846dc8",
+    "repository_observation_id": "git-observation:735c214acf83e7b08e03886c558275f0aaa2c3d0d03d618be9e974edf4b52435",
+    "target": "Prefect",
+    "world_model_snapshot_id": "world-model-snapshot:754b63c7d710a879b18abb65c39750c14351b24f9a2c3ff67794f1bf0e2ed21d"
+  },
+  "result": "LIVE_CALL_COMPLETE",
+  "source": {
+    "025zn_artifact_sha256": "sha256:"
+  }
+}
