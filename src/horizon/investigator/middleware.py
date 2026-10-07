@@ -25,6 +25,7 @@ import hashlib
 import json
 
 from dataclasses import dataclass
+from enum import Enum
 
 from horizon.claims.epistemic import (
     EpistemicAssessment,
@@ -32,11 +33,17 @@ from horizon.claims.epistemic import (
 from horizon.claims.evidence_backed import (
     EvidenceBackedClaim,
 )
+from horizon.investigation.semantic_gap import (
+    RepositorySemanticGapQuestion,
+)
 from horizon.world_model.assertion import (
     WorldModelAssertion,
 )
 from horizon.world_model.reconciliation import (
     WorldModelRelationshipAnalysis,
+)
+from horizon.world_model.repository_deterministic import (
+    RepositoryDeterministicWorldModel,
 )
 from horizon.world_model.snapshot import (
     WorldModelSnapshot,
@@ -47,6 +54,19 @@ class InvestigationMiddlewareError(
     ValueError
 ):
     """Bounded investigation context could not be compiled faithfully."""
+
+
+class InvestigationRequestOrigin(
+    str,
+    Enum,
+):
+    WORLD_MODEL_CONFLICT = (
+        "WORLD_MODEL_CONFLICT"
+    )
+
+    REPOSITORY_SEMANTIC_GAP = (
+        "REPOSITORY_SEMANTIC_GAP"
+    )
 
 
 @dataclass(
@@ -86,8 +106,8 @@ class InvestigationRequest:
     question_id: str
     question: str
 
-    relationship_id: str
-    relationship_kind: str
+    relationship_id: str | None
+    relationship_kind: str | None
     relationship_reason: str | None
 
     assertions: tuple[
@@ -116,6 +136,14 @@ class InvestigationRequest:
     ]
 
     request_id: str
+
+    origin: InvestigationRequestOrigin = (
+        InvestigationRequestOrigin
+        .WORLD_MODEL_CONFLICT
+    )
+
+    semantic_gap_id: str | None = None
+    semantic_gap_section: str | None = None
 
     @property
     def assertion_ids(
@@ -649,4 +677,419 @@ def compile_investigation_request(
             evidence_records
         ),
         request_id=request_id,
+    )
+
+
+def _semantic_gap_context(
+    question: RepositorySemanticGapQuestion,
+    model: RepositoryDeterministicWorldModel,
+) -> tuple[
+    tuple[
+        WorldModelAssertion,
+        ...,
+    ],
+    tuple[
+        EvidenceBackedClaim,
+        ...,
+    ],
+    tuple[
+        EpistemicAssessment,
+        ...,
+    ],
+    tuple[
+        str,
+        ...,
+    ],
+]:
+    snapshot = model.snapshot
+
+    assertions_by_id = {
+        assertion.assertion_id: assertion
+        for assertion
+        in snapshot.assertions
+    }
+
+    claims_by_id = {
+        claim.claim_id: claim
+        for claim
+        in snapshot.claims
+    }
+
+    assessments_by_id = {
+        assessment.assessment_id: assessment
+        for assessment
+        in snapshot.assessments
+    }
+
+    try:
+        assertions = tuple(
+            sorted(
+                (
+                    assertions_by_id[
+                        assertion_id
+                    ]
+                    for assertion_id
+                    in question.context_assertion_ids
+                ),
+                key=lambda item: (
+                    item.assertion_id
+                ),
+            )
+        )
+    except KeyError as exc:
+        raise InvestigationMiddlewareError(
+            "semantic gap context references "
+            "an assertion outside its World Model snapshot"
+        ) from exc
+
+    expected_claim_ids = tuple(
+        sorted(
+            {
+                assertion.claim_id
+                for assertion
+                in assertions
+            }
+        )
+    )
+
+    expected_assessment_ids = tuple(
+        sorted(
+            {
+                assertion.assessment_id
+                for assertion
+                in assertions
+            }
+        )
+    )
+
+    if (
+        question.context_claim_ids
+        != expected_claim_ids
+    ):
+        raise InvestigationMiddlewareError(
+            "semantic gap context claims do not "
+            "match its assertion closure"
+        )
+
+    if (
+        question.context_assessment_ids
+        != expected_assessment_ids
+    ):
+        raise InvestigationMiddlewareError(
+            "semantic gap context assessments do not "
+            "match its assertion closure"
+        )
+
+    try:
+        claims = tuple(
+            claims_by_id[
+                claim_id
+            ]
+            for claim_id
+            in expected_claim_ids
+        )
+
+        assessments = tuple(
+            assessments_by_id[
+                assessment_id
+            ]
+            for assessment_id
+            in expected_assessment_ids
+        )
+    except KeyError as exc:
+        raise InvestigationMiddlewareError(
+            "semantic gap context is not closed "
+            "over claims and assessments"
+        ) from exc
+
+    claims_for_assessment = {
+        claim.claim_id: claim
+        for claim
+        in claims
+    }
+
+    basis_reference_ids: set[
+        str
+    ] = set()
+
+    for assessment in assessments:
+        claim = claims_for_assessment.get(
+            assessment.claim_id
+        )
+
+        if claim is None:
+            raise InvestigationMiddlewareError(
+                "semantic gap context assessment "
+                "references a claim outside the context"
+            )
+
+        references_by_id = {
+            reference.reference_id: reference
+            for reference
+            in claim.evidence
+        }
+
+        for reference_id in (
+            assessment.basis_reference_ids
+        ):
+            if (
+                reference_id
+                not in references_by_id
+            ):
+                raise InvestigationMiddlewareError(
+                    "semantic gap context assessment "
+                    "basis is not attached to its claim"
+                )
+
+            basis_reference_ids.add(
+                reference_id
+            )
+
+    expected_reference_ids = tuple(
+        sorted(
+            basis_reference_ids
+        )
+    )
+
+    if (
+        question.context_evidence_reference_ids
+        != expected_reference_ids
+    ):
+        raise InvestigationMiddlewareError(
+            "semantic gap context evidence references "
+            "do not match its assessment basis closure"
+        )
+
+    return (
+        assertions,
+        claims,
+        assessments,
+        expected_reference_ids,
+    )
+
+
+def compile_semantic_gap_investigation_request(
+    question: RepositorySemanticGapQuestion,
+    *,
+    model: RepositoryDeterministicWorldModel,
+    evidence_records: tuple[
+        CanonicalEvidenceRecord,
+        ...,
+    ],
+) -> InvestigationRequest:
+    """Compile one ordinary semantic gap into bounded read-only context.
+
+    This path does not create or pretend that a World Model relationship
+    exists. Relationship fields are explicitly absent.
+
+    It performs no model call and no World Model mutation.
+    """
+
+    if not isinstance(
+        question,
+        RepositorySemanticGapQuestion,
+    ):
+        raise InvestigationMiddlewareError(
+            "question must be a RepositorySemanticGapQuestion"
+        )
+
+    if not isinstance(
+        model,
+        RepositoryDeterministicWorldModel,
+    ):
+        raise InvestigationMiddlewareError(
+            "model must be a RepositoryDeterministicWorldModel"
+        )
+
+    if (
+        question.source_commit
+        != model.source_commit
+        or question.repository_observation_id
+        != model.repository_observation_id
+        or question.world_model_snapshot_id
+        != model.snapshot.snapshot_id
+    ):
+        raise InvestigationMiddlewareError(
+            "semantic gap question and World Model "
+            "do not represent the same snapshot"
+        )
+
+    if not isinstance(
+        evidence_records,
+        tuple,
+    ):
+        raise InvestigationMiddlewareError(
+            "evidence_records must be a tuple"
+        )
+
+    (
+        assertions,
+        claims,
+        assessments,
+        evidence_reference_ids,
+    ) = _semantic_gap_context(
+        question,
+        model,
+    )
+
+    references_by_id = {
+        reference.reference_id: reference
+        for claim
+        in claims
+        for reference
+        in claim.evidence
+    }
+
+    try:
+        required_evidence_ids = tuple(
+            sorted(
+                {
+                    references_by_id[
+                        reference_id
+                    ].evidence_id
+                    for reference_id
+                    in evidence_reference_ids
+                }
+            )
+        )
+    except KeyError as exc:
+        raise InvestigationMiddlewareError(
+            "semantic gap evidence reference "
+            "is outside the bounded claims"
+        ) from exc
+
+    records_by_id: dict[
+        str,
+        CanonicalEvidenceRecord,
+    ] = {}
+
+    for record in evidence_records:
+        _validate_evidence_record(
+            record
+        )
+
+        if (
+            record.evidence_id
+            in records_by_id
+        ):
+            raise InvestigationMiddlewareError(
+                "duplicate canonical evidence identity"
+            )
+
+        records_by_id[
+            record.evidence_id
+        ] = record
+
+    missing_evidence_ids = (
+        set(
+            required_evidence_ids
+        )
+        - set(
+            records_by_id
+        )
+    )
+
+    if missing_evidence_ids:
+        raise InvestigationMiddlewareError(
+            "canonical evidence content is missing "
+            "for the bounded semantic gap request"
+        )
+
+    selected_records = tuple(
+        records_by_id[
+            evidence_id
+        ]
+        for evidence_id
+        in required_evidence_ids
+    )
+
+    canonical_payload = {
+        "origin": (
+            InvestigationRequestOrigin
+            .REPOSITORY_SEMANTIC_GAP
+            .value
+        ),
+        "question": (
+            question.question
+        ),
+        "question_id": (
+            question.question_id
+        ),
+        "semantic_gap_id": (
+            question.gap_id
+        ),
+        "semantic_gap_section": (
+            question.section.value
+        ),
+        "relationship_id": None,
+        "relationship_kind": None,
+        "relationship_reason": None,
+        "assertions": [
+            _assertion_payload(
+                assertion
+            )
+            for assertion
+            in assertions
+        ],
+        "claims": [
+            _claim_payload(
+                claim
+            )
+            for claim
+            in claims
+        ],
+        "assessments": [
+            _assessment_payload(
+                assessment
+            )
+            for assessment
+            in assessments
+        ],
+        "evidence_reference_ids": list(
+            evidence_reference_ids
+        ),
+        "evidence_records": [
+            _evidence_record_payload(
+                record
+            )
+            for record
+            in selected_records
+        ],
+    }
+
+    request_id = _identity(
+        "investigation-request:",
+        canonical_payload,
+    )
+
+    return InvestigationRequest(
+        question_id=(
+            question.question_id
+        ),
+        question=(
+            question.question
+        ),
+        relationship_id=None,
+        relationship_kind=None,
+        relationship_reason=None,
+        assertions=assertions,
+        claims=claims,
+        assessments=assessments,
+        evidence_reference_ids=(
+            evidence_reference_ids
+        ),
+        evidence_records=(
+            selected_records
+        ),
+        request_id=request_id,
+        origin=(
+            InvestigationRequestOrigin
+            .REPOSITORY_SEMANTIC_GAP
+        ),
+        semantic_gap_id=(
+            question.gap_id
+        ),
+        semantic_gap_section=(
+            question.section.value
+        ),
     )
