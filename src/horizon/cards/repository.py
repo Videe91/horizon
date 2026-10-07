@@ -23,14 +23,11 @@ from enum import Enum
 from horizon.claims.epistemic import (
     EpistemicStatus,
 )
-from horizon.languages.python.project_dependencies import (
-    PythonDeclaredProjectDependenciesEvidence,
-)
-from horizon.languages.python.repository_modules import (
-    PythonPackageLayoutEvidence,
-)
 from horizon.repository.python_index import (
     PythonRepositoryIndex,
+)
+from horizon.world_model.repository_deterministic import (
+    RepositoryDeterministicWorldModel,
 )
 
 
@@ -304,205 +301,226 @@ def _revision_identity(
     )
 
 
-def _package_placement_state(
-    layout: PythonPackageLayoutEvidence,
+def _unknown_semantic_state(
+    section: RepositorySemanticSection,
 ) -> RepositoryCardSemanticState:
-    if not isinstance(
-        layout,
-        PythonPackageLayoutEvidence,
-    ):
-        raise RepositoryCardError(
-            "package_layout must be PythonPackageLayoutEvidence"
+    return RepositoryCardSemanticState(
+        section=section,
+        status=(
+            EpistemicStatus.UNKNOWN
+        ),
+        reason=(
+            _UNKNOWN_REASONS[
+                section
+            ]
+        ),
+        evidence_ids=(),
+    )
+
+
+def _project_world_model_state(
+    world_model: RepositoryDeterministicWorldModel,
+    *,
+    section: RepositorySemanticSection,
+    assertion_ids: tuple[
+        str,
+        ...,
+    ],
+) -> RepositoryCardSemanticState:
+    snapshot = world_model.snapshot
+
+    assertions_by_id = {
+        assertion.assertion_id: assertion
+        for assertion
+        in snapshot.assertions
+    }
+
+    claims_by_id = {
+        claim.claim_id: claim
+        for claim
+        in snapshot.claims
+    }
+
+    assessments_by_id = {
+        assessment.assessment_id: assessment
+        for assessment
+        in snapshot.assessments
+    }
+
+    selected_ids = tuple(
+        sorted(
+            assertion_ids
+        )
+    )
+
+    if not selected_ids:
+        return _unknown_semantic_state(
+            section
         )
 
-    if not layout.import_roots:
-        raise RepositoryCardError(
-            "package layout contains no import roots"
+    propositions: list[
+        str
+    ] = []
+
+    statuses: set[
+        EpistemicStatus
+    ] = set()
+
+    evidence_ids: set[
+        str
+    ] = set()
+
+    for assertion_id in selected_ids:
+        assertion = assertions_by_id.get(
+            assertion_id
         )
 
-    placements: list[str] = []
-
-    for root in layout.import_roots:
-        import_root = (
-            root.root_path
-            if root.root_path
-            else "<repository-root>"
-        )
-
-        placements.append(
-            (
-                "package path "
-                + repr(
-                    root.package_path
-                )
-                + ", import root "
-                + repr(
-                    import_root
-                )
-                + ", top-level package "
-                + repr(
-                    root.top_level_package
-                )
+        if assertion is None:
+            raise RepositoryCardError(
+                "selected World Model assertion "
+                "is absent from snapshot"
             )
+
+        claim = claims_by_id.get(
+            assertion.claim_id
         )
+
+        if claim is None:
+            raise RepositoryCardError(
+                "selected assertion claim "
+                "is absent from snapshot"
+            )
+
+        assessment = assessments_by_id.get(
+            assertion.assessment_id
+        )
+
+        if assessment is None:
+            raise RepositoryCardError(
+                "selected assertion assessment "
+                "is absent from snapshot"
+            )
+
+        statuses.add(
+            assessment.status
+        )
+
+        propositions.append(
+            claim.proposition
+        )
+
+        basis_reference_ids = set(
+            assessment.basis_reference_ids
+        )
+
+        for reference in claim.evidence:
+            if (
+                reference.reference_id
+                in basis_reference_ids
+            ):
+                evidence_ids.add(
+                    reference.evidence_id
+                )
 
     if len(
-        placements
-    ) == 1:
-        prefix = (
-            "Declared Python package placement: "
-        )
-    else:
-        prefix = (
-            "Declared Python package placements: "
-        )
-
-    evidence_ids = tuple(
-        dict.fromkeys(
-            (
-                layout.source_evidence_id,
-                layout.layout_id,
-                *(
-                    root.evidence_id
-                    for root
-                    in layout.import_roots
-                ),
-            )
-        )
-    )
-
-    return RepositoryCardSemanticState(
-        section=(
-            RepositorySemanticSection
-            .WHERE_IT_SITS
-        ),
-        status=(
-            EpistemicStatus.PROVEN
-        ),
-        reason=(
-            prefix
-            + "; ".join(
-                placements
-            )
-            + "."
-        ),
-        evidence_ids=(
-            evidence_ids
-        ),
-    )
-
-
-def _dependency_state(
-    evidence: PythonDeclaredProjectDependenciesEvidence,
-) -> RepositoryCardSemanticState:
-    if not isinstance(
-        evidence,
-        PythonDeclaredProjectDependenciesEvidence,
-    ):
+        statuses
+    ) != 1:
         raise RepositoryCardError(
-            "project_dependencies must be "
-            "PythonDeclaredProjectDependenciesEvidence"
+            "one Card section cannot collapse "
+            "mixed epistemic statuses"
         )
 
+    status = next(
+        iter(
+            statuses
+        )
+    )
+
     return RepositoryCardSemanticState(
-        section=(
-            RepositorySemanticSection
-            .WHAT_IT_DEPENDS_ON
+        section=section,
+        status=status,
+        reason=" ".join(
+            propositions
         ),
-        status=(
-            EpistemicStatus.PROVEN
-        ),
-        reason=(
-            "Project "
-            + repr(
-                evidence.project_name
+        evidence_ids=tuple(
+            sorted(
+                evidence_ids
             )
-            + " declares "
-            + str(
-                evidence.dependency_count
-            )
-            + " direct project dependencies "
-            + "in pyproject.toml."
-        ),
-        evidence_ids=(
-            evidence.source_evidence_id,
-            evidence.evidence_id,
         ),
     )
 
 
 def _semantic_states(
-    package_layout: PythonPackageLayoutEvidence | None,
-    project_dependencies: (
-        PythonDeclaredProjectDependenciesEvidence
+    index: PythonRepositoryIndex,
+    world_model: (
+        RepositoryDeterministicWorldModel
         | None
     ),
 ) -> tuple[
     RepositoryCardSemanticState,
     ...,
 ]:
-    states: list[
-        RepositoryCardSemanticState
-    ] = []
-
-    for section in RepositorySemanticSection:
-        if (
-            section
-            is RepositorySemanticSection.WHERE_IT_SITS
-            and package_layout
-            is not None
-        ):
-            states.append(
-                _package_placement_state(
-                    package_layout
-                )
+    if world_model is None:
+        return tuple(
+            _unknown_semantic_state(
+                section
             )
-
-            continue
-
-        if (
-            section
-            is RepositorySemanticSection.WHAT_IT_DEPENDS_ON
-            and project_dependencies
-            is not None
-        ):
-            states.append(
-                _dependency_state(
-                    project_dependencies
-                )
-            )
-
-            continue
-
-        states.append(
-            RepositoryCardSemanticState(
-                section=section,
-                status=(
-                    EpistemicStatus.UNKNOWN
-                ),
-                reason=(
-                    _UNKNOWN_REASONS[
-                        section
-                    ]
-                ),
-                evidence_ids=(),
-            )
+            for section
+            in RepositorySemanticSection
         )
 
+    if not isinstance(
+        world_model,
+        RepositoryDeterministicWorldModel,
+    ):
+        raise RepositoryCardError(
+            "world_model must be "
+            "RepositoryDeterministicWorldModel"
+        )
+
+    if (
+        world_model.source_commit
+        != index.commit_sha
+        or world_model.repository_observation_id
+        != index.repository_observation_id
+    ):
+        raise RepositoryCardError(
+            "World Model and repository index "
+            "do not represent the same snapshot"
+        )
+
+    selections = {
+        RepositorySemanticSection.WHERE_IT_SITS: (
+            world_model
+            .where_it_sits_assertion_ids
+        ),
+        RepositorySemanticSection.WHAT_IT_DEPENDS_ON: (
+            world_model
+            .what_it_depends_on_assertion_ids
+        ),
+    }
+
     return tuple(
-        states
+        _project_world_model_state(
+            world_model,
+            section=section,
+            assertion_ids=(
+                selections.get(
+                    section,
+                    (),
+                )
+            ),
+        )
+        for section
+        in RepositorySemanticSection
     )
 
 
 def build_repository_card(
     index: PythonRepositoryIndex,
     *,
-    package_layout: (
-        PythonPackageLayoutEvidence
-        | None
-    ) = None,
-    project_dependencies: (
-        PythonDeclaredProjectDependenciesEvidence
+    world_model: (
+        RepositoryDeterministicWorldModel
         | None
     ) = None,
 ) -> RepositoryCard:
@@ -566,8 +584,8 @@ def build_repository_card(
     )
 
     semantic_sections = _semantic_states(
-        package_layout,
-        project_dependencies,
+        index,
+        world_model,
     )
 
     return RepositoryCard(

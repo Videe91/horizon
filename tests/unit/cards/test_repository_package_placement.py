@@ -242,7 +242,7 @@ def test_explicit_hatch_layout_automatically_proves_where_it_sits(
     )
 
     assert (
-        "package path 'src/acme'"
+        "package path is 'src/acme'"
         in where.reason
     )
 
@@ -582,7 +582,7 @@ def test_frozen_pyproject_evidence_beats_working_tree_mutation(
     )
 
     assert (
-        "package path 'src/acme'"
+        "package path is 'src/acme'"
         in where.reason
     )
 
@@ -715,7 +715,7 @@ def test_render_exposes_package_evidence(
     )
 
     assert (
-        "[PROVEN] Declared Python package placement:"
+        "[PROVEN] At frozen commit "
         in rendered
     )
 

@@ -1,19 +1,15 @@
-"""Automatic deterministic enrichment of the repository Card.
+"""Automatic deterministic repository Card pipeline.
 
-Current automatic evidence paths:
+Repository evidence is not written directly into Card semantic state.
 
-exact observed pyproject.toml
-    -> existing Hatch package-layout evidence
-    -> WHERE IT SITS
+The pipeline is:
 
-exact observed pyproject.toml
-    -> direct PEP 621 project dependency evidence
-    -> WHAT IT DEPENDS ON
+exact observed repository metadata
+    -> deterministic evidence
+    -> canonical World Model
+    -> Card projection
 
-The pyproject blob is read once and supplied independently to each
-evidence extractor.
-
-Unsupported evidence remains UNKNOWN. No directory heuristic is used.
+Unsupported evidence remains UNKNOWN.
 """
 
 from __future__ import annotations
@@ -44,6 +40,9 @@ from horizon.repository.git_observation import (
 )
 from horizon.repository.python_index import (
     PythonRepositoryIndex,
+)
+from horizon.world_model.repository_deterministic import (
+    build_repository_deterministic_world_model,
 )
 
 
@@ -124,7 +123,7 @@ def build_repository_card_automatically(
     observation: GitCommitObservation,
     index: PythonRepositoryIndex,
 ) -> RepositoryCard:
-    """Build a repository Card and attach deterministic evidence available now."""
+    """Build an automatic Card through Horizon's canonical World Model."""
 
     if not isinstance(
         observation,
@@ -149,7 +148,8 @@ def build_repository_card_automatically(
         != observation.observation_id
     ):
         raise RepositoryAutomaticCardError(
-            "repository index and observation do not represent the same snapshot"
+            "repository index and observation "
+            "do not represent the same snapshot"
         )
 
     repository_path = Path(
@@ -164,11 +164,9 @@ def build_repository_card_automatically(
             "repository path must identify an existing directory"
         )
 
-    pyproject_blob = (
-        _read_pyproject_blob(
-            repository_path,
-            observation,
-        )
+    pyproject_blob = _read_pyproject_blob(
+        repository_path,
+        observation,
     )
 
     package_layout = (
@@ -183,12 +181,24 @@ def build_repository_card_automatically(
         )
     )
 
+    world_model = (
+        build_repository_deterministic_world_model(
+            index,
+            pyproject_blob=(
+                pyproject_blob
+            ),
+            package_layout=(
+                package_layout
+            ),
+            project_dependencies=(
+                project_dependencies
+            ),
+        )
+    )
+
     return build_repository_card(
         index,
-        package_layout=(
-            package_layout
-        ),
-        project_dependencies=(
-            project_dependencies
+        world_model=(
+            world_model
         ),
     )

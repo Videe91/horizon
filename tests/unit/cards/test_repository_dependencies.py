@@ -264,7 +264,7 @@ def test_direct_dependencies_automatically_prove_dependency_section(
     )
 
     assert (
-        "Project 'acme' declares 2 direct project dependencies"
+        "project 'acme' declares 2 direct project dependencies"
         in depends.reason
     )
 
@@ -571,8 +571,7 @@ def test_dependency_enrichment_changes_revision_not_card_identity(
     )
 
     before = build_repository_card(
-        index,
-        package_layout=layout,
+        index
     )
 
     after = (
@@ -628,7 +627,7 @@ def test_render_exposes_dependency_evidence(
     )
 
     assert (
-        "[PROVEN] Project 'acme' declares 2 direct project dependencies"
+        "project 'acme' declares 2 direct project dependencies"
         in rendered
     )
 

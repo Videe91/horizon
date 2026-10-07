@@ -68,6 +68,9 @@ class RepositoryDeterministicWorldModelError(
     slots=True,
 )
 class RepositoryDeterministicWorldModel:
+    source_commit: str
+    repository_observation_id: str
+
     snapshot: WorldModelSnapshot
 
     where_it_sits_assertion_ids: tuple[
@@ -469,6 +472,12 @@ def build_repository_deterministic_world_model(
     )
 
     return RepositoryDeterministicWorldModel(
+        source_commit=(
+            index.commit_sha
+        ),
+        repository_observation_id=(
+            index.repository_observation_id
+        ),
         snapshot=snapshot,
         where_it_sits_assertion_ids=tuple(
             sorted(
