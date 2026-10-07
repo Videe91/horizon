@@ -1,0 +1,52 @@
+{
+  "authority": {
+    "claims_created": 0,
+    "epistemic_assessments_created": 0,
+    "investigation_operations_executed": 0,
+    "new_live_model_calls": 0,
+    "world_model_assertions_created": 0,
+    "world_model_mutations": 0
+  },
+  "capability": "025X",
+  "certification_kind": "OFFLINE_025W_TYPED_PLAN_REVIEW",
+  "plan": {
+    "all_operations_currently_typed": true,
+    "binding_count": 4,
+    "broad_repository_search_count": 0,
+    "flow_target_explicit_in_question": true,
+    "operation_count": 4,
+    "operation_kinds": [
+      "SEARCH_SOURCE",
+      "SEARCH_SOURCE",
+      "INSPECT_SYMBOL",
+      "INSPECT_SYMBOL"
+    ],
+    "readme_search_count": 2,
+    "readme_searches_exact_file_only": true,
+    "step_keys": [
+      "locate_readme_purpose",
+      "locate_readme_example",
+      "inspect_flow_docstring",
+      "inspect_task_docstring"
+    ],
+    "symbol_inspection_count": 2,
+    "task_target_explicit_in_question": true
+  },
+  "result": "CERTIFIED_FOR_EVIDENCE_EXECUTION",
+  "review": {
+    "flow_strategy": "CERTIFIED_DIRECT_SYMBOL_INSPECTION",
+    "hypothesis_promoted": false,
+    "readme_reason": "Question names README.md but not exact passage boundaries; exact-file literal search is appropriate before bounded read.",
+    "readme_strategy": "CERTIFIED_DISCOVERY_THEN_REPLAN",
+    "semantic_truth_created": false,
+    "task_strategy": "CERTIFIED_DIRECT_SYMBOL_INSPECTION",
+    "what_it_is_closed": false
+  },
+  "source": {
+    "025t_sha256": "sha256:d4054061c27b7bb5e9bae3353bbac1699f93d506a3c81fc42efd61a81db65713",
+    "025w_sha256": "sha256:0fc3841e7741d32416e7b8f95e5f33051c330eb13287015b7d70a3f694f0a34d",
+    "planning_proposal_id": "investigation-proposal:a73a99405fb0bc13e1590c564543e46108210a033a1f1c32b2ae1af6cc49bb74",
+    "question_id": "repository-semantic-gap-question:af7afaa11d8b7bdd25d6343180942b186c1b087a1cc35ae8f19442632f5eccb5",
+    "test_question_count": 2
+  }
+}
