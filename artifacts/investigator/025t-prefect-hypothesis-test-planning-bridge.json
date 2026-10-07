@@ -1,0 +1,53 @@
+{
+  "authority": {
+    "claims_created": 0,
+    "epistemic_assessments_created": 0,
+    "new_investigation_operations_executed": 0,
+    "new_live_model_calls": 0,
+    "world_model_assertions_created": 0,
+    "world_model_mutations": 0
+  },
+  "bridge": {
+    "bridge_id": "hypothesis-test-planning-bridge:d230e2c27e050e7d38e53f691963990c488f8b16d31ab68e7bc8ce8fe80afed8",
+    "exact_test_question_preservation": true,
+    "planning_proposal_id": "investigation-proposal:a73a99405fb0bc13e1590c564543e46108210a033a1f1c32b2ae1af6cc49bb74",
+    "planning_proposal_kind": "PROPOSE_INVESTIGATION",
+    "planning_questions": [
+      "At the same frozen commit, do README.md's introductory purpose statement and first usage example corroborate or qualify workflow orchestration and management as the repository's primary purpose? Retrieve only those relevant passages.",
+      "What responsibilities do the class docstrings immediately following Flow in src/prefect/flows.py at line 145 and Task in src/prefect/tasks.py at line 307 describe, and do they corroborate or contradict this purpose? Retrieve those docstrings rather than additional repository-wide search matches."
+    ],
+    "source_hypothesis_directly_executable": false,
+    "source_hypothesis_preserved": true,
+    "source_proposal_id": "investigation-proposal:f7de5be6011e548868c8ffc118967b17056ce80c8fc2376f9fc8108a99879295"
+  },
+  "capability": "025T",
+  "certification_kind": "REAL_PREFECT_HYPOTHESIS_TEST_PLANNING_BRIDGE",
+  "repository": {
+    "commit": "2338265f658845a9bef8ce7baf07519b89846dc8",
+    "repository_observation_id": "git-observation:735c214acf83e7b08e03886c558275f0aaa2c3d0d03d618be9e974edf4b52435",
+    "target": "Prefect"
+  },
+  "result": "PASS",
+  "source": {
+    "025p_sha256": "sha256:f9ab7f2bdb4d2229719ede1a5643bce422893b10e60aee84d677473c70245592",
+    "025r_sha256": "sha256:026cce4ef593ecb43de49f0d9a43013a52c8b5477ea83ccdbccc2817f143c2c8",
+    "025s_sha256": "sha256:07e5678a4d28b5dedbb41e9fb671a5b5f1d20ea0d61819fce9e780524341e3f2",
+    "api_request_id": "req_1ab4e76933c04ebca54169dd3aaf76a5",
+    "source_hypothesis": "At frozen commit 2338265f658845a9bef8ce7baf07519b89846dc8, this repository primarily implements Prefect as Python software for workflow orchestration and management. This tentative interpretation follows pyproject.toml's description, \"Workflow orchestration and management.\", and is consistent with the visible Flow and Task class declarations; those declarations alone do not establish their operational roles.",
+    "source_proposal_id": "investigation-proposal:f7de5be6011e548868c8ffc118967b17056ce80c8fc2376f9fc8108a99879295",
+    "source_proposal_kind": "PROPOSE_HYPOTHESIS",
+    "test_questions": [
+      "At the same frozen commit, do README.md's introductory purpose statement and first usage example corroborate or qualify workflow orchestration and management as the repository's primary purpose? Retrieve only those relevant passages.",
+      "What responsibilities do the class docstrings immediately following Flow in src/prefect/flows.py at line 145 and Task in src/prefect/tasks.py at line 307 describe, and do they corroborate or contradict this purpose? Retrieve those docstrings rather than additional repository-wide search matches."
+    ]
+  },
+  "typed_planner": {
+    "boundary_acceptance": true,
+    "canonical_input_hash": "sha256:c4072b546dba818f0671ead902c0773e9a2eda2b6d1a19892aadda9949c10526",
+    "cost_cap_usd": "1.000000",
+    "instruction_hash": "sha256:acca9def7e51707c2c0418c25734ec7a51a88d70583b232468caf44303d7a0c0",
+    "invocation_id": "semantic-gap-typed-planner-invocation:7b59f21848e8f39ac45b3fb670ad550dd0c30d6cabf643c77fefd994d57ce06d",
+    "operation_semantics_id": "typed-planner-operation-semantics:d2c7d2962cb7e7bad05367508a03c178e1ca8fcbd7a2149ed66ebff5c3681c2c",
+    "schema_hash": "sha256:efee04989243a3b7745f1969d9f1701827143ebcee147f3411136ca536b05a03"
+  }
+}
