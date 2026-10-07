@@ -23,6 +23,9 @@ from enum import Enum
 from horizon.claims.epistemic import (
     EpistemicStatus,
 )
+from horizon.languages.python.project_dependencies import (
+    PythonDeclaredProjectDependenciesEvidence,
+)
 from horizon.languages.python.repository_modules import (
     PythonPackageLayoutEvidence,
 )
@@ -389,8 +392,51 @@ def _package_placement_state(
     )
 
 
+def _dependency_state(
+    evidence: PythonDeclaredProjectDependenciesEvidence,
+) -> RepositoryCardSemanticState:
+    if not isinstance(
+        evidence,
+        PythonDeclaredProjectDependenciesEvidence,
+    ):
+        raise RepositoryCardError(
+            "project_dependencies must be "
+            "PythonDeclaredProjectDependenciesEvidence"
+        )
+
+    return RepositoryCardSemanticState(
+        section=(
+            RepositorySemanticSection
+            .WHAT_IT_DEPENDS_ON
+        ),
+        status=(
+            EpistemicStatus.PROVEN
+        ),
+        reason=(
+            "Project "
+            + repr(
+                evidence.project_name
+            )
+            + " declares "
+            + str(
+                evidence.dependency_count
+            )
+            + " direct project dependencies "
+            + "in pyproject.toml."
+        ),
+        evidence_ids=(
+            evidence.source_evidence_id,
+            evidence.evidence_id,
+        ),
+    )
+
+
 def _semantic_states(
     package_layout: PythonPackageLayoutEvidence | None,
+    project_dependencies: (
+        PythonDeclaredProjectDependenciesEvidence
+        | None
+    ),
 ) -> tuple[
     RepositoryCardSemanticState,
     ...,
@@ -409,6 +455,20 @@ def _semantic_states(
             states.append(
                 _package_placement_state(
                     package_layout
+                )
+            )
+
+            continue
+
+        if (
+            section
+            is RepositorySemanticSection.WHAT_IT_DEPENDS_ON
+            and project_dependencies
+            is not None
+        ):
+            states.append(
+                _dependency_state(
+                    project_dependencies
                 )
             )
 
@@ -439,6 +499,10 @@ def build_repository_card(
     *,
     package_layout: (
         PythonPackageLayoutEvidence
+        | None
+    ) = None,
+    project_dependencies: (
+        PythonDeclaredProjectDependenciesEvidence
         | None
     ) = None,
 ) -> RepositoryCard:
@@ -502,7 +566,8 @@ def build_repository_card(
     )
 
     semantic_sections = _semantic_states(
-        package_layout
+        package_layout,
+        project_dependencies,
     )
 
     return RepositoryCard(

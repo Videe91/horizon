@@ -1,15 +1,19 @@
 """Automatic deterministic enrichment of the repository Card.
 
-024A adds one evidence path only:
+Current automatic evidence paths:
 
 exact observed pyproject.toml
     -> existing Hatch package-layout evidence
     -> WHERE IT SITS
 
-No directory heuristic is used.
+exact observed pyproject.toml
+    -> direct PEP 621 project dependency evidence
+    -> WHAT IT DEPENDS ON
 
-If Horizon cannot establish an explicit supported package declaration,
-the section remains UNKNOWN.
+The pyproject blob is read once and supplied independently to each
+evidence extractor.
+
+Unsupported evidence remains UNKNOWN. No directory heuristic is used.
 """
 
 from __future__ import annotations
@@ -20,6 +24,11 @@ from horizon.cards.repository import (
     RepositoryCard,
     build_repository_card,
 )
+from horizon.languages.python.project_dependencies import (
+    PythonDeclaredProjectDependenciesEvidence,
+    PythonProjectDependencyEvidenceError,
+    discover_declared_project_dependencies,
+)
 from horizon.languages.python.repository_modules import (
     PythonPackageLayoutEvidence,
     PythonPackageLayoutEvidenceError,
@@ -27,6 +36,7 @@ from horizon.languages.python.repository_modules import (
 )
 from horizon.repository.git_blob import (
     GitBlobError,
+    GitBlobEvidence,
     read_observed_blob,
 )
 from horizon.repository.git_observation import (
@@ -43,10 +53,10 @@ class RepositoryAutomaticCardError(
     """Automatic Card enrichment could not be bound to one snapshot."""
 
 
-def _discover_package_layout(
+def _read_pyproject_blob(
     repository: Path,
     observation: GitCommitObservation,
-) -> PythonPackageLayoutEvidence | None:
+) -> GitBlobEvidence | None:
     pyproject_entry = next(
         (
             entry
@@ -68,12 +78,19 @@ def _discover_package_layout(
         return None
 
     try:
-        pyproject_blob = read_observed_blob(
+        return read_observed_blob(
             repository,
             observation,
             "pyproject.toml",
         )
     except GitBlobError:
+        return None
+
+
+def _discover_package_layout(
+    pyproject_blob: GitBlobEvidence | None,
+) -> PythonPackageLayoutEvidence | None:
+    if pyproject_blob is None:
         return None
 
     try:
@@ -83,6 +100,22 @@ def _discover_package_layout(
             )
         )
     except PythonPackageLayoutEvidenceError:
+        return None
+
+
+def _discover_project_dependencies(
+    pyproject_blob: GitBlobEvidence | None,
+) -> PythonDeclaredProjectDependenciesEvidence | None:
+    if pyproject_blob is None:
+        return None
+
+    try:
+        return (
+            discover_declared_project_dependencies(
+                pyproject_blob
+            )
+        )
+    except PythonProjectDependencyEvidenceError:
         return None
 
 
@@ -131,10 +164,22 @@ def build_repository_card_automatically(
             "repository path must identify an existing directory"
         )
 
-    package_layout = (
-        _discover_package_layout(
+    pyproject_blob = (
+        _read_pyproject_blob(
             repository_path,
             observation,
+        )
+    )
+
+    package_layout = (
+        _discover_package_layout(
+            pyproject_blob
+        )
+    )
+
+    project_dependencies = (
+        _discover_project_dependencies(
+            pyproject_blob
         )
     )
 
@@ -142,5 +187,8 @@ def build_repository_card_automatically(
         index,
         package_layout=(
             package_layout
+        ),
+        project_dependencies=(
+            project_dependencies
         ),
     )
