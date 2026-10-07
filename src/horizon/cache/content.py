@@ -612,3 +612,36 @@ class ContentAddressedExtractionCache:
                 payload_digest
             ),
         )
+
+
+def _content_cache_contains(
+    self: ContentAddressedExtractionCache,
+    key: ContentCacheKey,
+) -> bool:
+    """Return only whether a cache object is present.
+
+    This is deliberately a cheap scheduling/index hint.
+
+    It does not decode the stored document and does not establish payload
+    integrity. Consumers that use cached computation must still call get(),
+    which performs the full integrity checks.
+    """
+
+    path = self._entry_path(
+        key
+    )
+
+    if not path.exists():
+        return False
+
+    if not path.is_file():
+        raise ContentCacheCorruptionError(
+            "cache entry path is not a file"
+        )
+
+    return True
+
+
+ContentAddressedExtractionCache.contains = (
+    _content_cache_contains
+)
