@@ -1,0 +1,63 @@
+{
+  "authority": {
+    "claims_created": 0,
+    "epistemic_assessments_created": 0,
+    "fake_provider_capture_calls": 1,
+    "investigation_operations_executed": 0,
+    "live_model_calls": 0,
+    "world_model_assertions_created": 0,
+    "world_model_mutations": 0
+  },
+  "capability": "025U",
+  "certification_kind": "TYPED_PLANNER_PROVIDER_REQUEST_OFFLINE_MEASUREMENT",
+  "measurement": {
+    "canonical_provider_kwargs_bytes": 204422,
+    "canonical_provider_kwargs_sha256": "sha256:0d07ff5c601279395afbb380f0523a25ff6bc474859c87c0dadfcc8c46a07abc",
+    "combined_textual_request_bytes": 181896,
+    "followup_request_json_bytes": 176195,
+    "instruction_bytes": 520,
+    "instruction_sha256": "sha256:acca9def7e51707c2c0418c25734ec7a51a88d70583b232468caf44303d7a0c0",
+    "operation_semantics_json_bytes": 1811,
+    "planning_proposal_json_bytes": 1358,
+    "provider_input_json_bytes": 179625,
+    "provider_input_sha256": "sha256:2569d7d3a9e553fc0de368866b9a8b3631760bb67559a6ecb97b105fd6cfeda9",
+    "provider_output_schema_bytes": 1751,
+    "provider_output_schema_sha256": "sha256:5551ca6116d2b2f2203f2b9c498a3669d3f7c067b9f0ba029137d557738713e9"
+  },
+  "provider_configuration": {
+    "call_keys": [
+      "input",
+      "instructions",
+      "max_output_tokens",
+      "model",
+      "reasoning",
+      "store",
+      "text"
+    ],
+    "max_output_tokens": 4096,
+    "model": "gpt-6-astra",
+    "reasoning": {
+      "effort": "high"
+    }
+  },
+  "repository": {
+    "commit": "2338265f658845a9bef8ce7baf07519b89846dc8",
+    "target": "Prefect"
+  },
+  "result": "PASS",
+  "source": {
+    "025p_sha256": "sha256:f9ab7f2bdb4d2229719ede1a5643bce422893b10e60aee84d677473c70245592",
+    "025r_sha256": "sha256:026cce4ef593ecb43de49f0d9a43013a52c8b5477ea83ccdbccc2817f143c2c8",
+    "025s_sha256": "sha256:07e5678a4d28b5dedbb41e9fb671a5b5f1d20ea0d61819fce9e780524341e3f2",
+    "025t_sha256": "sha256:d4054061c27b7bb5e9bae3353bbac1699f93d506a3c81fc42efd61a81db65713"
+  },
+  "typed_planner": {
+    "canonical_input_hash": "sha256:c4072b546dba818f0671ead902c0773e9a2eda2b6d1a19892aadda9949c10526",
+    "invocation_id": "semantic-gap-typed-planner-invocation:7b59f21848e8f39ac45b3fb670ad550dd0c30d6cabf643c77fefd994d57ce06d",
+    "operation_semantics_id": "typed-planner-operation-semantics:d2c7d2962cb7e7bad05367508a03c178e1ca8fcbd7a2149ed66ebff5c3681c2c",
+    "planning_proposal_id": "investigation-proposal:a73a99405fb0bc13e1590c564543e46108210a033a1f1c32b2ae1af6cc49bb74",
+    "schema_hash": "sha256:efee04989243a3b7745f1969d9f1701827143ebcee147f3411136ca536b05a03",
+    "source_proposal_id": "investigation-proposal:f7de5be6011e548868c8ffc118967b17056ce80c8fc2376f9fc8108a99879295",
+    "test_question_count": 2
+  }
+}
