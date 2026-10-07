@@ -1,0 +1,56 @@
+{
+  "authority": {
+    "claims_created": 0,
+    "epistemic_assessments_created": 0,
+    "hypothesis_promoted": false,
+    "investigation_operations_executed": 0,
+    "live_model_calls": 0,
+    "what_it_is_closed": false,
+    "world_model_assertions_created": 0,
+    "world_model_mutations": 0
+  },
+  "bridge": {
+    "canonical_record_count": 2,
+    "evidence_kind": "INVESTIGATION_SYMBOL_OBSERVATION",
+    "preserves_all_structure_facts_exactly": true,
+    "preserves_definition_exactly": true,
+    "preserves_observation_identity": true,
+    "preserves_repository_provenance": true,
+    "records": [
+      {
+        "canonical_payload_bytes": 220914,
+        "canonical_payload_sha256": "sha256:cfe830561b56e93152f8dbfb9f1ec0e480bff36f33c4eeb9571135396b40b6aa",
+        "definition_evidence_id": "python-structure-fact:5072755a7fb5d197ebff9b1f57f55097e95a64089d2257685ea0bcfc51a70dec",
+        "definition_line_end": 2122,
+        "definition_line_start": 145,
+        "evidence_id": "investigation-symbol-observation:8ca597b21d5939624d9d56a1c485795cc359f41f1ac6b2868d93aff96fba689a",
+        "evidence_kind": "INVESTIGATION_SYMBOL_OBSERVATION",
+        "fact_count": 328,
+        "path": "src/prefect/flows.py",
+        "source_observation_id": "investigation-symbol-observation:8ca597b21d5939624d9d56a1c485795cc359f41f1ac6b2868d93aff96fba689a",
+        "symbol": "Flow"
+      },
+      {
+        "canonical_payload_bytes": 165150,
+        "canonical_payload_sha256": "sha256:25f59f116a31a7b9e89aa31f7509a0a7033f7faf2add64601de4a6b94aef04c6",
+        "definition_evidence_id": "python-structure-fact:af6b1caf63f744454434968298e803ebd8ae0f02d5b07f3ffd9e1c2701f1fcc6",
+        "definition_line_end": 1864,
+        "definition_line_start": 307,
+        "evidence_id": "investigation-symbol-observation:773b4979718469f694b87eb864315f25742c11e9ad0ba818936d761f361373bb",
+        "evidence_kind": "INVESTIGATION_SYMBOL_OBSERVATION",
+        "fact_count": 250,
+        "path": "src/prefect/tasks.py",
+        "source_observation_id": "investigation-symbol-observation:773b4979718469f694b87eb864315f25742c11e9ad0ba818936d761f361373bb",
+        "symbol": "Task"
+      }
+    ],
+    "semantic_truth_created": false
+  },
+  "capability": "025ZD",
+  "certification_kind": "SYMBOL_OBSERVATION_CANONICAL_EVIDENCE_BRIDGE",
+  "result": "PASS",
+  "source": {
+    "025y_sha256": "sha256:e74b5c8da9583650b9f5df31412e6063aa3aeaf75f9cdd21e363e38d2df10523",
+    "source_symbol_observation_count": 2
+  }
+}

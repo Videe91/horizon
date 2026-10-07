@@ -16,6 +16,10 @@ import json
 
 from horizon.investigation.execution import (
     InvestigationSearchObservation,
+    InvestigationSymbolObservation,
+)
+from horizon.languages.python.structure import (
+    PythonStructureFact,
 )
 from horizon.investigator.middleware import (
     CanonicalEvidenceRecord,
@@ -33,6 +37,10 @@ class InvestigationEvidenceRecordError(
 
 SEARCH_OBSERVATION_EVIDENCE_KIND = (
     "INVESTIGATION_SEARCH_OBSERVATION"
+)
+
+SYMBOL_OBSERVATION_EVIDENCE_KIND = (
+    "INVESTIGATION_SYMBOL_OBSERVATION"
 )
 
 
@@ -337,6 +345,361 @@ def canonical_search_observation_evidence_records(
 
     return tuple(
         canonical_search_observation_evidence_record(
+            observation
+        )
+        for observation
+        in observations
+    )
+
+
+def _structure_fact_payload(
+    fact: PythonStructureFact,
+) -> dict[
+    str,
+    object,
+]:
+    if not isinstance(
+        fact,
+        PythonStructureFact,
+    ):
+        raise InvestigationEvidenceRecordError(
+            "symbol observation facts must be PythonStructureFact values"
+        )
+
+    _require_nonempty_text(
+        fact.evidence_id,
+        name="structure fact evidence id",
+    )
+
+    _require_nonempty_text(
+        fact.source_evidence_id,
+        name="structure fact source evidence id",
+    )
+
+    _require_nonempty_text(
+        fact.name,
+        name="structure fact name",
+    )
+
+    kind_value = getattr(
+        fact.kind,
+        "value",
+        None,
+    )
+
+    if (
+        not isinstance(
+            kind_value,
+            str,
+        )
+        or not kind_value
+    ):
+        raise InvestigationEvidenceRecordError(
+            "structure fact kind must expose nonempty text"
+        )
+
+    for name, value in (
+        (
+            "structure fact line start",
+            fact.line_start,
+        ),
+        (
+            "structure fact line end",
+            fact.line_end,
+        ),
+        (
+            "structure fact byte start",
+            fact.byte_start,
+        ),
+        (
+            "structure fact byte end",
+            fact.byte_end,
+        ),
+    ):
+        if (
+            isinstance(
+                value,
+                bool,
+            )
+            or not isinstance(
+                value,
+                int,
+            )
+            or value < 0
+        ):
+            raise InvestigationEvidenceRecordError(
+                f"{name} must be a nonnegative integer"
+            )
+
+    if fact.line_start <= 0:
+        raise InvestigationEvidenceRecordError(
+            "structure fact line start must be positive"
+        )
+
+    if fact.line_end < fact.line_start:
+        raise InvestigationEvidenceRecordError(
+            "structure fact line end must not precede line start"
+        )
+
+    if fact.byte_end < fact.byte_start:
+        raise InvestigationEvidenceRecordError(
+            "structure fact byte end must not precede byte start"
+        )
+
+    return {
+        "kind": kind_value,
+        "name": fact.name,
+        "module": fact.module,
+        "alias": fact.alias,
+        "callee_expression": (
+            fact.callee_expression
+        ),
+        "callee_byte_start": (
+            fact.callee_byte_start
+        ),
+        "callee_byte_end": (
+            fact.callee_byte_end
+        ),
+        "callee_evidence_id": (
+            fact.callee_evidence_id
+        ),
+        "scope": list(
+            fact.scope
+        ),
+        "line_start": (
+            fact.line_start
+        ),
+        "line_end": (
+            fact.line_end
+        ),
+        "byte_start": (
+            fact.byte_start
+        ),
+        "byte_end": (
+            fact.byte_end
+        ),
+        "structural_parent_id": (
+            fact.structural_parent_id
+        ),
+        "source_evidence_id": (
+            fact.source_evidence_id
+        ),
+        "evidence_id": (
+            fact.evidence_id
+        ),
+    }
+
+
+def canonical_symbol_observation_evidence_record(
+    observation: InvestigationSymbolObservation,
+) -> CanonicalEvidenceRecord:
+    """Represent one exact INSPECT_SYMBOL observation as canonical evidence."""
+
+    if not isinstance(
+        observation,
+        InvestigationSymbolObservation,
+    ):
+        raise InvestigationEvidenceRecordError(
+            "observation must be an InvestigationSymbolObservation"
+        )
+
+    for name, value in (
+        (
+            "observation id",
+            observation.observation_id,
+        ),
+        (
+            "symbol path",
+            observation.path,
+        ),
+        (
+            "symbol name",
+            observation.symbol,
+        ),
+        (
+            "commit sha",
+            observation.commit_sha,
+        ),
+        (
+            "repository observation id",
+            observation.repository_observation_id,
+        ),
+        (
+            "source blob evidence id",
+            observation.source_blob_evidence_id,
+        ),
+        (
+            "source object id",
+            observation.source_object_id,
+        ),
+        (
+            "structure analysis id",
+            observation.structure_analysis_id,
+        ),
+    ):
+        _require_nonempty_text(
+            value,
+            name=name,
+        )
+
+    if not isinstance(
+        observation.definition,
+        PythonStructureFact,
+    ):
+        raise InvestigationEvidenceRecordError(
+            "symbol observation definition must be a PythonStructureFact"
+        )
+
+    if not isinstance(
+        observation.facts,
+        tuple,
+    ):
+        raise InvestigationEvidenceRecordError(
+            "symbol observation facts must be a tuple"
+        )
+
+    if not observation.facts:
+        raise InvestigationEvidenceRecordError(
+            "symbol observation facts must not be empty"
+        )
+
+    fact_ids = tuple(
+        fact.evidence_id
+        if isinstance(
+            fact,
+            PythonStructureFact,
+        )
+        else None
+        for fact
+        in observation.facts
+    )
+
+    if len(
+        fact_ids
+    ) != len(
+        set(
+            fact_ids
+        )
+    ):
+        raise InvestigationEvidenceRecordError(
+            "symbol observation contains duplicate structure fact identities"
+        )
+
+    if (
+        observation.definition.evidence_id
+        not in fact_ids
+    ):
+        raise InvestigationEvidenceRecordError(
+            "symbol observation facts do not contain its definition"
+        )
+
+    payload = {
+        "operation_kind": (
+            "INSPECT_SYMBOL"
+        ),
+        "observation_id": (
+            observation.observation_id
+        ),
+        "path": observation.path,
+        "symbol": observation.symbol,
+        "commit_sha": (
+            observation.commit_sha
+        ),
+        "repository_observation_id": (
+            observation.repository_observation_id
+        ),
+        "source_blob_evidence_id": (
+            observation.source_blob_evidence_id
+        ),
+        "source_object_id": (
+            observation.source_object_id
+        ),
+        "structure_analysis_id": (
+            observation.structure_analysis_id
+        ),
+        "definition": (
+            _structure_fact_payload(
+                observation.definition
+            )
+        ),
+        "fact_count": len(
+            observation.facts
+        ),
+        "facts": [
+            _structure_fact_payload(
+                fact
+            )
+            for fact
+            in observation.facts
+        ],
+    }
+
+    canonical_payload = json.dumps(
+        payload,
+        sort_keys=True,
+        separators=(
+            ",",
+            ":",
+        ),
+        ensure_ascii=True,
+    )
+
+    return CanonicalEvidenceRecord(
+        evidence_id=(
+            observation.observation_id
+        ),
+        evidence_kind=(
+            SYMBOL_OBSERVATION_EVIDENCE_KIND
+        ),
+        canonical_payload=(
+            canonical_payload
+        ),
+    )
+
+
+def canonical_symbol_observation_evidence_records(
+    observations: tuple[
+        InvestigationSymbolObservation,
+        ...,
+    ],
+) -> tuple[
+    CanonicalEvidenceRecord,
+    ...,
+]:
+    """Represent several exact symbol observations without collapsing them."""
+
+    if not isinstance(
+        observations,
+        tuple,
+    ):
+        raise InvestigationEvidenceRecordError(
+            "observations must be a tuple"
+        )
+
+    observation_ids = tuple(
+        observation.observation_id
+        if isinstance(
+            observation,
+            InvestigationSymbolObservation,
+        )
+        else None
+        for observation
+        in observations
+    )
+
+    if len(
+        observation_ids
+    ) != len(
+        set(
+            observation_ids
+        )
+    ):
+        raise InvestigationEvidenceRecordError(
+            "observations contain duplicate identities"
+        )
+
+    return tuple(
+        canonical_symbol_observation_evidence_record(
             observation
         )
         for observation
