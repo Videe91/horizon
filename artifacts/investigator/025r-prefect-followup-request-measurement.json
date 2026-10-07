@@ -1,0 +1,56 @@
+{
+  "authority": {
+    "claims_created": 0,
+    "epistemic_assessments_created": 0,
+    "live_model_calls": 0,
+    "new_investigation_operations_executed": 0,
+    "world_model_assertions_created": 0,
+    "world_model_mutations": 0
+  },
+  "capability": "025R",
+  "certification_kind": "SEMANTIC_GAP_FOLLOWUP_REQUEST_OFFLINE",
+  "invocation": {
+    "canonical_input_hash": "sha256:64f0f6b7da444788247a009cbf910ab2d085f179cfc8dc0cfaf2acc973bae89a",
+    "cost_cap_usd": "1.000000",
+    "instruction_hash": "sha256:16d4bc5e1244a11d8c7de732d09c0da60335b8ce2fa2971b9256c30515849a5f",
+    "invocation_id": "investigator-model-invocation:0e98281f3da1c6a393b11a3f483019d12304281a44e54062fe0129a542b45225"
+  },
+  "model_facing_measurement": {
+    "base_evidence_payload_bytes": 18029,
+    "bounded_source_payload_bytes": 140622,
+    "combined_textual_request_bytes": 180354,
+    "followup_evidence_payload_bytes": 158651,
+    "instruction_bytes": 937,
+    "provider_input_json_bytes": 176195,
+    "provider_input_sha256": "sha256:9c9fcec3f24c6c0ce893c6874ca549884e7fee2964ec9a81215d489594f53803",
+    "schema_sha256": "sha256:317fc710e34296a300541e33c55877173c57bda64d986449a5ae6f0527f8413b",
+    "structured_output_schema_bytes": 3222
+  },
+  "repository": {
+    "commit": "2338265f658845a9bef8ce7baf07519b89846dc8",
+    "repository_observation_id": "git-observation:735c214acf83e7b08e03886c558275f0aaa2c3d0d03d618be9e974edf4b52435",
+    "target": "Prefect",
+    "world_model_snapshot_id": "world-model-snapshot:754b63c7d710a879b18abb65c39750c14351b24f9a2c3ff67794f1bf0e2ed21d"
+  },
+  "requests": {
+    "all_base_records_preserved": true,
+    "all_supplemental_records_present": true,
+    "base_evidence_record_count": 4,
+    "base_request_id": "investigation-request:b1ea54522b82cd45277ed79dca0ceb6e66ccb46d2cb714c52af32d66b554ff20",
+    "followup_evidence_record_count": 7,
+    "followup_request_id": "semantic-gap-followup-investigation-request:4be50d858e35f410454e759f46d85655e3ea76b4c2e5ae855d3b8077baaefdc8",
+    "supplemental_evidence_record_count": 3
+  },
+  "result": "PASS",
+  "semantic_gap": {
+    "gap_id": "repository-semantic-gap:422595e651bdc55ac8eb2c4818ff7342e6a919a6b3f57c7363a7d66618c8e163",
+    "question_id": "repository-semantic-gap-question:af7afaa11d8b7bdd25d6343180942b186c1b087a1cc35ae8f19442632f5eccb5",
+    "section": "WHAT_IT_IS"
+  },
+  "source": {
+    "025p_artifact": "artifacts/investigator/025p-prefect-bounded-search-evidence.json",
+    "025p_sha256": "sha256:f9ab7f2bdb4d2229719ede1a5643bce422893b10e60aee84d677473c70245592",
+    "bounded_evidence_record_count": 3,
+    "bounded_payload_bytes": 140622
+  }
+}
