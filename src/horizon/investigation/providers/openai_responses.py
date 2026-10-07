@@ -31,6 +31,10 @@ No operation or field is added by that normalization.
 
 from __future__ import annotations
 
+from horizon.investigation.typed_planner_request_view import (
+    make_typed_planner_request_view,
+)
+
 import json
 import math
 
@@ -233,7 +237,9 @@ def _canonical_input_json(
             invocation.proposal
         ),
         "request": (
-            invocation.request
+            make_typed_planner_request_view(
+                invocation.request
+            )
         ),
         "schema_hash": (
             invocation.schema_hash

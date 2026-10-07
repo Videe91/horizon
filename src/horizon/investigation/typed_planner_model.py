@@ -31,6 +31,10 @@ This module does not:
 
 from __future__ import annotations
 
+from horizon.investigation.typed_planner_request_view import (
+    make_typed_planner_request_view,
+)
+
 import hashlib
 import json
 import math
@@ -511,6 +515,12 @@ def make_semantic_gap_typed_planner_invocation(
         proposal,
     )
 
+    request_view = (
+        make_typed_planner_request_view(
+            request
+        )
+    )
+
     _validate_instruction(
         instruction
     )
@@ -556,7 +566,7 @@ def make_semantic_gap_typed_planner_invocation(
     canonical_input_hash = _sha256(
         _canonical_bytes(
             {
-                "request": request,
+                "request": request_view,
                 "proposal": proposal,
                 "instruction_hash": (
                     instruction_hash
@@ -587,6 +597,9 @@ def make_semantic_gap_typed_planner_invocation(
         {
             "request_id": (
                 request.request_id
+            ),
+            "request_view_id": (
+                request_view.view_id
             ),
             "proposal_id": (
                 proposal.proposal_id

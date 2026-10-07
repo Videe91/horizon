@@ -1,0 +1,61 @@
+{
+  "authority": {
+    "claims_created": 0,
+    "epistemic_assessments_created": 0,
+    "fake_provider_capture_calls": 1,
+    "investigation_operations_executed": 0,
+    "live_model_calls": 0,
+    "world_model_assertions_created": 0,
+    "world_model_mutations": 0
+  },
+  "capability": "025V",
+  "certification_kind": "REAL_PREFECT_COMPACT_TYPED_PLANNER_CONTEXT",
+  "measurement": {
+    "025u_combined_textual_request_bytes": 181896,
+    "025u_provider_input_json_bytes": 179625,
+    "025v_combined_textual_request_bytes": 9437,
+    "025v_provider_input_json_bytes": 7166,
+    "compact_request_view_json_bytes": 3736,
+    "instruction_bytes": 520,
+    "output_schema_bytes": 1751,
+    "provider_input_bytes_removed": 172459,
+    "provider_input_reduction_percent": "96.01057759220598469032707029"
+  },
+  "repository": {
+    "commit": "2338265f658845a9bef8ce7baf07519b89846dc8",
+    "repository_observation_id": "git-observation:735c214acf83e7b08e03886c558275f0aaa2c3d0d03d618be9e974edf4b52435",
+    "target": "Prefect"
+  },
+  "request": {
+    "compact_evidence_record_count": 7,
+    "compact_request_view_id": "typed-planner-request-view:23710cc12e6790714f35d7c6beaadbc3f515309f0c138dd16f88539ce6d7321d",
+    "evidence_bodies_sent_to_model": false,
+    "evidence_byte_count_sent_to_model": true,
+    "evidence_hash_sent_to_model": true,
+    "evidence_identity_sent_to_model": true,
+    "evidence_kind_sent_to_model": true,
+    "full_evidence_record_count": 7,
+    "full_request_id": "semantic-gap-followup-investigation-request:4be50d858e35f410454e759f46d85655e3ea76b4c2e5ae855d3b8077baaefdc8",
+    "full_request_retained_in_invocation": true
+  },
+  "result": "PASS",
+  "source": {
+    "025p_sha256": "sha256:f9ab7f2bdb4d2229719ede1a5643bce422893b10e60aee84d677473c70245592",
+    "025r_sha256": "sha256:026cce4ef593ecb43de49f0d9a43013a52c8b5477ea83ccdbccc2817f143c2c8",
+    "025s_sha256": "sha256:07e5678a4d28b5dedbb41e9fb671a5b5f1d20ea0d61819fce9e780524341e3f2",
+    "025t_sha256": "sha256:d4054061c27b7bb5e9bae3353bbac1699f93d506a3c81fc42efd61a81db65713",
+    "025u_sha256": "sha256:8eb5d3eee0e080899b06b80ac21d19cd598a08b43cbe358cf094673773c48138",
+    "planning_proposal_id": "investigation-proposal:a73a99405fb0bc13e1590c564543e46108210a033a1f1c32b2ae1af6cc49bb74",
+    "source_proposal_id": "investigation-proposal:f7de5be6011e548868c8ffc118967b17056ce80c8fc2376f9fc8108a99879295"
+  },
+  "typed_planner": {
+    "canonical_input_hash_changed": true,
+    "compact_canonical_input_hash": "sha256:a306077e89d303f33329226ac11cf682fc624283565b11478113e74d6670614e",
+    "compact_invocation_id": "semantic-gap-typed-planner-invocation:ee8d30c1a25fa4a18f43e9d69b350589e6d673bf6f67d1889d23f5e6529d3099",
+    "historical_025t_canonical_input_hash": "sha256:c4072b546dba818f0671ead902c0773e9a2eda2b6d1a19892aadda9949c10526",
+    "historical_025t_invocation_id": "semantic-gap-typed-planner-invocation:7b59f21848e8f39ac45b3fb670ad550dd0c30d6cabf643c77fefd994d57ce06d",
+    "invocation_identity_changed": true,
+    "operation_semantics_id": "typed-planner-operation-semantics:d2c7d2962cb7e7bad05367508a03c178e1ca8fcbd7a2149ed66ebff5c3681c2c",
+    "schema_hash": "sha256:efee04989243a3b7745f1969d9f1701827143ebcee147f3411136ca536b05a03"
+  }
+}
