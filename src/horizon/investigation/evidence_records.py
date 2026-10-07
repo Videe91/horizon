@@ -17,6 +17,8 @@ import json
 from horizon.investigation.execution import (
     InvestigationSearchObservation,
     InvestigationSymbolObservation,
+    InvestigationSourceLine,
+    InvestigationSourceObservation,
 )
 from horizon.languages.python.structure import (
     PythonStructureFact,
@@ -705,3 +707,296 @@ def canonical_symbol_observation_evidence_records(
         for observation
         in observations
     )
+
+
+SOURCE_OBSERVATION_EVIDENCE_KIND = (
+    "INVESTIGATION_SOURCE_OBSERVATION"
+)
+
+
+def _source_line_payload(
+    line: InvestigationSourceLine,
+    *,
+    expected_line_number: int,
+) -> dict[
+    str,
+    object,
+]:
+    if not isinstance(
+        line,
+        InvestigationSourceLine,
+    ):
+        raise InvestigationEvidenceRecordError(
+            "source observation lines must be InvestigationSourceLine values"
+        )
+
+    if (
+        isinstance(
+            line.line_number,
+            bool,
+        )
+        or not isinstance(
+            line.line_number,
+            int,
+        )
+        or line.line_number <= 0
+    ):
+        raise InvestigationEvidenceRecordError(
+            "source line number must be positive"
+        )
+
+    if (
+        line.line_number
+        != expected_line_number
+    ):
+        raise InvestigationEvidenceRecordError(
+            "source line coordinates must exactly match requested line window"
+        )
+
+    if not isinstance(
+        line.content,
+        bytes,
+    ):
+        raise InvestigationEvidenceRecordError(
+            "source line content must be bytes"
+        )
+
+    return {
+        "line_number": (
+            line.line_number
+        ),
+        "content_base64": (
+            base64.b64encode(
+                line.content
+            ).decode(
+                "ascii"
+            )
+        ),
+    }
+
+
+def canonical_source_observation_evidence_record(
+    observation: InvestigationSourceObservation,
+) -> CanonicalEvidenceRecord:
+    """Represent one exact READ_SOURCE observation as canonical evidence."""
+
+    if not isinstance(
+        observation,
+        InvestigationSourceObservation,
+    ):
+        raise InvestigationEvidenceRecordError(
+            "observation must be an InvestigationSourceObservation"
+        )
+
+    _require_nonempty_text(
+        observation.observation_id,
+        name="observation id",
+    )
+
+    _require_nonempty_text(
+        observation.path,
+        name="source path",
+    )
+
+    _require_nonempty_text(
+        observation.commit_sha,
+        name="commit sha",
+    )
+
+    _require_nonempty_text(
+        observation.repository_observation_id,
+        name="repository observation id",
+    )
+
+    _require_nonempty_text(
+        observation.source_blob_evidence_id,
+        name="source blob evidence id",
+    )
+
+    _require_nonempty_text(
+        observation.source_object_id,
+        name="source object id",
+    )
+
+    for name, value in (
+        (
+            "start line",
+            observation.start_line,
+        ),
+        (
+            "end line",
+            observation.end_line,
+        ),
+    ):
+        if (
+            isinstance(
+                value,
+                bool,
+            )
+            or not isinstance(
+                value,
+                int,
+            )
+            or value <= 0
+        ):
+            raise InvestigationEvidenceRecordError(
+                f"{name} must be positive"
+            )
+
+    if (
+        observation.end_line
+        < observation.start_line
+    ):
+        raise InvestigationEvidenceRecordError(
+            "end line must not precede start line"
+        )
+
+    if not isinstance(
+        observation.lines,
+        tuple,
+    ):
+        raise InvestigationEvidenceRecordError(
+            "source observation lines must be a tuple"
+        )
+
+    expected_line_numbers = tuple(
+        range(
+            observation.start_line,
+            observation.end_line + 1,
+        )
+    )
+
+    if (
+        len(
+            observation.lines
+        )
+        != len(
+            expected_line_numbers
+        )
+    ):
+        raise InvestigationEvidenceRecordError(
+            "source observation must contain the exact requested line window"
+        )
+
+    line_payloads = [
+        _source_line_payload(
+            line,
+            expected_line_number=(
+                expected_line_number
+            ),
+        )
+        for line, expected_line_number
+        in zip(
+            observation.lines,
+            expected_line_numbers,
+            strict=True,
+        )
+    ]
+
+    payload = {
+        "operation_kind": (
+            "READ_SOURCE"
+        ),
+        "observation_id": (
+            observation.observation_id
+        ),
+        "path": (
+            observation.path
+        ),
+        "start_line": (
+            observation.start_line
+        ),
+        "end_line": (
+            observation.end_line
+        ),
+        "commit_sha": (
+            observation.commit_sha
+        ),
+        "repository_observation_id": (
+            observation.repository_observation_id
+        ),
+        "source_blob_evidence_id": (
+            observation.source_blob_evidence_id
+        ),
+        "source_object_id": (
+            observation.source_object_id
+        ),
+        "line_count": len(
+            observation.lines
+        ),
+        "lines": (
+            line_payloads
+        ),
+    }
+
+    canonical_payload = json.dumps(
+        payload,
+        sort_keys=True,
+        separators=(
+            ",",
+            ":",
+        ),
+        ensure_ascii=True,
+    )
+
+    return CanonicalEvidenceRecord(
+        evidence_id=(
+            observation.observation_id
+        ),
+        evidence_kind=(
+            SOURCE_OBSERVATION_EVIDENCE_KIND
+        ),
+        canonical_payload=(
+            canonical_payload
+        ),
+    )
+
+
+def canonical_source_observation_evidence_records(
+    observations: tuple[
+        InvestigationSourceObservation,
+        ...,
+    ],
+) -> tuple[
+    CanonicalEvidenceRecord,
+    ...,
+]:
+    """Represent several READ_SOURCE observations without collapsing them."""
+
+    if not isinstance(
+        observations,
+        tuple,
+    ):
+        raise InvestigationEvidenceRecordError(
+            "observations must be a tuple"
+        )
+
+    records = tuple(
+        canonical_source_observation_evidence_record(
+            observation
+        )
+        for observation
+        in observations
+    )
+
+    evidence_ids = tuple(
+        record.evidence_id
+        for record
+        in records
+    )
+
+    if (
+        len(
+            evidence_ids
+        )
+        != len(
+            set(
+                evidence_ids
+            )
+        )
+    ):
+        raise InvestigationEvidenceRecordError(
+            "observations contain duplicate identities"
+        )
+
+    return records
