@@ -1,0 +1,71 @@
+{
+  "authority": {
+    "claims_created": 0,
+    "epistemic_assessments_created": 0,
+    "live_model_calls": 0,
+    "new_investigation_operations_executed": 0,
+    "new_repository_facts_created": 0,
+    "what_it_is_closed": false,
+    "world_model_assertions_created": 0,
+    "world_model_mutations": 0
+  },
+  "capability": "025ZN",
+  "certification_kind": "COMPACT_ELEVEN_RECORD_TYPED_PLANNER_PREREGISTRATION",
+  "invocation": {
+    "canonical_input_hash": "sha256:0564f34057e2a57e2e3c75e8b97327eaec5640ffedddccc5d8bb116f2c02c1f0",
+    "canonical_input_json_bytes": 15536,
+    "cost_cap_usd": "0.300000",
+    "instruction": "Translate the supplied investigation questions into the next legal typed Horizon evidence-gathering operations.\n\nUse only the operation kinds and exact argument semantics in the supplied operation_semantics contract. Treat operational_context in the request as observed evidence from already-executed operations. Use that evidence to bind exact repository paths, symbols, line ranges, literal search terms, and call coordinates only when supported.\n\nDo not invent repository addresses, symbols, line numbers, search terms, call coordinates, or outputs. If the supplied evidence does not support an exact operation argument, do not guess it.\n\nPlan only evidence gathering. Do not answer the semantic-gap question, promote the hypothesis, create semantic truth, or mutate Horizon state.\n\nDependencies are ordering only; outputs from one operation may not be substituted into later operation arguments.\n\nReturn only the required structured planner output.\n",
+    "instruction_bytes": 953,
+    "instruction_hash": "sha256:353a981094293f9eb8a2eaf0411ec904e2ffa928227c08042480f0fd3c4fb8e5",
+    "invocation_id": "semantic-gap-typed-planner-invocation:92a29e7e216f720117734ef235dd5f93e028f51f524dc2fcbce63464f70ebad1",
+    "operation_semantics_id": "typed-planner-operation-semantics:d2c7d2962cb7e7bad05367508a03c178e1ca8fcbd7a2149ed66ebff5c3681c2c",
+    "schema_hash": "sha256:efee04989243a3b7745f1969d9f1701827143ebcee147f3411136ca536b05a03",
+    "temperature": null
+  },
+  "prior_invocation": {
+    "025w_invocation_id": "semantic-gap-typed-planner-invocation:ee8d30c1a25fa4a18f43e9d69b350589e6d673bf6f67d1889d23f5e6529d3099",
+    "reused": false
+  },
+  "proposal_lineage": {
+    "planning_bridge_id": "hypothesis-test-planning-bridge:9eb10ebbf69d88faaba935a139a033f02075513f9ab74bef9d9fb060a2c10877",
+    "planning_proposal_id": "investigation-proposal:a73a99405fb0bc13e1590c564543e46108210a033a1f1c32b2ae1af6cc49bb74",
+    "planning_questions": [
+      "At the same frozen commit, do README.md's introductory purpose statement and first usage example corroborate or qualify workflow orchestration and management as the repository's primary purpose? Retrieve only those relevant passages.",
+      "What responsibilities do the class docstrings immediately following Flow in src/prefect/flows.py at line 145 and Task in src/prefect/tasks.py at line 307 describe, and do they corroborate or contradict this purpose? Retrieve those docstrings rather than additional repository-wide search matches."
+    ],
+    "source_hypothesis_proposal_id": "investigation-proposal:f7de5be6011e548868c8ffc118967b17056ce80c8fc2376f9fc8108a99879295"
+  },
+  "provider_pre_registration": {
+    "live_call_permitted_in_this_capability": false,
+    "max_output_tokens": 4096,
+    "model_id": "gpt-6-astra",
+    "provider": "openai",
+    "reasoning_effort": "high",
+    "timeout_seconds": 60.0
+  },
+  "repository": {
+    "commit": "2338265f658845a9bef8ce7baf07519b89846dc8",
+    "repository_observation_id": "git-observation:735c214acf83e7b08e03886c558275f0aaa2c3d0d03d618be9e974edf4b52435",
+    "target": "Prefect",
+    "world_model_snapshot_id": "world-model-snapshot:754b63c7d710a879b18abb65c39750c14351b24f9a2c3ff67794f1bf0e2ed21d"
+  },
+  "request": {
+    "compression_ratio_full_evidence_to_request_view": 46.5940006684492,
+    "full_canonical_payload_sent_to_model": false,
+    "full_evidence_payload_bytes": 557637,
+    "full_evidence_record_count": 11,
+    "operational_context_count": 4,
+    "request_id": "semantic-gap-followup-investigation-request:4bd29f50a833a4f06b6718756009e556459ebac539cf8f9fc94eac7c50e10006",
+    "request_view_id": "typed-planner-request-view:c23f1a117adccade107183fd925b4c87b4836c509b63c3b3e4aaa707449b7440",
+    "request_view_json_bytes": 11968,
+    "search_operational_context_count": 2,
+    "symbol_operational_context_count": 2
+  },
+  "result": "PASS",
+  "semantic_gap": {
+    "gap_id": "repository-semantic-gap:422595e651bdc55ac8eb2c4818ff7342e6a919a6b3f57c7363a7d66618c8e163",
+    "question_id": "repository-semantic-gap-question:af7afaa11d8b7bdd25d6343180942b186c1b087a1cc35ae8f19442632f5eccb5",
+    "section": "WHAT_IT_IS"
+  }
+}
