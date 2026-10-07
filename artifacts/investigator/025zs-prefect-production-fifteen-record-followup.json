@@ -1,0 +1,142 @@
+{
+  "authority": {
+    "claims_created": 0,
+    "epistemic_assessments_created": 0,
+    "hypothesis_promoted": false,
+    "live_model_calls": 0,
+    "new_investigation_operations_executed": 0,
+    "new_repository_facts_created": 0,
+    "source_reads_executed": 0,
+    "what_it_is_closed": false,
+    "world_model_assertions_created": 0,
+    "world_model_mutations": 0
+  },
+  "capability": "025ZS",
+  "certification_kind": "PREFECT_PRODUCTION_FIFTEEN_RECORD_FOLLOWUP_REQUEST",
+  "evidence": {
+    "025p_record_count": 3,
+    "025y_operation_record_count": 4,
+    "025zr_source_payload_bytes": 22391,
+    "025zr_source_record_count": 4,
+    "deterministic_record_count": 4,
+    "eleven_record_payload_bytes": 557637,
+    "fifteen_record_count": 15,
+    "fifteen_record_payload_bytes": 580028,
+    "records": [
+      {
+        "canonical_payload_bytes": 1900,
+        "canonical_payload_sha256": "sha256:7a999ebef861895ac1be9a89dd1499423fa754daa5cf04e7dc2d58c68241ce4d",
+        "evidence_id": "declared-python-dependency-set:81b9a8f175c04ae597c85e391a4c7b4a4dac4cdc7004ae08c83873f3a8730906",
+        "evidence_kind": "PYTHON_DECLARED_PROJECT_DEPENDENCIES_EVIDENCE"
+      },
+      {
+        "canonical_payload_bytes": 19924,
+        "canonical_payload_sha256": "sha256:42f70d0881c579a5fc8aa6be8eeab4c4cbe0900fe75d9361c3168f4f088b6b0b",
+        "evidence_id": "git-blob-evidence:927a4cb2a45fd9b51f47926c0484991876b47eaf1558de5b85d840f943d6a1d0",
+        "evidence_kind": "GIT_BLOB_EVIDENCE"
+      },
+      {
+        "canonical_payload_bytes": 330,
+        "canonical_payload_sha256": "sha256:620cfc34ef73db7326ec268bd44cd7bbb1956b58975a941346014270d7a2f720",
+        "evidence_id": "python-import-root:7ad6b0b4ddcd123b600b8b92a02204ae16882e05ebd3e18a5c6ae4765f105390",
+        "evidence_kind": "PYTHON_IMPORT_ROOT_EVIDENCE"
+      },
+      {
+        "canonical_payload_bytes": 581,
+        "canonical_payload_sha256": "sha256:6bd03006a0f962ce2dbc2c29eabc650e55906bd81e2aa6d11ccb1b7c68b2af63",
+        "evidence_id": "python-package-layout:215b8c791992a430b2285aff548a856d00d9401f63bda4e98e5c149e9db73667",
+        "evidence_kind": "PYTHON_PACKAGE_LAYOUT_EVIDENCE"
+      },
+      {
+        "canonical_payload_bytes": 48886,
+        "canonical_payload_sha256": "sha256:10975156eb342f88014451c3a41a943d830812d86eb31c10f3c811e9ea24573c",
+        "evidence_id": "bounded-investigation-search-evidence:10975156eb342f88014451c3a41a943d830812d86eb31c10f3c811e9ea24573c",
+        "evidence_kind": "BOUNDED_INVESTIGATION_SEARCH_OBSERVATION"
+      },
+      {
+        "canonical_payload_bytes": 65397,
+        "canonical_payload_sha256": "sha256:588be2be86ad4aaee4744adf1f58f4c9e7f565c752e900fc340acb1fdddf7e5e",
+        "evidence_id": "bounded-investigation-search-evidence:588be2be86ad4aaee4744adf1f58f4c9e7f565c752e900fc340acb1fdddf7e5e",
+        "evidence_kind": "BOUNDED_INVESTIGATION_SEARCH_OBSERVATION"
+      },
+      {
+        "canonical_payload_bytes": 26339,
+        "canonical_payload_sha256": "sha256:7d193ee8b290b80938ef1ed316d8b772d5780b6dee9f78463bb809ca5aa07023",
+        "evidence_id": "bounded-investigation-search-evidence:7d193ee8b290b80938ef1ed316d8b772d5780b6dee9f78463bb809ca5aa07023",
+        "evidence_kind": "BOUNDED_INVESTIGATION_SEARCH_OBSERVATION"
+      },
+      {
+        "canonical_payload_bytes": 2994,
+        "canonical_payload_sha256": "sha256:5b6353fcf80929051addf3afdb49ffa6d667bc7a49c20fde76dba5f4a4ecbcb5",
+        "evidence_id": "investigation-search-observation:498b29a505963974044d1bf9b4929965041b099cfc081adb0dd73c755dff462d",
+        "evidence_kind": "INVESTIGATION_SEARCH_OBSERVATION"
+      },
+      {
+        "canonical_payload_bytes": 5222,
+        "canonical_payload_sha256": "sha256:e960054e3412a843711f57a0441eb8d06072d81ebf94cca8589345b10216014b",
+        "evidence_id": "investigation-search-observation:888a0f5032c212e874838880f142d6dae3fe7e774ac2b9a7a1a1c20ef5127800",
+        "evidence_kind": "INVESTIGATION_SEARCH_OBSERVATION"
+      },
+      {
+        "canonical_payload_bytes": 165150,
+        "canonical_payload_sha256": "sha256:25f59f116a31a7b9e89aa31f7509a0a7033f7faf2add64601de4a6b94aef04c6",
+        "evidence_id": "investigation-symbol-observation:773b4979718469f694b87eb864315f25742c11e9ad0ba818936d761f361373bb",
+        "evidence_kind": "INVESTIGATION_SYMBOL_OBSERVATION"
+      },
+      {
+        "canonical_payload_bytes": 220914,
+        "canonical_payload_sha256": "sha256:cfe830561b56e93152f8dbfb9f1ec0e480bff36f33c4eeb9571135396b40b6aa",
+        "evidence_id": "investigation-symbol-observation:8ca597b21d5939624d9d56a1c485795cc359f41f1ac6b2868d93aff96fba689a",
+        "evidence_kind": "INVESTIGATION_SYMBOL_OBSERVATION"
+      },
+      {
+        "canonical_payload_bytes": 10617,
+        "canonical_payload_sha256": "sha256:cacf077f988e98869249f23ed340594bb03273c78f59533ae592d938e6890d1b",
+        "evidence_id": "investigation-source-observation:1bbbba51000fb63886ea19a66e9cea0cca827eeb1e6077b79bc40e849cc0f4bb",
+        "evidence_kind": "INVESTIGATION_SOURCE_OBSERVATION"
+      },
+      {
+        "canonical_payload_bytes": 2372,
+        "canonical_payload_sha256": "sha256:7a6ac2eef2f321a943185b9cf1842f03bd21765fb735932e4170f836deddb5e2",
+        "evidence_id": "investigation-source-observation:6e5a493e182a2d1c0fee65d24ac2a940606e21e026007aec30430ab1a56020f2",
+        "evidence_kind": "INVESTIGATION_SOURCE_OBSERVATION"
+      },
+      {
+        "canonical_payload_bytes": 8557,
+        "canonical_payload_sha256": "sha256:91646352879067e16208ac4273f1f9d4a02ff848519af9d8143e6a2f2d60e1a6",
+        "evidence_id": "investigation-source-observation:d6a91a2dc5d8c5f67e09a85543403ad2654b7eb61f2894934bf104097522fce6",
+        "evidence_kind": "INVESTIGATION_SOURCE_OBSERVATION"
+      },
+      {
+        "canonical_payload_bytes": 845,
+        "canonical_payload_sha256": "sha256:12da7d48a0957fc866ae65d3dcf68c2ec2a069725efbc69cd028c96039a62037",
+        "evidence_id": "investigation-source-observation:e4730dd25b7741d5a677881dc98c671db15f2ea96c0f1bc9fbfbfde25590bbc6",
+        "evidence_kind": "INVESTIGATION_SOURCE_OBSERVATION"
+      }
+    ],
+    "source_evidence_ids": [
+      "investigation-source-observation:1bbbba51000fb63886ea19a66e9cea0cca827eeb1e6077b79bc40e849cc0f4bb",
+      "investigation-source-observation:6e5a493e182a2d1c0fee65d24ac2a940606e21e026007aec30430ab1a56020f2",
+      "investigation-source-observation:d6a91a2dc5d8c5f67e09a85543403ad2654b7eb61f2894934bf104097522fce6",
+      "investigation-source-observation:e4730dd25b7741d5a677881dc98c671db15f2ea96c0f1bc9fbfbfde25590bbc6"
+    ]
+  },
+  "repository": {
+    "commit": "2338265f658845a9bef8ce7baf07519b89846dc8",
+    "repository_observation_id": "git-observation:735c214acf83e7b08e03886c558275f0aaa2c3d0d03d618be9e974edf4b52435",
+    "target": "Prefect",
+    "world_model_snapshot_id": "world-model-snapshot:754b63c7d710a879b18abb65c39750c14351b24f9a2c3ff67794f1bf0e2ed21d"
+  },
+  "request_lineage": {
+    "base_request_id": "investigation-request:4d91c1e5fc7810a0458739c0a1b73bf4ee02e564aeddd4ca1c52db70885e6fa5",
+    "eleven_record_request_id": "semantic-gap-followup-investigation-request:4bd29f50a833a4f06b6718756009e556459ebac539cf8f9fc94eac7c50e10006",
+    "fifteen_record_request_id": "semantic-gap-followup-investigation-request:b22d2b8474573cf7334e5eed1292f463d01fff025e7c575ac32a0b79c86e2cdb",
+    "seven_record_request_id": "semantic-gap-followup-investigation-request:afd29860222a12b5a92623b04aa14490ee0f995b348bb0663e09a1780e293c61"
+  },
+  "result": "PASS",
+  "semantic_gap": {
+    "gap_id": "repository-semantic-gap:422595e651bdc55ac8eb2c4818ff7342e6a919a6b3f57c7363a7d66618c8e163",
+    "question_id": "repository-semantic-gap-question:af7afaa11d8b7bdd25d6343180942b186c1b087a1cc35ae8f19442632f5eccb5",
+    "section": "WHAT_IT_IS"
+  }
+}
