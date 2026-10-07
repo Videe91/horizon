@@ -1,0 +1,126 @@
+{
+  "authority": {
+    "claims_created": 0,
+    "epistemic_assessments_created": 0,
+    "investigation_operations_executed": 0,
+    "live_model_calls": 1,
+    "world_model_assertions_created": 0,
+    "world_model_mutations": 0
+  },
+  "capability": "025S",
+  "live_execution": {
+    "api_request_id": "req_1ab4e76933c04ebca54169dd3aaf76a5",
+    "cost_usd": "0.933142",
+    "elapsed_ms": 41065.490875,
+    "input_tokens": 68476,
+    "output_tokens": 1544,
+    "proposal": {
+      "assertion_ids": [
+        "world-model-assertion:6b63a3ca4eba18b43851a8285efb109512c98163b12807867a3ee0cf97729e04"
+      ],
+      "assessment_ids": [
+        "epistemic-assessment:cc5560df1bbbc5e5e3de4b6fbdfbd7596b108738c2b7a193f2f591d03c1c0b4c"
+      ],
+      "candidates": [],
+      "claim_ids": [
+        "evidence-backed-claim:e833a3461c2ea8eea65a015284c6e848baa2fd375e0de554d738592bfb4cd769"
+      ],
+      "evidence_reference_ids": [
+        "claim-evidence-reference:d56b6c18684011d996b0972ce10d43546cf02c450237dbaac1fdd7b6f5dc1593"
+      ],
+      "hypothesis": "At frozen commit 2338265f658845a9bef8ce7baf07519b89846dc8, this repository primarily implements Prefect as Python software for workflow orchestration and management. This tentative interpretation follows pyproject.toml's description, \"Workflow orchestration and management.\", and is consistent with the visible Flow and Task class declarations; those declarations alone do not establish their operational roles.",
+      "investigation_questions": [],
+      "kind": "PROPOSE_HYPOTHESIS",
+      "missing_evidence_questions": [],
+      "proposal_id": "investigation-proposal:f7de5be6011e548868c8ffc118967b17056ce80c8fc2376f9fc8108a99879295",
+      "question_id": "repository-semantic-gap-question:af7afaa11d8b7bdd25d6343180942b186c1b087a1cc35ae8f19442632f5eccb5",
+      "relationship_id": null,
+      "test_questions": [
+        "At the same frozen commit, do README.md's introductory purpose statement and first usage example corroborate or qualify workflow orchestration and management as the repository's primary purpose? Retrieve only those relevant passages.",
+        "What responsibilities do the class docstrings immediately following Flow in src/prefect/flows.py at line 145 and Task in src/prefect/tasks.py at line 307 describe, and do they corroborate or contradict this purpose? Retrieve those docstrings rather than additional repository-wide search matches."
+      ]
+    },
+    "provider": "OPENAI",
+    "raw_output": {
+      "assertion_ids": [
+        "world-model-assertion:6b63a3ca4eba18b43851a8285efb109512c98163b12807867a3ee0cf97729e04"
+      ],
+      "assessment_ids": [
+        "epistemic-assessment:cc5560df1bbbc5e5e3de4b6fbdfbd7596b108738c2b7a193f2f591d03c1c0b4c"
+      ],
+      "claim_ids": [
+        "evidence-backed-claim:e833a3461c2ea8eea65a015284c6e848baa2fd375e0de554d738592bfb4cd769"
+      ],
+      "evidence_reference_ids": [
+        "claim-evidence-reference:d56b6c18684011d996b0972ce10d43546cf02c450237dbaac1fdd7b6f5dc1593"
+      ],
+      "hypothesis": "At frozen commit 2338265f658845a9bef8ce7baf07519b89846dc8, this repository primarily implements Prefect as Python software for workflow orchestration and management. This tentative interpretation follows pyproject.toml's description, \"Workflow orchestration and management.\", and is consistent with the visible Flow and Task class declarations; those declarations alone do not establish their operational roles.",
+      "question_id": "repository-semantic-gap-question:af7afaa11d8b7bdd25d6343180942b186c1b087a1cc35ae8f19442632f5eccb5",
+      "relationship_id": null,
+      "test_questions": [
+        "At the same frozen commit, do README.md's introductory purpose statement and first usage example corroborate or qualify workflow orchestration and management as the repository's primary purpose? Retrieve only those relevant passages.",
+        "What responsibilities do the class docstrings immediately following Flow in src/prefect/flows.py at line 145 and Task in src/prefect/tasks.py at line 307 describe, and do they corroborate or contradict this purpose? Retrieve those docstrings rather than additional repository-wide search matches."
+      ],
+      "type": "PROPOSE_HYPOTHESIS"
+    },
+    "returned_model_id": "gpt-6-astra",
+    "run": {
+      "api_request_id": "req_1ab4e76933c04ebca54169dd3aaf76a5",
+      "canonical_input_hash": "sha256:64f0f6b7da444788247a009cbf910ab2d085f179cfc8dc0cfaf2acc973bae89a",
+      "canonical_output_hash": "sha256:f7de5be6011e548868c8ffc118967b17056ce80c8fc2376f9fc8108a99879295",
+      "cost_cap_usd": "1.000000",
+      "cost_usd": "0.933142",
+      "input_tokens": 68476,
+      "instruction_hash": "sha256:16d4bc5e1244a11d8c7de732d09c0da60335b8ce2fa2971b9256c30515849a5f",
+      "invocation_id": "investigator-model-invocation:0e98281f3da1c6a393b11a3f483019d12304281a44e54062fe0129a542b45225",
+      "model_id": "gpt-6-astra",
+      "output_tokens": 1544,
+      "provider": "OPENAI",
+      "rejection_reason": null,
+      "run_id": "investigator-model-run:0d8ce798a47e00665234d730fba7cbbf41454ccf759e031819c6d75b1f367e7c",
+      "temperature": null,
+      "validation_result": "VALID"
+    }
+  },
+  "pre_registered": {
+    "base_request_id": "investigation-request:b1ea54522b82cd45277ed79dca0ceb6e66ccb46d2cb714c52af32d66b554ff20",
+    "canonical_input_hash": "sha256:64f0f6b7da444788247a009cbf910ab2d085f179cfc8dc0cfaf2acc973bae89a",
+    "cost_cap_usd": "1.000000",
+    "followup_request_id": "semantic-gap-followup-investigation-request:4be50d858e35f410454e759f46d85655e3ea76b4c2e5ae855d3b8077baaefdc8",
+    "instruction_hash": "sha256:16d4bc5e1244a11d8c7de732d09c0da60335b8ce2fa2971b9256c30515849a5f",
+    "invocation_id": "investigator-model-invocation:0e98281f3da1c6a393b11a3f483019d12304281a44e54062fe0129a542b45225",
+    "provider_input_json_bytes": 176195
+  },
+  "provider_configuration": {
+    "configured_model_id": "gpt-6-astra",
+    "max_output_tokens": 4096,
+    "pricing": {
+      "cache_write_per_million": "12.50",
+      "cached_input_per_million": "1.00",
+      "input_per_million": "10.00",
+      "output_per_million": "50.00"
+    },
+    "provider": "OPENAI",
+    "reasoning_effort": "high",
+    "sdk_max_retries": 0,
+    "timeout_seconds": 180.0
+  },
+  "repository": {
+    "commit": "2338265f658845a9bef8ce7baf07519b89846dc8",
+    "repository_observation_id": "git-observation:735c214acf83e7b08e03886c558275f0aaa2c3d0d03d618be9e974edf4b52435",
+    "target": "Prefect",
+    "world_model_snapshot_id": "world-model-snapshot:754b63c7d710a879b18abb65c39750c14351b24f9a2c3ff67794f1bf0e2ed21d"
+  },
+  "result": "LIVE_CALL_COMPLETE",
+  "semantic_gap": {
+    "gap_id": "repository-semantic-gap:422595e651bdc55ac8eb2c4818ff7342e6a919a6b3f57c7363a7d66618c8e163",
+    "question_id": "repository-semantic-gap-question:af7afaa11d8b7bdd25d6343180942b186c1b087a1cc35ae8f19442632f5eccb5",
+    "section": "WHAT_IT_IS"
+  },
+  "source": {
+    "025p_artifact": "artifacts/investigator/025p-prefect-bounded-search-evidence.json",
+    "025p_sha256": "sha256:f9ab7f2bdb4d2229719ede1a5643bce422893b10e60aee84d677473c70245592",
+    "025r_artifact": "artifacts/investigator/025r-prefect-followup-request-measurement.json",
+    "025r_sha256": "sha256:026cce4ef593ecb43de49f0d9a43013a52c8b5477ea83ccdbccc2817f143c2c8"
+  }
+}
