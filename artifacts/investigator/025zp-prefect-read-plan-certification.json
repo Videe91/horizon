@@ -1,0 +1,134 @@
+{
+  "authority": {
+    "claims_created": 0,
+    "epistemic_assessments_created": 0,
+    "live_model_calls": 0,
+    "new_investigation_operations_executed": 0,
+    "new_repository_facts_created": 0,
+    "planner_output_executed": false,
+    "source_reads_executed": 0,
+    "what_it_is_closed": false,
+    "world_model_assertions_created": 0,
+    "world_model_mutations": 0
+  },
+  "capability": "025ZP",
+  "certification_kind": "PREFECT_FOUR_READ_PLAN_EXACT_LINEAGE_CERTIFICATION",
+  "plan": {
+    "max_steps": 4,
+    "max_total_seconds": 120,
+    "plan_id": "investigation-plan:0be38208718633662c0e4254358d42621439f93457a69686c2258db183e51214",
+    "proposal_id": "investigation-proposal:a73a99405fb0bc13e1590c564543e46108210a033a1f1c32b2ae1af6cc49bb74",
+    "question_id": "repository-semantic-gap-question:af7afaa11d8b7bdd25d6343180942b186c1b087a1cc35ae8f19442632f5eccb5",
+    "step_count": 4,
+    "steps": [
+      {
+        "depends_on_step_ids": [],
+        "expected_information": "The Task class docstring describing its responsibilities, without retrieving method implementations.",
+        "grounding": {
+          "basis": "Observed Task class starts at 307 and first __init__ starts at 384.",
+          "source_observation_ids": [
+            "investigation-symbol-observation:773b4979718469f694b87eb864315f25742c11e9ad0ba818936d761f361373bb"
+          ]
+        },
+        "max_seconds": 30,
+        "operation": {
+          "end_line": 383,
+          "path": "src/prefect/tasks.py",
+          "start_line": 307,
+          "type": "READ_SOURCE"
+        },
+        "purpose": "Retrieve the Task class opening and docstring, bounded by the observed class start and the line immediately before its first method at line 384.",
+        "step_id": "investigation-step:1298a8b4444f1b189f49059ca488523d16deae294a036b9772541daa19d841d1",
+        "step_key": "read_task_class_docstring"
+      },
+      {
+        "depends_on_step_ids": [],
+        "expected_information": "The Flow class docstring describing its responsibilities, without retrieving method implementations.",
+        "grounding": {
+          "basis": "Observed Flow class starts at 145 and first __init__ starts at 205.",
+          "source_observation_ids": [
+            "investigation-symbol-observation:8ca597b21d5939624d9d56a1c485795cc359f41f1ac6b2868d93aff96fba689a"
+          ]
+        },
+        "max_seconds": 30,
+        "operation": {
+          "end_line": 204,
+          "path": "src/prefect/flows.py",
+          "start_line": 145,
+          "type": "READ_SOURCE"
+        },
+        "purpose": "Retrieve the Flow class opening and docstring, bounded by the observed class start and the line immediately before its first method at line 205.",
+        "step_id": "investigation-step:7ef4a093049d46850d6c640e52d1183765e92e83821a31864efb948e3fc42340",
+        "step_key": "read_flow_class_docstring"
+      },
+      {
+        "depends_on_step_ids": [],
+        "expected_information": "The first Python usage example and its introductory explanation, for comparison with the stated purpose.",
+        "grounding": {
+          "basis": "Observed usage anchor at line 79 and code-fence anchors at lines 81 and 102.",
+          "source_observation_ids": [
+            "investigation-search-observation:888a0f5032c212e874838880f142d6dae3fe7e774ac2b9a7a1a1c20ef5127800",
+            "investigation-search-observation:498b29a505963974044d1bf9b4929965041b099cfc081adb0dd73c755dff462d"
+          ]
+        },
+        "max_seconds": 30,
+        "operation": {
+          "end_line": 102,
+          "path": "README.md",
+          "start_line": 79,
+          "type": "READ_SOURCE"
+        },
+        "purpose": "Retrieve the observed usage introduction and its first Python example, through the observed closing code fence.",
+        "step_id": "investigation-step:96b3899d106781762bad4ec67f615cea47668d5f6a80abc8aed688d7e1136c9b",
+        "step_key": "read_readme_first_usage"
+      },
+      {
+        "depends_on_step_ids": [],
+        "expected_information": "The exact introductory purpose statement from the frozen README.",
+        "grounding": {
+          "basis": "Observed README purpose matches at lines 54 and 55.",
+          "source_observation_ids": [
+            "investigation-search-observation:888a0f5032c212e874838880f142d6dae3fe7e774ac2b9a7a1a1c20ef5127800"
+          ]
+        },
+        "max_seconds": 30,
+        "operation": {
+          "end_line": 55,
+          "path": "README.md",
+          "start_line": 54,
+          "type": "READ_SOURCE"
+        },
+        "purpose": "Retrieve the introductory purpose statement at the observed matching lines.",
+        "step_id": "investigation-step:f59ec7f4c1840ea90f40333c44a7ce39d6afb97b14008d30d290b173a384b7af",
+        "step_key": "read_readme_purpose"
+      }
+    ]
+  },
+  "repository": {
+    "commit": "2338265f658845a9bef8ce7baf07519b89846dc8",
+    "repository_observation_id": "git-observation:735c214acf83e7b08e03886c558275f0aaa2c3d0d03d618be9e974edf4b52435",
+    "target": "Prefect",
+    "world_model_snapshot_id": "world-model-snapshot:754b63c7d710a879b18abb65c39750c14351b24f9a2c3ff67794f1bf0e2ed21d"
+  },
+  "result": "CERTIFIED_FOR_EVIDENCE_EXECUTION",
+  "review": {
+    "all_coordinates_grounded_in_existing_025y_evidence": true,
+    "all_operations_are_read_source": true,
+    "exact_eleven_record_request_rebuilt": true,
+    "exact_planning_bridge_rebuilt": true,
+    "exact_planning_proposal_rebuilt": true,
+    "exact_source_hypothesis_rebuilt": true,
+    "live_output_reparsed_against_exact_authority": true,
+    "operation_count": 4,
+    "production_plan_compiler_passed": true
+  },
+  "source": {
+    "025zo_sha256": "sha256:4ca47fd557368b72ef345a617514875f8eafc60051624131ac2e4329f0f5a266",
+    "invocation_id": "semantic-gap-typed-planner-invocation:92a29e7e216f720117734ef235dd5f93e028f51f524dc2fcbce63464f70ebad1",
+    "planner_output_id": "semantic-gap-typed-planner-output:ffb31810009a1bdeb609483e50431b74c673091fae05e35a906119069a11e343",
+    "planning_bridge_id": "hypothesis-test-planning-bridge:9eb10ebbf69d88faaba935a139a033f02075513f9ab74bef9d9fb060a2c10877",
+    "planning_proposal_id": "investigation-proposal:a73a99405fb0bc13e1590c564543e46108210a033a1f1c32b2ae1af6cc49bb74",
+    "request_id": "semantic-gap-followup-investigation-request:4bd29f50a833a4f06b6718756009e556459ebac539cf8f9fc94eac7c50e10006",
+    "source_hypothesis_proposal_id": "investigation-proposal:f7de5be6011e548868c8ffc118967b17056ce80c8fc2376f9fc8108a99879295"
+  }
+}
