@@ -38,7 +38,7 @@ from horizon.languages.python.structure_cache import (
 )
 from horizon.repository.git_blob import (
     GitBlobError,
-    read_observed_blob,
+    read_observed_blobs,
 )
 from horizon.repository.git_observation import (
     GitCommitObservation,
@@ -103,6 +103,8 @@ class PythonRepositoryOpenReport:
     cache_misses: int
 
     total_fact_count: int
+
+    blob_read_elapsed_ns: int
 
     files: tuple[
         PythonRepositoryFileMaterialization,
@@ -296,6 +298,39 @@ def open_python_repository(
         observation
     )
 
+    blob_read_started = (
+        time.perf_counter_ns()
+    )
+
+    try:
+        blobs = read_observed_blobs(
+            repository_path,
+            observation,
+            tuple(
+                entry.path
+                for entry
+                in entries
+            ),
+        )
+    except GitBlobError as exc:
+        raise PythonRepositoryOpenError(
+            "observed Python blobs could not be batch-read"
+        ) from exc
+
+    blob_read_elapsed_ns = (
+        time.perf_counter_ns()
+        - blob_read_started
+    )
+
+    if len(
+        blobs
+    ) != len(
+        entries
+    ):
+        raise PythonRepositoryOpenError(
+            "batch blob result count does not match Python entries"
+        )
+
     files: list[
         PythonRepositoryFileMaterialization
     ] = []
@@ -304,22 +339,14 @@ def open_python_repository(
         PythonRepositorySyntaxFailure
     ] = []
 
-    for entry in entries:
+    for entry, blob in zip(
+        entries,
+        blobs,
+        strict=True,
+    ):
         file_started = (
             time.perf_counter_ns()
         )
-
-        try:
-            blob = read_observed_blob(
-                repository_path,
-                observation,
-                entry.path,
-            )
-        except GitBlobError as exc:
-            raise PythonRepositoryOpenError(
-                "observed Python path could not be read as a Git blob: "
-                f"{entry.path!r}"
-            ) from exc
 
         try:
             cached = (
@@ -481,6 +508,9 @@ def open_python_repository(
         ),
         total_fact_count=(
             total_fact_count
+        ),
+        blob_read_elapsed_ns=(
+            blob_read_elapsed_ns
         ),
         files=(
             materialized_files
