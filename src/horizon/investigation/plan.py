@@ -174,9 +174,17 @@ class SearchSourceOperation:
         )
 
         if self.path_prefix is not None:
-            _validate_repository_path(
-                self.path_prefix,
-                name="search path prefix",
+            normalized_path_prefix = (
+                _validate_repository_path(
+                    self.path_prefix,
+                    name="search path prefix",
+                )
+            )
+
+            object.__setattr__(
+                self,
+                "path_prefix",
+                normalized_path_prefix,
             )
 
 
@@ -198,9 +206,17 @@ class ReadSourceOperation:
     def __post_init__(
         self,
     ) -> None:
-        _validate_repository_path(
-            self.path,
-            name="read path",
+        normalized_path = (
+            _validate_repository_path(
+                self.path,
+                name="read path",
+            )
+        )
+
+        object.__setattr__(
+            self,
+            "path",
+            normalized_path,
         )
 
         _require_positive_integer(
@@ -239,9 +255,17 @@ class InspectSymbolOperation:
     def __post_init__(
         self,
     ) -> None:
-        _validate_repository_path(
-            self.path,
-            name="symbol path",
+        normalized_path = (
+            _validate_repository_path(
+                self.path,
+                name="symbol path",
+            )
+        )
+
+        object.__setattr__(
+            self,
+            "path",
+            normalized_path,
         )
 
         _require_nonempty(
@@ -268,9 +292,17 @@ class ResolveCallOperation:
     def __post_init__(
         self,
     ) -> None:
-        _validate_repository_path(
-            self.path,
-            name="call path",
+        normalized_path = (
+            _validate_repository_path(
+                self.path,
+                name="call path",
+            )
+        )
+
+        object.__setattr__(
+            self,
+            "path",
+            normalized_path,
         )
 
         _require_positive_integer(
@@ -302,9 +334,17 @@ class ResolveTypeOperation:
     def __post_init__(
         self,
     ) -> None:
-        _validate_repository_path(
-            self.path,
-            name="type path",
+        normalized_path = (
+            _validate_repository_path(
+                self.path,
+                name="type path",
+            )
+        )
+
+        object.__setattr__(
+            self,
+            "path",
+            normalized_path,
         )
 
         _require_positive_integer(
@@ -336,14 +376,30 @@ class TraceHttpContractOperation:
     def __post_init__(
         self,
     ) -> None:
-        _validate_repository_path(
-            self.client_path,
-            name="HTTP client path",
+        normalized_client_path = (
+            _validate_repository_path(
+                self.client_path,
+                name="HTTP client path",
+            )
         )
 
-        _validate_repository_path(
-            self.server_path,
-            name="HTTP server path",
+        normalized_server_path = (
+            _validate_repository_path(
+                self.server_path,
+                name="HTTP server path",
+            )
+        )
+
+        object.__setattr__(
+            self,
+            "client_path",
+            normalized_client_path,
+        )
+
+        object.__setattr__(
+            self,
+            "server_path",
+            normalized_server_path,
         )
 
         _require_nonempty(
