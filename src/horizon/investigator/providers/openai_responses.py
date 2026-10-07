@@ -242,6 +242,18 @@ _STRING = {
 }
 
 
+_NULLABLE_STRING = {
+    "anyOf": [
+        {
+            "type": "string",
+        },
+        {
+            "type": "null",
+        },
+    ],
+}
+
+
 _STRING_ARRAY = {
     "type": "array",
     "items": {
@@ -252,7 +264,7 @@ _STRING_ARRAY = {
 
 _COMMON_PROPERTIES = {
     "question_id": _STRING,
-    "relationship_id": _STRING,
+    "relationship_id": _NULLABLE_STRING,
     "assertion_ids": _STRING_ARRAY,
     "claim_ids": _STRING_ARRAY,
     "assessment_ids": _STRING_ARRAY,

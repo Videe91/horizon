@@ -68,7 +68,7 @@ class InvestigationProposal:
     kind: InvestigationProposalKind
 
     question_id: str
-    relationship_id: str
+    relationship_id: str | None
 
     assertion_ids: tuple[str, ...]
     claim_ids: tuple[str, ...]
@@ -231,6 +231,11 @@ def _require_identifier_subset(
     identifiers = _require_text_sequence(
         value,
         field=field,
+        minimum=(
+            1
+            if allowed
+            else 0
+        ),
     )
 
     allowed_set = set(
@@ -435,7 +440,7 @@ def _common_payload(
     *,
     kind: InvestigationProposalKind,
     question_id: str,
-    relationship_id: str,
+    relationship_id: str | None,
     assertion_ids: tuple[str, ...],
     claim_ids: tuple[str, ...],
     assessment_ids: tuple[str, ...],
@@ -515,20 +520,31 @@ def parse_investigation_proposal(
             "question_id is outside the request"
         )
 
-    relationship_id = _require_text(
-        raw[
-            "relationship_id"
-        ],
-        field="relationship_id",
-    )
+    raw_relationship_id = raw[
+        "relationship_id"
+    ]
 
-    if (
-        relationship_id
-        != request.relationship_id
-    ):
-        raise InvestigationProposalError(
-            "relationship_id is outside the request"
+    if request.relationship_id is None:
+        if raw_relationship_id is not None:
+            raise InvestigationProposalError(
+                "relationship_id is outside the request"
+            )
+
+        relationship_id = None
+
+    else:
+        relationship_id = _require_text(
+            raw_relationship_id,
+            field="relationship_id",
         )
+
+        if (
+            relationship_id
+            != request.relationship_id
+        ):
+            raise InvestigationProposalError(
+                "relationship_id is outside the request"
+            )
 
     assertion_ids = _require_identifier_subset(
         raw[
