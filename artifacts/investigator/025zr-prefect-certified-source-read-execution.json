@@ -1,0 +1,1631 @@
+{
+  "authority": {
+    "canonical_evidence_records_created": 4,
+    "claims_created": 0,
+    "epistemic_assessments_created": 0,
+    "hypothesis_promoted": false,
+    "live_model_calls": 0,
+    "new_investigation_operations_executed": 4,
+    "new_repository_facts_created": 0,
+    "planner_output_executed": true,
+    "source_reads_executed": 4,
+    "what_it_is_closed": false,
+    "world_model_assertions_created": 0,
+    "world_model_mutations": 0
+  },
+  "capability": "025ZR",
+  "certification_kind": "PREFECT_CERTIFIED_SOURCE_READ_EVIDENCE_EXECUTION",
+  "execution": {
+    "canonical_evidence_payload_bytes": 22391,
+    "canonical_evidence_record_count": 4,
+    "certified_operation_count": 4,
+    "executed_operation_count": 4,
+    "operation_kind": "READ_SOURCE",
+    "results": [
+      {
+        "canonical_evidence_record": {
+          "canonical_payload": "{\"commit_sha\":\"2338265f658845a9bef8ce7baf07519b89846dc8\",\"end_line\":383,\"line_count\":77,\"lines\":[{\"content_base64\":\"Y2xhc3MgVGFzayhHZW5lcmljW1AsIFJdKTo=\",\"line_number\":307},{\"content_base64\":\"ICAgICIiIg==\",\"line_number\":308},{\"content_base64\":\"ICAgIEEgUHJlZmVjdCB0YXNrIGRlZmluaXRpb24u\",\"line_number\":309},{\"content_base64\":\"\",\"line_number\":310},{\"content_base64\":\"ICAgIFdyYXBzIGEgZnVuY3Rpb24gd2l0aCBhbiBlbnRyeXBvaW50IHRvIHRoZSBQcmVmZWN0IGVuZ2luZS4gQ2FsbGluZyB0aGlzIGNsYXNzIHdpdGhpbiBhIGZsb3cgZnVuY3Rpb24=\",\"line_number\":311},{\"content_base64\":\"ICAgIGNyZWF0ZXMgYSBuZXcgdGFzayBydW4u\",\"line_number\":312},{\"content_base64\":\"\",\"line_number\":313},{\"content_base64\":\"ICAgIFRvIHByZXNlcnZlIHRoZSBpbnB1dCBhbmQgb3V0cHV0IHR5cGVzLCB3ZSB1c2UgdGhlIGdlbmVyaWMgdHlwZSB2YXJpYWJsZXMgUCBhbmQgUiBmb3IgIlBhcmFtZXRlcnMiIGFuZA==\",\"line_number\":314},{\"content_base64\":\"ICAgICJSZXR1cm5zIiByZXNwZWN0aXZlbHku\",\"line_number\":315},{\"content_base64\":\"\",\"line_number\":316},{\"content_base64\":\"ICAgIEFyZ3M6\",\"line_number\":317},{\"content_base64\":\"ICAgICAgICBmbjogVGhlIGZ1bmN0aW9uIGRlZmluaW5nIHRoZSB0YXNrLg==\",\"line_number\":318},{\"content_base64\":\"ICAgICAgICBuYW1lOiBBbiBvcHRpb25hbCBuYW1lIGZvciB0aGUgdGFzazsgaWYgbm90IHByb3ZpZGVkLCB0aGUgbmFtZSB3aWxsIGJlIGluZmVycmVk\",\"line_number\":319},{\"content_base64\":\"ICAgICAgICAgICAgZnJvbSB0aGUgZ2l2ZW4gZnVuY3Rpb24u\",\"line_number\":320},{\"content_base64\":\"ICAgICAgICBkZXNjcmlwdGlvbjogQW4gb3B0aW9uYWwgc3RyaW5nIGRlc2NyaXB0aW9uIGZvciB0aGUgdGFzay4=\",\"line_number\":321},{\"content_base64\":\"ICAgICAgICB0YWdzOiBBbiBvcHRpb25hbCBzZXQgb2YgdGFncyB0byBiZSBhc3NvY2lhdGVkIHdpdGggcnVucyBvZiB0aGlzIHRhc2suIFRoZXNl\",\"line_number\":322},{\"content_base64\":\"ICAgICAgICAgICAgdGFncyBhcmUgY29tYmluZWQgd2l0aCBhbnkgdGFncyBkZWZpbmVkIGJ5IGEgYHByZWZlY3QudGFnc2AgY29udGV4dCBhdA==\",\"line_number\":323},{\"content_base64\":\"ICAgICAgICAgICAgdGFzayBydW50aW1lLg==\",\"line_number\":324},{\"content_base64\":\"ICAgICAgICB2ZXJzaW9uOiBBbiBvcHRpb25hbCBzdHJpbmcgc3BlY2lmeWluZyB0aGUgdmVyc2lvbiBvZiB0aGlzIHRhc2sgZGVmaW5pdGlvbg==\",\"line_number\":325},{\"content_base64\":\"ICAgICAgICBjYWNoZV9wb2xpY3k6IEEgY2FjaGUgcG9saWN5IHRoYXQgZGV0ZXJtaW5lcyB0aGUgbGV2ZWwgb2YgY2FjaGluZyBmb3IgdGhpcyB0YXNr\",\"line_number\":326},{\"content_base64\":\"ICAgICAgICBjYWNoZV9rZXlfZm46IEFuIG9wdGlvbmFsIGNhbGxhYmxlIHRoYXQsIGdpdmVuIHRoZSB0YXNrIHJ1biBjb250ZXh0IGFuZCBjYWxs\",\"line_number\":327},{\"content_base64\":\"ICAgICAgICAgICAgcGFyYW1ldGVycywgZ2VuZXJhdGVzIGEgc3RyaW5nIGtleTsgaWYgdGhlIGtleSBtYXRjaGVzIGEgcHJldmlvdXMgY29tcGxldGVk\",\"line_number\":328},{\"content_base64\":\"ICAgICAgICAgICAgc3RhdGUsIHRoYXQgc3RhdGUgcmVzdWx0IHdpbGwgYmUgcmVzdG9yZWQgaW5zdGVhZCBvZiBydW5uaW5nIHRoZSB0YXNrIGFnYWluLg==\",\"line_number\":329},{\"content_base64\":\"ICAgICAgICBjYWNoZV9leHBpcmF0aW9uOiBBbiBvcHRpb25hbCBhbW91bnQgb2YgdGltZSBpbmRpY2F0aW5nIGhvdyBsb25nIGNhY2hlZCBzdGF0ZXM=\",\"line_number\":330},{\"content_base64\":\"ICAgICAgICAgICAgZm9yIHRoaXMgdGFzayBzaG91bGQgYmUgcmVzdG9yYWJsZTsgaWYgbm90IHByb3ZpZGVkLCBjYWNoZWQgc3RhdGVzIHdpbGw=\",\"line_number\":331},{\"content_base64\":\"ICAgICAgICAgICAgbmV2ZXIgZXhwaXJlLg==\",\"line_number\":332},{\"content_base64\":\"ICAgICAgICB0YXNrX3J1bl9uYW1lOiBBbiBvcHRpb25hbCBuYW1lIHRvIGRpc3Rpbmd1aXNoIHJ1bnMgb2YgdGhpcyB0YXNrOyB0aGlzIG5hbWUgY2FuIGJlIHByb3ZpZGVk\",\"line_number\":333},{\"content_base64\":\"ICAgICAgICAgICAgYXMgYSBzdHJpbmcgdGVtcGxhdGUgd2l0aCB0aGUgdGFzaydzIGtleXdvcmQgYXJndW1lbnRzIGFzIHZhcmlhYmxlcyw=\",\"line_number\":334},{\"content_base64\":\"ICAgICAgICAgICAgb3IgYSBmdW5jdGlvbiB0aGF0IHJldHVybnMgYSBzdHJpbmcu\",\"line_number\":335},{\"content_base64\":\"ICAgICAgICByZXRyaWVzOiBBbiBvcHRpb25hbCBudW1iZXIgb2YgdGltZXMgdG8gcmV0cnkgb24gdGFzayBydW4gZmFpbHVyZS4=\",\"line_number\":336},{\"content_base64\":\"ICAgICAgICByZXRyeV9kZWxheV9zZWNvbmRzOiBPcHRpb25hbGx5IGNvbmZpZ3VyZXMgaG93IGxvbmcgdG8gd2FpdCBiZWZvcmUgcmV0cnlpbmcgdGhl\",\"line_number\":337},{\"content_base64\":\"ICAgICAgICAgICAgdGFzayBhZnRlciBmYWlsdXJlLiBUaGlzIGlzIG9ubHkgYXBwbGljYWJsZSBpZiBgcmV0cmllc2AgaXMgbm9uemVyby4gVGhpcw==\",\"line_number\":338},{\"content_base64\":\"ICAgICAgICAgICAgc2V0dGluZyBjYW4gZWl0aGVyIGJlIGEgbnVtYmVyIG9mIHNlY29uZHMsIGEgbGlzdCBvZiByZXRyeSBkZWxheXMsIG9yIGE=\",\"line_number\":339},{\"content_base64\":\"ICAgICAgICAgICAgY2FsbGFibGUgdGhhdCwgZ2l2ZW4gdGhlIHRvdGFsIG51bWJlciBvZiByZXRyaWVzLCBnZW5lcmF0ZXMgYSBsaXN0IG9mIHJldHJ5\",\"line_number\":340},{\"content_base64\":\"ICAgICAgICAgICAgZGVsYXlzLiBJZiBhIG51bWJlciBvZiBzZWNvbmRzLCB0aGF0IGRlbGF5IHdpbGwgYmUgYXBwbGllZCB0byBhbGwgcmV0cmllcy4=\",\"line_number\":341},{\"content_base64\":\"ICAgICAgICAgICAgSWYgYSBsaXN0LCBlYWNoIHJldHJ5IHdpbGwgd2FpdCBmb3IgdGhlIGNvcnJlc3BvbmRpbmcgZGVsYXkgYmVmb3JlIHJldHJ5aW5nLg==\",\"line_number\":342},{\"content_base64\":\"ICAgICAgICAgICAgV2hlbiBwYXNzaW5nIGEgY2FsbGFibGUgb3IgYSBsaXN0LCB0aGUgbnVtYmVyIG9mIGNvbmZpZ3VyZWQgcmV0cnkgZGVsYXlz\",\"line_number\":343},{\"content_base64\":\"ICAgICAgICAgICAgY2Fubm90IGV4Y2VlZCA1MC4=\",\"line_number\":344},{\"content_base64\":\"ICAgICAgICByZXRyeV9qaXR0ZXJfZmFjdG9yOiBBbiBvcHRpb25hbCBmYWN0b3IgdGhhdCBkZWZpbmVzIHRoZSBmYWN0b3IgdG8gd2hpY2ggYSByZXRyeQ==\",\"line_number\":345},{\"content_base64\":\"ICAgICAgICAgICAgY2FuIGJlIGppdHRlcmVkIGluIG9yZGVyIHRvIGF2b2lkIGEgInRodW5kZXJpbmcgaGVyZCIu\",\"line_number\":346},{\"content_base64\":\"ICAgICAgICBwZXJzaXN0X3Jlc3VsdDogQSB0b2dnbGUgaW5kaWNhdGluZyB3aGV0aGVyIHRoZSByZXN1bHQgb2YgdGhpcyB0YXNr\",\"line_number\":347},{\"content_base64\":\"ICAgICAgICAgICAgc2hvdWxkIGJlIHBlcnNpc3RlZCB0byByZXN1bHQgc3RvcmFnZS4gRGVmYXVsdHMgdG8gYE5vbmVgLCB3aGljaA==\",\"line_number\":348},{\"content_base64\":\"ICAgICAgICAgICAgaW5kaWNhdGVzIHRoYXQgdGhlIGdsb2JhbCBkZWZhdWx0IHNob3VsZCBiZSB1c2VkICh3aGljaCBpcyBgVHJ1ZWAgYnk=\",\"line_number\":349},{\"content_base64\":\"ICAgICAgICAgICAgZGVmYXVsdCku\",\"line_number\":350},{\"content_base64\":\"ICAgICAgICByZXN1bHRfc3RvcmFnZTogQW4gb3B0aW9uYWwgYmxvY2sgdG8gdXNlIHRvIHBlcnNpc3QgdGhlIHJlc3VsdCBvZiB0aGlzIHRhc2su\",\"line_number\":351},{\"content_base64\":\"ICAgICAgICAgICAgVGhpcyBjYW4gYmUgZWl0aGVyIGEgc2F2ZWQgYmxvY2sgaW5zdGFuY2Ugb3IgYSBzdHJpbmcgcmVmZXJlbmNlIChlLmcuLA==\",\"line_number\":352},{\"content_base64\":\"ICAgICAgICAgICAgImxvY2FsLWZpbGUtc3lzdGVtL215LXN0b3JhZ2UiKS4gQmxvY2sgaW5zdGFuY2VzIG11c3QgaGF2ZSBgLnNhdmUoKWAgY2FsbGVk\",\"line_number\":353},{\"content_base64\":\"ICAgICAgICAgICAgZmlyc3Qgc2luY2UgZGVjb3JhdG9ycyBleGVjdXRlIGF0IGltcG9ydCB0aW1lLiBTdHJpbmcgcmVmZXJlbmNlcyBhcmUgcmVzb2x2ZWQ=\",\"line_number\":354},{\"content_base64\":\"ICAgICAgICAgICAgYXQgcnVudGltZSBhbmQgcmVjb21tZW5kZWQgZm9yIHRlc3Rpbmcgc2NlbmFyaW9zLiBEZWZhdWx0cyB0byB0aGUgdmFsdWUgc2V0\",\"line_number\":355},{\"content_base64\":\"ICAgICAgICAgICAgaW4gdGhlIGZsb3cgdGhlIHRhc2sgaXMgY2FsbGVkIGluLg==\",\"line_number\":356},{\"content_base64\":\"ICAgICAgICByZXN1bHRfc3RvcmFnZV9rZXk6IEFuIG9wdGlvbmFsIGtleSB0byBzdG9yZSB0aGUgcmVzdWx0IGluIHN0b3JhZ2UgYXQgd2hlbiBwZXJzaXN0ZWQu\",\"line_number\":357},{\"content_base64\":\"ICAgICAgICAgICAgRGVmYXVsdHMgdG8gYSB1bmlxdWUgaWRlbnRpZmllci4=\",\"line_number\":358},{\"content_base64\":\"ICAgICAgICByZXN1bHRfc2VyaWFsaXplcjogQW4gb3B0aW9uYWwgc2VyaWFsaXplciB0byB1c2UgdG8gc2VyaWFsaXplIHRoZSByZXN1bHQgb2YgdGhpcw==\",\"line_number\":359},{\"content_base64\":\"ICAgICAgICAgICAgdGFzayBmb3IgcGVyc2lzdGVuY2UuIERlZmF1bHRzIHRvIHRoZSB2YWx1ZSBzZXQgaW4gdGhlIGZsb3cgdGhlIHRhc2sgaXM=\",\"line_number\":360},{\"content_base64\":\"ICAgICAgICAgICAgY2FsbGVkIGluLg==\",\"line_number\":361},{\"content_base64\":\"ICAgICAgICB0aW1lb3V0X3NlY29uZHM6IEFuIG9wdGlvbmFsIG51bWJlciBvZiBzZWNvbmRzIGluZGljYXRpbmcgYSBtYXhpbXVtIHJ1bnRpbWUgZm9y\",\"line_number\":362},{\"content_base64\":\"ICAgICAgICAgICAgdGhlIHRhc2suIElmIHRoZSB0YXNrIGV4Y2VlZHMgdGhpcyBydW50aW1lLCBpdCB3aWxsIGJlIG1hcmtlZCBhcyBmYWlsZWQu\",\"line_number\":363},{\"content_base64\":\"ICAgICAgICBsb2dfcHJpbnRzOiBJZiBzZXQsIGBwcmludGAgc3RhdGVtZW50cyBpbiB0aGUgdGFzayB3aWxsIGJlIHJlZGlyZWN0ZWQgdG8gdGhl\",\"line_number\":364},{\"content_base64\":\"ICAgICAgICAgICAgUHJlZmVjdCBsb2dnZXIgZm9yIHRoZSB0YXNrIHJ1bi4gRGVmYXVsdHMgdG8gYE5vbmVgLCB3aGljaCBpbmRpY2F0ZXM=\",\"line_number\":365},{\"content_base64\":\"ICAgICAgICAgICAgdGhhdCB0aGUgdmFsdWUgZnJvbSB0aGUgZmxvdyBzaG91bGQgYmUgdXNlZC4=\",\"line_number\":366},{\"content_base64\":\"ICAgICAgICByZWZyZXNoX2NhY2hlOiBJZiBzZXQsIGNhY2hlZCByZXN1bHRzIGZvciB0aGUgY2FjaGUga2V5IGFyZSBub3QgdXNlZC4=\",\"line_number\":367},{\"content_base64\":\"ICAgICAgICAgICAgRGVmYXVsdHMgdG8gYE5vbmVgLCB3aGljaCBpbmRpY2F0ZXMgdGhhdCBhIGNhY2hlZCByZXN1bHQgZnJvbSBhIHByZXZpb3Vz\",\"line_number\":368},{\"content_base64\":\"ICAgICAgICAgICAgZXhlY3V0aW9uIHdpdGggbWF0Y2hpbmcgY2FjaGUga2V5IGlzIHVzZWQu\",\"line_number\":369},{\"content_base64\":\"ICAgICAgICBvbl9mYWlsdXJlOiBBbiBvcHRpb25hbCBsaXN0IG9mIGNhbGxhYmxlcyB0byBydW4gd2hlbiB0aGUgdGFzayBlbnRlcnMgYSBmYWlsZWQgc3RhdGUu\",\"line_number\":370},{\"content_base64\":\"ICAgICAgICBvbl9jb21wbGV0aW9uOiBBbiBvcHRpb25hbCBsaXN0IG9mIGNhbGxhYmxlcyB0byBydW4gd2hlbiB0aGUgdGFzayBlbnRlcnMgYSBjb21wbGV0ZWQgc3RhdGUu\",\"line_number\":371},{\"content_base64\":\"ICAgICAgICBvbl9jb21taXQ6IEFuIG9wdGlvbmFsIGxpc3Qgb2YgY2FsbGFibGVzIHRvIHJ1biB3aGVuIHRoZSB0YXNrJ3MgaWRlbXBvdGVuY3kgcmVjb3JkIGlzIGNvbW1pdHRlZC4=\",\"line_number\":372},{\"content_base64\":\"ICAgICAgICBvbl9yb2xsYmFjazogQW4gb3B0aW9uYWwgbGlzdCBvZiBjYWxsYWJsZXMgdG8gcnVuIHdoZW4gdGhlIHRhc2sgcm9sbHMgYmFjay4=\",\"line_number\":373},{\"content_base64\":\"ICAgICAgICByZXRyeV9jb25kaXRpb25fZm46IEFuIG9wdGlvbmFsIGNhbGxhYmxlIHJ1biB3aGVuIGEgdGFzayBydW4gcmV0dXJucyBhIEZhaWxlZCBzdGF0ZS4gU2hvdWxk\",\"line_number\":374},{\"content_base64\":\"ICAgICAgICAgICAgcmV0dXJuIGBUcnVlYCBpZiB0aGUgdGFzayBzaG91bGQgY29udGludWUgdG8gaXRzIHJldHJ5IHBvbGljeSAoZS5nLiBgcmV0cmllcz0zYCksIGFuZCBgRmFsc2VgIGlmIHRoZSB0YXNr\",\"line_number\":375},{\"content_base64\":\"ICAgICAgICAgICAgc2hvdWxkIGVuZCBhcyBmYWlsZWQuIERlZmF1bHRzIHRvIGBOb25lYCwgaW5kaWNhdGluZyB0aGUgdGFzayBzaG91bGQgYWx3YXlzIGNvbnRpbnVl\",\"line_number\":376},{\"content_base64\":\"ICAgICAgICAgICAgdG8gaXRzIHJldHJ5IHBvbGljeS4=\",\"line_number\":377},{\"content_base64\":\"ICAgICAgICB2aXpfcmV0dXJuX3ZhbHVlOiBBbiBvcHRpb25hbCB2YWx1ZSB0byByZXR1cm4gd2hlbiB0aGUgdGFzayBkZXBlbmRlbmN5IHRyZWUgaXMgdmlzdWFsaXplZC4=\",\"line_number\":378},{\"content_base64\":\"ICAgICAgICBhc3NldF9kZXBzOiBBbiBvcHRpb25hbCBsaXN0IG9mIHVwc3RyZWFtIGFzc2V0cyB0aGF0IHRoaXMgdGFzayBkZXBlbmRzIG9uLg==\",\"line_number\":379},{\"content_base64\":\"ICAgICIiIg==\",\"line_number\":380},{\"content_base64\":\"\",\"line_number\":381},{\"content_base64\":\"ICAgICMgTk9URTogVGhlc2UgcGFyYW1ldGVycyAodHlwZXMsIGRlZmF1bHRzLCBhbmQgZG9jc3RyaW5ncykgc2hvdWxkIGJlIGR1cGxpY2F0ZWQ=\",\"line_number\":382},{\"content_base64\":\"ICAgICMgICAgICAgZXhhY3RseSBpbiB0aGUgQHRhc2sgZGVjb3JhdG9y\",\"line_number\":383}],\"observation_id\":\"investigation-source-observation:1bbbba51000fb63886ea19a66e9cea0cca827eeb1e6077b79bc40e849cc0f4bb\",\"operation_kind\":\"READ_SOURCE\",\"path\":\"src/prefect/tasks.py\",\"repository_observation_id\":\"git-observation:735c214acf83e7b08e03886c558275f0aaa2c3d0d03d618be9e974edf4b52435\",\"source_blob_evidence_id\":\"git-blob-evidence:b4a862cdf4a53f57082df701eb4f34f5eeda4689d9e2e9fbd4a73c0e5c438c86\",\"source_object_id\":\"d7463b54a4366153ab1c9e9448c3d6695e2f13db\",\"start_line\":307}",
+          "canonical_payload_bytes": 10617,
+          "canonical_payload_sha256": "sha256:cacf077f988e98869249f23ed340594bb03273c78f59533ae592d938e6890d1b",
+          "evidence_id": "investigation-source-observation:1bbbba51000fb63886ea19a66e9cea0cca827eeb1e6077b79bc40e849cc0f4bb",
+          "evidence_kind": "INVESTIGATION_SOURCE_OBSERVATION"
+        },
+        "observation": {
+          "commit_sha": "2338265f658845a9bef8ce7baf07519b89846dc8",
+          "end_line": 383,
+          "line_count": 77,
+          "lines": [
+            {
+              "content": {
+                "base64": "Y2xhc3MgVGFzayhHZW5lcmljW1AsIFJdKTo=",
+                "bytes": 26,
+                "encoding": "base64",
+                "sha256": "sha256:579ead8b63e237b1c9e546f23a2893ecd5c307844bb4abf806480be4c32e5741"
+              },
+              "line_number": 307
+            },
+            {
+              "content": {
+                "base64": "ICAgICIiIg==",
+                "bytes": 7,
+                "encoding": "base64",
+                "sha256": "sha256:c7fecba7421afe7775a8a6a72a82f3c4f87b557c6f9786e4b342af9130361c73"
+              },
+              "line_number": 308
+            },
+            {
+              "content": {
+                "base64": "ICAgIEEgUHJlZmVjdCB0YXNrIGRlZmluaXRpb24u",
+                "bytes": 30,
+                "encoding": "base64",
+                "sha256": "sha256:eec97afdf5cca153bc7bf60c0017a9c7f10f9f1b3db597738fb5ee58183a6b0c"
+              },
+              "line_number": 309
+            },
+            {
+              "content": {
+                "base64": "",
+                "bytes": 0,
+                "encoding": "base64",
+                "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+              },
+              "line_number": 310
+            },
+            {
+              "content": {
+                "base64": "ICAgIFdyYXBzIGEgZnVuY3Rpb24gd2l0aCBhbiBlbnRyeXBvaW50IHRvIHRoZSBQcmVmZWN0IGVuZ2luZS4gQ2FsbGluZyB0aGlzIGNsYXNzIHdpdGhpbiBhIGZsb3cgZnVuY3Rpb24=",
+                "bytes": 104,
+                "encoding": "base64",
+                "sha256": "sha256:e32ce562991bcf009fe0a38132bae2485287b48fe4451b278529a3d134d46768"
+              },
+              "line_number": 311
+            },
+            {
+              "content": {
+                "base64": "ICAgIGNyZWF0ZXMgYSBuZXcgdGFzayBydW4u",
+                "bytes": 27,
+                "encoding": "base64",
+                "sha256": "sha256:f72cac39f2a91392ec06c0c774b59d630bd1a0e640677f467242c69ee7092a9b"
+              },
+              "line_number": 312
+            },
+            {
+              "content": {
+                "base64": "",
+                "bytes": 0,
+                "encoding": "base64",
+                "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+              },
+              "line_number": 313
+            },
+            {
+              "content": {
+                "base64": "ICAgIFRvIHByZXNlcnZlIHRoZSBpbnB1dCBhbmQgb3V0cHV0IHR5cGVzLCB3ZSB1c2UgdGhlIGdlbmVyaWMgdHlwZSB2YXJpYWJsZXMgUCBhbmQgUiBmb3IgIlBhcmFtZXRlcnMiIGFuZA==",
+                "bytes": 106,
+                "encoding": "base64",
+                "sha256": "sha256:98450fdbca2bedc1b9b6484dbbd060d690780e5669265e2c72a84851cf1920cd"
+              },
+              "line_number": 314
+            },
+            {
+              "content": {
+                "base64": "ICAgICJSZXR1cm5zIiByZXNwZWN0aXZlbHku",
+                "bytes": 27,
+                "encoding": "base64",
+                "sha256": "sha256:9350afe3229aefc3847202754760d752b5469318abd0e07a9612b638c6959d85"
+              },
+              "line_number": 315
+            },
+            {
+              "content": {
+                "base64": "",
+                "bytes": 0,
+                "encoding": "base64",
+                "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+              },
+              "line_number": 316
+            },
+            {
+              "content": {
+                "base64": "ICAgIEFyZ3M6",
+                "bytes": 9,
+                "encoding": "base64",
+                "sha256": "sha256:237bc5c81bfb5b2d6c4ecc4000313cb81bcc6e47a23aa2a66801f44f8cfd3d4f"
+              },
+              "line_number": 317
+            },
+            {
+              "content": {
+                "base64": "ICAgICAgICBmbjogVGhlIGZ1bmN0aW9uIGRlZmluaW5nIHRoZSB0YXNrLg==",
+                "bytes": 43,
+                "encoding": "base64",
+                "sha256": "sha256:c83bf5051f24dd2248a543dc35057a9959fc46409d891b7f69bc8f7ecbd2047b"
+              },
+              "line_number": 318
+            },
+            {
+              "content": {
+                "base64": "ICAgICAgICBuYW1lOiBBbiBvcHRpb25hbCBuYW1lIGZvciB0aGUgdGFzazsgaWYgbm90IHByb3ZpZGVkLCB0aGUgbmFtZSB3aWxsIGJlIGluZmVycmVk",
+                "bytes": 87,
+                "encoding": "base64",
+                "sha256": "sha256:b3a8f14c9e29e384a64c502d0ada8765a3174b01769ffd10a28960100e83e8b9"
+              },
+              "line_number": 319
+            },
+            {
+              "content": {
+                "base64": "ICAgICAgICAgICAgZnJvbSB0aGUgZ2l2ZW4gZnVuY3Rpb24u",
+                "bytes": 36,
+                "encoding": "base64",
+                "sha256": "sha256:3dbb7ce9a9fe7d1e674b2ea29d087e0bcd5c3867371c6896d26ba3355f0b111c"
+              },
+              "line_number": 320
+            },
+            {
+              "content": {
+                "base64": "ICAgICAgICBkZXNjcmlwdGlvbjogQW4gb3B0aW9uYWwgc3RyaW5nIGRlc2NyaXB0aW9uIGZvciB0aGUgdGFzay4=",
+                "bytes": 65,
+                "encoding": "base64",
+                "sha256": "sha256:6cbd744c02a68eb793c21aec67329e562ada3b3db78242b884f787146d7d5924"
+              },
+              "line_number": 321
+            },
+            {
+              "content": {
+                "base64": "ICAgICAgICB0YWdzOiBBbiBvcHRpb25hbCBzZXQgb2YgdGFncyB0byBiZSBhc3NvY2lhdGVkIHdpdGggcnVucyBvZiB0aGlzIHRhc2suIFRoZXNl",
+                "bytes": 84,
+                "encoding": "base64",
+                "sha256": "sha256:e456903575541682e3df6b53cc208c2e3c35ee6c76903c7edce112212d5c6bef"
+              },
+              "line_number": 322
+            },
+            {
+              "content": {
+                "base64": "ICAgICAgICAgICAgdGFncyBhcmUgY29tYmluZWQgd2l0aCBhbnkgdGFncyBkZWZpbmVkIGJ5IGEgYHByZWZlY3QudGFnc2AgY29udGV4dCBhdA==",
+                "bytes": 82,
+                "encoding": "base64",
+                "sha256": "sha256:3c4777298e7ab44be323ed19a4d1392e6f58ba13017e5e6ef2d8e5e3bda06085"
+              },
+              "line_number": 323
+            },
+            {
+              "content": {
+                "base64": "ICAgICAgICAgICAgdGFzayBydW50aW1lLg==",
+                "bytes": 25,
+                "encoding": "base64",
+                "sha256": "sha256:2312bdbbaf021d664f78bb574dea8a63cd13f973cb89210067e5e71731bbb183"
+              },
+              "line_number": 324
+            },
+            {
+              "content": {
+                "base64": "ICAgICAgICB2ZXJzaW9uOiBBbiBvcHRpb25hbCBzdHJpbmcgc3BlY2lmeWluZyB0aGUgdmVyc2lvbiBvZiB0aGlzIHRhc2sgZGVmaW5pdGlvbg==",
+                "bytes": 82,
+                "encoding": "base64",
+                "sha256": "sha256:08050dcbf0b966b97a539ba475d39b1f811c89adf06640590f1e01562eca52ba"
+              },
+              "line_number": 325
+            },
+            {
+              "content": {
+                "base64": "ICAgICAgICBjYWNoZV9wb2xpY3k6IEEgY2FjaGUgcG9saWN5IHRoYXQgZGV0ZXJtaW5lcyB0aGUgbGV2ZWwgb2YgY2FjaGluZyBmb3IgdGhpcyB0YXNr",
+                "bytes": 87,
+                "encoding": "base64",
+                "sha256": "sha256:5c17463287b315822dcc5e7b433a15bf8206c0a85ab14ca5dc634f9043ca58ac"
+              },
+              "line_number": 326
+            },
+            {
+              "content": {
+                "base64": "ICAgICAgICBjYWNoZV9rZXlfZm46IEFuIG9wdGlvbmFsIGNhbGxhYmxlIHRoYXQsIGdpdmVuIHRoZSB0YXNrIHJ1biBjb250ZXh0IGFuZCBjYWxs",
+                "bytes": 84,
+                "encoding": "base64",
+                "sha256": "sha256:6be7a0860b6af4e0584867e74ecf6a14e823f0f0435a5f46542ddabc7e87ce47"
+              },
+              "line_number": 327
+            },
+            {
+              "content": {
+                "base64": "ICAgICAgICAgICAgcGFyYW1ldGVycywgZ2VuZXJhdGVzIGEgc3RyaW5nIGtleTsgaWYgdGhlIGtleSBtYXRjaGVzIGEgcHJldmlvdXMgY29tcGxldGVk",
+                "bytes": 87,
+                "encoding": "base64",
+                "sha256": "sha256:9aee35ddb351bda5283ce310d3e703f88c8a7575d7e126d903350ca398c6f963"
+              },
+              "line_number": 328
+            },
+            {
+              "content": {
+                "base64": "ICAgICAgICAgICAgc3RhdGUsIHRoYXQgc3RhdGUgcmVzdWx0IHdpbGwgYmUgcmVzdG9yZWQgaW5zdGVhZCBvZiBydW5uaW5nIHRoZSB0YXNrIGFnYWluLg==",
+                "bytes": 88,
+                "encoding": "base64",
+                "sha256": "sha256:b5cda9cc82514ab0a676fd8f7e8b42c079f19f3a849e8c01c8f1fb76e3a6c24a"
+              },
+              "line_number": 329
+            },
+            {
+              "content": {
+                "base64": "ICAgICAgICBjYWNoZV9leHBpcmF0aW9uOiBBbiBvcHRpb25hbCBhbW91bnQgb2YgdGltZSBpbmRpY2F0aW5nIGhvdyBsb25nIGNhY2hlZCBzdGF0ZXM=",
+                "bytes": 86,
+                "encoding": "base64",
+                "sha256": "sha256:3ea39ee91a2b951d974de1e4e26de0bca7cdb4de1687c872246f261414fa7b17"
+              },
+              "line_number": 330
+            },
+            {
+              "content": {
+                "base64": "ICAgICAgICAgICAgZm9yIHRoaXMgdGFzayBzaG91bGQgYmUgcmVzdG9yYWJsZTsgaWYgbm90IHByb3ZpZGVkLCBjYWNoZWQgc3RhdGVzIHdpbGw=",
+                "bytes": 83,
+                "encoding": "base64",
+                "sha256": "sha256:9e06828d328dd9bd8f5f9017ff9ee0752b6133523d1141f37364db18912e5c2e"
+              },
+              "line_number": 331
+            },
+            {
+              "content": {
+                "base64": "ICAgICAgICAgICAgbmV2ZXIgZXhwaXJlLg==",
+                "bytes": 25,
+                "encoding": "base64",
+                "sha256": "sha256:fccb2ccebfc1a3ce82c1033ce0692d1f23a8dcfd0d83921336c5330785620d68"
+              },
+              "line_number": 332
+            },
+            {
+              "content": {
+                "base64": "ICAgICAgICB0YXNrX3J1bl9uYW1lOiBBbiBvcHRpb25hbCBuYW1lIHRvIGRpc3Rpbmd1aXNoIHJ1bnMgb2YgdGhpcyB0YXNrOyB0aGlzIG5hbWUgY2FuIGJlIHByb3ZpZGVk",
+                "bytes": 99,
+                "encoding": "base64",
+                "sha256": "sha256:cea199f047a73e1665446d35f6ce70f5cbf2f132c9c95e6ae19acc61d758ada5"
+              },
+              "line_number": 333
+            },
+            {
+              "content": {
+                "base64": "ICAgICAgICAgICAgYXMgYSBzdHJpbmcgdGVtcGxhdGUgd2l0aCB0aGUgdGFzaydzIGtleXdvcmQgYXJndW1lbnRzIGFzIHZhcmlhYmxlcyw=",
+                "bytes": 80,
+                "encoding": "base64",
+                "sha256": "sha256:354bdadc668a1e4933730420d4697e1517706e64b78749deb5363be8b31e92da"
+              },
+              "line_number": 334
+            },
+            {
+              "content": {
+                "base64": "ICAgICAgICAgICAgb3IgYSBmdW5jdGlvbiB0aGF0IHJldHVybnMgYSBzdHJpbmcu",
+                "bytes": 48,
+                "encoding": "base64",
+                "sha256": "sha256:7ba976fb9354e7ab60bc7a9f8d192be2131f27e07b2e75d9355335615eec759e"
+              },
+              "line_number": 335
+            },
+            {
+              "content": {
+                "base64": "ICAgICAgICByZXRyaWVzOiBBbiBvcHRpb25hbCBudW1iZXIgb2YgdGltZXMgdG8gcmV0cnkgb24gdGFzayBydW4gZmFpbHVyZS4=",
+                "bytes": 74,
+                "encoding": "base64",
+                "sha256": "sha256:fa868161910765314e458bc99f76eed5764bd0f74da9ab029588568597e73a2f"
+              },
+              "line_number": 336
+            },
+            {
+              "content": {
+                "base64": "ICAgICAgICByZXRyeV9kZWxheV9zZWNvbmRzOiBPcHRpb25hbGx5IGNvbmZpZ3VyZXMgaG93IGxvbmcgdG8gd2FpdCBiZWZvcmUgcmV0cnlpbmcgdGhl",
+                "bytes": 87,
+                "encoding": "base64",
+                "sha256": "sha256:631b1c177626ff8b97a55a1a3a53075a8c3f7f9c523dcb0009f8d2f418813a91"
+              },
+              "line_number": 337
+            },
+            {
+              "content": {
+                "base64": "ICAgICAgICAgICAgdGFzayBhZnRlciBmYWlsdXJlLiBUaGlzIGlzIG9ubHkgYXBwbGljYWJsZSBpZiBgcmV0cmllc2AgaXMgbm9uemVyby4gVGhpcw==",
+                "bytes": 85,
+                "encoding": "base64",
+                "sha256": "sha256:581cd59531de2314a5af4e23b84ec4e70f2fb40694c14c570419260bd7408323"
+              },
+              "line_number": 338
+            },
+            {
+              "content": {
+                "base64": "ICAgICAgICAgICAgc2V0dGluZyBjYW4gZWl0aGVyIGJlIGEgbnVtYmVyIG9mIHNlY29uZHMsIGEgbGlzdCBvZiByZXRyeSBkZWxheXMsIG9yIGE=",
+                "bytes": 83,
+                "encoding": "base64",
+                "sha256": "sha256:6741c4a08369cde03f42d2a60d31a29d09b8697fe75f3de0943d73603bd7aacf"
+              },
+              "line_number": 339
+            },
+            {
+              "content": {
+                "base64": "ICAgICAgICAgICAgY2FsbGFibGUgdGhhdCwgZ2l2ZW4gdGhlIHRvdGFsIG51bWJlciBvZiByZXRyaWVzLCBnZW5lcmF0ZXMgYSBsaXN0IG9mIHJldHJ5",
+                "bytes": 87,
+                "encoding": "base64",
+                "sha256": "sha256:f6b8ccf889049594977440d0d6d2317f704804d368832e762748a430f955e22b"
+              },
+              "line_number": 340
+            },
+            {
+              "content": {
+                "base64": "ICAgICAgICAgICAgZGVsYXlzLiBJZiBhIG51bWJlciBvZiBzZWNvbmRzLCB0aGF0IGRlbGF5IHdpbGwgYmUgYXBwbGllZCB0byBhbGwgcmV0cmllcy4=",
+                "bytes": 86,
+                "encoding": "base64",
+                "sha256": "sha256:0db34096b8ad981e47bd1836f1aa95a1be92cd4e69c42d1fe6365f3ae4db6523"
+              },
+              "line_number": 341
+            },
+            {
+              "content": {
+                "base64": "ICAgICAgICAgICAgSWYgYSBsaXN0LCBlYWNoIHJldHJ5IHdpbGwgd2FpdCBmb3IgdGhlIGNvcnJlc3BvbmRpbmcgZGVsYXkgYmVmb3JlIHJldHJ5aW5nLg==",
+                "bytes": 88,
+                "encoding": "base64",
+                "sha256": "sha256:32be08dedbaae6913d4c7c78253c9d74873bd5592dd7f273e23e62ffbbf2d3b7"
+              },
+              "line_number": 342
+            },
+            {
+              "content": {
+                "base64": "ICAgICAgICAgICAgV2hlbiBwYXNzaW5nIGEgY2FsbGFibGUgb3IgYSBsaXN0LCB0aGUgbnVtYmVyIG9mIGNvbmZpZ3VyZWQgcmV0cnkgZGVsYXlz",
+                "bytes": 84,
+                "encoding": "base64",
+                "sha256": "sha256:1c86064d8e36a0497999678af090b058908ac07a5e7049e1e228bccbe7e3d8b2"
+              },
+              "line_number": 343
+            },
+            {
+              "content": {
+                "base64": "ICAgICAgICAgICAgY2Fubm90IGV4Y2VlZCA1MC4=",
+                "bytes": 29,
+                "encoding": "base64",
+                "sha256": "sha256:eebd81090e7a5d452d190db2d4b5df19dacb40f05661aecdaf21639e40c08b76"
+              },
+              "line_number": 344
+            },
+            {
+              "content": {
+                "base64": "ICAgICAgICByZXRyeV9qaXR0ZXJfZmFjdG9yOiBBbiBvcHRpb25hbCBmYWN0b3IgdGhhdCBkZWZpbmVzIHRoZSBmYWN0b3IgdG8gd2hpY2ggYSByZXRyeQ==",
+                "bytes": 88,
+                "encoding": "base64",
+                "sha256": "sha256:10f17c3143e0f861cb496630bfcef18df8940a657fb74ffbc0c5c695433107c8"
+              },
+              "line_number": 345
+            },
+            {
+              "content": {
+                "base64": "ICAgICAgICAgICAgY2FuIGJlIGppdHRlcmVkIGluIG9yZGVyIHRvIGF2b2lkIGEgInRodW5kZXJpbmcgaGVyZCIu",
+                "bytes": 66,
+                "encoding": "base64",
+                "sha256": "sha256:bed30e310e1ec23fcf8d1b1d305466037f803ea94d342ca1ef98863709472991"
+              },
+              "line_number": 346
+            },
+            {
+              "content": {
+                "base64": "ICAgICAgICBwZXJzaXN0X3Jlc3VsdDogQSB0b2dnbGUgaW5kaWNhdGluZyB3aGV0aGVyIHRoZSByZXN1bHQgb2YgdGhpcyB0YXNr",
+                "bytes": 75,
+                "encoding": "base64",
+                "sha256": "sha256:008dceb71614770b3e5967a3c5c75621b771b33c568dc46bd77c14d66044a964"
+              },
+              "line_number": 347
+            },
+            {
+              "content": {
+                "base64": "ICAgICAgICAgICAgc2hvdWxkIGJlIHBlcnNpc3RlZCB0byByZXN1bHQgc3RvcmFnZS4gRGVmYXVsdHMgdG8gYE5vbmVgLCB3aGljaA==",
+                "bytes": 76,
+                "encoding": "base64",
+                "sha256": "sha256:65532a3f1cff9da71c320d5194d29046212ee50f306dcfdf68892e8b4d63be4a"
+              },
+              "line_number": 348
+            },
+            {
+              "content": {
+                "base64": "ICAgICAgICAgICAgaW5kaWNhdGVzIHRoYXQgdGhlIGdsb2JhbCBkZWZhdWx0IHNob3VsZCBiZSB1c2VkICh3aGljaCBpcyBgVHJ1ZWAgYnk=",
+                "bytes": 80,
+                "encoding": "base64",
+                "sha256": "sha256:631c6ef710b7f520dfccf5ca148959e56d62e583f430c12f01473740fecedf9b"
+              },
+              "line_number": 349
+            },
+            {
+              "content": {
+                "base64": "ICAgICAgICAgICAgZGVmYXVsdCku",
+                "bytes": 21,
+                "encoding": "base64",
+                "sha256": "sha256:1b1d9d991fb3099e1ed8506821fe347a5f5ed767324847ea9dd0dbf15d0f973b"
+              },
+              "line_number": 350
+            },
+            {
+              "content": {
+                "base64": "ICAgICAgICByZXN1bHRfc3RvcmFnZTogQW4gb3B0aW9uYWwgYmxvY2sgdG8gdXNlIHRvIHBlcnNpc3QgdGhlIHJlc3VsdCBvZiB0aGlzIHRhc2su",
+                "bytes": 84,
+                "encoding": "base64",
+                "sha256": "sha256:18e79d60edb1e01960474fe30758ecfade8967e97647e226aaa3126ee71642e3"
+              },
+              "line_number": 351
+            },
+            {
+              "content": {
+                "base64": "ICAgICAgICAgICAgVGhpcyBjYW4gYmUgZWl0aGVyIGEgc2F2ZWQgYmxvY2sgaW5zdGFuY2Ugb3IgYSBzdHJpbmcgcmVmZXJlbmNlIChlLmcuLA==",
+                "bytes": 82,
+                "encoding": "base64",
+                "sha256": "sha256:0cbb25b809a07de02839ce3ee5fab1d14dd6e70fd97d94c1c58ee0678a8bea31"
+              },
+              "line_number": 352
+            },
+            {
+              "content": {
+                "base64": "ICAgICAgICAgICAgImxvY2FsLWZpbGUtc3lzdGVtL215LXN0b3JhZ2UiKS4gQmxvY2sgaW5zdGFuY2VzIG11c3QgaGF2ZSBgLnNhdmUoKWAgY2FsbGVk",
+                "bytes": 87,
+                "encoding": "base64",
+                "sha256": "sha256:c866dca34c0d875ac5190c95f60edee19e12d010e15473f3bd60ba7f2ba9e166"
+              },
+              "line_number": 353
+            },
+            {
+              "content": {
+                "base64": "ICAgICAgICAgICAgZmlyc3Qgc2luY2UgZGVjb3JhdG9ycyBleGVjdXRlIGF0IGltcG9ydCB0aW1lLiBTdHJpbmcgcmVmZXJlbmNlcyBhcmUgcmVzb2x2ZWQ=",
+                "bytes": 89,
+                "encoding": "base64",
+                "sha256": "sha256:9f3d6b7ee9209f980f4778970e450b659d32e6a3b06a2b026b399e17b4352f4a"
+              },
+              "line_number": 354
+            },
+            {
+              "content": {
+                "base64": "ICAgICAgICAgICAgYXQgcnVudGltZSBhbmQgcmVjb21tZW5kZWQgZm9yIHRlc3Rpbmcgc2NlbmFyaW9zLiBEZWZhdWx0cyB0byB0aGUgdmFsdWUgc2V0",
+                "bytes": 87,
+                "encoding": "base64",
+                "sha256": "sha256:d3c9fca4175683cbc9de3f30ac61b63f3e3dc377ad539d1cbc99c7658aa80115"
+              },
+              "line_number": 355
+            },
+            {
+              "content": {
+                "base64": "ICAgICAgICAgICAgaW4gdGhlIGZsb3cgdGhlIHRhc2sgaXMgY2FsbGVkIGluLg==",
+                "bytes": 46,
+                "encoding": "base64",
+                "sha256": "sha256:c25b7a3591228d429dfa23224c45f87e7078a94e2d96cb2d3f2db608d77948b0"
+              },
+              "line_number": 356
+            },
+            {
+              "content": {
+                "base64": "ICAgICAgICByZXN1bHRfc3RvcmFnZV9rZXk6IEFuIG9wdGlvbmFsIGtleSB0byBzdG9yZSB0aGUgcmVzdWx0IGluIHN0b3JhZ2UgYXQgd2hlbiBwZXJzaXN0ZWQu",
+                "bytes": 93,
+                "encoding": "base64",
+                "sha256": "sha256:4b0c18f6f3dfcc134e2c2b6b995ffe464e866e983fb1bc882c130f0b963d9ba7"
+              },
+              "line_number": 357
+            },
+            {
+              "content": {
+                "base64": "ICAgICAgICAgICAgRGVmYXVsdHMgdG8gYSB1bmlxdWUgaWRlbnRpZmllci4=",
+                "bytes": 44,
+                "encoding": "base64",
+                "sha256": "sha256:a955d333c8a9e77e02a15933c122867d0fc3f9a20f3fe0bd7db1f7511ae13e91"
+              },
+              "line_number": 358
+            },
+            {
+              "content": {
+                "base64": "ICAgICAgICByZXN1bHRfc2VyaWFsaXplcjogQW4gb3B0aW9uYWwgc2VyaWFsaXplciB0byB1c2UgdG8gc2VyaWFsaXplIHRoZSByZXN1bHQgb2YgdGhpcw==",
+                "bytes": 88,
+                "encoding": "base64",
+                "sha256": "sha256:316ecbcd8918725457986880baac91134a6dbffcd7b93a2d9af104eda1c7140a"
+              },
+              "line_number": 359
+            },
+            {
+              "content": {
+                "base64": "ICAgICAgICAgICAgdGFzayBmb3IgcGVyc2lzdGVuY2UuIERlZmF1bHRzIHRvIHRoZSB2YWx1ZSBzZXQgaW4gdGhlIGZsb3cgdGhlIHRhc2sgaXM=",
+                "bytes": 83,
+                "encoding": "base64",
+                "sha256": "sha256:e97a3a6ac340d70007a5d00c60bfbaf728cb1a0c70a008a410d1185409b90dfc"
+              },
+              "line_number": 360
+            },
+            {
+              "content": {
+                "base64": "ICAgICAgICAgICAgY2FsbGVkIGluLg==",
+                "bytes": 22,
+                "encoding": "base64",
+                "sha256": "sha256:5d42e41e7f4b1adc6ca706723e75b859d51916da132dd95f869652c8e4accd41"
+              },
+              "line_number": 361
+            },
+            {
+              "content": {
+                "base64": "ICAgICAgICB0aW1lb3V0X3NlY29uZHM6IEFuIG9wdGlvbmFsIG51bWJlciBvZiBzZWNvbmRzIGluZGljYXRpbmcgYSBtYXhpbXVtIHJ1bnRpbWUgZm9y",
+                "bytes": 87,
+                "encoding": "base64",
+                "sha256": "sha256:15d9a4b1cd28ad32a9be0ac1508cdb9d0180f37604b3a04ad9183390054ee73e"
+              },
+              "line_number": 362
+            },
+            {
+              "content": {
+                "base64": "ICAgICAgICAgICAgdGhlIHRhc2suIElmIHRoZSB0YXNrIGV4Y2VlZHMgdGhpcyBydW50aW1lLCBpdCB3aWxsIGJlIG1hcmtlZCBhcyBmYWlsZWQu",
+                "bytes": 84,
+                "encoding": "base64",
+                "sha256": "sha256:53e9f215b138191af4d4099909bd775a454fe62e7e675b2852755fe9f9800aa2"
+              },
+              "line_number": 363
+            },
+            {
+              "content": {
+                "base64": "ICAgICAgICBsb2dfcHJpbnRzOiBJZiBzZXQsIGBwcmludGAgc3RhdGVtZW50cyBpbiB0aGUgdGFzayB3aWxsIGJlIHJlZGlyZWN0ZWQgdG8gdGhl",
+                "bytes": 84,
+                "encoding": "base64",
+                "sha256": "sha256:8b66975445ade9203b420c77931ae6a4134d4ba3c5b87285c080c4403d9b09f2"
+              },
+              "line_number": 364
+            },
+            {
+              "content": {
+                "base64": "ICAgICAgICAgICAgUHJlZmVjdCBsb2dnZXIgZm9yIHRoZSB0YXNrIHJ1bi4gRGVmYXVsdHMgdG8gYE5vbmVgLCB3aGljaCBpbmRpY2F0ZXM=",
+                "bytes": 80,
+                "encoding": "base64",
+                "sha256": "sha256:80b6688bb7aa90242bcb2a92be65626e60aaaf7cd7379a57e20707f4b959805b"
+              },
+              "line_number": 365
+            },
+            {
+              "content": {
+                "base64": "ICAgICAgICAgICAgdGhhdCB0aGUgdmFsdWUgZnJvbSB0aGUgZmxvdyBzaG91bGQgYmUgdXNlZC4=",
+                "bytes": 56,
+                "encoding": "base64",
+                "sha256": "sha256:c65578158847777430a278de41d8d95ae6c2db2b26158c48d09f4cadf3ef531b"
+              },
+              "line_number": 366
+            },
+            {
+              "content": {
+                "base64": "ICAgICAgICByZWZyZXNoX2NhY2hlOiBJZiBzZXQsIGNhY2hlZCByZXN1bHRzIGZvciB0aGUgY2FjaGUga2V5IGFyZSBub3QgdXNlZC4=",
+                "bytes": 77,
+                "encoding": "base64",
+                "sha256": "sha256:34376ebbac396cfbd9ca04fa0c9e12be71218e8f178d96e899321f318413a69d"
+              },
+              "line_number": 367
+            },
+            {
+              "content": {
+                "base64": "ICAgICAgICAgICAgRGVmYXVsdHMgdG8gYE5vbmVgLCB3aGljaCBpbmRpY2F0ZXMgdGhhdCBhIGNhY2hlZCByZXN1bHQgZnJvbSBhIHByZXZpb3Vz",
+                "bytes": 84,
+                "encoding": "base64",
+                "sha256": "sha256:5444de5e056a2d44355de61d51fe15ced50dc71d0d0c644a9e3e36b9415020e7"
+              },
+              "line_number": 368
+            },
+            {
+              "content": {
+                "base64": "ICAgICAgICAgICAgZXhlY3V0aW9uIHdpdGggbWF0Y2hpbmcgY2FjaGUga2V5IGlzIHVzZWQu",
+                "bytes": 54,
+                "encoding": "base64",
+                "sha256": "sha256:5069922d6a61e91c95d48eadc30c985d54c319e0af3091904aec5c2dbdc1701b"
+              },
+              "line_number": 369
+            },
+            {
+              "content": {
+                "base64": "ICAgICAgICBvbl9mYWlsdXJlOiBBbiBvcHRpb25hbCBsaXN0IG9mIGNhbGxhYmxlcyB0byBydW4gd2hlbiB0aGUgdGFzayBlbnRlcnMgYSBmYWlsZWQgc3RhdGUu",
+                "bytes": 93,
+                "encoding": "base64",
+                "sha256": "sha256:6b66d6e652945512e1df3870df72aeafbf7bc80671e55274320313b8d746f762"
+              },
+              "line_number": 370
+            },
+            {
+              "content": {
+                "base64": "ICAgICAgICBvbl9jb21wbGV0aW9uOiBBbiBvcHRpb25hbCBsaXN0IG9mIGNhbGxhYmxlcyB0byBydW4gd2hlbiB0aGUgdGFzayBlbnRlcnMgYSBjb21wbGV0ZWQgc3RhdGUu",
+                "bytes": 99,
+                "encoding": "base64",
+                "sha256": "sha256:d078e5972f04c08625eff08ad163a4e54795d5d52830438e056f2fd6e9fd263d"
+              },
+              "line_number": 371
+            },
+            {
+              "content": {
+                "base64": "ICAgICAgICBvbl9jb21taXQ6IEFuIG9wdGlvbmFsIGxpc3Qgb2YgY2FsbGFibGVzIHRvIHJ1biB3aGVuIHRoZSB0YXNrJ3MgaWRlbXBvdGVuY3kgcmVjb3JkIGlzIGNvbW1pdHRlZC4=",
+                "bytes": 104,
+                "encoding": "base64",
+                "sha256": "sha256:727b804aac782bf0d6d3572acc4a192dafddfa32f89218b541460f6722fec94b"
+              },
+              "line_number": 372
+            },
+            {
+              "content": {
+                "base64": "ICAgICAgICBvbl9yb2xsYmFjazogQW4gb3B0aW9uYWwgbGlzdCBvZiBjYWxsYWJsZXMgdG8gcnVuIHdoZW4gdGhlIHRhc2sgcm9sbHMgYmFjay4=",
+                "bytes": 83,
+                "encoding": "base64",
+                "sha256": "sha256:be22fcf34e92b2c16c7e4bacd4849f461af552638388c36b56227bd4ced5b11b"
+              },
+              "line_number": 373
+            },
+            {
+              "content": {
+                "base64": "ICAgICAgICByZXRyeV9jb25kaXRpb25fZm46IEFuIG9wdGlvbmFsIGNhbGxhYmxlIHJ1biB3aGVuIGEgdGFzayBydW4gcmV0dXJucyBhIEZhaWxlZCBzdGF0ZS4gU2hvdWxk",
+                "bytes": 99,
+                "encoding": "base64",
+                "sha256": "sha256:c3676b33bf983d4d400c5337fa4169e9d5e05f602285aa636c9274ff65f23b63"
+              },
+              "line_number": 374
+            },
+            {
+              "content": {
+                "base64": "ICAgICAgICAgICAgcmV0dXJuIGBUcnVlYCBpZiB0aGUgdGFzayBzaG91bGQgY29udGludWUgdG8gaXRzIHJldHJ5IHBvbGljeSAoZS5nLiBgcmV0cmllcz0zYCksIGFuZCBgRmFsc2VgIGlmIHRoZSB0YXNr",
+                "bytes": 117,
+                "encoding": "base64",
+                "sha256": "sha256:ba54df32f077a65f89eac8b1b4ae720b27bbb94fd8c030368a53d60f41e19c74"
+              },
+              "line_number": 375
+            },
+            {
+              "content": {
+                "base64": "ICAgICAgICAgICAgc2hvdWxkIGVuZCBhcyBmYWlsZWQuIERlZmF1bHRzIHRvIGBOb25lYCwgaW5kaWNhdGluZyB0aGUgdGFzayBzaG91bGQgYWx3YXlzIGNvbnRpbnVl",
+                "bytes": 96,
+                "encoding": "base64",
+                "sha256": "sha256:75b988d53bfebc67fa6878233cad5db03f65e2f2579a957811ef8dc2894337da"
+              },
+              "line_number": 376
+            },
+            {
+              "content": {
+                "base64": "ICAgICAgICAgICAgdG8gaXRzIHJldHJ5IHBvbGljeS4=",
+                "bytes": 32,
+                "encoding": "base64",
+                "sha256": "sha256:0fe671a7e51a1c3e5a627d1e45b95d0526f2c6ee3321482f34d9ca90a17acd86"
+              },
+              "line_number": 377
+            },
+            {
+              "content": {
+                "base64": "ICAgICAgICB2aXpfcmV0dXJuX3ZhbHVlOiBBbiBvcHRpb25hbCB2YWx1ZSB0byByZXR1cm4gd2hlbiB0aGUgdGFzayBkZXBlbmRlbmN5IHRyZWUgaXMgdmlzdWFsaXplZC4=",
+                "bytes": 98,
+                "encoding": "base64",
+                "sha256": "sha256:41253065134e1b745861de5b293d0ec086fa6c7514f5d8927faaab6a927713bd"
+              },
+              "line_number": 378
+            },
+            {
+              "content": {
+                "base64": "ICAgICAgICBhc3NldF9kZXBzOiBBbiBvcHRpb25hbCBsaXN0IG9mIHVwc3RyZWFtIGFzc2V0cyB0aGF0IHRoaXMgdGFzayBkZXBlbmRzIG9uLg==",
+                "bytes": 82,
+                "encoding": "base64",
+                "sha256": "sha256:50357fcef9240aeb16f833b0bd9b65b3dc60faddd1f7989df3419936204c628e"
+              },
+              "line_number": 379
+            },
+            {
+              "content": {
+                "base64": "ICAgICIiIg==",
+                "bytes": 7,
+                "encoding": "base64",
+                "sha256": "sha256:c7fecba7421afe7775a8a6a72a82f3c4f87b557c6f9786e4b342af9130361c73"
+              },
+              "line_number": 380
+            },
+            {
+              "content": {
+                "base64": "",
+                "bytes": 0,
+                "encoding": "base64",
+                "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+              },
+              "line_number": 381
+            },
+            {
+              "content": {
+                "base64": "ICAgICMgTk9URTogVGhlc2UgcGFyYW1ldGVycyAodHlwZXMsIGRlZmF1bHRzLCBhbmQgZG9jc3RyaW5ncykgc2hvdWxkIGJlIGR1cGxpY2F0ZWQ=",
+                "bytes": 83,
+                "encoding": "base64",
+                "sha256": "sha256:b85073af8003ac37f7d4923d17429731948fd9fbaafacd9c0360d7be22259bf9"
+              },
+              "line_number": 382
+            },
+            {
+              "content": {
+                "base64": "ICAgICMgICAgICAgZXhhY3RseSBpbiB0aGUgQHRhc2sgZGVjb3JhdG9y",
+                "bytes": 42,
+                "encoding": "base64",
+                "sha256": "sha256:2e7b2fe033f99a5b9514c25f95a37568ed78969845f09bcd71af13555e516176"
+              },
+              "line_number": 383
+            }
+          ],
+          "observation_id": "investigation-source-observation:1bbbba51000fb63886ea19a66e9cea0cca827eeb1e6077b79bc40e849cc0f4bb",
+          "path": "src/prefect/tasks.py",
+          "repository_observation_id": "git-observation:735c214acf83e7b08e03886c558275f0aaa2c3d0d03d618be9e974edf4b52435",
+          "source_blob_evidence_id": "git-blob-evidence:b4a862cdf4a53f57082df701eb4f34f5eeda4689d9e2e9fbd4a73c0e5c438c86",
+          "source_object_id": "d7463b54a4366153ab1c9e9448c3d6695e2f13db",
+          "start_line": 307
+        },
+        "operation": {
+          "end_line": 383,
+          "path": "src/prefect/tasks.py",
+          "start_line": 307,
+          "type": "READ_SOURCE"
+        },
+        "ordinal": 1,
+        "step_id": "investigation-step:1298a8b4444f1b189f49059ca488523d16deae294a036b9772541daa19d841d1",
+        "step_key": "read_task_class_docstring"
+      },
+      {
+        "canonical_evidence_record": {
+          "canonical_payload": "{\"commit_sha\":\"2338265f658845a9bef8ce7baf07519b89846dc8\",\"end_line\":204,\"line_count\":60,\"lines\":[{\"content_base64\":\"Y2xhc3MgRmxvdyhHZW5lcmljW1AsIFJdKTo=\",\"line_number\":145},{\"content_base64\":\"ICAgICIiIg==\",\"line_number\":146},{\"content_base64\":\"ICAgIEEgUHJlZmVjdCB3b3JrZmxvdyBkZWZpbml0aW9uLg==\",\"line_number\":147},{\"content_base64\":\"\",\"line_number\":148},{\"content_base64\":\"ICAgIFdyYXBzIGEgZnVuY3Rpb24gd2l0aCBhbiBlbnRyeXBvaW50IHRvIHRoZSBQcmVmZWN0IGVuZ2luZS4gVG8gcHJlc2VydmUgdGhlIGlucHV0\",\"line_number\":149},{\"content_base64\":\"ICAgIGFuZCBvdXRwdXQgdHlwZXMsIHdlIHVzZSB0aGUgZ2VuZXJpYyB0eXBlIHZhcmlhYmxlcyBgUGAgYW5kIGBSYCBmb3IgIlBhcmFtZXRlcnMiIGFuZA==\",\"line_number\":150},{\"content_base64\":\"ICAgICJSZXR1cm5zIiByZXNwZWN0aXZlbHku\",\"line_number\":151},{\"content_base64\":\"\",\"line_number\":152},{\"content_base64\":\"ICAgIEFyZ3M6\",\"line_number\":153},{\"content_base64\":\"ICAgICAgICBmbjogVGhlIGZ1bmN0aW9uIGRlZmluaW5nIHRoZSB3b3JrZmxvdy4=\",\"line_number\":154},{\"content_base64\":\"ICAgICAgICBuYW1lOiBBbiBvcHRpb25hbCBuYW1lIGZvciB0aGUgZmxvdzsgaWYgbm90IHByb3ZpZGVkLCB0aGUgbmFtZSB3aWxsIGJlIGluZmVycmVk\",\"line_number\":155},{\"content_base64\":\"ICAgICAgICAgICAgZnJvbSB0aGUgZ2l2ZW4gZnVuY3Rpb24u\",\"line_number\":156},{\"content_base64\":\"ICAgICAgICB2ZXJzaW9uOiBBbiBvcHRpb25hbCB2ZXJzaW9uIHN0cmluZyBmb3IgdGhlIGZsb3c7IGlmIG5vdCBwcm92aWRlZCwgd2Ugd2lsbA==\",\"line_number\":157},{\"content_base64\":\"ICAgICAgICAgICAgYXR0ZW1wdCB0byBjcmVhdGUgYSB2ZXJzaW9uIHN0cmluZyBhcyBhIGhhc2ggb2YgdGhlIGZpbGUgY29udGFpbmluZyB0aGU=\",\"line_number\":158},{\"content_base64\":\"ICAgICAgICAgICAgd3JhcHBlZCBmdW5jdGlvbjsgaWYgdGhlIGZpbGUgY2Fubm90IGJlIGxvY2F0ZWQsIHRoZSB2ZXJzaW9uIHdpbGwgYmUgbnVsbC4=\",\"line_number\":159},{\"content_base64\":\"ICAgICAgICBmbG93X3J1bl9uYW1lOiBBbiBvcHRpb25hbCBuYW1lIHRvIGRpc3Rpbmd1aXNoIHJ1bnMgb2YgdGhpcyBmbG93OyB0aGlzIG5hbWUgY2Fu\",\"line_number\":160},{\"content_base64\":\"ICAgICAgICAgICAgYmUgcHJvdmlkZWQgYXMgYSBzdHJpbmcgdGVtcGxhdGUgd2l0aCB0aGUgZmxvdydzIHBhcmFtZXRlcnMgYXMgdmFyaWFibGVzLA==\",\"line_number\":161},{\"content_base64\":\"ICAgICAgICAgICAgb3IgYSBmdW5jdGlvbiB0aGF0IHJldHVybnMgYSBzdHJpbmcu\",\"line_number\":162},{\"content_base64\":\"ICAgICAgICB0YXNrX3J1bm5lcjogQW4gb3B0aW9uYWwgdGFzayBydW5uZXIgdG8gdXNlIGZvciB0YXNrIGV4ZWN1dGlvbiB3aXRoaW4gdGhlIGZsb3c7\",\"line_number\":163},{\"content_base64\":\"ICAgICAgICAgICAgaWYgbm90IHByb3ZpZGVkLCBhIGBUaHJlYWRQb29sVGFza1J1bm5lcmAgd2lsbCBiZSB1c2VkLg==\",\"line_number\":164},{\"content_base64\":\"ICAgICAgICBkZXNjcmlwdGlvbjogQW4gb3B0aW9uYWwgc3RyaW5nIGRlc2NyaXB0aW9uIGZvciB0aGUgZmxvdzsgaWYgbm90IHByb3ZpZGVkLCB0aGU=\",\"line_number\":165},{\"content_base64\":\"ICAgICAgICAgICAgZGVzY3JpcHRpb24gd2lsbCBiZSBwdWxsZWQgZnJvbSB0aGUgZG9jc3RyaW5nIGZvciB0aGUgZGVjb3JhdGVkIGZ1bmN0aW9uLg==\",\"line_number\":166},{\"content_base64\":\"ICAgICAgICB0aW1lb3V0X3NlY29uZHM6IEFuIG9wdGlvbmFsIG51bWJlciBvZiBzZWNvbmRzIGluZGljYXRpbmcgYSBtYXhpbXVtIHJ1bnRpbWUgZm9y\",\"line_number\":167},{\"content_base64\":\"ICAgICAgICAgICAgdGhlIGZsb3cuIElmIHRoZSBmbG93IGV4Y2VlZHMgdGhpcyBydW50aW1lLCBpdCB3aWxsIGJlIG1hcmtlZCBhcyBmYWlsZWQu\",\"line_number\":168},{\"content_base64\":\"ICAgICAgICAgICAgRmxvdyBleGVjdXRpb24gbWF5IGNvbnRpbnVlIHVudGlsIHRoZSBuZXh0IHRhc2sgaXMgY2FsbGVkLg==\",\"line_number\":169},{\"content_base64\":\"ICAgICAgICB2YWxpZGF0ZV9wYXJhbWV0ZXJzOiBCeSBkZWZhdWx0LCBwYXJhbWV0ZXJzIHBhc3NlZCB0byBmbG93cyBhcmUgdmFsaWRhdGVkIGJ5\",\"line_number\":170},{\"content_base64\":\"ICAgICAgICAgICAgUHlkYW50aWMuIFRoaXMgd2lsbCBjaGVjayB0aGF0IGlucHV0IHZhbHVlcyBjb25mb3JtIHRvIHRoZSBhbm5vdGF0ZWQgdHlwZXM=\",\"line_number\":171},{\"content_base64\":\"ICAgICAgICAgICAgb24gdGhlIGZ1bmN0aW9uLiBXaGVyZSBwb3NzaWJsZSwgdmFsdWVzIHdpbGwgYmUgY29lcmNlZCBpbnRvIHRoZSBjb3JyZWN0\",\"line_number\":172},{\"content_base64\":\"ICAgICAgICAgICAgdHlwZTsgZm9yIGV4YW1wbGUsIGlmIGEgcGFyYW1ldGVyIGlzIGRlZmluZWQgYXMgYHg6IGludGAgYW5kICI1IiBpcyBwYXNzZWQs\",\"line_number\":173},{\"content_base64\":\"ICAgICAgICAgICAgaXQgd2lsbCBiZSByZXNvbHZlZCB0byBgNWAuIElmIHNldCB0byBgRmFsc2VgLCBubyB2YWxpZGF0aW9uIHdpbGwgYmU=\",\"line_number\":174},{\"content_base64\":\"ICAgICAgICAgICAgcGVyZm9ybWVkIG9uIGZsb3cgcGFyYW1ldGVycy4=\",\"line_number\":175},{\"content_base64\":\"ICAgICAgICByZXRyaWVzOiBBbiBvcHRpb25hbCBudW1iZXIgb2YgdGltZXMgdG8gcmV0cnkgb24gZmxvdyBydW4gZmFpbHVyZS4=\",\"line_number\":176},{\"content_base64\":\"ICAgICAgICByZXRyeV9kZWxheV9zZWNvbmRzOiBBbiBvcHRpb25hbCBudW1iZXIgb2Ygc2Vjb25kcyB0byB3YWl0IGJlZm9yZSByZXRyeWluZyB0aGU=\",\"line_number\":177},{\"content_base64\":\"ICAgICAgICAgICAgZmxvdyBhZnRlciBmYWlsdXJlLiBUaGlzIGlzIG9ubHkgYXBwbGljYWJsZSBpZiBgcmV0cmllc2AgaXMgbm9uemVyby4=\",\"line_number\":178},{\"content_base64\":\"ICAgICAgICBwZXJzaXN0X3Jlc3VsdDogQW4gb3B0aW9uYWwgdG9nZ2xlIGluZGljYXRpbmcgd2hldGhlciB0aGUgcmVzdWx0IG9mIHRoaXMgZmxvdw==\",\"line_number\":179},{\"content_base64\":\"ICAgICAgICAgICAgc2hvdWxkIGJlIHBlcnNpc3RlZCB0byByZXN1bHQgc3RvcmFnZS4gRGVmYXVsdHMgdG8gYE5vbmVgLCB3aGljaCBpbmRpY2F0ZXM=\",\"line_number\":180},{\"content_base64\":\"ICAgICAgICAgICAgdGhhdCBQcmVmZWN0IHNob3VsZCBjaG9vc2Ugd2hldGhlciB0aGUgcmVzdWx0IHNob3VsZCBiZSBwZXJzaXN0ZWQgZGVwZW5kaW5nIG9u\",\"line_number\":181},{\"content_base64\":\"ICAgICAgICAgICAgdGhlIGZlYXR1cmVzIGJlaW5nIHVzZWQu\",\"line_number\":182},{\"content_base64\":\"ICAgICAgICByZXN1bHRfc3RvcmFnZTogQW4gb3B0aW9uYWwgYmxvY2sgdG8gdXNlIHRvIHBlcnNpc3QgdGhlIHJlc3VsdCBvZiB0aGlzIGZsb3cu\",\"line_number\":183},{\"content_base64\":\"ICAgICAgICAgICAgVGhpcyBjYW4gYmUgZWl0aGVyIGEgc2F2ZWQgYmxvY2sgaW5zdGFuY2Ugb3IgYSBzdHJpbmcgcmVmZXJlbmNlIChlLmcuLA==\",\"line_number\":184},{\"content_base64\":\"ICAgICAgICAgICAgImxvY2FsLWZpbGUtc3lzdGVtL215LXN0b3JhZ2UiKS4gQmxvY2sgaW5zdGFuY2VzIG11c3QgaGF2ZSBgLnNhdmUoKWAgY2FsbGVk\",\"line_number\":185},{\"content_base64\":\"ICAgICAgICAgICAgZmlyc3Qgc2luY2UgZGVjb3JhdG9ycyBleGVjdXRlIGF0IGltcG9ydCB0aW1lLiBTdHJpbmcgcmVmZXJlbmNlcyBhcmUgcmVzb2x2ZWQ=\",\"line_number\":186},{\"content_base64\":\"ICAgICAgICAgICAgYXQgcnVudGltZSBhbmQgcmVjb21tZW5kZWQgZm9yIHRlc3Rpbmcgc2NlbmFyaW9zLiBUaGlzIHZhbHVlIHdpbGwgYmUgdXNlZCBhcw==\",\"line_number\":187},{\"content_base64\":\"ICAgICAgICAgICAgdGhlIGRlZmF1bHQgZm9yIGFueSB0YXNrcyBpbiB0aGlzIGZsb3cuIElmIG5vdCBwcm92aWRlZCwgdGhlIGxvY2FsIGZpbGUgc3lzdGVt\",\"line_number\":188},{\"content_base64\":\"ICAgICAgICAgICAgd2lsbCBiZSB1c2VkIHVubGVzcyBjYWxsZWQgYXMgYSBzdWJmbG93LCBhdCB3aGljaCBwb2ludCB0aGUgZGVmYXVsdCB3aWxsIGJl\",\"line_number\":189},{\"content_base64\":\"ICAgICAgICAgICAgbG9hZGVkIGZyb20gdGhlIHBhcmVudCBmbG93Lg==\",\"line_number\":190},{\"content_base64\":\"ICAgICAgICByZXN1bHRfc2VyaWFsaXplcjogQW4gb3B0aW9uYWwgc2VyaWFsaXplciB0byB1c2UgdG8gc2VyaWFsaXplIHRoZSByZXN1bHQgb2YgdGhpcw==\",\"line_number\":191},{\"content_base64\":\"ICAgICAgICAgICAgZmxvdyBmb3IgcGVyc2lzdGVuY2UuIFRoaXMgdmFsdWUgd2lsbCBiZSB1c2VkIGFzIHRoZSBkZWZhdWx0IGZvciBhbnkgdGFza3M=\",\"line_number\":192},{\"content_base64\":\"ICAgICAgICAgICAgaW4gdGhpcyBmbG93LiBJZiBub3QgcHJvdmlkZWQsIHRoZSB2YWx1ZSBvZiBgUFJFRkVDVF9SRVNVTFRTX0RFRkFVTFRfU0VSSUFMSVpFUmA=\",\"line_number\":193},{\"content_base64\":\"ICAgICAgICAgICAgd2lsbCBiZSB1c2VkIHVubGVzcyBjYWxsZWQgYXMgYSBzdWJmbG93LCBhdCB3aGljaCBwb2ludCB0aGUgZGVmYXVsdCB3aWxsIGJl\",\"line_number\":194},{\"content_base64\":\"ICAgICAgICAgICAgbG9hZGVkIGZyb20gdGhlIHBhcmVudCBmbG93Lg==\",\"line_number\":195},{\"content_base64\":\"ICAgICAgICBvbl9mYWlsdXJlOiBBbiBvcHRpb25hbCBsaXN0IG9mIGNhbGxhYmxlcyB0byBydW4gd2hlbiB0aGUgZmxvdyBlbnRlcnMgYSBmYWlsZWQgc3RhdGUu\",\"line_number\":196},{\"content_base64\":\"ICAgICAgICBvbl9jb21wbGV0aW9uOiBBbiBvcHRpb25hbCBsaXN0IG9mIGNhbGxhYmxlcyB0byBydW4gd2hlbiB0aGUgZmxvdyBlbnRlcnMgYSBjb21wbGV0ZWQgc3RhdGUu\",\"line_number\":197},{\"content_base64\":\"ICAgICAgICBvbl9jYW5jZWxsYXRpb246IEFuIG9wdGlvbmFsIGxpc3Qgb2YgY2FsbGFibGVzIHRvIHJ1biB3aGVuIHRoZSBmbG93IGVudGVycyBhIGNhbmNlbGxpbmcgc3RhdGUu\",\"line_number\":198},{\"content_base64\":\"ICAgICAgICBvbl9jcmFzaGVkOiBBbiBvcHRpb25hbCBsaXN0IG9mIGNhbGxhYmxlcyB0byBydW4gd2hlbiB0aGUgZmxvdyBlbnRlcnMgYSBjcmFzaGVkIHN0YXRlLg==\",\"line_number\":199},{\"content_base64\":\"ICAgICAgICBvbl9ydW5uaW5nOiBBbiBvcHRpb25hbCBsaXN0IG9mIGNhbGxhYmxlcyB0byBydW4gd2hlbiB0aGUgZmxvdyBlbnRlcnMgYSBydW5uaW5nIHN0YXRlLg==\",\"line_number\":200},{\"content_base64\":\"ICAgICIiIg==\",\"line_number\":201},{\"content_base64\":\"\",\"line_number\":202},{\"content_base64\":\"ICAgICMgTk9URTogVGhlc2UgcGFyYW1ldGVycyAodHlwZXMsIGRlZmF1bHRzLCBhbmQgZG9jc3RyaW5ncykgc2hvdWxkIGJlIGR1cGxpY2F0ZWQ=\",\"line_number\":203},{\"content_base64\":\"ICAgICMgICAgICAgZXhhY3RseSBpbiB0aGUgQGZsb3cgZGVjb3JhdG9y\",\"line_number\":204}],\"observation_id\":\"investigation-source-observation:d6a91a2dc5d8c5f67e09a85543403ad2654b7eb61f2894934bf104097522fce6\",\"operation_kind\":\"READ_SOURCE\",\"path\":\"src/prefect/flows.py\",\"repository_observation_id\":\"git-observation:735c214acf83e7b08e03886c558275f0aaa2c3d0d03d618be9e974edf4b52435\",\"source_blob_evidence_id\":\"git-blob-evidence:b7a8b0aba5c15735de2e05440b98f6d8b2e4442518a4128d8020f6526da82c41\",\"source_object_id\":\"2f48010b6ad93f87f5889526dcdeadb229aac324\",\"start_line\":145}",
+          "canonical_payload_bytes": 8557,
+          "canonical_payload_sha256": "sha256:91646352879067e16208ac4273f1f9d4a02ff848519af9d8143e6a2f2d60e1a6",
+          "evidence_id": "investigation-source-observation:d6a91a2dc5d8c5f67e09a85543403ad2654b7eb61f2894934bf104097522fce6",
+          "evidence_kind": "INVESTIGATION_SOURCE_OBSERVATION"
+        },
+        "observation": {
+          "commit_sha": "2338265f658845a9bef8ce7baf07519b89846dc8",
+          "end_line": 204,
+          "line_count": 60,
+          "lines": [
+            {
+              "content": {
+                "base64": "Y2xhc3MgRmxvdyhHZW5lcmljW1AsIFJdKTo=",
+                "bytes": 26,
+                "encoding": "base64",
+                "sha256": "sha256:7dcd9f610225882259e76b171299f7bdceba148d402fc0b74fb9d2bd3f3ff7c1"
+              },
+              "line_number": 145
+            },
+            {
+              "content": {
+                "base64": "ICAgICIiIg==",
+                "bytes": 7,
+                "encoding": "base64",
+                "sha256": "sha256:c7fecba7421afe7775a8a6a72a82f3c4f87b557c6f9786e4b342af9130361c73"
+              },
+              "line_number": 146
+            },
+            {
+              "content": {
+                "base64": "ICAgIEEgUHJlZmVjdCB3b3JrZmxvdyBkZWZpbml0aW9uLg==",
+                "bytes": 34,
+                "encoding": "base64",
+                "sha256": "sha256:7f530de571fae8541a688a614e2dd7b7e98f4a8fb252832a7409cb41aa072b69"
+              },
+              "line_number": 147
+            },
+            {
+              "content": {
+                "base64": "",
+                "bytes": 0,
+                "encoding": "base64",
+                "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+              },
+              "line_number": 148
+            },
+            {
+              "content": {
+                "base64": "ICAgIFdyYXBzIGEgZnVuY3Rpb24gd2l0aCBhbiBlbnRyeXBvaW50IHRvIHRoZSBQcmVmZWN0IGVuZ2luZS4gVG8gcHJlc2VydmUgdGhlIGlucHV0",
+                "bytes": 84,
+                "encoding": "base64",
+                "sha256": "sha256:579d435a0b39585053a14dae397f0e6aad750e1f68bc37e496c383e503dacad1"
+              },
+              "line_number": 149
+            },
+            {
+              "content": {
+                "base64": "ICAgIGFuZCBvdXRwdXQgdHlwZXMsIHdlIHVzZSB0aGUgZ2VuZXJpYyB0eXBlIHZhcmlhYmxlcyBgUGAgYW5kIGBSYCBmb3IgIlBhcmFtZXRlcnMiIGFuZA==",
+                "bytes": 88,
+                "encoding": "base64",
+                "sha256": "sha256:819407b5f0fa4ab93272d2ee8d352153c443730aa156ae01bd95b2f3d9d5a506"
+              },
+              "line_number": 150
+            },
+            {
+              "content": {
+                "base64": "ICAgICJSZXR1cm5zIiByZXNwZWN0aXZlbHku",
+                "bytes": 27,
+                "encoding": "base64",
+                "sha256": "sha256:9350afe3229aefc3847202754760d752b5469318abd0e07a9612b638c6959d85"
+              },
+              "line_number": 151
+            },
+            {
+              "content": {
+                "base64": "",
+                "bytes": 0,
+                "encoding": "base64",
+                "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+              },
+              "line_number": 152
+            },
+            {
+              "content": {
+                "base64": "ICAgIEFyZ3M6",
+                "bytes": 9,
+                "encoding": "base64",
+                "sha256": "sha256:237bc5c81bfb5b2d6c4ecc4000313cb81bcc6e47a23aa2a66801f44f8cfd3d4f"
+              },
+              "line_number": 153
+            },
+            {
+              "content": {
+                "base64": "ICAgICAgICBmbjogVGhlIGZ1bmN0aW9uIGRlZmluaW5nIHRoZSB3b3JrZmxvdy4=",
+                "bytes": 47,
+                "encoding": "base64",
+                "sha256": "sha256:d5d3f642dd29e8e5f9596aa34028fd0cfa7c7dce3bab9bb8c5f43e6cfb8f0ff4"
+              },
+              "line_number": 154
+            },
+            {
+              "content": {
+                "base64": "ICAgICAgICBuYW1lOiBBbiBvcHRpb25hbCBuYW1lIGZvciB0aGUgZmxvdzsgaWYgbm90IHByb3ZpZGVkLCB0aGUgbmFtZSB3aWxsIGJlIGluZmVycmVk",
+                "bytes": 87,
+                "encoding": "base64",
+                "sha256": "sha256:8c4e09f7d9fae8578e07e0c071fa543b641bf2a3e3a6c3af0c2765e37a94bf07"
+              },
+              "line_number": 155
+            },
+            {
+              "content": {
+                "base64": "ICAgICAgICAgICAgZnJvbSB0aGUgZ2l2ZW4gZnVuY3Rpb24u",
+                "bytes": 36,
+                "encoding": "base64",
+                "sha256": "sha256:3dbb7ce9a9fe7d1e674b2ea29d087e0bcd5c3867371c6896d26ba3355f0b111c"
+              },
+              "line_number": 156
+            },
+            {
+              "content": {
+                "base64": "ICAgICAgICB2ZXJzaW9uOiBBbiBvcHRpb25hbCB2ZXJzaW9uIHN0cmluZyBmb3IgdGhlIGZsb3c7IGlmIG5vdCBwcm92aWRlZCwgd2Ugd2lsbA==",
+                "bytes": 82,
+                "encoding": "base64",
+                "sha256": "sha256:e1158f5f08a5e41ab9aeb0cf7cda71766ec2d212d6496d6c652f93a823367e6f"
+              },
+              "line_number": 157
+            },
+            {
+              "content": {
+                "base64": "ICAgICAgICAgICAgYXR0ZW1wdCB0byBjcmVhdGUgYSB2ZXJzaW9uIHN0cmluZyBhcyBhIGhhc2ggb2YgdGhlIGZpbGUgY29udGFpbmluZyB0aGU=",
+                "bytes": 83,
+                "encoding": "base64",
+                "sha256": "sha256:715eada5de2edabf21fb730c4fcf9d959c74f957c51977a4fcb564150f435e17"
+              },
+              "line_number": 158
+            },
+            {
+              "content": {
+                "base64": "ICAgICAgICAgICAgd3JhcHBlZCBmdW5jdGlvbjsgaWYgdGhlIGZpbGUgY2Fubm90IGJlIGxvY2F0ZWQsIHRoZSB2ZXJzaW9uIHdpbGwgYmUgbnVsbC4=",
+                "bytes": 86,
+                "encoding": "base64",
+                "sha256": "sha256:4ccdd78b4d59d051e2650e37239fa8243397cd6acb2d0347b9e41a190458d270"
+              },
+              "line_number": 159
+            },
+            {
+              "content": {
+                "base64": "ICAgICAgICBmbG93X3J1bl9uYW1lOiBBbiBvcHRpb25hbCBuYW1lIHRvIGRpc3Rpbmd1aXNoIHJ1bnMgb2YgdGhpcyBmbG93OyB0aGlzIG5hbWUgY2Fu",
+                "bytes": 87,
+                "encoding": "base64",
+                "sha256": "sha256:417fa165ac29525c1a1a0efdbf5a6980e6e34725e5cac1b887fd7fce248c8104"
+              },
+              "line_number": 160
+            },
+            {
+              "content": {
+                "base64": "ICAgICAgICAgICAgYmUgcHJvdmlkZWQgYXMgYSBzdHJpbmcgdGVtcGxhdGUgd2l0aCB0aGUgZmxvdydzIHBhcmFtZXRlcnMgYXMgdmFyaWFibGVzLA==",
+                "bytes": 85,
+                "encoding": "base64",
+                "sha256": "sha256:57131955f60070fcd170680ef1d840036446db9318a67f3a90c1a7f730eb7e22"
+              },
+              "line_number": 161
+            },
+            {
+              "content": {
+                "base64": "ICAgICAgICAgICAgb3IgYSBmdW5jdGlvbiB0aGF0IHJldHVybnMgYSBzdHJpbmcu",
+                "bytes": 48,
+                "encoding": "base64",
+                "sha256": "sha256:7ba976fb9354e7ab60bc7a9f8d192be2131f27e07b2e75d9355335615eec759e"
+              },
+              "line_number": 162
+            },
+            {
+              "content": {
+                "base64": "ICAgICAgICB0YXNrX3J1bm5lcjogQW4gb3B0aW9uYWwgdGFzayBydW5uZXIgdG8gdXNlIGZvciB0YXNrIGV4ZWN1dGlvbiB3aXRoaW4gdGhlIGZsb3c7",
+                "bytes": 87,
+                "encoding": "base64",
+                "sha256": "sha256:7ac0740700845db843dfa00273a75835b9c4dd4dca810204ab28b532e143d155"
+              },
+              "line_number": 163
+            },
+            {
+              "content": {
+                "base64": "ICAgICAgICAgICAgaWYgbm90IHByb3ZpZGVkLCBhIGBUaHJlYWRQb29sVGFza1J1bm5lcmAgd2lsbCBiZSB1c2VkLg==",
+                "bytes": 67,
+                "encoding": "base64",
+                "sha256": "sha256:506c7642a35908cc78fff97dee0e1240159a1e1e1351fbc5d2ba1c06705c681a"
+              },
+              "line_number": 164
+            },
+            {
+              "content": {
+                "base64": "ICAgICAgICBkZXNjcmlwdGlvbjogQW4gb3B0aW9uYWwgc3RyaW5nIGRlc2NyaXB0aW9uIGZvciB0aGUgZmxvdzsgaWYgbm90IHByb3ZpZGVkLCB0aGU=",
+                "bytes": 86,
+                "encoding": "base64",
+                "sha256": "sha256:0edca3ef1ae1f49ca2d1401787ef216c3fdd5bc0f49a47fc4ab04b405f3f6408"
+              },
+              "line_number": 165
+            },
+            {
+              "content": {
+                "base64": "ICAgICAgICAgICAgZGVzY3JpcHRpb24gd2lsbCBiZSBwdWxsZWQgZnJvbSB0aGUgZG9jc3RyaW5nIGZvciB0aGUgZGVjb3JhdGVkIGZ1bmN0aW9uLg==",
+                "bytes": 85,
+                "encoding": "base64",
+                "sha256": "sha256:4c6cd5162f3a0a03962492eb7ad7b8ae7efd2b8a78c6ce0addb1b6fd8a14483a"
+              },
+              "line_number": 166
+            },
+            {
+              "content": {
+                "base64": "ICAgICAgICB0aW1lb3V0X3NlY29uZHM6IEFuIG9wdGlvbmFsIG51bWJlciBvZiBzZWNvbmRzIGluZGljYXRpbmcgYSBtYXhpbXVtIHJ1bnRpbWUgZm9y",
+                "bytes": 87,
+                "encoding": "base64",
+                "sha256": "sha256:15d9a4b1cd28ad32a9be0ac1508cdb9d0180f37604b3a04ad9183390054ee73e"
+              },
+              "line_number": 167
+            },
+            {
+              "content": {
+                "base64": "ICAgICAgICAgICAgdGhlIGZsb3cuIElmIHRoZSBmbG93IGV4Y2VlZHMgdGhpcyBydW50aW1lLCBpdCB3aWxsIGJlIG1hcmtlZCBhcyBmYWlsZWQu",
+                "bytes": 84,
+                "encoding": "base64",
+                "sha256": "sha256:ca53176d7df144e3ab243dbb4596948dda0e61dd7e9a06e3ff4e64c65e76fd18"
+              },
+              "line_number": 168
+            },
+            {
+              "content": {
+                "base64": "ICAgICAgICAgICAgRmxvdyBleGVjdXRpb24gbWF5IGNvbnRpbnVlIHVudGlsIHRoZSBuZXh0IHRhc2sgaXMgY2FsbGVkLg==",
+                "bytes": 70,
+                "encoding": "base64",
+                "sha256": "sha256:c2ddff7a40d5747715e78fe52d510e65bd39b10701202e57d1c927095f93c9e3"
+              },
+              "line_number": 169
+            },
+            {
+              "content": {
+                "base64": "ICAgICAgICB2YWxpZGF0ZV9wYXJhbWV0ZXJzOiBCeSBkZWZhdWx0LCBwYXJhbWV0ZXJzIHBhc3NlZCB0byBmbG93cyBhcmUgdmFsaWRhdGVkIGJ5",
+                "bytes": 84,
+                "encoding": "base64",
+                "sha256": "sha256:d0f025c75053f5f850667ef56fcb59146874902b10d7ba46aef7faa57c88636e"
+              },
+              "line_number": 170
+            },
+            {
+              "content": {
+                "base64": "ICAgICAgICAgICAgUHlkYW50aWMuIFRoaXMgd2lsbCBjaGVjayB0aGF0IGlucHV0IHZhbHVlcyBjb25mb3JtIHRvIHRoZSBhbm5vdGF0ZWQgdHlwZXM=",
+                "bytes": 86,
+                "encoding": "base64",
+                "sha256": "sha256:6f888369ff75db4f27867a248312e19324bb2aa5dedc35f1e1212d3b9add5182"
+              },
+              "line_number": 171
+            },
+            {
+              "content": {
+                "base64": "ICAgICAgICAgICAgb24gdGhlIGZ1bmN0aW9uLiBXaGVyZSBwb3NzaWJsZSwgdmFsdWVzIHdpbGwgYmUgY29lcmNlZCBpbnRvIHRoZSBjb3JyZWN0",
+                "bytes": 84,
+                "encoding": "base64",
+                "sha256": "sha256:e3eaba870fc0be768afdff9a78758c52293b793adbd2e99f63cfa40a7fae9057"
+              },
+              "line_number": 172
+            },
+            {
+              "content": {
+                "base64": "ICAgICAgICAgICAgdHlwZTsgZm9yIGV4YW1wbGUsIGlmIGEgcGFyYW1ldGVyIGlzIGRlZmluZWQgYXMgYHg6IGludGAgYW5kICI1IiBpcyBwYXNzZWQs",
+                "bytes": 87,
+                "encoding": "base64",
+                "sha256": "sha256:1ead321ca325cddbd8d40a1d094843acf6a2c1e5cb4a563ebceec22889c93e84"
+              },
+              "line_number": 173
+            },
+            {
+              "content": {
+                "base64": "ICAgICAgICAgICAgaXQgd2lsbCBiZSByZXNvbHZlZCB0byBgNWAuIElmIHNldCB0byBgRmFsc2VgLCBubyB2YWxpZGF0aW9uIHdpbGwgYmU=",
+                "bytes": 80,
+                "encoding": "base64",
+                "sha256": "sha256:df0c3a21eefa97829523046610d1a9d043de1f79ef199517724403a31e9499d9"
+              },
+              "line_number": 174
+            },
+            {
+              "content": {
+                "base64": "ICAgICAgICAgICAgcGVyZm9ybWVkIG9uIGZsb3cgcGFyYW1ldGVycy4=",
+                "bytes": 41,
+                "encoding": "base64",
+                "sha256": "sha256:723cc0d499393b9e27b2a822bc22f17564f7957b137de3bc55565497fde4e28f"
+              },
+              "line_number": 175
+            },
+            {
+              "content": {
+                "base64": "ICAgICAgICByZXRyaWVzOiBBbiBvcHRpb25hbCBudW1iZXIgb2YgdGltZXMgdG8gcmV0cnkgb24gZmxvdyBydW4gZmFpbHVyZS4=",
+                "bytes": 74,
+                "encoding": "base64",
+                "sha256": "sha256:74aa97fe362bbae1cb5d39cc5dca265fec7757639d754d63eebcd46859f8f181"
+              },
+              "line_number": 176
+            },
+            {
+              "content": {
+                "base64": "ICAgICAgICByZXRyeV9kZWxheV9zZWNvbmRzOiBBbiBvcHRpb25hbCBudW1iZXIgb2Ygc2Vjb25kcyB0byB3YWl0IGJlZm9yZSByZXRyeWluZyB0aGU=",
+                "bytes": 86,
+                "encoding": "base64",
+                "sha256": "sha256:cd59e7e0c5f8a5554799beb77aad22fe5c1b7bfaf8a5f3bdcf962725f6932b2f"
+              },
+              "line_number": 177
+            },
+            {
+              "content": {
+                "base64": "ICAgICAgICAgICAgZmxvdyBhZnRlciBmYWlsdXJlLiBUaGlzIGlzIG9ubHkgYXBwbGljYWJsZSBpZiBgcmV0cmllc2AgaXMgbm9uemVyby4=",
+                "bytes": 80,
+                "encoding": "base64",
+                "sha256": "sha256:f71cb76aecd619b46f6ba440b7fb7224b47f3430f2b24fdf084433a17e465d9a"
+              },
+              "line_number": 178
+            },
+            {
+              "content": {
+                "base64": "ICAgICAgICBwZXJzaXN0X3Jlc3VsdDogQW4gb3B0aW9uYWwgdG9nZ2xlIGluZGljYXRpbmcgd2hldGhlciB0aGUgcmVzdWx0IG9mIHRoaXMgZmxvdw==",
+                "bytes": 85,
+                "encoding": "base64",
+                "sha256": "sha256:f30ff6e08e705862666c841a2e7557122c5e0f9401ef8c2d87a0ca5524abd688"
+              },
+              "line_number": 179
+            },
+            {
+              "content": {
+                "base64": "ICAgICAgICAgICAgc2hvdWxkIGJlIHBlcnNpc3RlZCB0byByZXN1bHQgc3RvcmFnZS4gRGVmYXVsdHMgdG8gYE5vbmVgLCB3aGljaCBpbmRpY2F0ZXM=",
+                "bytes": 86,
+                "encoding": "base64",
+                "sha256": "sha256:6a0a61e4a567fb12f6138ddce87a4bd5ff57f95971bcf3627ade9b99fd3302f6"
+              },
+              "line_number": 180
+            },
+            {
+              "content": {
+                "base64": "ICAgICAgICAgICAgdGhhdCBQcmVmZWN0IHNob3VsZCBjaG9vc2Ugd2hldGhlciB0aGUgcmVzdWx0IHNob3VsZCBiZSBwZXJzaXN0ZWQgZGVwZW5kaW5nIG9u",
+                "bytes": 90,
+                "encoding": "base64",
+                "sha256": "sha256:639b8ac0845640278ddd7c3921f8acbba46de7b9689d079fb06332271959f902"
+              },
+              "line_number": 181
+            },
+            {
+              "content": {
+                "base64": "ICAgICAgICAgICAgdGhlIGZlYXR1cmVzIGJlaW5nIHVzZWQu",
+                "bytes": 36,
+                "encoding": "base64",
+                "sha256": "sha256:b9bbe7e4109592225e63052bff3ff63db26741a7a4354a7a11f611c3a4d7b648"
+              },
+              "line_number": 182
+            },
+            {
+              "content": {
+                "base64": "ICAgICAgICByZXN1bHRfc3RvcmFnZTogQW4gb3B0aW9uYWwgYmxvY2sgdG8gdXNlIHRvIHBlcnNpc3QgdGhlIHJlc3VsdCBvZiB0aGlzIGZsb3cu",
+                "bytes": 84,
+                "encoding": "base64",
+                "sha256": "sha256:c469076724e84153d8947c5c7348ba38ba042c1c43f0bef6a85903cab6f0172b"
+              },
+              "line_number": 183
+            },
+            {
+              "content": {
+                "base64": "ICAgICAgICAgICAgVGhpcyBjYW4gYmUgZWl0aGVyIGEgc2F2ZWQgYmxvY2sgaW5zdGFuY2Ugb3IgYSBzdHJpbmcgcmVmZXJlbmNlIChlLmcuLA==",
+                "bytes": 82,
+                "encoding": "base64",
+                "sha256": "sha256:0cbb25b809a07de02839ce3ee5fab1d14dd6e70fd97d94c1c58ee0678a8bea31"
+              },
+              "line_number": 184
+            },
+            {
+              "content": {
+                "base64": "ICAgICAgICAgICAgImxvY2FsLWZpbGUtc3lzdGVtL215LXN0b3JhZ2UiKS4gQmxvY2sgaW5zdGFuY2VzIG11c3QgaGF2ZSBgLnNhdmUoKWAgY2FsbGVk",
+                "bytes": 87,
+                "encoding": "base64",
+                "sha256": "sha256:c866dca34c0d875ac5190c95f60edee19e12d010e15473f3bd60ba7f2ba9e166"
+              },
+              "line_number": 185
+            },
+            {
+              "content": {
+                "base64": "ICAgICAgICAgICAgZmlyc3Qgc2luY2UgZGVjb3JhdG9ycyBleGVjdXRlIGF0IGltcG9ydCB0aW1lLiBTdHJpbmcgcmVmZXJlbmNlcyBhcmUgcmVzb2x2ZWQ=",
+                "bytes": 89,
+                "encoding": "base64",
+                "sha256": "sha256:9f3d6b7ee9209f980f4778970e450b659d32e6a3b06a2b026b399e17b4352f4a"
+              },
+              "line_number": 186
+            },
+            {
+              "content": {
+                "base64": "ICAgICAgICAgICAgYXQgcnVudGltZSBhbmQgcmVjb21tZW5kZWQgZm9yIHRlc3Rpbmcgc2NlbmFyaW9zLiBUaGlzIHZhbHVlIHdpbGwgYmUgdXNlZCBhcw==",
+                "bytes": 88,
+                "encoding": "base64",
+                "sha256": "sha256:9a18f538cbb114d0aca67cd37ead6e8046aeb2d735415ae0cfe57a4be918ce16"
+              },
+              "line_number": 187
+            },
+            {
+              "content": {
+                "base64": "ICAgICAgICAgICAgdGhlIGRlZmF1bHQgZm9yIGFueSB0YXNrcyBpbiB0aGlzIGZsb3cuIElmIG5vdCBwcm92aWRlZCwgdGhlIGxvY2FsIGZpbGUgc3lzdGVt",
+                "bytes": 90,
+                "encoding": "base64",
+                "sha256": "sha256:aeb7f55aded958b14cc02d447fb7e550fa89993e9afc3b9bb3236c4b17ec490c"
+              },
+              "line_number": 188
+            },
+            {
+              "content": {
+                "base64": "ICAgICAgICAgICAgd2lsbCBiZSB1c2VkIHVubGVzcyBjYWxsZWQgYXMgYSBzdWJmbG93LCBhdCB3aGljaCBwb2ludCB0aGUgZGVmYXVsdCB3aWxsIGJl",
+                "bytes": 87,
+                "encoding": "base64",
+                "sha256": "sha256:fdf0884a5ca7ec741b3755b13009f66db478d2239381c086b4d6bacf9535e108"
+              },
+              "line_number": 189
+            },
+            {
+              "content": {
+                "base64": "ICAgICAgICAgICAgbG9hZGVkIGZyb20gdGhlIHBhcmVudCBmbG93Lg==",
+                "bytes": 40,
+                "encoding": "base64",
+                "sha256": "sha256:6e4a127673036d6541a0f51534d71b4d1c7bf120f479e876670e148e7aaafb28"
+              },
+              "line_number": 190
+            },
+            {
+              "content": {
+                "base64": "ICAgICAgICByZXN1bHRfc2VyaWFsaXplcjogQW4gb3B0aW9uYWwgc2VyaWFsaXplciB0byB1c2UgdG8gc2VyaWFsaXplIHRoZSByZXN1bHQgb2YgdGhpcw==",
+                "bytes": 88,
+                "encoding": "base64",
+                "sha256": "sha256:316ecbcd8918725457986880baac91134a6dbffcd7b93a2d9af104eda1c7140a"
+              },
+              "line_number": 191
+            },
+            {
+              "content": {
+                "base64": "ICAgICAgICAgICAgZmxvdyBmb3IgcGVyc2lzdGVuY2UuIFRoaXMgdmFsdWUgd2lsbCBiZSB1c2VkIGFzIHRoZSBkZWZhdWx0IGZvciBhbnkgdGFza3M=",
+                "bytes": 86,
+                "encoding": "base64",
+                "sha256": "sha256:3c3bd871cb4a6d521943b2221fc6ac55daabd497d2ec4272feef1deebd578c69"
+              },
+              "line_number": 192
+            },
+            {
+              "content": {
+                "base64": "ICAgICAgICAgICAgaW4gdGhpcyBmbG93LiBJZiBub3QgcHJvdmlkZWQsIHRoZSB2YWx1ZSBvZiBgUFJFRkVDVF9SRVNVTFRTX0RFRkFVTFRfU0VSSUFMSVpFUmA=",
+                "bytes": 92,
+                "encoding": "base64",
+                "sha256": "sha256:073f607b9fe8c28c42dbd5592147470277458f74a1702838752f96206396319e"
+              },
+              "line_number": 193
+            },
+            {
+              "content": {
+                "base64": "ICAgICAgICAgICAgd2lsbCBiZSB1c2VkIHVubGVzcyBjYWxsZWQgYXMgYSBzdWJmbG93LCBhdCB3aGljaCBwb2ludCB0aGUgZGVmYXVsdCB3aWxsIGJl",
+                "bytes": 87,
+                "encoding": "base64",
+                "sha256": "sha256:fdf0884a5ca7ec741b3755b13009f66db478d2239381c086b4d6bacf9535e108"
+              },
+              "line_number": 194
+            },
+            {
+              "content": {
+                "base64": "ICAgICAgICAgICAgbG9hZGVkIGZyb20gdGhlIHBhcmVudCBmbG93Lg==",
+                "bytes": 40,
+                "encoding": "base64",
+                "sha256": "sha256:6e4a127673036d6541a0f51534d71b4d1c7bf120f479e876670e148e7aaafb28"
+              },
+              "line_number": 195
+            },
+            {
+              "content": {
+                "base64": "ICAgICAgICBvbl9mYWlsdXJlOiBBbiBvcHRpb25hbCBsaXN0IG9mIGNhbGxhYmxlcyB0byBydW4gd2hlbiB0aGUgZmxvdyBlbnRlcnMgYSBmYWlsZWQgc3RhdGUu",
+                "bytes": 93,
+                "encoding": "base64",
+                "sha256": "sha256:fafbe9e184e557312697f39fbc1a1c627b4797e497f96a3fc610468fbc8a4413"
+              },
+              "line_number": 196
+            },
+            {
+              "content": {
+                "base64": "ICAgICAgICBvbl9jb21wbGV0aW9uOiBBbiBvcHRpb25hbCBsaXN0IG9mIGNhbGxhYmxlcyB0byBydW4gd2hlbiB0aGUgZmxvdyBlbnRlcnMgYSBjb21wbGV0ZWQgc3RhdGUu",
+                "bytes": 99,
+                "encoding": "base64",
+                "sha256": "sha256:f4aaca77a61aa00c2d9a75fce4d8d5be9f2b1e58c14e1a7a633a01b368fddc39"
+              },
+              "line_number": 197
+            },
+            {
+              "content": {
+                "base64": "ICAgICAgICBvbl9jYW5jZWxsYXRpb246IEFuIG9wdGlvbmFsIGxpc3Qgb2YgY2FsbGFibGVzIHRvIHJ1biB3aGVuIHRoZSBmbG93IGVudGVycyBhIGNhbmNlbGxpbmcgc3RhdGUu",
+                "bytes": 102,
+                "encoding": "base64",
+                "sha256": "sha256:1f47a718f3bfec8c34f2ee6ea2b4e696fd6643ee526c3c50ad0a667d88d52df1"
+              },
+              "line_number": 198
+            },
+            {
+              "content": {
+                "base64": "ICAgICAgICBvbl9jcmFzaGVkOiBBbiBvcHRpb25hbCBsaXN0IG9mIGNhbGxhYmxlcyB0byBydW4gd2hlbiB0aGUgZmxvdyBlbnRlcnMgYSBjcmFzaGVkIHN0YXRlLg==",
+                "bytes": 94,
+                "encoding": "base64",
+                "sha256": "sha256:bcca34b916493238efc8d0bc31fffd6c27a3931c0e7d822feb179d9944c07c98"
+              },
+              "line_number": 199
+            },
+            {
+              "content": {
+                "base64": "ICAgICAgICBvbl9ydW5uaW5nOiBBbiBvcHRpb25hbCBsaXN0IG9mIGNhbGxhYmxlcyB0byBydW4gd2hlbiB0aGUgZmxvdyBlbnRlcnMgYSBydW5uaW5nIHN0YXRlLg==",
+                "bytes": 94,
+                "encoding": "base64",
+                "sha256": "sha256:cef0ca814b5135c255cd8ccb3ff536a9dc6d03560b9c4ee7faef4e00bc427931"
+              },
+              "line_number": 200
+            },
+            {
+              "content": {
+                "base64": "ICAgICIiIg==",
+                "bytes": 7,
+                "encoding": "base64",
+                "sha256": "sha256:c7fecba7421afe7775a8a6a72a82f3c4f87b557c6f9786e4b342af9130361c73"
+              },
+              "line_number": 201
+            },
+            {
+              "content": {
+                "base64": "",
+                "bytes": 0,
+                "encoding": "base64",
+                "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+              },
+              "line_number": 202
+            },
+            {
+              "content": {
+                "base64": "ICAgICMgTk9URTogVGhlc2UgcGFyYW1ldGVycyAodHlwZXMsIGRlZmF1bHRzLCBhbmQgZG9jc3RyaW5ncykgc2hvdWxkIGJlIGR1cGxpY2F0ZWQ=",
+                "bytes": 83,
+                "encoding": "base64",
+                "sha256": "sha256:b85073af8003ac37f7d4923d17429731948fd9fbaafacd9c0360d7be22259bf9"
+              },
+              "line_number": 203
+            },
+            {
+              "content": {
+                "base64": "ICAgICMgICAgICAgZXhhY3RseSBpbiB0aGUgQGZsb3cgZGVjb3JhdG9y",
+                "bytes": 42,
+                "encoding": "base64",
+                "sha256": "sha256:bf83e198c4d372d9e41b0634cafe745dc7a66ae21dd66a9d908003d19d934fc1"
+              },
+              "line_number": 204
+            }
+          ],
+          "observation_id": "investigation-source-observation:d6a91a2dc5d8c5f67e09a85543403ad2654b7eb61f2894934bf104097522fce6",
+          "path": "src/prefect/flows.py",
+          "repository_observation_id": "git-observation:735c214acf83e7b08e03886c558275f0aaa2c3d0d03d618be9e974edf4b52435",
+          "source_blob_evidence_id": "git-blob-evidence:b7a8b0aba5c15735de2e05440b98f6d8b2e4442518a4128d8020f6526da82c41",
+          "source_object_id": "2f48010b6ad93f87f5889526dcdeadb229aac324",
+          "start_line": 145
+        },
+        "operation": {
+          "end_line": 204,
+          "path": "src/prefect/flows.py",
+          "start_line": 145,
+          "type": "READ_SOURCE"
+        },
+        "ordinal": 2,
+        "step_id": "investigation-step:7ef4a093049d46850d6c640e52d1183765e92e83821a31864efb948e3fc42340",
+        "step_key": "read_flow_class_docstring"
+      },
+      {
+        "canonical_evidence_record": {
+          "canonical_payload": "{\"commit_sha\":\"2338265f658845a9bef8ce7baf07519b89846dc8\",\"end_line\":102,\"line_count\":24,\"lines\":[{\"content_base64\":\"VGhlbiBjcmVhdGUgYW5kIHJ1biBhIFB5dGhvbiBmaWxlIHRoYXQgdXNlcyBQcmVmZWN0IGBmbG93YCBhbmQgYHRhc2tgIGRlY29yYXRvcnMgdG8gb3JjaGVzdHJhdGUgYW5kIG9ic2VydmUgeW91ciB3b3JrZmxvdyAtIGluIHRoaXMgY2FzZSwgYSBzaW1wbGUgc2NyaXB0IHRoYXQgZmV0Y2hlcyB0aGUgbnVtYmVyIG9mIEdpdEh1YiBzdGFycyBmcm9tIGEgcmVwb3NpdG9yeTo=\",\"line_number\":79},{\"content_base64\":\"\",\"line_number\":80},{\"content_base64\":\"YGBgcHl0aG9u\",\"line_number\":81},{\"content_base64\":\"ZnJvbSBwcmVmZWN0IGltcG9ydCBmbG93LCB0YXNr\",\"line_number\":82},{\"content_base64\":\"aW1wb3J0IGh0dHB4\",\"line_number\":83},{\"content_base64\":\"\",\"line_number\":84},{\"content_base64\":\"\",\"line_number\":85},{\"content_base64\":\"QHRhc2sobG9nX3ByaW50cz1UcnVlKQ==\",\"line_number\":86},{\"content_base64\":\"ZGVmIGdldF9zdGFycyhyZXBvOiBzdHIpOg==\",\"line_number\":87},{\"content_base64\":\"ICAgIHVybCA9IGYiaHR0cHM6Ly9hcGkuZ2l0aHViLmNvbS9yZXBvcy97cmVwb30i\",\"line_number\":88},{\"content_base64\":\"ICAgIGNvdW50ID0gaHR0cHguZ2V0KHVybCkuanNvbigpWyJzdGFyZ2F6ZXJzX2NvdW50Il0=\",\"line_number\":89},{\"content_base64\":\"ICAgIHByaW50KGYie3JlcG99IGhhcyB7Y291bnR9IHN0YXJzISIp\",\"line_number\":90},{\"content_base64\":\"\",\"line_number\":91},{\"content_base64\":\"\",\"line_number\":92},{\"content_base64\":\"QGZsb3cobmFtZT0iR2l0SHViIFN0YXJzIik=\",\"line_number\":93},{\"content_base64\":\"ZGVmIGdpdGh1Yl9zdGFycyhyZXBvczogbGlzdFtzdHJdKTo=\",\"line_number\":94},{\"content_base64\":\"ICAgIGZvciByZXBvIGluIHJlcG9zOg==\",\"line_number\":95},{\"content_base64\":\"ICAgICAgICBnZXRfc3RhcnMocmVwbyk=\",\"line_number\":96},{\"content_base64\":\"\",\"line_number\":97},{\"content_base64\":\"\",\"line_number\":98},{\"content_base64\":\"IyBydW4gdGhlIGZsb3ch\",\"line_number\":99},{\"content_base64\":\"aWYgX19uYW1lX18gPT0gIl9fbWFpbl9fIjo=\",\"line_number\":100},{\"content_base64\":\"ICAgIGdpdGh1Yl9zdGFycyhbIlByZWZlY3RIUS9wcmVmZWN0Il0p\",\"line_number\":101},{\"content_base64\":\"YGBg\",\"line_number\":102}],\"observation_id\":\"investigation-source-observation:6e5a493e182a2d1c0fee65d24ac2a940606e21e026007aec30430ab1a56020f2\",\"operation_kind\":\"READ_SOURCE\",\"path\":\"README.md\",\"repository_observation_id\":\"git-observation:735c214acf83e7b08e03886c558275f0aaa2c3d0d03d618be9e974edf4b52435\",\"source_blob_evidence_id\":\"git-blob-evidence:c1b34973f3c9c170c0d7aad059fb10852d28bd744c7e6f5b699782f8aa0095db\",\"source_object_id\":\"ee649f7eb8f5c0c0f38629b919c31eacec2a5015\",\"start_line\":79}",
+          "canonical_payload_bytes": 2372,
+          "canonical_payload_sha256": "sha256:7a6ac2eef2f321a943185b9cf1842f03bd21765fb735932e4170f836deddb5e2",
+          "evidence_id": "investigation-source-observation:6e5a493e182a2d1c0fee65d24ac2a940606e21e026007aec30430ab1a56020f2",
+          "evidence_kind": "INVESTIGATION_SOURCE_OBSERVATION"
+        },
+        "observation": {
+          "commit_sha": "2338265f658845a9bef8ce7baf07519b89846dc8",
+          "end_line": 102,
+          "line_count": 24,
+          "lines": [
+            {
+              "content": {
+                "base64": "VGhlbiBjcmVhdGUgYW5kIHJ1biBhIFB5dGhvbiBmaWxlIHRoYXQgdXNlcyBQcmVmZWN0IGBmbG93YCBhbmQgYHRhc2tgIGRlY29yYXRvcnMgdG8gb3JjaGVzdHJhdGUgYW5kIG9ic2VydmUgeW91ciB3b3JrZmxvdyAtIGluIHRoaXMgY2FzZSwgYSBzaW1wbGUgc2NyaXB0IHRoYXQgZmV0Y2hlcyB0aGUgbnVtYmVyIG9mIEdpdEh1YiBzdGFycyBmcm9tIGEgcmVwb3NpdG9yeTo=",
+                "bytes": 212,
+                "encoding": "base64",
+                "sha256": "sha256:9393a67139637cf57048c73d111471324f5cce2407433a65a42a298005997d9e"
+              },
+              "line_number": 79
+            },
+            {
+              "content": {
+                "base64": "",
+                "bytes": 0,
+                "encoding": "base64",
+                "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+              },
+              "line_number": 80
+            },
+            {
+              "content": {
+                "base64": "YGBgcHl0aG9u",
+                "bytes": 9,
+                "encoding": "base64",
+                "sha256": "sha256:b839d1b2b703576919548db08bd100e7c9be17820b76bd5bbe386a36507ec127"
+              },
+              "line_number": 81
+            },
+            {
+              "content": {
+                "base64": "ZnJvbSBwcmVmZWN0IGltcG9ydCBmbG93LCB0YXNr",
+                "bytes": 30,
+                "encoding": "base64",
+                "sha256": "sha256:47bc939c55f84ec68584a8cb233cf7478b1b35ff1744fe76964f51bbb50c3071"
+              },
+              "line_number": 82
+            },
+            {
+              "content": {
+                "base64": "aW1wb3J0IGh0dHB4",
+                "bytes": 12,
+                "encoding": "base64",
+                "sha256": "sha256:567ccee6b33aaab81acf5136cee5c1eeead175f2d4b0afc81839b7c4804da64b"
+              },
+              "line_number": 83
+            },
+            {
+              "content": {
+                "base64": "",
+                "bytes": 0,
+                "encoding": "base64",
+                "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+              },
+              "line_number": 84
+            },
+            {
+              "content": {
+                "base64": "",
+                "bytes": 0,
+                "encoding": "base64",
+                "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+              },
+              "line_number": 85
+            },
+            {
+              "content": {
+                "base64": "QHRhc2sobG9nX3ByaW50cz1UcnVlKQ==",
+                "bytes": 22,
+                "encoding": "base64",
+                "sha256": "sha256:eed30388e2262cb8d5e21e0f14e833d3627f1428a72f027cb652ebc8d0186c6c"
+              },
+              "line_number": 86
+            },
+            {
+              "content": {
+                "base64": "ZGVmIGdldF9zdGFycyhyZXBvOiBzdHIpOg==",
+                "bytes": 25,
+                "encoding": "base64",
+                "sha256": "sha256:3462ed5ed29e09e607b9fbd10dbbcbe321eff5c34daf347a1d133fdc3361c947"
+              },
+              "line_number": 87
+            },
+            {
+              "content": {
+                "base64": "ICAgIHVybCA9IGYiaHR0cHM6Ly9hcGkuZ2l0aHViLmNvbS9yZXBvcy97cmVwb30i",
+                "bytes": 48,
+                "encoding": "base64",
+                "sha256": "sha256:b607ce5ddff0b9ac2a830230f69c6057ecf3b7eb282b396a3b66f6226e1c93ce"
+              },
+              "line_number": 88
+            },
+            {
+              "content": {
+                "base64": "ICAgIGNvdW50ID0gaHR0cHguZ2V0KHVybCkuanNvbigpWyJzdGFyZ2F6ZXJzX2NvdW50Il0=",
+                "bytes": 53,
+                "encoding": "base64",
+                "sha256": "sha256:b6460951992765b631fe369560601bae44b1aa0e7290e8bed66ecb0ed1bae3cd"
+              },
+              "line_number": 89
+            },
+            {
+              "content": {
+                "base64": "ICAgIHByaW50KGYie3JlcG99IGhhcyB7Y291bnR9IHN0YXJzISIp",
+                "bytes": 39,
+                "encoding": "base64",
+                "sha256": "sha256:9164d7d8c204a81ff7dbb14f74edbc175e8432ce1b0f0d9fcd2fb9900ad20985"
+              },
+              "line_number": 90
+            },
+            {
+              "content": {
+                "base64": "",
+                "bytes": 0,
+                "encoding": "base64",
+                "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+              },
+              "line_number": 91
+            },
+            {
+              "content": {
+                "base64": "",
+                "bytes": 0,
+                "encoding": "base64",
+                "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+              },
+              "line_number": 92
+            },
+            {
+              "content": {
+                "base64": "QGZsb3cobmFtZT0iR2l0SHViIFN0YXJzIik=",
+                "bytes": 26,
+                "encoding": "base64",
+                "sha256": "sha256:dd91ccc16f6a7a495c22244abf80e636a47f10862487c06dae17bc50fe6fcf54"
+              },
+              "line_number": 93
+            },
+            {
+              "content": {
+                "base64": "ZGVmIGdpdGh1Yl9zdGFycyhyZXBvczogbGlzdFtzdHJdKTo=",
+                "bytes": 35,
+                "encoding": "base64",
+                "sha256": "sha256:58d3d41f644272ad3d86bd6ef49f563c591cdaa3d7a4dad725fa7df3fdc26c2d"
+              },
+              "line_number": 94
+            },
+            {
+              "content": {
+                "base64": "ICAgIGZvciByZXBvIGluIHJlcG9zOg==",
+                "bytes": 22,
+                "encoding": "base64",
+                "sha256": "sha256:4ed58cd2dcf37e029240e455ecc2419e3b97bb70ac4bd9219d5872259f4cee2a"
+              },
+              "line_number": 95
+            },
+            {
+              "content": {
+                "base64": "ICAgICAgICBnZXRfc3RhcnMocmVwbyk=",
+                "bytes": 23,
+                "encoding": "base64",
+                "sha256": "sha256:b9cd6b7699c3de4405f806c00e9a6882fd3a7e39f2072ca8bc8cc143ee828cea"
+              },
+              "line_number": 96
+            },
+            {
+              "content": {
+                "base64": "",
+                "bytes": 0,
+                "encoding": "base64",
+                "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+              },
+              "line_number": 97
+            },
+            {
+              "content": {
+                "base64": "",
+                "bytes": 0,
+                "encoding": "base64",
+                "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+              },
+              "line_number": 98
+            },
+            {
+              "content": {
+                "base64": "IyBydW4gdGhlIGZsb3ch",
+                "bytes": 15,
+                "encoding": "base64",
+                "sha256": "sha256:35ac2a0386e4c8ed88e0fb2a2f3c9deb61f67d119d74691e7173d9cbe00e052f"
+              },
+              "line_number": 99
+            },
+            {
+              "content": {
+                "base64": "aWYgX19uYW1lX18gPT0gIl9fbWFpbl9fIjo=",
+                "bytes": 26,
+                "encoding": "base64",
+                "sha256": "sha256:3412809c1cf42d7343047cba6a497584fa6c468737e2ef3fc443e11211447ea5"
+              },
+              "line_number": 100
+            },
+            {
+              "content": {
+                "base64": "ICAgIGdpdGh1Yl9zdGFycyhbIlByZWZlY3RIUS9wcmVmZWN0Il0p",
+                "bytes": 39,
+                "encoding": "base64",
+                "sha256": "sha256:23acd00d05034538c296e4c38af769d799ac6802d82bd5adb1f209dcede0979d"
+              },
+              "line_number": 101
+            },
+            {
+              "content": {
+                "base64": "YGBg",
+                "bytes": 3,
+                "encoding": "base64",
+                "sha256": "sha256:f1b901847390b0ed7e374e7c1e464ec17b46a427c487a5ad6cbd2906405083d5"
+              },
+              "line_number": 102
+            }
+          ],
+          "observation_id": "investigation-source-observation:6e5a493e182a2d1c0fee65d24ac2a940606e21e026007aec30430ab1a56020f2",
+          "path": "README.md",
+          "repository_observation_id": "git-observation:735c214acf83e7b08e03886c558275f0aaa2c3d0d03d618be9e974edf4b52435",
+          "source_blob_evidence_id": "git-blob-evidence:c1b34973f3c9c170c0d7aad059fb10852d28bd744c7e6f5b699782f8aa0095db",
+          "source_object_id": "ee649f7eb8f5c0c0f38629b919c31eacec2a5015",
+          "start_line": 79
+        },
+        "operation": {
+          "end_line": 102,
+          "path": "README.md",
+          "start_line": 79,
+          "type": "READ_SOURCE"
+        },
+        "ordinal": 3,
+        "step_id": "investigation-step:96b3899d106781762bad4ec67f615cea47668d5f6a80abc8aed688d7e1136c9b",
+        "step_key": "read_readme_first_usage"
+      },
+      {
+        "canonical_evidence_record": {
+          "canonical_payload": "{\"commit_sha\":\"2338265f658845a9bef8ce7baf07519b89846dc8\",\"end_line\":55,\"line_count\":2,\"lines\":[{\"content_base64\":\"UHJlZmVjdCBpcyBhIHdvcmtmbG93IG9yY2hlc3RyYXRpb24gZnJhbWV3b3JrIGZvciBidWlsZGluZyBkYXRhIHBpcGVsaW5lcyBpbiBQeXRob24u\",\"line_number\":54},{\"content_base64\":\"SXQncyB0aGUgc2ltcGxlc3Qgd2F5IHRvIGVsZXZhdGUgYSBzY3JpcHQgaW50byBhIHByb2R1Y3Rpb24gd29ya2Zsb3cu\",\"line_number\":55}],\"observation_id\":\"investigation-source-observation:e4730dd25b7741d5a677881dc98c671db15f2ea96c0f1bc9fbfbfde25590bbc6\",\"operation_kind\":\"READ_SOURCE\",\"path\":\"README.md\",\"repository_observation_id\":\"git-observation:735c214acf83e7b08e03886c558275f0aaa2c3d0d03d618be9e974edf4b52435\",\"source_blob_evidence_id\":\"git-blob-evidence:c1b34973f3c9c170c0d7aad059fb10852d28bd744c7e6f5b699782f8aa0095db\",\"source_object_id\":\"ee649f7eb8f5c0c0f38629b919c31eacec2a5015\",\"start_line\":54}",
+          "canonical_payload_bytes": 845,
+          "canonical_payload_sha256": "sha256:12da7d48a0957fc866ae65d3dcf68c2ec2a069725efbc69cd028c96039a62037",
+          "evidence_id": "investigation-source-observation:e4730dd25b7741d5a677881dc98c671db15f2ea96c0f1bc9fbfbfde25590bbc6",
+          "evidence_kind": "INVESTIGATION_SOURCE_OBSERVATION"
+        },
+        "observation": {
+          "commit_sha": "2338265f658845a9bef8ce7baf07519b89846dc8",
+          "end_line": 55,
+          "line_count": 2,
+          "lines": [
+            {
+              "content": {
+                "base64": "UHJlZmVjdCBpcyBhIHdvcmtmbG93IG9yY2hlc3RyYXRpb24gZnJhbWV3b3JrIGZvciBidWlsZGluZyBkYXRhIHBpcGVsaW5lcyBpbiBQeXRob24u",
+                "bytes": 84,
+                "encoding": "base64",
+                "sha256": "sha256:e022c4cccb08e62aabe7ca371e6daeed2678bbc3e725eb4c0f6b251941575388"
+              },
+              "line_number": 54
+            },
+            {
+              "content": {
+                "base64": "SXQncyB0aGUgc2ltcGxlc3Qgd2F5IHRvIGVsZXZhdGUgYSBzY3JpcHQgaW50byBhIHByb2R1Y3Rpb24gd29ya2Zsb3cu",
+                "bytes": 69,
+                "encoding": "base64",
+                "sha256": "sha256:fd819fc4295b2b7dfdb3b4a810a8bf338c8192b7a81f00a47a480f1022191686"
+              },
+              "line_number": 55
+            }
+          ],
+          "observation_id": "investigation-source-observation:e4730dd25b7741d5a677881dc98c671db15f2ea96c0f1bc9fbfbfde25590bbc6",
+          "path": "README.md",
+          "repository_observation_id": "git-observation:735c214acf83e7b08e03886c558275f0aaa2c3d0d03d618be9e974edf4b52435",
+          "source_blob_evidence_id": "git-blob-evidence:c1b34973f3c9c170c0d7aad059fb10852d28bd744c7e6f5b699782f8aa0095db",
+          "source_object_id": "ee649f7eb8f5c0c0f38629b919c31eacec2a5015",
+          "start_line": 54
+        },
+        "operation": {
+          "end_line": 55,
+          "path": "README.md",
+          "start_line": 54,
+          "type": "READ_SOURCE"
+        },
+        "ordinal": 4,
+        "step_id": "investigation-step:f59ec7f4c1840ea90f40333c44a7ce39d6afb97b14008d30d290b173a384b7af",
+        "step_key": "read_readme_purpose"
+      }
+    ],
+    "total_source_line_count": 163
+  },
+  "repository": {
+    "commit": "2338265f658845a9bef8ce7baf07519b89846dc8",
+    "repository_observation_id": "git-observation:735c214acf83e7b08e03886c558275f0aaa2c3d0d03d618be9e974edf4b52435",
+    "target": "Prefect"
+  },
+  "result": "EVIDENCE_EXECUTION_COMPLETE",
+  "source": {
+    "025zp_sha256": "sha256:c4c9761edf84a9ca656209ca80792e8824a67d6c128169392011406b75864af9",
+    "plan_id": "investigation-plan:0be38208718633662c0e4254358d42621439f93457a69686c2258db183e51214",
+    "planner_output_id": "semantic-gap-typed-planner-output:ffb31810009a1bdeb609483e50431b74c673091fae05e35a906119069a11e343",
+    "request_id": "semantic-gap-followup-investigation-request:4bd29f50a833a4f06b6718756009e556459ebac539cf8f9fc94eac7c50e10006"
+  }
+}
