@@ -238,6 +238,12 @@ def _canonical_input_json(
         "schema_hash": (
             invocation.schema_hash
         ),
+        "operation_semantics": (
+            invocation.operation_semantics
+        ),
+        "operation_semantics_id": (
+            invocation.operation_semantics_id
+        ),
     }
 
     try:

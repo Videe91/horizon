@@ -332,6 +332,8 @@ def test_adapter_sends_bounded_request_and_proposal_as_input() -> None:
         "proposal",
         "request",
         "schema_hash",
+        "operation_semantics",
+        "operation_semantics_id",
     }
 
     assert (
@@ -357,6 +359,22 @@ def test_adapter_sends_bounded_request_and_proposal_as_input() -> None:
             "schema_hash"
         ]
         == value.schema_hash
+    )
+
+    assert (
+        payload[
+            "operation_semantics_id"
+        ]
+        == value.operation_semantics_id
+    )
+
+    assert (
+        payload[
+            "operation_semantics"
+        ][
+            "contract_id"
+        ]
+        == value.operation_semantics_id
     )
 
 

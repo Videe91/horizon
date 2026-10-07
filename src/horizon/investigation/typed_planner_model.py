@@ -55,6 +55,10 @@ from horizon.investigation.typed_planner import (
     parse_semantic_gap_typed_planner_output,
     semantic_gap_typed_planner_schema,
 )
+from horizon.investigation.typed_planner_semantics import (
+    TypedPlannerOperationSemanticsContract,
+    semantic_gap_typed_planner_operation_semantics,
+)
 from horizon.investigator.middleware import (
     InvestigationRequest,
     InvestigationRequestOrigin,
@@ -93,6 +97,12 @@ class SemanticGapTypedPlannerModelInvocation:
 
     instruction_hash: str
     schema_hash: str
+
+    operation_semantics: (
+        TypedPlannerOperationSemanticsContract
+    )
+    operation_semantics_id: str
+
     canonical_input_hash: str
 
     invocation_id: str
@@ -132,6 +142,7 @@ class SemanticGapTypedPlannerModelRun:
 
     instruction_hash: str
     schema_hash: str
+    operation_semantics_id: str
 
     canonical_input_hash: str
     canonical_output_hash: str
@@ -534,6 +545,14 @@ def make_semantic_gap_typed_planner_invocation(
         )
     )
 
+    operation_semantics = (
+        semantic_gap_typed_planner_operation_semantics()
+    )
+
+    operation_semantics_id = (
+        operation_semantics.contract_id
+    )
+
     canonical_input_hash = _sha256(
         _canonical_bytes(
             {
@@ -544,6 +563,12 @@ def make_semantic_gap_typed_planner_invocation(
                 ),
                 "schema_hash": (
                     schema_hash
+                ),
+                "operation_semantics": (
+                    operation_semantics
+                ),
+                "operation_semantics_id": (
+                    operation_semantics_id
                 ),
                 "temperature": (
                     normalized_temperature
@@ -571,6 +596,9 @@ def make_semantic_gap_typed_planner_invocation(
             ),
             "schema_hash": (
                 schema_hash
+            ),
+            "operation_semantics_id": (
+                operation_semantics_id
             ),
             "canonical_input_hash": (
                 canonical_input_hash
@@ -601,6 +629,12 @@ def make_semantic_gap_typed_planner_invocation(
                 instruction_hash
             ),
             schema_hash=schema_hash,
+            operation_semantics=(
+                operation_semantics
+            ),
+            operation_semantics_id=(
+                operation_semantics_id
+            ),
             canonical_input_hash=(
                 canonical_input_hash
             ),
@@ -766,6 +800,9 @@ def _make_run(
             "model_id": (
                 result.model_id
             ),
+            "operation_semantics_id": (
+                invocation.operation_semantics_id
+            ),
             "canonical_output_hash": (
                 canonical_output_hash
             ),
@@ -809,6 +846,9 @@ def _make_run(
         ),
         schema_hash=(
             invocation.schema_hash
+        ),
+        operation_semantics_id=(
+            invocation.operation_semantics_id
         ),
         canonical_input_hash=(
             invocation.canonical_input_hash
