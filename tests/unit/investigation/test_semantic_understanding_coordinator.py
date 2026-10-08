@@ -2233,3 +2233,714 @@ def test_coordinator_fails_before_next_model_call_when_aggregate_budget_exhauste
         )
     )
 
+
+
+
+def test_repaired_two_round_hypothesis_loop_is_coherent_offline(
+    tmp_path: Path,
+) -> None:
+    from horizon.investigation.typed_planner_operational_evidence import (
+        TypedPlannerSourceObservationView,
+    )
+    from horizon.investigation.typed_planner_request_view import (
+        make_typed_planner_request_view,
+    )
+
+    followup_question = (
+        "Which exact pyproject.toml source passage "
+        "provides the remaining source-backed basis?"
+    )
+
+    fixture = prepare(
+        tmp_path
+    )
+
+    class CoherentPlanner:
+        def __init__(
+            self,
+        ) -> None:
+            self.calls = []
+            self.source_contexts = []
+
+        def invoke(
+            self,
+            invocation,
+        ):
+            self.calls.append(
+                invocation
+            )
+
+            call_number = len(
+                self.calls
+            )
+
+            proposal = (
+                invocation.proposal
+            )
+
+            assert (
+                len(
+                    proposal
+                    .investigation_questions
+                )
+                == 1
+            )
+
+            question = (
+                proposal
+                .investigation_questions[
+                    0
+                ]
+            )
+
+            instruction = (
+                invocation
+                .instruction
+                .decode(
+                    "utf-8"
+                )
+            )
+
+            assert (
+                "source_hypothesis="
+                in instruction
+            )
+
+            assert (
+                HYPOTHESIS
+                in instruction
+            )
+
+            assert (
+                'source_hypothesis_material_basis_paths='
+                '["pyproject.toml"]'
+                in instruction
+            )
+
+            request_view = (
+                make_typed_planner_request_view(
+                    invocation.request
+                )
+            )
+
+            source_contexts = tuple(
+                record.operational_context
+                for record
+                in request_view.evidence_records
+                if isinstance(
+                    record.operational_context,
+                    TypedPlannerSourceObservationView,
+                )
+            )
+
+            self.source_contexts.append(
+                source_contexts
+            )
+
+            if call_number == 1:
+                assert (
+                    question
+                    == TEST_QUESTION
+                )
+
+                assert (
+                    "current_hypothesis_round=1"
+                    in instruction
+                )
+
+                assert (
+                    "final_hypothesis_round=false"
+                    in instruction
+                )
+
+                assert source_contexts == ()
+
+                path = "README.md"
+
+            elif call_number == 2:
+                assert (
+                    question
+                    == followup_question
+                )
+
+                assert (
+                    "current_hypothesis_round=2"
+                    in instruction
+                )
+
+                assert (
+                    "final_hypothesis_round=true"
+                    in instruction
+                )
+
+                assert (
+                    len(
+                        source_contexts
+                    )
+                    == 1
+                )
+
+                previous = (
+                    source_contexts[
+                        0
+                    ]
+                )
+
+                assert (
+                    previous.path
+                    == "README.md"
+                )
+
+                assert (
+                    previous.start_line
+                    == 1
+                )
+
+                assert (
+                    previous.end_line
+                    == 2
+                )
+
+                assert (
+                    previous.line_count
+                    == 2
+                )
+
+                assert (
+                    previous.visible_line_count
+                    == 2
+                )
+
+                assert (
+                    previous.omitted_line_count
+                    == 0
+                )
+
+                assert (
+                    previous.selection_mode
+                    == "ALL"
+                )
+
+                assert (
+                    previous.observed_source_line_count
+                    == 2
+                )
+
+                assert (
+                    previous.ends_at_observed_eof
+                    is True
+                )
+
+                assert tuple(
+                    line.line_text
+                    for line
+                    in previous.lines
+                ) == (
+                    (
+                        "Semantic Demo provides workflow "
+                        "orchestration software."
+                    ),
+                    (
+                        "It coordinates and executes "
+                        "declared workflow tasks."
+                    ),
+                )
+
+                #
+                # R34 final-round source-basis closure:
+                # the selected hypothesis basis is pyproject.toml,
+                # so the final round materializes that exact path.
+                #
+                path = "pyproject.toml"
+
+            else:
+                raise AssertionError(
+                    "certification permits exactly "
+                    "two hypothesis planner calls"
+                )
+
+            output = {
+                "proposal_id": (
+                    proposal.proposal_id
+                ),
+                "question_id": (
+                    invocation
+                    .request
+                    .question_id
+                ),
+                "bindings": [
+                    {
+                        "investigation_question": (
+                            question
+                        ),
+                        "step_key": (
+                            "certify_round_"
+                            + str(
+                                call_number
+                            )
+                        ),
+                        "purpose": (
+                            "Gather complete frozen "
+                            "source evidence."
+                        ),
+                        "operation": {
+                            "type": (
+                                "READ_SOURCE"
+                            ),
+                            "path": path,
+                            "start_line": 1,
+
+                            #
+                            # R35:
+                            # Horizon, not the planner,
+                            # resolves actual frozen EOF.
+                            #
+                            "end_line": None,
+                        },
+                        "depends_on_keys": [],
+                        "expected_information": (
+                            "Complete observed source "
+                            "through repository EOF."
+                        ),
+                        "max_seconds": 5,
+                    },
+                ],
+            }
+
+            return (
+                SemanticGapTypedPlannerModelResult(
+                    provider=(
+                        "R38_FAKE_PLANNER"
+                    ),
+                    model_id=(
+                        "r38-fake-planner-v1"
+                    ),
+                    output=output,
+                    input_tokens=10,
+                    output_tokens=5,
+                    cost_usd=Decimal(
+                        "0.001000"
+                    ),
+                    api_request_id=(
+                        "r38-fake-planner-"
+                        + str(
+                            call_number
+                        )
+                    ),
+                )
+            )
+
+    class CoherentEvaluator:
+        def __init__(
+            self,
+        ) -> None:
+            self.calls = []
+            self.verdicts = []
+
+        def invoke(
+            self,
+            invocation,
+        ):
+            self.calls.append(
+                invocation
+            )
+
+            call_number = len(
+                self.calls
+            )
+
+            request = (
+                invocation.request
+            )
+
+            source_records = tuple(
+                record
+                for record
+                in request.evidence_records
+                if (
+                    record.evidence_id
+                    .startswith(
+                        "investigation-source-observation:"
+                    )
+                )
+            )
+
+            source_ids = tuple(
+                record.evidence_id
+                for record
+                in source_records
+            )
+
+            if call_number == 1:
+                assert (
+                    len(
+                        source_records
+                    )
+                    == 1
+                )
+
+                payload = json.loads(
+                    source_records[
+                        0
+                    ].canonical_payload
+                )
+
+                assert (
+                    payload[
+                        "path"
+                    ]
+                    == "README.md"
+                )
+
+                assert (
+                    payload[
+                        "ends_at_observed_eof"
+                    ]
+                    is True
+                )
+
+                assert (
+                    payload[
+                        "end_line"
+                    ]
+                    == payload[
+                        "observed_source_line_count"
+                    ]
+                )
+
+                verdict = (
+                    "STILL_INCOMPLETE"
+                )
+
+                supporting = [
+                    source_ids[
+                        0
+                    ],
+                ]
+
+                missing = [
+                    followup_question,
+                ]
+
+            elif call_number == 2:
+                assert (
+                    len(
+                        source_records
+                    )
+                    == 2
+                )
+
+                payloads = tuple(
+                    json.loads(
+                        record.canonical_payload
+                    )
+                    for record
+                    in source_records
+                )
+
+                assert {
+                    payload[
+                        "path"
+                    ]
+                    for payload
+                    in payloads
+                } == {
+                    "README.md",
+                    "pyproject.toml",
+                }
+
+                assert all(
+                    payload[
+                        "ends_at_observed_eof"
+                    ]
+                    is True
+                    for payload
+                    in payloads
+                )
+
+                assert all(
+                    payload[
+                        "end_line"
+                    ]
+                    == payload[
+                        "observed_source_line_count"
+                    ]
+                    for payload
+                    in payloads
+                )
+
+                verdict = "SUPPORTED"
+
+                #
+                # Promotion support is exclusively canonical
+                # material READ_SOURCE evidence gathered by
+                # the coordinator.
+                #
+                supporting = list(
+                    source_ids
+                )
+
+                missing = []
+
+            else:
+                raise AssertionError(
+                    "certification permits exactly "
+                    "two evaluator calls"
+                )
+
+            self.verdicts.append(
+                verdict
+            )
+
+            return (
+                HypothesisEvaluationModelResult(
+                    provider=(
+                        "R38_FAKE_EVALUATOR"
+                    ),
+                    model_id=(
+                        "r38-fake-evaluator-v1"
+                    ),
+                    output={
+                        "request_id": (
+                            request.request_id
+                        ),
+                        "question_id": (
+                            request.question_id
+                        ),
+                        "source_proposal_id": (
+                            invocation
+                            .source_proposal
+                            .proposal_id
+                        ),
+                        "verdict": verdict,
+                        "supporting_evidence_ids": (
+                            supporting
+                        ),
+                        "contradicting_evidence_ids": [],
+                        "missing_evidence_questions": (
+                            missing
+                        ),
+                    },
+                    input_tokens=10,
+                    output_tokens=5,
+                    cost_usd=Decimal(
+                        "0.001000"
+                    ),
+                    api_request_id=(
+                        "r38-fake-evaluator-"
+                        + str(
+                            call_number
+                        )
+                    ),
+                )
+            )
+
+    planner = CoherentPlanner()
+
+    evaluator = CoherentEvaluator()
+
+    result = run(
+        fixture,
+        investigator=(
+            FakeInvestigator(
+                mode="hypothesis"
+            )
+        ),
+        planner=(
+            planner
+        ),
+        evaluator=(
+            evaluator
+        ),
+        value_limits=(
+            limits(
+                investigator_rounds=1,
+                hypothesis_rounds=2,
+            )
+        ),
+    )
+
+    #
+    # --------------------------------------------------------
+    # R33:
+    # hypothesis and source basis survived planning.
+    #
+    # R34:
+    # final round successfully satisfied pyproject.toml
+    # source-basis READ_SOURCE closure.
+    #
+    # R35:
+    # both reads used end_line=None and were resolved to EOF.
+    #
+    # R36:
+    # evaluator's exact missing question became round 2's
+    # exact planning question.
+    #
+    # R37:
+    # round 2 saw bounded semantic content from round 1.
+    #
+    # Promotion:
+    # only material executed READ_SOURCE IDs supported it.
+    # --------------------------------------------------------
+    #
+
+    assert (
+        result.disposition
+        is RepositorySemanticUnderstandingDisposition
+        .PROMOTED
+    )
+
+    assert (
+        result.hypothesis_rounds_completed
+        == 2
+    )
+
+    assert (
+        len(
+            planner.calls
+        )
+        == 2
+    )
+
+    assert (
+        len(
+            evaluator.calls
+        )
+        == 2
+    )
+
+    assert (
+        evaluator.verdicts
+        == [
+            "STILL_INCOMPLETE",
+            "SUPPORTED",
+        ]
+    )
+
+    assert (
+        planner.calls[
+            0
+        ]
+        .proposal
+        .investigation_questions
+        == (
+            TEST_QUESTION,
+        )
+    )
+
+    assert (
+        planner.calls[
+            1
+        ]
+        .proposal
+        .investigation_questions
+        == (
+            followup_question,
+        )
+    )
+
+    assert (
+        planner.calls[
+            0
+        ]
+        .proposal
+        .investigation_questions
+        != planner.calls[
+            1
+        ]
+        .proposal
+        .investigation_questions
+    )
+
+    assert (
+        len(
+            planner.source_contexts[
+                0
+            ]
+        )
+        == 0
+    )
+
+    assert (
+        len(
+            planner.source_contexts[
+                1
+            ]
+        )
+        == 1
+    )
+
+    assert (
+        len(
+            result.operation_observation_ids
+        )
+        == 2
+    )
+
+    assert (
+        result.evaluation
+        is not None
+    )
+
+    assert (
+        result.evaluation.verdict
+        is HypothesisEvaluationVerdict
+        .SUPPORTED
+    )
+
+    assert (
+        len(
+            result.evaluation
+            .supporting_evidence_ids
+        )
+        == 2
+    )
+
+    assert all(
+        evidence_id.startswith(
+            "investigation-source-observation:"
+        )
+        for evidence_id
+        in result.evaluation
+        .supporting_evidence_ids
+    )
+
+    assert (
+        len(
+            result.final_model
+            .what_it_is_assertion_ids
+        )
+        == 1
+    )
+
+    assert (
+        result.final_model
+        != fixture.base_model
+    )
+
+    assert (
+        result.persisted_overlay_path
+        is not None
+    )
+
+    assert (
+        fixture.store.load(
+            fixture.base_model
+        )
+        == result.final_model
+    )
+
+    remaining = {
+        question.section
+        for question
+        in discover_repository_semantic_gaps(
+            fixture.index,
+            result.final_model,
+        ).questions
+    }
+
+    assert (
+        RepositorySemanticGapSection
+        .WHAT_IT_IS
+        not in remaining
+    )

@@ -1,0 +1,44 @@
+{
+  "certification": "R38_REPAIRED_AUTONOMOUS_HYPOTHESIS_LOOP_OFFLINE",
+  "certified_product": {
+    "branch": "feat/autonomous-semantic-understanding-025",
+    "head": "24c9241012fa805855fd7755322fbc1d3bea9d41",
+    "production_source_modified_by_r38": false,
+    "tree": "ba74a23556c955a783290ad2779ae3903bced0fc"
+  },
+  "coherent_execution": {
+    "hypothesis_rounds": 2,
+    "promotion_support": "executed canonical READ_SOURCE evidence only",
+    "round_1_evaluation": "STILL_INCOMPLETE",
+    "round_1_read": "README.md:1-EOF",
+    "round_2_evaluation": "SUPPORTED",
+    "round_2_prior_source_context_visible": true,
+    "round_2_prior_source_eof_visible": true,
+    "round_2_question_source": "exact evaluator missing_evidence_questions",
+    "round_2_read": "pyproject.toml:1-EOF",
+    "round_2_source_basis_closed": true,
+    "temporary_semantic_overlay_persisted": true,
+    "temporary_what_it_is_promoted": true
+  },
+  "durable_regression_test": {
+    "path": "tests/unit/investigation/test_semantic_understanding_coordinator.py",
+    "sha256": "sha256:a2a8c7b10f3f42a4b69875f1bd1081e7c453e8de98f6267c32a2d5acdb23d5f6",
+    "test": "test_repaired_two_round_hypothesis_loop_is_coherent_offline"
+  },
+  "result": "PASS",
+  "safety": {
+    "frozen_horizon_target_modified": false,
+    "frozen_prefect_target_modified": false,
+    "live_target_repository_operations": 0,
+    "live_world_model_mutations": 0,
+    "paid_calls": 0,
+    "provider_calls": 0
+  },
+  "scope": {
+    "r33": "source hypothesis and selected source-backed basis survive into planning",
+    "r34": "final-round selected source basis requires material READ_SOURCE coverage",
+    "r35": "READ_SOURCE may resolve through frozen observed EOF with explicit completeness metadata",
+    "r36": "STILL_INCOMPLETE missing evidence questions become the next round's exact planning questions",
+    "r37": "prior READ_SOURCE evidence is visible to the next planner through bounded semantic context"
+  }
+}
