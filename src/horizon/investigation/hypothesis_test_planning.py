@@ -22,6 +22,9 @@ import json
 
 from dataclasses import dataclass
 
+from horizon.investigation.deterministic_evidence_records import (
+    GIT_BLOB_EVIDENCE_KIND,
+)
 from horizon.investigator.middleware import (
     InvestigationRequest,
     InvestigationRequestOrigin,
@@ -46,6 +49,11 @@ class HypothesisTestPlanningBridge:
     source_proposal_id: str
     source_hypothesis: str
     test_questions: tuple[
+        str,
+        ...,
+    ]
+
+    source_basis_paths: tuple[
         str,
         ...,
     ]
@@ -76,6 +84,133 @@ def _identity(
         + hashlib.sha256(
             encoded
         ).hexdigest()
+    )
+
+
+def _selected_source_basis_paths(
+    *,
+    request: InvestigationRequest,
+    proposal: InvestigationProposal,
+) -> tuple[str, ...]:
+    """Resolve source-backed evidence selected by the hypothesis."""
+
+    references_by_id = {
+        reference.reference_id: reference
+        for claim
+        in request.claims
+        for reference
+        in claim.evidence
+    }
+
+    records_by_id = {
+        record.evidence_id: record
+        for record
+        in request.evidence_records
+    }
+
+    paths = set()
+
+    for reference_id in (
+        proposal.evidence_reference_ids
+    ):
+        reference = (
+            references_by_id.get(
+                reference_id
+            )
+        )
+
+        if reference is None:
+            raise HypothesisTestPlanningBridgeError(
+                "hypothesis evidence reference "
+                "is outside bounded request claims"
+            )
+
+        record = (
+            records_by_id.get(
+                reference.evidence_id
+            )
+        )
+
+        if record is None:
+            raise HypothesisTestPlanningBridgeError(
+                "hypothesis evidence reference "
+                "has no canonical evidence record"
+            )
+
+        if (
+            record.evidence_kind
+            != GIT_BLOB_EVIDENCE_KIND
+        ):
+            continue
+
+        try:
+            payload = json.loads(
+                record.canonical_payload
+            )
+        except (
+            TypeError,
+            json.JSONDecodeError,
+        ) as exc:
+            raise HypothesisTestPlanningBridgeError(
+                "selected Git blob evidence "
+                "must contain valid canonical JSON"
+            ) from exc
+
+        if not isinstance(
+            payload,
+            dict,
+        ):
+            raise HypothesisTestPlanningBridgeError(
+                "selected Git blob evidence "
+                "payload must be an object"
+            )
+
+        if (
+            payload.get(
+                "evidence_type"
+            )
+            != GIT_BLOB_EVIDENCE_KIND
+        ):
+            raise HypothesisTestPlanningBridgeError(
+                "selected Git blob evidence "
+                "type is inconsistent"
+            )
+
+        if (
+            payload.get(
+                "evidence_id"
+            )
+            != record.evidence_id
+        ):
+            raise HypothesisTestPlanningBridgeError(
+                "selected Git blob evidence "
+                "identity is inconsistent"
+            )
+
+        path = payload.get(
+            "path"
+        )
+
+        if (
+            not isinstance(
+                path,
+                str,
+            )
+            or not path.strip()
+        ):
+            raise HypothesisTestPlanningBridgeError(
+                "selected Git blob evidence "
+                "must identify a source path"
+            )
+
+        paths.add(
+            path
+        )
+
+    return tuple(
+        sorted(
+            paths
+        )
     )
 
 
@@ -166,6 +301,13 @@ def bridge_hypothesis_tests_to_typed_planning(
             "test questions must be nonempty text"
         )
 
+    source_basis_paths = (
+        _selected_source_basis_paths(
+            request=request,
+            proposal=proposal,
+        )
+    )
+
     planning_proposal = (
         parse_investigation_proposal(
             request,
@@ -222,6 +364,9 @@ def bridge_hypothesis_tests_to_typed_planning(
             "test_questions": list(
                 proposal.test_questions
             ),
+            "source_basis_paths": list(
+                source_basis_paths
+            ),
             "planning_proposal_id": (
                 planning_proposal.proposal_id
             ),
@@ -237,6 +382,9 @@ def bridge_hypothesis_tests_to_typed_planning(
         ),
         test_questions=(
             proposal.test_questions
+        ),
+        source_basis_paths=(
+            source_basis_paths
         ),
         planning_proposal=(
             planning_proposal

@@ -29,6 +29,7 @@ implemented and certified.
 
 from __future__ import annotations
 
+import json
 import math
 
 from dataclasses import dataclass
@@ -311,6 +312,8 @@ def _hypothesis_round_typed_planner_instruction(
     *,
     current_round: int,
     max_rounds: int,
+    source_hypothesis: str,
+    source_basis_paths: tuple[str, ...],
 ) -> bytes:
     """Seal bounded hypothesis-round authority into planner instructions."""
 
@@ -320,6 +323,60 @@ def _hypothesis_round_typed_planner_instruction(
             "typed_planner_instruction"
         ),
     )
+
+    if (
+        not isinstance(
+            source_hypothesis,
+            str,
+        )
+        or not source_hypothesis.strip()
+    ):
+        raise RepositorySemanticUnderstandingCoordinatorError(
+            "source_hypothesis must be nonempty text"
+        )
+
+    if (
+        not isinstance(
+            source_basis_paths,
+            tuple,
+        )
+        or any(
+            (
+                not isinstance(
+                    path,
+                    str,
+                )
+                or not path.strip()
+            )
+            for path
+            in source_basis_paths
+        )
+    ):
+        raise RepositorySemanticUnderstandingCoordinatorError(
+            "source_basis_paths must be a tuple "
+            "of nonempty paths"
+        )
+
+    if (
+        len(
+            source_basis_paths
+        )
+        != len(
+            set(
+                source_basis_paths
+            )
+        )
+        or source_basis_paths
+        != tuple(
+            sorted(
+                source_basis_paths
+            )
+        )
+    ):
+        raise RepositorySemanticUnderstandingCoordinatorError(
+            "source_basis_paths must be unique "
+            "and canonically ordered"
+        )
 
     for name, value in (
         (
@@ -389,6 +446,31 @@ def _hypothesis_round_typed_planner_instruction(
         + "\n"
     )
 
+    context += (
+        "source_hypothesis="
+        + json.dumps(
+            source_hypothesis,
+            ensure_ascii=True,
+            separators=(
+                ",",
+                ":",
+            ),
+        )
+        + "\n"
+        + "source_hypothesis_material_basis_paths="
+        + json.dumps(
+            list(
+                source_basis_paths
+            ),
+            ensure_ascii=True,
+            separators=(
+                ",",
+                ":",
+            ),
+        )
+        + "\n"
+    )
+
     if final_round:
         context += (
             "final_round_rule="
@@ -401,6 +483,15 @@ def _hypothesis_round_typed_planner_instruction(
             "question on the final round. Dependencies are ordering-only; "
             "SEARCH_SOURCE results cannot dynamically populate a later "
             "operation in the same compiled plan.\n"
+            "final_round_source_basis_rule="
+            "The source hypothesis and its selected source-backed evidence "
+            "basis are supplied above. Metadata or hashes are not semantic "
+            "proof. Every path listed in "
+            "source_hypothesis_material_basis_paths must be considered for "
+            "material READ_SOURCE coverage before final evaluation; when "
+            "the hypothesis explicitly depends on such a source, the plan "
+            "must read that source rather than relying on its opaque "
+            "metadata record.\n"
         )
 
     else:
@@ -1682,6 +1773,15 @@ def run_repository_what_it_is_semantic_understanding(
             == limits.max_hypothesis_rounds
         )
 
+        bridge = (
+            bridge_hypothesis_tests_to_typed_planning(
+                request=request,
+                proposal=(
+                    active_hypothesis
+                ),
+            )
+        )
+
         round_typed_planner_instruction = (
             _hypothesis_round_typed_planner_instruction(
                 typed_planner_instruction,
@@ -1691,14 +1791,11 @@ def run_repository_what_it_is_semantic_understanding(
                 max_rounds=(
                     limits.max_hypothesis_rounds
                 ),
-            )
-        )
-
-        bridge = (
-            bridge_hypothesis_tests_to_typed_planning(
-                request=request,
-                proposal=(
-                    active_hypothesis
+                source_hypothesis=(
+                    bridge.source_hypothesis
+                ),
+                source_basis_paths=(
+                    bridge.source_basis_paths
                 ),
             )
         )

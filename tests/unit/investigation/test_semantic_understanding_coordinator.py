@@ -1503,6 +1503,21 @@ def test_hypothesis_typed_planner_receives_exact_round_budget_and_finality(
     )
 
     assert (
+        "source_hypothesis="
+        in second_instruction
+    )
+
+    assert (
+        HYPOTHESIS
+        in second_instruction
+    )
+
+    assert (
+        "source_hypothesis_material_basis_paths="
+        in second_instruction
+    )
+
+    assert (
         planner.calls[
             0
         ]

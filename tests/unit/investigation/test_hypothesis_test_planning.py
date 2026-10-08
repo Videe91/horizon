@@ -1,11 +1,18 @@
 from __future__ import annotations
 
+import json
+
+from dataclasses import replace
 from decimal import Decimal
 
 import pytest
 
 from horizon.claims.evidence_backed import (
+    ClaimEvidenceKind,
+    ClaimEvidenceRelation,
     EvidenceBackedClaim,
+    make_claim_evidence_reference,
+    make_evidence_backed_claim,
 )
 from horizon.claims.epistemic import (
     EpistemicAssessment,
@@ -26,6 +33,7 @@ from horizon.investigation.typed_planner_model import (
     make_semantic_gap_typed_planner_invocation,
 )
 from horizon.investigator.middleware import (
+    CanonicalEvidenceRecord,
     InvestigationRequest,
     InvestigationRequestOrigin,
 )
@@ -102,6 +110,143 @@ def hypothesis_proposal(
     )
 
 
+def test_bridge_preserves_selected_source_backed_hypothesis_basis() -> None:
+    evidence_id = (
+        "git-blob-evidence:test-source-basis"
+    )
+
+    reference = (
+        make_claim_evidence_reference(
+            ClaimEvidenceKind.STATIC,
+            ClaimEvidenceRelation.SUPPORTS,
+            evidence_id,
+        )
+    )
+
+    claim = (
+        make_evidence_backed_claim(
+            "The repository declares its purpose.",
+            scope="repository purpose",
+            evidence=(
+                reference,
+            ),
+        )
+    )
+
+    record = (
+        CanonicalEvidenceRecord(
+            evidence_id=(
+                evidence_id
+            ),
+            evidence_kind=(
+                "GIT_BLOB_EVIDENCE"
+            ),
+            canonical_payload=(
+                json.dumps(
+                    {
+                        "evidence_type": (
+                            "GIT_BLOB_EVIDENCE"
+                        ),
+                        "evidence_id": (
+                            evidence_id
+                        ),
+                        "commit_sha": (
+                            "a" * 40
+                        ),
+                        "repository_observation_id": (
+                            "git-observation:test"
+                        ),
+                        "path": (
+                            "pyproject.toml"
+                        ),
+                        "object_id": (
+                            "b" * 40
+                        ),
+                        "content_bytes": 10,
+                        "content_base64": (
+                            "dGVzdA=="
+                        ),
+                    },
+                    sort_keys=True,
+                    separators=(
+                        ",",
+                        ":",
+                    ),
+                )
+            ),
+        )
+    )
+
+    value = replace(
+        request(),
+        claims=(
+            claim,
+        ),
+        evidence_reference_ids=(
+            reference.reference_id,
+        ),
+        evidence_records=(
+            record,
+        ),
+        request_id=(
+            "semantic-gap-followup-investigation-request:"
+            "source-basis"
+        ),
+    )
+
+    source = (
+        parse_investigation_proposal(
+            value,
+            {
+                "type": (
+                    "PROPOSE_HYPOTHESIS"
+                ),
+                "question_id": (
+                    value.question_id
+                ),
+                "relationship_id": None,
+                "assertion_ids": [],
+                "claim_ids": [
+                    claim.claim_id,
+                ],
+                "assessment_ids": [],
+                "evidence_reference_ids": [
+                    reference.reference_id,
+                ],
+                "hypothesis": (
+                    "pyproject.toml declares "
+                    "the repository purpose."
+                ),
+                "test_questions": [
+                    (
+                        "Verify the exact declared "
+                        "repository purpose."
+                    ),
+                ],
+            },
+        )
+    )
+
+    bridge = (
+        bridge_hypothesis_tests_to_typed_planning(
+            request=value,
+            proposal=source,
+        )
+    )
+
+    assert (
+        bridge.source_hypothesis
+        == source.hypothesis
+    )
+
+    assert (
+        bridge.source_basis_paths
+        == (
+            "pyproject.toml",
+        )
+    )
+
+
 def test_hypothesis_test_questions_become_exact_planning_questions() -> None:
     value = request()
     source = hypothesis_proposal()
@@ -126,6 +271,11 @@ def test_hypothesis_test_questions_become_exact_planning_questions() -> None:
     assert (
         bridge.test_questions
         == source.test_questions
+    )
+
+    assert (
+        bridge.source_basis_paths
+        == ()
     )
 
     assert (
