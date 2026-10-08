@@ -274,6 +274,11 @@ def test_hypothesis_test_questions_become_exact_planning_questions() -> None:
     )
 
     assert (
+        bridge.planning_questions
+        == source.test_questions
+    )
+
+    assert (
         bridge.source_basis_paths
         == ()
     )
@@ -283,6 +288,74 @@ def test_hypothesis_test_questions_become_exact_planning_questions() -> None:
         .investigation_questions
         == source.test_questions
     )
+
+
+def test_evaluator_followup_questions_replace_only_current_planning_questions() -> None:
+    value = request()
+
+    source = hypothesis_proposal()
+
+    followup = (
+        "Which exact implementation passage "
+        "shows the remaining unresolved behavior?",
+    )
+
+    bridge = (
+        bridge_hypothesis_tests_to_typed_planning(
+            request=value,
+            proposal=source,
+            planning_questions=(
+                followup
+            ),
+        )
+    )
+
+    assert (
+        bridge.source_proposal_id
+        == source.proposal_id
+    )
+
+    assert (
+        bridge.source_hypothesis
+        == source.hypothesis
+    )
+
+    assert (
+        bridge.test_questions
+        == source.test_questions
+    )
+
+    assert (
+        bridge.planning_questions
+        == followup
+    )
+
+    assert (
+        bridge.planning_proposal
+        .investigation_questions
+        == followup
+    )
+
+    assert (
+        source.test_questions
+        != followup
+    )
+
+
+def test_followup_planning_questions_must_be_nonempty() -> None:
+    with pytest.raises(
+        HypothesisTestPlanningBridgeError,
+        match=(
+            "planning questions"
+        ),
+    ):
+        bridge_hypothesis_tests_to_typed_planning(
+            request=request(),
+            proposal=(
+                hypothesis_proposal()
+            ),
+            planning_questions=(),
+        )
 
 
 def test_derived_planning_proposal_is_not_source_hypothesis_proposal() -> None:

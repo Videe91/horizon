@@ -1517,6 +1517,42 @@ def test_hypothesis_typed_planner_receives_exact_round_budget_and_finality(
         planner.calls
     ) == 2
 
+    assert (
+        planner.calls[
+            0
+        ]
+        .proposal
+        .investigation_questions
+        == (
+            TEST_QUESTION,
+        )
+    )
+
+    assert (
+        planner.calls[
+            1
+        ]
+        .proposal
+        .investigation_questions
+        == (
+            "Inspect another exact "
+            "source location.",
+        )
+    )
+
+    assert (
+        planner.calls[
+            1
+        ]
+        .proposal
+        .investigation_questions
+        != planner.calls[
+            0
+        ]
+        .proposal
+        .investigation_questions
+    )
+
     first_instruction = (
         planner.calls[
             0

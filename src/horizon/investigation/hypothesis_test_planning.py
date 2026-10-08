@@ -53,6 +53,11 @@ class HypothesisTestPlanningBridge:
         ...,
     ]
 
+    planning_questions: tuple[
+        str,
+        ...,
+    ]
+
     source_basis_paths: tuple[
         str,
         ...,
@@ -218,8 +223,9 @@ def bridge_hypothesis_tests_to_typed_planning(
     *,
     request: InvestigationRequest,
     proposal: InvestigationProposal,
+    planning_questions: tuple[str, ...] | None = None,
 ) -> HypothesisTestPlanningBridge:
-    """Derive an executable-planning envelope from exact test questions."""
+    """Derive an executable-planning envelope from exact current questions."""
 
     if not isinstance(
         request,
@@ -301,6 +307,58 @@ def bridge_hypothesis_tests_to_typed_planning(
             "test questions must be nonempty text"
         )
 
+    if planning_questions is None:
+        current_planning_questions = (
+            proposal.test_questions
+        )
+
+    else:
+        if (
+            not isinstance(
+                planning_questions,
+                tuple,
+            )
+            or not planning_questions
+        ):
+            raise HypothesisTestPlanningBridgeError(
+                "planning questions must be "
+                "a nonempty tuple"
+            )
+
+        if any(
+            (
+                not isinstance(
+                    question,
+                    str,
+                )
+                or not question.strip()
+            )
+            for question
+            in planning_questions
+        ):
+            raise HypothesisTestPlanningBridgeError(
+                "planning questions must be "
+                "nonempty text"
+            )
+
+        if (
+            len(
+                planning_questions
+            )
+            != len(
+                set(
+                    planning_questions
+                )
+            )
+        ):
+            raise HypothesisTestPlanningBridgeError(
+                "planning questions must be unique"
+            )
+
+        current_planning_questions = (
+            planning_questions
+        )
+
     source_basis_paths = (
         _selected_source_basis_paths(
             request=request,
@@ -334,7 +392,7 @@ def bridge_hypothesis_tests_to_typed_planning(
                     proposal.evidence_reference_ids
                 ),
                 "investigation_questions": list(
-                    proposal.test_questions
+                    current_planning_questions
                 ),
             },
         )
@@ -343,10 +401,11 @@ def bridge_hypothesis_tests_to_typed_planning(
     if (
         planning_proposal
         .investigation_questions
-        != proposal.test_questions
+        != current_planning_questions
     ):
         raise HypothesisTestPlanningBridgeError(
-            "derived planning questions do not exactly match test questions"
+            "derived planning questions do not exactly "
+            "match current planning questions"
         )
 
     bridge_id = _identity(
@@ -363,6 +422,9 @@ def bridge_hypothesis_tests_to_typed_planning(
             ),
             "test_questions": list(
                 proposal.test_questions
+            ),
+            "planning_questions": list(
+                current_planning_questions
             ),
             "source_basis_paths": list(
                 source_basis_paths
@@ -382,6 +444,9 @@ def bridge_hypothesis_tests_to_typed_planning(
         ),
         test_questions=(
             proposal.test_questions
+        ),
+        planning_questions=(
+            current_planning_questions
         ),
         source_basis_paths=(
             source_basis_paths

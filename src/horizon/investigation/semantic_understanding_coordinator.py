@@ -1499,6 +1499,8 @@ def run_repository_what_it_is_semantic_understanding(
 
     latest_evaluation = None
 
+    next_hypothesis_planning_questions = None
+
     investigator_rounds_completed = 0
 
     hypothesis_rounds_completed = 0
@@ -1827,9 +1829,12 @@ def run_repository_what_it_is_semantic_understanding(
 
     #
     # Phase 2:
-    # Use the hypothesis's exact test questions to gather evidence,
-    # then evaluate the SAME hypothesis against the expanded request.
+    # Round 1 uses the hypothesis's exact test questions.
     #
+    # If evaluation returns STILL_INCOMPLETE, the following round
+    # plans the evaluator's exact missing-evidence questions.
+    #
+    # The SAME source hypothesis remains under evaluation throughout.
     # STILL_INCOMPLETE loops only within the pre-registered round bound.
     #
 
@@ -1852,6 +1857,9 @@ def run_repository_what_it_is_semantic_understanding(
                 request=request,
                 proposal=(
                     active_hypothesis
+                ),
+                planning_questions=(
+                    next_hypothesis_planning_questions
                 ),
             )
         )
@@ -2127,6 +2135,53 @@ def run_repository_what_it_is_semantic_understanding(
             is HypothesisEvaluationVerdict
             .STILL_INCOMPLETE
         ):
+            missing_questions = (
+                evaluation
+                .missing_evidence_questions
+            )
+
+            if (
+                not isinstance(
+                    missing_questions,
+                    tuple,
+                )
+                or not missing_questions
+                or any(
+                    (
+                        not isinstance(
+                            question,
+                            str,
+                        )
+                        or not question.strip()
+                    )
+                    for question
+                    in missing_questions
+                )
+            ):
+                raise RepositorySemanticUnderstandingCoordinatorError(
+                    "STILL_INCOMPLETE evaluation must provide "
+                    "nonempty missing evidence questions"
+                )
+
+            if (
+                len(
+                    missing_questions
+                )
+                != len(
+                    set(
+                        missing_questions
+                    )
+                )
+            ):
+                raise RepositorySemanticUnderstandingCoordinatorError(
+                    "STILL_INCOMPLETE missing evidence "
+                    "questions must be unique"
+                )
+
+            next_hypothesis_planning_questions = (
+                missing_questions
+            )
+
             continue
 
         if (
