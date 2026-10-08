@@ -1,0 +1,127 @@
+{
+  "boundary": {
+    "investigation_plan_compiled": false,
+    "investigation_plan_executed": false,
+    "planner_output_is_proposal_only": true,
+    "repository_operations": 0,
+    "semantic_promotions": 0,
+    "what_it_is_closed": false,
+    "world_model_mutations": 0
+  },
+  "certification": {
+    "mode": "OFFLINE_LIVE_RESULT_CERTIFICATION",
+    "stage": "025ZZE-2C-R22",
+    "status": "PASS"
+  },
+  "cost_authority": {
+    "aggregate_exam_cap_usd": "2.700000",
+    "call6_actual_cost_usd": "0.240460",
+    "conservative_exposure_through_call5_usd": "0.859493",
+    "conservative_exposure_through_call6_usd": "1.099953"
+  },
+  "durability": {
+    "attempt_ledger_path": "/tmp/horizon-025zze2-r21-call6-attempt-ledger.jsonl",
+    "attempt_ledger_sha256": "sha256:b8e18bdc548e5b2e11fc9eef24b8a0df520aaa65811b3264d31253e8868bf680",
+    "lock_path": "/tmp/horizon-025zze2-r21-call6-live.lock",
+    "lock_sha256": "sha256:a187358a36a7d087d3aa21b0d1f3d799ee78283ac19a435ba53d3af4579d69a0",
+    "raw_response_persisted_before_validation": true,
+    "rerun_allowed": false,
+    "response_spool_path": "/tmp/horizon-025zze2-r21-call6-response-spool/response-0006.json",
+    "response_spool_sha256": "sha256:59f0c2863eb935b0f3fef12ab4322b015228b05b9cb3ba722ed07594f3efb061",
+    "result_spool_path": "/tmp/horizon-025zze2-r21-call6-result.json",
+    "result_spool_sha256": "sha256:14604334632eeb1f44169d1bfc468556a591e68ed714ef7a313f7d24ec5fa117"
+  },
+  "final_round_contract": {
+    "contract_satisfied": true,
+    "deferred_discovery_required": false,
+    "every_question_has_read_source": true,
+    "question_count": 2,
+    "search_source_count": 0
+  },
+  "lineage": {
+    "global_provider_call_ordinal": 6,
+    "hypothesis_round": 2,
+    "max_hypothesis_rounds": 2,
+    "remaining_hypothesis_rounds": 0,
+    "source_r20_preregistration": "artifacts/investigator/025zze2c-r20-final-round-call6-preregistration.json",
+    "target_commit": "6151aad2081d9a849a6aac7a6081a2d7b32c4334"
+  },
+  "next_authorized_stage": "Compile the exact certified R22 planner output into a bounded InvestigationPlan offline. Do not execute repository operations in the plan-compilation stage.",
+  "planner_output": {
+    "bindings": [
+      {
+        "depends_on_keys": [],
+        "expected_information": "Exact passages defining the intended software understanding and agent-facing context, including distinctions between architectural intent, limitations, and future work.",
+        "investigation_question": "At frozen commit 6151aad2081d9a849a6aac7a6081a2d7b32c4334, which exact documentation or source passages define the software understanding intended for AI agents and confirm, qualify, or contradict this primary-purpose interpretation?",
+        "max_seconds": 10,
+        "operation": {
+          "end_line": 278,
+          "path": "CONSTITUTION.md",
+          "start_line": 1,
+          "type": "READ_SOURCE"
+        },
+        "purpose": "Read the stated purpose, understanding model, card rationale, and surrounding qualifications within the observed documentation bounds.",
+        "step_key": "read_purpose_and_scope"
+      },
+      {
+        "depends_on_keys": [],
+        "expected_information": "Implemented reconciliation behavior, inputs, and limits visible in this range; evidence supporting or qualifying maintenance over time without assuming continuous execution.",
+        "investigation_question": "At that commit, which implementation or test passages, if any, show how that understanding is maintained over time and made available to AI agents, rather than identifying these capabilities only as planned work?",
+        "max_seconds": 10,
+        "operation": {
+          "end_line": 371,
+          "path": "src/horizon/world_model/reconciliation.py",
+          "start_line": 1,
+          "type": "READ_SOURCE"
+        },
+        "purpose": "Inspect world-model reconciliation implementation for concrete maintenance behavior rather than relying on purpose statements.",
+        "step_key": "read_maintenance_implementation"
+      },
+      {
+        "depends_on_keys": [],
+        "expected_information": "Test setup and assertions showing what repository cards expose and any maintenance behavior covered in this range, distinguishing tested card generation from demonstrated agent delivery or continuously running maintenance.",
+        "investigation_question": "At that commit, which implementation or test passages, if any, show how that understanding is maintained over time and made available to AI agents, rather than identifying these capabilities only as planned work?",
+        "max_seconds": 10,
+        "operation": {
+          "end_line": 381,
+          "path": "tests/unit/cards/test_repository_card.py",
+          "start_line": 1,
+          "type": "READ_SOURCE"
+        },
+        "purpose": "Inspect repository-card tests for concrete output behavior and any change-handling scenarios within the observed bounds.",
+        "step_key": "read_repository_card_tests"
+      }
+    ],
+    "proposal_id": "investigation-proposal:718b5d12bc9c7a95389ce878ebfe79ab4a602746b1c0b06d5dc10d18f530192d",
+    "question_id": "repository-semantic-gap-question:627bdd67d2987320db7e045a86ea8c87a4c256ab4bf3c44c86b90c52d8775ab8"
+  },
+  "provider": {
+    "api_request_id": "req_fd896440cebf47b09578e5f3179c3407",
+    "cost_cap_usd": "0.300000",
+    "cost_usd": "0.240460",
+    "input_tokens": 4507,
+    "output_tokens": 1704,
+    "requested_model": "gpt-6-astra",
+    "response_id": "resp_0c8b73e773dbeb46016ac7ba12cec887d1ba6ec60305363e12",
+    "returned_model": "gpt-6-astra",
+    "status": "completed"
+  },
+  "semantic_invocation": {
+    "canonical_input_hash": "sha256:a203d91cc139aa211a19e083c00ea5d34ffd5144e946a4fab554c2d886db3032",
+    "instruction_hash": "sha256:49168578fe00f479e2fd7321400e8feba7bcd7d70f405f3eb7142b66d652c1e2",
+    "invocation_id": "semantic-gap-typed-planner-invocation:7aa870158f207b6027f2a1ab05b2e5fab08292c737e6ce0e16e3d01cef9b174d",
+    "provider_input_sha256": "sha256:cf1df7de7aa1e719e24960386602220ee791676b267fb369591c6769e043ad24"
+  },
+  "validation": {
+    "binding_count": 3,
+    "canonical_output_hash": "sha256:27820f12b708241b44a8bca31ec30d97b821a0d3efc47a0731570e4bc62a087b",
+    "operation_counts": {
+      "INSPECT_SYMBOL": 0,
+      "READ_SOURCE": 3,
+      "RESOLVE_CALL": 0,
+      "SEARCH_SOURCE": 0
+    },
+    "planner_output_id": "semantic-gap-typed-planner-output:a5d2e7f7c618b2deaf29ff92a914e6f8a9b2a90b11163f2187664ed4b70d16f3",
+    "result": "VALID"
+  }
+}
