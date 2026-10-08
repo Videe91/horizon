@@ -1,0 +1,101 @@
+{
+  "authority": {
+    "investigation_plan_compiled": false,
+    "investigation_plan_executed": false,
+    "provider_calls_this_stage": 0,
+    "read_source_operations_this_stage": 0,
+    "repository_operations_this_stage": 0,
+    "semantic_promotions": 0,
+    "typed_planner_calls_this_stage": 0,
+    "what_it_is_closed": false,
+    "world_model_mutations": 0
+  },
+  "boundary": {
+    "call4_failure_state_preserved": true,
+    "call4_not_retried": true,
+    "call5_executed": false,
+    "call5_preregistered": true,
+    "planner_output_exists": false,
+    "semantic_invocation_changed": false,
+    "transport_envelope_changed": true
+  },
+  "certification": {
+    "mode": "OFFLINE_ONLY",
+    "name": "025ZZE-2C-R16 round-2 typed-planner recovery dispatch preregistration",
+    "status": "PASS"
+  },
+  "cost_authority": {
+    "aggregate_exam_cap_usd": "2.700000",
+    "call5_cost_cap_usd": "0.300000",
+    "conservative_exposure_before_call5_usd": "0.663655",
+    "indeterminate_call4_reserved_usd": "0.300000",
+    "known_paid_cost_usd": "0.363655",
+    "worst_case_exposure_through_call5_usd": "0.963655"
+  },
+  "lineage": {
+    "hypothesis_round": 2,
+    "planning_proposal_id": "investigation-proposal:718b5d12bc9c7a95389ce878ebfe79ab4a602746b1c0b06d5dc10d18f530192d",
+    "semantic_canonical_input_hash": "sha256:923ba5c064ee7ac8171f033b5617dfd177a2d40647ef367789e25d6aaf624d1a",
+    "semantic_invocation_id": "semantic-gap-typed-planner-invocation:6b6000f36c91d2567884a709eb09d95fc8ef8983d452cfd036fc074d8027410d",
+    "semantic_provider_input_sha256": "sha256:cf1df7de7aa1e719e24960386602220ee791676b267fb369591c6769e043ad24",
+    "source_r14_preregistration": "artifacts/investigator/025zze2c-r14-round2-typed-planner-preregistration.json",
+    "source_r15r1_timeout_certification": "artifacts/investigator/025zze2c-r15r1-timeout-forensic-certification.json"
+  },
+  "next_authorized_stage": "Execute exactly one new OpenAI typed-planner dispatch as global provider call ordinal 5 using the exact sealed semantic invocation and the exact R16 recovery transport envelope. Inject the preregistered X-Client-Request-Id, use a 300-second timeout, use zero SDK and wrapper retries, persist the raw response before semantic validation, and do not compile or execute the planner output in that stage.",
+  "prior_indeterminate_dispatch": {
+    "failure_class": "TRANSPORT_READ_TIMEOUT_AFTER_DISPATCH_ATTEMPT",
+    "full_call_cap_reserved": true,
+    "global_provider_call_ordinal": 4,
+    "remote_outcome": "UNKNOWN",
+    "response_received": false,
+    "semantic_output_available": false,
+    "silent_retry_authorized": false
+  },
+  "recovery_dispatch": {
+    "dispatch_id": "typed-planner-recovery-dispatch:5f7430047faf0032baf9c3537d3c237a2cf10de9acd1f0904c64d3187b5c679d",
+    "global_provider_call_ordinal": 5,
+    "semantic_invocation_reused_exactly": true,
+    "semantic_provider_input_reused_exactly": true,
+    "transport_envelope": {
+      "global_provider_call_ordinal": 5,
+      "hypothesis_round": 2,
+      "prior_indeterminate_dispatch": {
+        "failure_state_must_be_preserved": true,
+        "global_provider_call_ordinal": 4,
+        "remote_outcome": "UNKNOWN",
+        "silent_retry_forbidden": true
+      },
+      "provider": "OPENAI",
+      "provider_role": "TYPED_PLANNER",
+      "schema_version": 1,
+      "semantic_canonical_input_hash": "sha256:923ba5c064ee7ac8171f033b5617dfd177a2d40647ef367789e25d6aaf624d1a",
+      "semantic_invocation_id": "semantic-gap-typed-planner-invocation:6b6000f36c91d2567884a709eb09d95fc8ef8983d452cfd036fc074d8027410d",
+      "semantic_provider_input_sha256": "sha256:cf1df7de7aa1e719e24960386602220ee791676b267fb369591c6769e043ad24",
+      "transport": {
+        "client_request_id": "horizon-025zze2c-call5-c054891315734cadae6cb9269045cbfd2b2b1e0d51617729d8a748ef71fcd11b",
+        "client_request_id_header": "X-Client-Request-Id",
+        "response_store": false,
+        "sdk_max_retries": 0,
+        "timeout_seconds": 300.0,
+        "wrapper_retries": 0
+      }
+    },
+    "transport_envelope_hash": "sha256:5f7430047faf0032baf9c3537d3c237a2cf10de9acd1f0904c64d3187b5c679d"
+  },
+  "sdk_preflight": {
+    "default_headers_supported": true,
+    "openai_sdk_version": "3.24.0",
+    "sdk_max_retries": 0,
+    "timeout_seconds": 300.0,
+    "wrapper_retries": 0,
+    "x_client_request_id_injection_verified": true
+  },
+  "traceability": {
+    "client_request_id": "horizon-025zze2c-call5-c054891315734cadae6cb9269045cbfd2b2b1e0d51617729d8a748ef71fcd11b",
+    "client_request_id_ascii": true,
+    "client_request_id_length": 87,
+    "header_name": "X-Client-Request-Id",
+    "purpose": "Provide caller-controlled request trace identity when a timeout prevents receipt of server x-request-id.",
+    "unique_to_global_provider_call_5": true
+  }
+}
