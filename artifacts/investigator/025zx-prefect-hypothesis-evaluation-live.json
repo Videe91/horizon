@@ -1,0 +1,82 @@
+{
+  "authority": {
+    "claims_created": 0,
+    "epistemic_assessments_created": 0,
+    "hypothesis_promoted": false,
+    "live_model_calls": 1,
+    "new_repository_operations_executed": 0,
+    "what_it_is_closed": false,
+    "world_model_assertions_created": 0,
+    "world_model_mutations": 0
+  },
+  "capability": "025ZX",
+  "evaluation": {
+    "contradicting_evidence_ids": [],
+    "evaluation_id": "hypothesis-evidence-evaluation:ff18bebecdaa0b9dc57ecaf6e771ac61358617420049ead288c063ca85f993f1",
+    "hypothesis": "At frozen commit 2338265f658845a9bef8ce7baf07519b89846dc8, this repository primarily implements Prefect as Python software for workflow orchestration and management. This tentative interpretation follows pyproject.toml's description, \"Workflow orchestration and management.\", and is consistent with the visible Flow and Task class declarations; those declarations alone do not establish their operational roles.",
+    "missing_evidence_questions": [],
+    "question_id": "repository-semantic-gap-question:af7afaa11d8b7bdd25d6343180942b186c1b087a1cc35ae8f19442632f5eccb5",
+    "request_id": "semantic-gap-followup-investigation-request:b22d2b8474573cf7334e5eed1292f463d01fff025e7c575ac32a0b79c86e2cdb",
+    "source_proposal_id": "investigation-proposal:f7de5be6011e548868c8ffc118967b17056ce80c8fc2376f9fc8108a99879295",
+    "supporting_evidence_ids": [
+      "investigation-source-observation:1bbbba51000fb63886ea19a66e9cea0cca827eeb1e6077b79bc40e849cc0f4bb",
+      "investigation-source-observation:6e5a493e182a2d1c0fee65d24ac2a940606e21e026007aec30430ab1a56020f2",
+      "investigation-source-observation:d6a91a2dc5d8c5f67e09a85543403ad2654b7eb61f2894934bf104097522fce6",
+      "investigation-source-observation:e4730dd25b7741d5a677881dc98c671db15f2ea96c0f1bc9fbfbfde25590bbc6"
+    ],
+    "verdict": "SUPPORTED"
+  },
+  "invocation": {
+    "canonical_input_hash": "sha256:72350bf1967fa5beb4525a64b8381094c5f8b91be18bab71eabe2137a18e020b",
+    "cost_cap_usd": "0.200000",
+    "instruction_hash": "sha256:0d776662f5e4d17834dca18d9233df01ef7bcc8bf2b5d0e82a23043d2a22a896",
+    "invocation_id": "hypothesis-evaluation-model-invocation:6afffda72dba1089d1c0e905444cbebab639f754b2875d0c25e5ebdf37dca1ce",
+    "schema_hash": "sha256:386c3c6aefa9749216916d05041c035fdc59d73e6a62278b084d8e82db86ff82"
+  },
+  "provider": {
+    "api_request_id": "req_7141ca06c451440195aeb358b4c51630",
+    "calculated_cost_usd": "0.1043425",
+    "input_tokens": 6160,
+    "model_id": "gpt-6-astra",
+    "output_tokens": 547,
+    "provider_name": "OPENAI"
+  },
+  "raw_output": {
+    "contradicting_evidence_ids": [],
+    "missing_evidence_questions": [],
+    "question_id": "repository-semantic-gap-question:af7afaa11d8b7bdd25d6343180942b186c1b087a1cc35ae8f19442632f5eccb5",
+    "request_id": "semantic-gap-followup-investigation-request:b22d2b8474573cf7334e5eed1292f463d01fff025e7c575ac32a0b79c86e2cdb",
+    "source_proposal_id": "investigation-proposal:f7de5be6011e548868c8ffc118967b17056ce80c8fc2376f9fc8108a99879295",
+    "supporting_evidence_ids": [
+      "investigation-source-observation:e4730dd25b7741d5a677881dc98c671db15f2ea96c0f1bc9fbfbfde25590bbc6",
+      "investigation-source-observation:6e5a493e182a2d1c0fee65d24ac2a940606e21e026007aec30430ab1a56020f2",
+      "investigation-source-observation:d6a91a2dc5d8c5f67e09a85543403ad2654b7eb61f2894934bf104097522fce6",
+      "investigation-source-observation:1bbbba51000fb63886ea19a66e9cea0cca827eeb1e6077b79bc40e849cc0f4bb"
+    ],
+    "verdict": "SUPPORTED"
+  },
+  "result": "MODEL_EVALUATION_RETURNED",
+  "run": {
+    "api_request_id": "req_7141ca06c451440195aeb358b4c51630",
+    "canonical_input_hash": "sha256:72350bf1967fa5beb4525a64b8381094c5f8b91be18bab71eabe2137a18e020b",
+    "canonical_output_hash": "sha256:98ed703f7bb53bd0770a792d6b7769c22c71085d65ad1281004646a437f71141",
+    "cost_cap_usd": "0.200000",
+    "cost_usd": "0.1043425",
+    "input_tokens": 6160,
+    "instruction_hash": "sha256:0d776662f5e4d17834dca18d9233df01ef7bcc8bf2b5d0e82a23043d2a22a896",
+    "invocation_id": "hypothesis-evaluation-model-invocation:6afffda72dba1089d1c0e905444cbebab639f754b2875d0c25e5ebdf37dca1ce",
+    "model_id": "gpt-6-astra",
+    "output_tokens": 547,
+    "provider": "OPENAI",
+    "rejection_reason": null,
+    "run_id": "hypothesis-evaluation-model-run:80d98244d0caa2c0eeba57159ccadd8dd2470a0e99c412c9717c09b1b02ae2ad",
+    "schema_hash": "sha256:386c3c6aefa9749216916d05041c035fdc59d73e6a62278b084d8e82db86ff82",
+    "temperature": null,
+    "validation_result": "VALID"
+  },
+  "source": {
+    "pre_registration_artifact": "artifacts/investigator/025zv-prefect-hypothesis-evaluation-invocation.json",
+    "request_id": "semantic-gap-followup-investigation-request:b22d2b8474573cf7334e5eed1292f463d01fff025e7c575ac32a0b79c86e2cdb",
+    "source_proposal_id": "investigation-proposal:f7de5be6011e548868c8ffc118967b17056ce80c8fc2376f9fc8108a99879295"
+  }
+}
