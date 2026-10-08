@@ -1,0 +1,771 @@
+{
+  "authority": {
+    "model_calls_this_stage": 0,
+    "read_source_operations_this_stage": 0,
+    "repository_operations_this_stage": 0,
+    "semantic_overlay_created": false,
+    "semantic_promotions": 0,
+    "typed_planner_calls_this_stage": 0,
+    "what_it_is_closed": false,
+    "world_model_mutations": 0
+  },
+  "boundary": {
+    "investigation_plan_compiled": false,
+    "investigation_plan_executed": false,
+    "planner_output_exists": false,
+    "provider_call_4_executed": false,
+    "r13_repaired_coordinates_visible_to_provider": true,
+    "round2_planner_invocation_sealed": true
+  },
+  "certification": {
+    "mode": "OFFLINE_ONLY",
+    "name": "025ZZE-2C-R14 hypothesis-round-2 typed-planner preregistration",
+    "status": "PASS"
+  },
+  "cost_authority": {
+    "aggregate_exam_cap_usd": "2.700000",
+    "next_call_cap_usd": "0.300000",
+    "paid_cost_through_r12_usd": "0.363655",
+    "worst_case_paid_cost_through_call4_usd": "0.663655"
+  },
+  "lineage": {
+    "base_request_id": "investigation-request:fe6c0526a0667730eba56abe4dc465b958cac79616d78842857198e76a5b5d61",
+    "base_world_model_snapshot_id": "world-model-snapshot:44d0df5367ae7e6a1fa212e80cf6a79eab422cda3dec9b56ed0166944365faff",
+    "expanded_followup_request_id": "semantic-gap-followup-investigation-request:564d2da3b6c6615a4af3ba49cbf6cd026980199baff1e6441e0eb8d396587005",
+    "question_id": "repository-semantic-gap-question:627bdd67d2987320db7e045a86ea8c87a4c256ab4bf3c44c86b90c52d8775ab8",
+    "repository_observation_id": "git-observation:a453d58352a0769d5fbc954c808c977f2e0a65eb095d862d5f3f8a9566cab5b5",
+    "semantic_gap_id": "repository-semantic-gap:b530b9c5bd7f0108fe555ddbd2d74250c07ca5e854e2e1ddda5dcc030fb01e5d",
+    "source_hypothesis_proposal_id": "investigation-proposal:50754d89b43816d8b54d12712690c16815462f9daa0c3b515d0ee3bd6e385103",
+    "source_r12_evaluation_id": "hypothesis-evidence-evaluation:45a147f4eb04588ede4446d01d08cda7fd14e2fd81cda735ef2286090540cc25",
+    "source_r12_verdict": "STILL_INCOMPLETE",
+    "source_r13_repair": "artifacts/investigator/025zze2c-r13-bounded-search-planner-projection-fix.json",
+    "target_commit": "6151aad2081d9a849a6aac7a6081a2d7b32c4334"
+  },
+  "next_authorized_stage": "Execute exactly one paid GPT-6 Astra typed-planner call using this sealed round-2 invocation as global provider call ordinal 4. Persist the raw provider response before validation. Do not compile or execute the returned investigation plan in that same stage.",
+  "planning_bridge": {
+    "bridge_id": "hypothesis-test-planning-bridge:51e6d2e0d27afbdf7d1fa74d04924d274ef69173d17b988bfc115cad72084079",
+    "investigation_questions": [
+      "At frozen commit 6151aad2081d9a849a6aac7a6081a2d7b32c4334, which exact documentation or source passages define the software understanding intended for AI agents and confirm, qualify, or contradict this primary-purpose interpretation?",
+      "At that commit, which implementation or test passages, if any, show how that understanding is maintained over time and made available to AI agents, rather than identifying these capabilities only as planned work?"
+    ],
+    "planning_proposal_id": "investigation-proposal:718b5d12bc9c7a95389ce878ebfe79ab4a602746b1c0b06d5dc10d18f530192d",
+    "r12_missing_questions_do_not_replace_planning_questions": true,
+    "source_proposal_id": "investigation-proposal:50754d89b43816d8b54d12712690c16815462f9daa0c3b515d0ee3bd6e385103",
+    "uses_original_hypothesis_test_questions": true
+  },
+  "provider_input": {
+    "bytes": 14729,
+    "canonical_input": {
+      "operation_semantics": {
+        "contract_id": "typed-planner-operation-semantics:d2c7d2962cb7e7bad05367508a03c178e1ca8fcbd7a2149ed66ebff5c3681c2c",
+        "operations": [
+          {
+            "kind": "SEARCH_SOURCE",
+            "rules": [
+              [
+                "QUERY_MODE",
+                "EXACT_CASE_SENSITIVE_LITERAL_UTF8_SUBSTRING"
+              ],
+              [
+                "REGEX_SUPPORTED",
+                "NO"
+              ],
+              [
+                "GLOB_SUPPORTED",
+                "NO"
+              ],
+              [
+                "REGEX_METACHARACTERS",
+                "HAVE_NO_SPECIAL_MEANING"
+              ],
+              [
+                "SOURCE",
+                "FROZEN_OBSERVED_GIT_BLOB_BYTES"
+              ],
+              [
+                "PATH_PREFIX",
+                "OPTIONAL_REPOSITORY_RELATIVE_LITERAL_PREFIX_FILTER"
+              ],
+              [
+                "MATCH_RESULT",
+                "ALL_LITERAL_MATCHES_WITH_OBSERVED_EVIDENCE_IDENTITIES"
+              ]
+            ]
+          },
+          {
+            "kind": "READ_SOURCE",
+            "rules": [
+              [
+                "PATH",
+                "EXACT_REPOSITORY_RELATIVE_OBSERVED_GIT_BLOB_PATH"
+              ],
+              [
+                "START_LINE",
+                "ONE_BASED_INCLUSIVE"
+              ],
+              [
+                "END_LINE",
+                "ONE_BASED_INCLUSIVE"
+              ],
+              [
+                "END_LINE_REQUIREMENT",
+                "MUST_NOT_EXCEED_OBSERVED_SOURCE_LENGTH"
+              ],
+              [
+                "DISCOVERY",
+                "DOES_NOT_DISCOVER_OR_GUESS_PATHS"
+              ]
+            ]
+          },
+          {
+            "kind": "INSPECT_SYMBOL",
+            "rules": [
+              [
+                "PATH",
+                "EXACT_REPOSITORY_RELATIVE_PYTHON_BLOB_PATH"
+              ],
+              [
+                "SYMBOL",
+                "EXACT_DOTTED_LEXICAL_DEFINITION_NAME"
+              ],
+              [
+                "FUZZY_LOOKUP",
+                "NO"
+              ],
+              [
+                "RESULT",
+                "OBSERVED_PYTHON_STRUCTURE_DEFINITION_AND_SUBTREE"
+              ],
+              [
+                "DISCOVERY",
+                "DOES_NOT_DISCOVER_OR_GUESS_PATHS_OR_SYMBOLS"
+              ]
+            ]
+          },
+          {
+            "kind": "RESOLVE_CALL",
+            "rules": [
+              [
+                "PATH",
+                "EXACT_REPOSITORY_RELATIVE_PYTHON_BLOB_PATH"
+              ],
+              [
+                "LINE",
+                "ONE_BASED"
+              ],
+              [
+                "CHARACTER",
+                "ZERO_BASED_BYTE_OFFSET_WITHIN_SOURCE_LINE"
+              ],
+              [
+                "POSITION_REQUIREMENT",
+                "MUST_FALL_INSIDE_OBSERVED_CALLEE_EXPRESSION"
+              ],
+              [
+                "SEMANTIC_ENGINE",
+                "TRUSTED_PYRIGHT_CALLEE_TYPE_RESOLUTION"
+              ],
+              [
+                "DISCOVERY",
+                "DOES_NOT_DISCOVER_OR_GUESS_PATHS_OR_COORDINATES"
+              ]
+            ]
+          }
+        ],
+        "planner_laws": [
+          [
+            "OPERATION_ARGUMENT_BINDING",
+            "STATIC_AT_PLAN_COMPILE_TIME"
+          ],
+          [
+            "DEPENDENCY_SEMANTICS",
+            "ORDERING_ONLY_NO_OUTPUT_SUBSTITUTION"
+          ],
+          [
+            "UNKNOWN_PATH_SYMBOL_OR_COORDINATE",
+            "DO_NOT_INVENT_SEARCH_THEN_REPLAN"
+          ],
+          [
+            "REPOSITORY_STATE",
+            "READ_ONLY_FROZEN_OBSERVED_GIT_COMMIT"
+          ],
+          [
+            "MODEL_AUTHORITY",
+            "PROPOSES_OPERATIONS_ONLY_HORIZON_EXECUTES_AND_VERIFIES"
+          ]
+        ],
+        "schema_version": 1
+      },
+      "operation_semantics_id": "typed-planner-operation-semantics:d2c7d2962cb7e7bad05367508a03c178e1ca8fcbd7a2149ed66ebff5c3681c2c",
+      "proposal": {
+        "assertion_ids": [],
+        "assessment_ids": [],
+        "candidates": [],
+        "claim_ids": [],
+        "evidence_reference_ids": [
+          "claim-evidence-reference:bfa5b811383961808d9e9b45f3fa7e2a9b7acbf1b22638ebca8438be98874f29"
+        ],
+        "hypothesis": null,
+        "investigation_questions": [
+          "At frozen commit 6151aad2081d9a849a6aac7a6081a2d7b32c4334, which exact documentation or source passages define the software understanding intended for AI agents and confirm, qualify, or contradict this primary-purpose interpretation?",
+          "At that commit, which implementation or test passages, if any, show how that understanding is maintained over time and made available to AI agents, rather than identifying these capabilities only as planned work?"
+        ],
+        "kind": "PROPOSE_INVESTIGATION",
+        "missing_evidence_questions": [],
+        "proposal_id": "investigation-proposal:718b5d12bc9c7a95389ce878ebfe79ab4a602746b1c0b06d5dc10d18f530192d",
+        "question_id": "repository-semantic-gap-question:627bdd67d2987320db7e045a86ea8c87a4c256ab4bf3c44c86b90c52d8775ab8",
+        "relationship_id": null,
+        "test_questions": []
+      },
+      "request": {
+        "assertion_ids": [
+          "world-model-assertion:3b21080b12879e6b55435bfcc69acf516f9d84d31dd87afd5624457c6e94f254"
+        ],
+        "assessment_ids": [
+          "epistemic-assessment:8ab4d7468f86e4d86e680e6a7f8ab90909076dce42b5159c91ff25958c4005e9"
+        ],
+        "claim_ids": [
+          "evidence-backed-claim:50ad744a1d920c8ee275e92ce102a455ac06e62e9ff7005a36fe05e078ff445b"
+        ],
+        "evidence_records": [
+          {
+            "canonical_payload_bytes": 363,
+            "canonical_payload_sha256": "sha256:41e58f00c98e96527a335cc24281fc30e8d1733f164560af030436ee9c251dbe",
+            "evidence_id": "declared-python-dependency-set:96d09be949466add9c704196f5ef3c2fbb8d72589b613323ebfe8baf5d16aaca",
+            "evidence_kind": "PYTHON_DECLARED_PROJECT_DEPENDENCIES_EVIDENCE",
+            "operational_context": null
+          },
+          {
+            "canonical_payload_bytes": 970,
+            "canonical_payload_sha256": "sha256:a8a4639cc2dbff166f87f9455e47b5101cce5a9bb086a02633e20eff9513b310",
+            "evidence_id": "git-blob-evidence:04f33da4024e2f63cebd242911b3e16d24683443eb14506a6f24ef3fccf62075",
+            "evidence_kind": "GIT_BLOB_EVIDENCE",
+            "operational_context": null
+          },
+          {
+            "canonical_payload_bytes": 5663,
+            "canonical_payload_sha256": "sha256:18e0723bb2feff8942e1de3009d05a8c13bbe874fe0b09ebdb8226aa326be512",
+            "evidence_id": "bounded-investigation-search-evidence:18e0723bb2feff8942e1de3009d05a8c13bbe874fe0b09ebdb8226aa326be512",
+            "evidence_kind": "BOUNDED_INVESTIGATION_SEARCH_OBSERVATION",
+            "operational_context": {
+              "match_count": 9,
+              "matches": [
+                {
+                  "line_number": 5,
+                  "line_text": "Horizon gives AI agents a continuously maintained understanding of software.",
+                  "line_text_truncated": false,
+                  "path": "CONSTITUTION.md"
+                },
+                {
+                  "line_number": 29,
+                  "line_text": "- `agent`",
+                  "line_text_truncated": false,
+                  "path": "artifacts/cards/prefect-card-baseline-pre-022.md"
+                },
+                {
+                  "line_number": 264,
+                  "line_text": "an AI agent than raw repository exploration?",
+                  "line_text_truncated": false,
+                  "path": "challenges/001-prefect-flow-execution.md"
+                },
+                {
+                  "line_number": 3,
+                  "line_text": "> **For agentic workers:** REQUIRED SUB-SKILL: use",
+                  "line_text_truncated": false,
+                  "path": "docs/superpowers/plans/2026-10-06-world-model-snapshot-018.md"
+                },
+                {
+                  "line_number": 14,
+                  "line_text": "No generic autonomous-agent runtime, hidden routing policy, unrestricted tool-use layer, or multi-agent system is introduced in 021.",
+                  "line_text_truncated": false,
+                  "path": "docs/superpowers/specs/2026-10-06-ai-investigator-021-design.md"
+                },
+                {
+                  "line_number": 8,
+                  "line_text": "description = \"Continuously maintained software understanding for AI agents\"",
+                  "line_text_truncated": false,
+                  "path": "pyproject.toml"
+                },
+                {
+                  "line_number": 12,
+                  "line_text": "and make that understanding available to agents through dynamically compiled",
+                  "line_text_truncated": false,
+                  "path": "CONSTITUTION.md"
+                },
+                {
+                  "line_number": 14,
+                  "line_text": "No generic autonomous-agent runtime, hidden routing policy, unrestricted tool-use layer, or multi-agent system is introduced in 021.",
+                  "line_text_truncated": false,
+                  "path": "docs/superpowers/specs/2026-10-06-ai-investigator-021-design.md"
+                },
+                {
+                  "line_number": 81,
+                  "line_text": "Cards exist to give AI agents the minimum high-value context required to",
+                  "line_text_truncated": false,
+                  "path": "CONSTITUTION.md"
+                }
+              ],
+              "omitted_match_count": 0,
+              "operation_kind": "SEARCH_SOURCE",
+              "path_prefix": null,
+              "query": "agent",
+              "visible_match_count": 9
+            }
+          },
+          {
+            "canonical_payload_bytes": 10935,
+            "canonical_payload_sha256": "sha256:25c801e4431605ac44cb8c79a9951549006beba6ba3bc19750871f2e85d27067",
+            "evidence_id": "bounded-investigation-search-evidence:25c801e4431605ac44cb8c79a9951549006beba6ba3bc19750871f2e85d27067",
+            "evidence_kind": "BOUNDED_INVESTIGATION_SEARCH_OBSERVATION",
+            "operational_context": {
+              "match_count": 21,
+              "matches": [
+                {
+                  "line_number": 5,
+                  "line_text": "Horizon gives AI agents a continuously maintained understanding of software.",
+                  "line_text_truncated": false,
+                  "path": "CONSTITUTION.md"
+                },
+                {
+                  "line_number": 3,
+                  "line_text": "This artifact measures Horizon's current understanding before autonomous investigation.",
+                  "line_text_truncated": false,
+                  "path": "artifacts/cards/prefect-card-baseline-pre-022.md"
+                },
+                {
+                  "line_number": 32,
+                  "line_text": "control move through the system, and which parts of that understanding are",
+                  "line_text_truncated": false,
+                  "path": "challenges/001-prefect-flow-execution.md"
+                },
+                {
+                  "line_number": 8,
+                  "line_text": "description = \"Continuously maintained software understanding for AI agents\"",
+                  "line_text_truncated": false,
+                  "path": "pyproject.toml"
+                },
+                {
+                  "line_number": 1,
+                  "line_text": "\"\"\"Horizon software understanding engine.\"\"\"",
+                  "line_text_truncated": false,
+                  "path": "src/horizon/__init__.py"
+                },
+                {
+                  "line_number": 4,
+                  "line_text": "World Model assertion for one repository-understanding section.",
+                  "line_text_truncated": false,
+                  "path": "src/horizon/investigation/semantic_gap.py"
+                },
+                {
+                  "line_number": 1,
+                  "line_text": "\"\"\"Bounded autonomous coordination for repository WHAT_IT_IS understanding.",
+                  "line_text_truncated": false,
+                  "path": "src/horizon/investigation/semantic_understanding_coordinator.py"
+                },
+                {
+                  "line_number": 12,
+                  "line_text": "import horizon.investigation.semantic_understanding_coordinator as coordinator_module",
+                  "line_text_truncated": false,
+                  "path": "tests/unit/investigation/test_semantic_understanding_coordinator.py"
+                },
+                {
+                  "line_number": 12,
+                  "line_text": "and make that understanding available to agents through dynamically compiled",
+                  "line_text_truncated": false,
+                  "path": "CONSTITUTION.md"
+                },
+                {
+                  "line_number": 293,
+                  "line_text": "understanding failure or investigation need.",
+                  "line_text_truncated": false,
+                  "path": "challenges/001-prefect-flow-execution.md"
+                },
+                {
+                  "line_number": 123,
+                  "line_text": "    \"\"\"The bounded semantic-understanding state machine cannot continue safely.\"\"\"",
+                  "line_text_truncated": false,
+                  "path": "src/horizon/investigation/semantic_understanding_coordinator.py"
+                },
+                {
+                  "line_number": 36,
+                  "line_text": "from horizon.investigation.semantic_understanding_coordinator import (",
+                  "line_text_truncated": false,
+                  "path": "tests/unit/investigation/test_semantic_understanding_coordinator.py"
+                },
+                {
+                  "line_number": 226,
+                  "line_text": "Horizon reconstructs understanding from multiple sources and keeps uncertainty",
+                  "line_text_truncated": false,
+                  "path": "CONSTITUTION.md"
+                },
+                {
+                  "line_number": 875,
+                  "line_text": "def run_repository_what_it_is_semantic_understanding(",
+                  "line_text_truncated": false,
+                  "path": "src/horizon/investigation/semantic_understanding_coordinator.py"
+                },
+                {
+                  "line_number": 40,
+                  "line_text": "    run_repository_what_it_is_semantic_understanding,",
+                  "line_text_truncated": false,
+                  "path": "tests/unit/investigation/test_semantic_understanding_coordinator.py"
+                },
+                {
+                  "line_number": 255,
+                  "line_text": "understanding.",
+                  "line_text_truncated": false,
+                  "path": "CONSTITUTION.md"
+                },
+                {
+                  "line_number": 901,
+                  "line_text": "    \"\"\"Run one bounded WHAT_IT_IS semantic-understanding state machine.\"\"\"",
+                  "line_text_truncated": false,
+                  "path": "src/horizon/investigation/semantic_understanding_coordinator.py"
+                },
+                {
+                  "line_number": 748,
+                  "line_text": "        run_repository_what_it_is_semantic_understanding(",
+                  "line_text_truncated": false,
+                  "path": "tests/unit/investigation/test_semantic_understanding_coordinator.py"
+                },
+                {
+                  "line_number": 263,
+                  "line_text": "We will select real software and ask difficult understanding questions.",
+                  "line_text_truncated": false,
+                  "path": "CONSTITUTION.md"
+                },
+                {
+                  "line_number": 278,
+                  "line_text": "A capability learned while understanding one project must be tested against an",
+                  "line_text_truncated": false,
+                  "path": "CONSTITUTION.md"
+                }
+              ],
+              "omitted_match_count": 1,
+              "operation_kind": "SEARCH_SOURCE",
+              "path_prefix": null,
+              "query": "understanding",
+              "visible_match_count": 20
+            }
+          },
+          {
+            "canonical_payload_bytes": 101525,
+            "canonical_payload_sha256": "sha256:32ae1825765c921751706d043371dec3de425164d6537d3d26d63b0ca3431774",
+            "evidence_id": "bounded-investigation-search-evidence:32ae1825765c921751706d043371dec3de425164d6537d3d26d63b0ca3431774",
+            "evidence_kind": "BOUNDED_INVESTIGATION_SEARCH_OBSERVATION",
+            "operational_context": {
+              "match_count": 119,
+              "matches": [
+                {
+                  "line_number": 167,
+                  "line_text": "        \"canonical_payload\": \"{\\\"commit\\\":\\\"2338265f658845a9bef8ce7baf07519b89846dc8\\\",\\\"content\\\":\\\"1012:                 task_run_state_id=validated_state.id,\\\\n1013:             )\\\\n1014:             context.session.add(new_cache_item)\\\\",
+                  "line_text_truncated": true,
+                  "path": "artifacts/investigator/021k-prefect-astra-37f4906f98d341bb.json"
+                },
+                {
+                  "line_number": 1048,
+                  "line_text": "              \"callee_expression\": \"update_wrapper\",",
+                  "line_text_truncated": false,
+                  "path": "artifacts/investigator/025y-prefect-hypothesis-evidence-execution.json"
+                },
+                {
+                  "line_number": 517,
+                  "line_text": "    updated = (",
+                  "line_text_truncated": false,
+                  "path": "src/horizon/investigation/semantic_understanding_coordinator.py"
+                },
+                {
+                  "line_number": 727,
+                  "line_text": "    canonical_payload.update(",
+                  "line_text_truncated": false,
+                  "path": "src/horizon/investigator/proposal.py"
+                },
+                {
+                  "line_number": 156,
+                  "line_text": "    digest.update(",
+                  "line_text_truncated": false,
+                  "path": "src/horizon/languages/python/bindings.py"
+                },
+                {
+                  "line_number": 99,
+                  "line_text": "    digest.update(",
+                  "line_text_truncated": false,
+                  "path": "src/horizon/languages/python/compiler_bindings.py"
+                },
+                {
+                  "line_number": 93,
+                  "line_text": "    digest.update(",
+                  "line_text_truncated": false,
+                  "path": "src/horizon/languages/python/http_contracts.py"
+                },
+                {
+                  "line_number": 107,
+                  "line_text": "    digest.update(",
+                  "line_text_truncated": false,
+                  "path": "src/horizon/languages/python/import_use_provenance.py"
+                },
+                {
+                  "line_number": 65,
+                  "line_text": "    digest.update(",
+                  "line_text_truncated": false,
+                  "path": "src/horizon/languages/python/project_dependencies.py"
+                },
+                {
+                  "line_number": 59,
+                  "line_text": "    digest.update(prefix)",
+                  "line_text_truncated": false,
+                  "path": "src/horizon/languages/python/pyright_callee.py"
+                },
+                {
+                  "line_number": 82,
+                  "line_text": "    digest.update(",
+                  "line_text_truncated": false,
+                  "path": "src/horizon/languages/python/repository_modules.py"
+                },
+                {
+                  "line_number": 192,
+                  "line_text": "    digest.update(",
+                  "line_text_truncated": false,
+                  "path": "src/horizon/languages/python/structure.py"
+                },
+                {
+                  "line_number": 77,
+                  "line_text": "    digest.update(",
+                  "line_text_truncated": false,
+                  "path": "src/horizon/repository/git_blob.py"
+                },
+                {
+                  "line_number": 114,
+                  "line_text": "    digest.update(",
+                  "line_text_truncated": false,
+                  "path": "src/horizon/repository/git_observation.py"
+                },
+                {
+                  "line_number": 238,
+                  "line_text": "    digest.update(",
+                  "line_text_truncated": false,
+                  "path": "src/horizon/repository/git_search.py"
+                },
+                {
+                  "line_number": 469,
+                  "line_text": "    environment.update(",
+                  "line_text_truncated": false,
+                  "path": "src/horizon/runtime/observation.py"
+                },
+                {
+                  "line_number": 371,
+                  "line_text": "        roots.update(",
+                  "line_text_truncated": false,
+                  "path": "src/horizon/world_model/reconciliation.py"
+                },
+                {
+                  "line_number": 130,
+                  "line_text": "        selected_assertion_ids.update(",
+                  "line_text_truncated": false,
+                  "path": "src/horizon/world_model/render.py"
+                },
+                {
+                  "line_number": 381,
+                  "line_text": "    updated_index = (",
+                  "line_text_truncated": false,
+                  "path": "tests/unit/cards/test_repository_card.py"
+                },
+                {
+                  "line_number": 287,
+                  "line_text": "def update():",
+                  "line_text_truncated": false,
+                  "path": "tests/unit/languages/python/test_bindings.py"
+                }
+              ],
+              "omitted_match_count": 99,
+              "operation_kind": "SEARCH_SOURCE",
+              "path_prefix": null,
+              "query": "update",
+              "visible_match_count": 20
+            }
+          }
+        ],
+        "evidence_reference_ids": [
+          "claim-evidence-reference:bfa5b811383961808d9e9b45f3fa7e2a9b7acbf1b22638ebca8438be98874f29",
+          "claim-evidence-reference:f6388ee38b7c57952a32a90933672237aabb0ad7ebe05e232539213a2d863cd7"
+        ],
+        "origin": "REPOSITORY_SEMANTIC_GAP",
+        "question": "What is this repository's primary software purpose, and what evidence establishes it?",
+        "question_id": "repository-semantic-gap-question:627bdd67d2987320db7e045a86ea8c87a4c256ab4bf3c44c86b90c52d8775ab8",
+        "relationship_id": null,
+        "relationship_kind": null,
+        "relationship_reason": null,
+        "request_id": "semantic-gap-followup-investigation-request:564d2da3b6c6615a4af3ba49cbf6cd026980199baff1e6441e0eb8d396587005",
+        "semantic_gap_id": "repository-semantic-gap:b530b9c5bd7f0108fe555ddbd2d74250c07ca5e854e2e1ddda5dcc030fb01e5d",
+        "semantic_gap_section": "WHAT_IT_IS",
+        "view_id": "typed-planner-request-view:36d4cd99ef4af79f9e29882ea2fed9e1f74f00bff4c0a9286c156174701988fb"
+      },
+      "schema_hash": "sha256:efee04989243a3b7745f1969d9f1701827143ebcee147f3411136ca536b05a03"
+    },
+    "canonical_payload_bodies_visible": false,
+    "paths_and_line_numbers_visible": true,
+    "search_operational_context_count": 3,
+    "search_queries": [
+      "agent",
+      "understanding",
+      "update"
+    ],
+    "sha256": "sha256:cf1df7de7aa1e719e24960386602220ee791676b267fb369591c6769e043ad24"
+  },
+  "provider_pre_registration": {
+    "max_output_tokens": 4096,
+    "model_id": "gpt-6-astra",
+    "next_global_provider_call_ordinal": 4,
+    "pricing_usd_per_million_tokens": {
+      "cache_write_per_million": "25.00",
+      "cached_input_per_million": "2.00",
+      "input_per_million": "20.00",
+      "output_per_million": "75.00"
+    },
+    "provider": "OPENAI",
+    "reasoning_effort": "high",
+    "sdk_max_retries": 0,
+    "timeout_seconds": 60.0,
+    "wrapper_retries": 0
+  },
+  "request_view": {
+    "evidence_record_count": 5,
+    "metadata_only_base_record_count": 2,
+    "search_operational_context_count": 3,
+    "search_operational_contexts": [
+      {
+        "evidence_id": "bounded-investigation-search-evidence:18e0723bb2feff8942e1de3009d05a8c13bbe874fe0b09ebdb8226aa326be512",
+        "first_five_visible_coordinates": [
+          {
+            "line_number": 5,
+            "line_text": "Horizon gives AI agents a continuously maintained understanding of software.",
+            "line_text_truncated": false,
+            "path": "CONSTITUTION.md"
+          },
+          {
+            "line_number": 29,
+            "line_text": "- `agent`",
+            "line_text_truncated": false,
+            "path": "artifacts/cards/prefect-card-baseline-pre-022.md"
+          },
+          {
+            "line_number": 264,
+            "line_text": "an AI agent than raw repository exploration?",
+            "line_text_truncated": false,
+            "path": "challenges/001-prefect-flow-execution.md"
+          },
+          {
+            "line_number": 3,
+            "line_text": "> **For agentic workers:** REQUIRED SUB-SKILL: use",
+            "line_text_truncated": false,
+            "path": "docs/superpowers/plans/2026-10-06-world-model-snapshot-018.md"
+          },
+          {
+            "line_number": 14,
+            "line_text": "No generic autonomous-agent runtime, hidden routing policy, unrestricted tool-use layer, or multi-agent system is introduced in 021.",
+            "line_text_truncated": false,
+            "path": "docs/superpowers/specs/2026-10-06-ai-investigator-021-design.md"
+          }
+        ],
+        "omitted_match_count": 0,
+        "query": "agent",
+        "total_match_count": 9,
+        "visible_match_count": 9
+      },
+      {
+        "evidence_id": "bounded-investigation-search-evidence:25c801e4431605ac44cb8c79a9951549006beba6ba3bc19750871f2e85d27067",
+        "first_five_visible_coordinates": [
+          {
+            "line_number": 5,
+            "line_text": "Horizon gives AI agents a continuously maintained understanding of software.",
+            "line_text_truncated": false,
+            "path": "CONSTITUTION.md"
+          },
+          {
+            "line_number": 3,
+            "line_text": "This artifact measures Horizon's current understanding before autonomous investigation.",
+            "line_text_truncated": false,
+            "path": "artifacts/cards/prefect-card-baseline-pre-022.md"
+          },
+          {
+            "line_number": 32,
+            "line_text": "control move through the system, and which parts of that understanding are",
+            "line_text_truncated": false,
+            "path": "challenges/001-prefect-flow-execution.md"
+          },
+          {
+            "line_number": 8,
+            "line_text": "description = \"Continuously maintained software understanding for AI agents\"",
+            "line_text_truncated": false,
+            "path": "pyproject.toml"
+          },
+          {
+            "line_number": 1,
+            "line_text": "\"\"\"Horizon software understanding engine.\"\"\"",
+            "line_text_truncated": false,
+            "path": "src/horizon/__init__.py"
+          }
+        ],
+        "omitted_match_count": 1,
+        "query": "understanding",
+        "total_match_count": 21,
+        "visible_match_count": 20
+      },
+      {
+        "evidence_id": "bounded-investigation-search-evidence:32ae1825765c921751706d043371dec3de425164d6537d3d26d63b0ca3431774",
+        "first_five_visible_coordinates": [
+          {
+            "line_number": 167,
+            "line_text": "        \"canonical_payload\": \"{\\\"commit\\\":\\\"2338265f658845a9bef8ce7baf07519b89846dc8\\\",\\\"content\\\":\\\"1012:                 task_run_state_id=validated_state.id,\\\\n1013:             )\\\\n1014:             context.session.add(new_cache_item)\\\\",
+            "line_text_truncated": true,
+            "path": "artifacts/investigator/021k-prefect-astra-37f4906f98d341bb.json"
+          },
+          {
+            "line_number": 1048,
+            "line_text": "              \"callee_expression\": \"update_wrapper\",",
+            "line_text_truncated": false,
+            "path": "artifacts/investigator/025y-prefect-hypothesis-evidence-execution.json"
+          },
+          {
+            "line_number": 517,
+            "line_text": "    updated = (",
+            "line_text_truncated": false,
+            "path": "src/horizon/investigation/semantic_understanding_coordinator.py"
+          },
+          {
+            "line_number": 727,
+            "line_text": "    canonical_payload.update(",
+            "line_text_truncated": false,
+            "path": "src/horizon/investigator/proposal.py"
+          },
+          {
+            "line_number": 156,
+            "line_text": "    digest.update(",
+            "line_text_truncated": false,
+            "path": "src/horizon/languages/python/bindings.py"
+          }
+        ],
+        "omitted_match_count": 99,
+        "query": "update",
+        "total_match_count": 119,
+        "visible_match_count": 20
+      }
+    ],
+    "view_id": "typed-planner-request-view:36d4cd99ef4af79f9e29882ea2fed9e1f74f00bff4c0a9286c156174701988fb"
+  },
+  "round_authority": {
+    "final_authorized_hypothesis_round": true,
+    "global_provider_call_ordinal": 4,
+    "hypothesis_round": 2,
+    "max_hypothesis_rounds": 2
+  },
+  "sealed_invocation": {
+    "canonical_input_hash": "sha256:923ba5c064ee7ac8171f033b5617dfd177a2d40647ef367789e25d6aaf624d1a",
+    "cost_cap_usd": "0.300000",
+    "instruction_hash": "sha256:e3f493f369dfbbf2932b5ae78ff437d1f7bddc1668a08c6e15df932e4b8d0056",
+    "invocation_id": "semantic-gap-typed-planner-invocation:6b6000f36c91d2567884a709eb09d95fc8ef8983d452cfd036fc074d8027410d",
+    "operation_semantics_id": "typed-planner-operation-semantics:d2c7d2962cb7e7bad05367508a03c178e1ca8fcbd7a2149ed66ebff5c3681c2c",
+    "schema_hash": "sha256:efee04989243a3b7745f1969d9f1701827143ebcee147f3411136ca536b05a03",
+    "temperature": null
+  }
+}
