@@ -72,6 +72,7 @@ from horizon.investigation.hypothesis_test_planning import (
 )
 from horizon.investigation.plan import (
     InvestigationPlan,
+    ReadSourceOperation,
     ResolveCallOperation,
 )
 from horizon.investigation.proposal_plan import (
@@ -303,6 +304,170 @@ def _require_instruction(
         )
 
     return value
+
+
+def _hypothesis_round_typed_planner_instruction(
+    instruction: bytes,
+    *,
+    current_round: int,
+    max_rounds: int,
+) -> bytes:
+    """Seal bounded hypothesis-round authority into planner instructions."""
+
+    _require_instruction(
+        instruction,
+        name=(
+            "typed_planner_instruction"
+        ),
+    )
+
+    for name, value in (
+        (
+            "current_round",
+            current_round,
+        ),
+        (
+            "max_rounds",
+            max_rounds,
+        ),
+    ):
+        if (
+            isinstance(
+                value,
+                bool,
+            )
+            or not isinstance(
+                value,
+                int,
+            )
+            or value <= 0
+        ):
+            raise RepositorySemanticUnderstandingCoordinatorError(
+                name
+                + " must be a positive integer"
+            )
+
+    if current_round > max_rounds:
+        raise RepositorySemanticUnderstandingCoordinatorError(
+            "current hypothesis round may not exceed maximum rounds"
+        )
+
+    remaining = (
+        max_rounds
+        - current_round
+    )
+
+    final_round = (
+        remaining
+        == 0
+    )
+
+    context = (
+        "\n\n"
+        "Horizon bounded hypothesis-round execution context:\n"
+        "current_hypothesis_round="
+        + str(
+            current_round
+        )
+        + "\n"
+        "max_hypothesis_rounds="
+        + str(
+            max_rounds
+        )
+        + "\n"
+        "remaining_hypothesis_rounds_after_this="
+        + str(
+            remaining
+        )
+        + "\n"
+        "final_hypothesis_round="
+        + (
+            "true"
+            if final_round
+            else "false"
+        )
+        + "\n"
+    )
+
+    if final_round:
+        context += (
+            "final_round_rule="
+            "There is no future hypothesis-test replan after this response.\n"
+            "final_round_material_evidence_rule="
+            "For every exact investigation question, this returned plan "
+            "must contain at least one legal READ_SOURCE operation capable "
+            "of gathering material source evidence for that question. "
+            "SEARCH_SOURCE may not be the only evidence path for any "
+            "question on the final round. Dependencies are ordering-only; "
+            "SEARCH_SOURCE results cannot dynamically populate a later "
+            "operation in the same compiled plan.\n"
+        )
+
+    else:
+        context += (
+            "nonfinal_round_rule="
+            "Future hypothesis-test replanning remains available within "
+            "the sealed round bound. SEARCH_SOURCE may be used for bounded "
+            "discovery when exact source coordinates are not yet known.\n"
+        )
+
+    return (
+        instruction
+        + context.encode(
+            "utf-8"
+        )
+    )
+
+
+def _validate_final_hypothesis_round_material_paths(
+    *,
+    proposal: InvestigationProposal,
+    bindings,
+    final_round: bool,
+) -> None:
+    """Fail closed before compilation when a final-round question is discovery-only."""
+
+    if not final_round:
+        return
+
+    missing = []
+
+    for question in (
+        proposal.investigation_questions
+    ):
+        has_material_read = any(
+            (
+                binding.investigation_question
+                == question
+            )
+            and isinstance(
+                binding.draft.operation,
+                ReadSourceOperation,
+            )
+            for binding
+            in bindings
+        )
+
+        if not has_material_read:
+            missing.append(
+                question
+            )
+
+    if missing:
+        raise RepositorySemanticUnderstandingCoordinatorError(
+            "final hypothesis round requires at least one "
+            "READ_SOURCE material-evidence path for every exact "
+            "investigation question; missing material path for "
+            + str(
+                len(
+                    missing
+                )
+            )
+            + " question(s): "
+            + " | ".join(
+                missing
+            )
+        )
 
 
 def _require_decimal_cost_cap(
@@ -1448,6 +1613,23 @@ def run_repository_what_it_is_semantic_understanding(
             hypothesis_round
         )
 
+        final_hypothesis_round = (
+            hypothesis_round
+            == limits.max_hypothesis_rounds
+        )
+
+        round_typed_planner_instruction = (
+            _hypothesis_round_typed_planner_instruction(
+                typed_planner_instruction,
+                current_round=(
+                    hypothesis_round
+                ),
+                max_rounds=(
+                    limits.max_hypothesis_rounds
+                ),
+            )
+        )
+
         bridge = (
             bridge_hypothesis_tests_to_typed_planning(
                 request=request,
@@ -1471,7 +1653,7 @@ def run_repository_what_it_is_semantic_understanding(
                     planning_proposal
                 ),
                 instruction=(
-                    typed_planner_instruction
+                    round_typed_planner_instruction
                 ),
                 temperature=(
                     typed_planner_temperature
@@ -1512,6 +1694,20 @@ def run_repository_what_it_is_semantic_understanding(
             raise RepositorySemanticUnderstandingCoordinatorError(
                 "hypothesis-test typed planner run was not valid"
             )
+
+        _validate_final_hypothesis_round_material_paths(
+            proposal=(
+                planning_proposal
+            ),
+            bindings=(
+                planner_execution
+                .planner_output
+                .bindings
+            ),
+            final_round=(
+                final_hypothesis_round
+            ),
+        )
 
         plan = (
             compile_semantic_gap_proposal_plan(

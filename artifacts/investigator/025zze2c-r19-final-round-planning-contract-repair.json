@@ -1,0 +1,94 @@
+{
+  "authority": {
+    "frozen_target_repository_operations": 0,
+    "paid_model_calls_this_stage": 0,
+    "provider_calls_this_stage": 0,
+    "r17_planner_output_compiled": false,
+    "r17_planner_output_executed": false,
+    "semantic_promotions": 0,
+    "what_it_is_closed": false,
+    "world_model_mutations": 0
+  },
+  "boundary": {
+    "new_model_call_not_authorized_by_r19": true,
+    "new_model_call_required_before_new_final_round_plan_exists": true,
+    "r17_output_not_manually_upgraded_from_search_to_read": true,
+    "r17_output_not_rewritten": true,
+    "r17_paid_output_preserved_unchanged": true
+  },
+  "certification": {
+    "mode": "OFFLINE_PRODUCTION_REPAIR",
+    "name": "025ZZE-2C-R19 final-round planning contract production repair",
+    "status": "PASS"
+  },
+  "files": {
+    "production": "src/horizon/investigation/semantic_understanding_coordinator.py",
+    "production_sha256": "sha256:80eecd649a0591c58bcca6a6c6687aa6e6b104f0417a4c7a691ba06271cbe3ec",
+    "test": "tests/unit/investigation/test_semantic_understanding_coordinator.py",
+    "test_sha256": "sha256:c677346a38e8770d523ee9753a435809f789f4ae07ecd21f236fd6bd2c8d4b7e"
+  },
+  "next_authorized_stage": "Push R19. Then preregister a new final-round typed-planner dispatch under the corrected contract. The historical R17 plan remains non-executable.",
+  "project_toolchain": {
+    "declared_runtime_dependencies": [
+      "openai==3.24.0"
+    ],
+    "pyproject": "pyproject.toml",
+    "pyproject_sha256": "sha256:770dcb69b801c8c4a84bd38085426000fd99ea22b365bf8e398fe105823ab298",
+    "ruff_certification_status": "NOT_APPLICABLE",
+    "ruff_configuration_present": false,
+    "ruff_declared_dependency": false,
+    "ruff_environment_available": false,
+    "ruff_installed_for_certification": false
+  },
+  "recovery": {
+    "new_product_defect_discovered_during_recovery": false,
+    "original_green_log_sha256": "sha256:a3b6e6f0f4b3e679cd6e83202b363fd8d33c54897e0c6d971d488c957c26d3f4",
+    "original_r19_failure": "TEST_FIXTURE_DUPLICATE_EVIDENCE_IDENTITY",
+    "original_red_log_sha256": "sha256:ca57c6b2cced53615f47595b6782b2309471e16716cb375d6af98307211538c3",
+    "r19_r1_failure": "PRESERVATION_GUARD_DEFECT",
+    "r19_r2_failure": "PYTEST_CONSOLE_SUMMARY_GUARD_DEFECT",
+    "r19_r3_failure": "RUFF_EXECUTABLE_PATH_GUARD_DEFECT",
+    "r19_r4_failure": "UNDECLARED_OPTIONAL_LINTER_GUARD"
+  },
+  "red_green": {
+    "clean_red_against_exact_pre_repair_head": "329390ac1f05449a0f836019800108c75b9f8fd3",
+    "clean_red_duplicate_evidence_failure": false,
+    "clean_red_failure_count": 2,
+    "clean_red_final_round_gate_missing": true,
+    "clean_red_log_sha256": "sha256:e772deacf753703104a8747f00663a33c7af39e531efa38b8e2fee18cfc34eac",
+    "clean_red_round_context_missing": true,
+    "green_junit_sha256": "sha256:e82571774ff8cecd577b0d820973f53bcecc706e1a5d56293ffc0d4b1fcf8a7b",
+    "green_log_sha256": "sha256:99db33d5c94c6f7da021687c7391181685cc33299c5435b1c861e2db3be3ec87",
+    "python_compile": "PASS",
+    "regression_errors": 0,
+    "regression_failures": 0,
+    "regression_junit_sha256": "sha256:07563e33697a9ed7b11b4c67e3c95f3a84e271cce1bed6f4d8d8a6ceec50dc8d",
+    "regression_log_sha256": "sha256:ac495f87c93297f7a6b6576302f0c026457a444008c68b065caf82d3eed780d0",
+    "regression_test_count": 78,
+    "targeted_green_errors": 0,
+    "targeted_green_failures": 0,
+    "targeted_green_skipped": 0,
+    "targeted_green_test_count": 2
+  },
+  "repair": {
+    "context_fields": [
+      "current_hypothesis_round",
+      "max_hypothesis_rounds",
+      "remaining_hypothesis_rounds_after_this",
+      "final_hypothesis_round"
+    ],
+    "deterministic_precompile_gate_added": true,
+    "final_round_instruction_requires_read_source_per_exact_question": true,
+    "final_round_instruction_states_no_future_replan": true,
+    "gate_occurs_before_plan_compilation": true,
+    "gate_occurs_before_repository_execution": true,
+    "gate_requires_read_source_material_path_per_exact_question": true,
+    "round_context_exposed_to_typed_planner": true,
+    "round_context_transport": "SEALED_TYPED_PLANNER_INSTRUCTION"
+  },
+  "source_defect": {
+    "artifact": "artifacts/investigator/025zze2c-r18-final-round-plan-viability-certification.json",
+    "artifact_sha256": "sha256:54ef49e7ac43c24be250db971ac46abf17010b7cfb274d3806ae9365de0f44b2",
+    "classification": "FINAL_ROUND_PLANNING_CONTRACT_MISMATCH"
+  }
+}

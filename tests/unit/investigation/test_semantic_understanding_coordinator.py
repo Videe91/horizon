@@ -455,8 +455,22 @@ class FakePlanner:
                 "character": 4,
             }
 
+        elif self.mode == "search":
+            operation = {
+                "type": (
+                    "SEARCH_SOURCE"
+                ),
+                "query": "workflow",
+                "path_prefix": None,
+            }
+
         else:
-            if (
+            if self.mode == "round_read":
+                line = len(
+                    self.calls
+                )
+
+            elif (
                 question
                 == DISCOVERY_QUESTION
             ):
@@ -1371,3 +1385,212 @@ def test_investigator_temperature_may_be_omitted_for_reasoning_model(
             "0.005000"
         )
     )
+
+
+def test_hypothesis_typed_planner_receives_exact_round_budget_and_finality(
+    tmp_path: Path,
+) -> None:
+    fixture = prepare(
+        tmp_path
+    )
+
+    planner = (
+        FakePlanner(
+            mode="round_read"
+        )
+    )
+
+    result = run(
+        fixture,
+        investigator=(
+            FakeInvestigator(
+                mode="hypothesis"
+            )
+        ),
+        planner=planner,
+        evaluator=(
+            FakeEvaluator(
+                mode="incomplete"
+            )
+        ),
+        value_limits=(
+            limits(
+                investigator_rounds=1,
+                hypothesis_rounds=2,
+            )
+        ),
+    )
+
+    assert (
+        result.disposition
+        is RepositorySemanticUnderstandingDisposition
+        .BOUNDED_STOP
+    )
+
+    assert len(
+        planner.calls
+    ) == 2
+
+    first_instruction = (
+        planner.calls[
+            0
+        ]
+        .instruction
+        .decode(
+            "utf-8"
+        )
+    )
+
+    second_instruction = (
+        planner.calls[
+            1
+        ]
+        .instruction
+        .decode(
+            "utf-8"
+        )
+    )
+
+    assert (
+        "current_hypothesis_round=1"
+        in first_instruction
+    ), "ROUND_CONTEXT_CURRENT_1_MISSING"
+
+    assert (
+        "max_hypothesis_rounds=2"
+        in first_instruction
+    )
+
+    assert (
+        "remaining_hypothesis_rounds_after_this=1"
+        in first_instruction
+    )
+
+    assert (
+        "final_hypothesis_round=false"
+        in first_instruction
+    )
+
+    assert (
+        "current_hypothesis_round=2"
+        in second_instruction
+    )
+
+    assert (
+        "max_hypothesis_rounds=2"
+        in second_instruction
+    )
+
+    assert (
+        "remaining_hypothesis_rounds_after_this=0"
+        in second_instruction
+    )
+
+    assert (
+        "final_hypothesis_round=true"
+        in second_instruction
+    )
+
+    assert (
+        "There is no future hypothesis-test replan"
+        in second_instruction
+    )
+
+    assert (
+        "READ_SOURCE"
+        in second_instruction
+    )
+
+    assert (
+        planner.calls[
+            0
+        ]
+        .instruction_hash
+        != planner.calls[
+            1
+        ]
+        .instruction_hash
+    )
+
+
+def test_final_hypothesis_round_rejects_discovery_only_plan_before_execution(
+    tmp_path: Path,
+    monkeypatch,
+) -> None:
+    fixture = prepare(
+        tmp_path
+    )
+
+    planner = (
+        FakePlanner(
+            mode="search"
+        )
+    )
+
+    evaluator = (
+        FakeEvaluator()
+    )
+
+    executed = []
+
+    def forbidden_executor(
+        *args,
+        **kwargs,
+    ):
+        executed.append(
+            (
+                args,
+                kwargs,
+            )
+        )
+
+        raise AssertionError(
+            "final-round discovery-only plan "
+            "must fail before repository execution"
+        )
+
+    monkeypatch.setattr(
+        coordinator_module,
+        "execute_investigation_operation",
+        forbidden_executor,
+    )
+
+    with pytest.raises(
+        RepositorySemanticUnderstandingCoordinatorError,
+        match=(
+            "final hypothesis round requires "
+            "at least one READ_SOURCE"
+        ),
+    ):
+        run(
+            fixture,
+            investigator=(
+                FakeInvestigator(
+                    mode="hypothesis"
+                )
+            ),
+            planner=planner,
+            evaluator=evaluator,
+            value_limits=(
+                limits(
+                    investigator_rounds=1,
+                    hypothesis_rounds=1,
+                )
+            ),
+        )
+
+    assert len(
+        planner.calls
+    ) == 1
+
+    assert evaluator.calls == []
+
+    assert executed == []
+
+    assert (
+        fixture.store.load(
+            fixture.base_model
+        )
+        == fixture.base_model
+    )
+
