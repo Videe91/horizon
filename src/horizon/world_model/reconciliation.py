@@ -80,6 +80,21 @@ WORLD_MODEL_RELATIONSHIP_POLICIES = {
     ),
 }
 
+# IMPLEMENTS is intentionally non-exclusive at the relationship layer.
+#
+# A repository may implement more than one capability or purpose.
+# Repository-section selection decides which assertion represents
+# WHAT_IT_IS; relationship reconciliation must not invent exclusivity.
+WORLD_MODEL_RELATIONSHIP_POLICIES = {
+    **WORLD_MODEL_RELATIONSHIP_POLICIES,
+    WorldModelRelationKind.IMPLEMENTS: (
+        WORLD_MODEL_RELATIONSHIP_POLICIES[
+            WorldModelRelationKind.DEPENDS_ON
+        ]
+    ),
+}
+
+
 
 class WorldModelRelationshipKind(
     str,
