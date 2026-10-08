@@ -743,6 +743,7 @@ def run(
     planner,
     evaluator,
     value_limits=None,
+    investigator_temperature=0.0,
 ):
     return (
         run_repository_what_it_is_semantic_understanding(
@@ -774,7 +775,9 @@ def run(
             investigator_instruction=(
                 b"Propose only bounded semantic investigation."
             ),
-            investigator_temperature=0.0,
+            investigator_temperature=(
+                investigator_temperature
+            ),
             investigator_cost_cap_usd=(
                 Decimal(
                     "0.010000"
@@ -1328,4 +1331,43 @@ def test_discovery_round_limit_is_hard(
             fixture.base_model
         )
         == fixture.base_model
+    )
+
+
+def test_investigator_temperature_may_be_omitted_for_reasoning_model(
+    tmp_path: Path,
+) -> None:
+    fixture = prepare(
+        tmp_path
+    )
+
+    result = run(
+        fixture,
+        investigator=(
+            FakeInvestigator()
+        ),
+        planner=(
+            FakePlanner()
+        ),
+        evaluator=(
+            FakeEvaluator()
+        ),
+        investigator_temperature=None,
+    )
+
+    assert (
+        result.disposition
+        is RepositorySemanticUnderstandingDisposition
+        .PROMOTED
+    )
+
+    assert len(
+        result.investigator_run_ids
+    ) == 2
+
+    assert (
+        result.total_model_cost_usd
+        == Decimal(
+            "0.005000"
+        )
     )

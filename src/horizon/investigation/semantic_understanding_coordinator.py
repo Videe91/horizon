@@ -887,7 +887,7 @@ def run_repository_what_it_is_semantic_understanding(
     typed_planner_model: SemanticGapTypedPlannerModel,
     evaluation_model: HypothesisEvaluationModel,
     investigator_instruction: bytes,
-    investigator_temperature: float,
+    investigator_temperature: float | None,
     investigator_cost_cap_usd: Decimal,
     typed_planner_instruction: bytes,
     typed_planner_temperature: float | None,
@@ -967,7 +967,7 @@ def run_repository_what_it_is_semantic_understanding(
             name=(
                 "investigator_temperature"
             ),
-            allow_none=False,
+            allow_none=True,
         )
     )
 
