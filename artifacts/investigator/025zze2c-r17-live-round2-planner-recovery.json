@@ -1,0 +1,257 @@
+{
+  "authority": {
+    "global_provider_call_ordinal": 5,
+    "investigation_plan_compiled": false,
+    "investigation_plan_executed": false,
+    "live_provider_dispatches_this_stage": 1,
+    "planner_output_executed": false,
+    "read_source_operations_this_stage": 0,
+    "repository_operations_this_stage": 0,
+    "semantic_overlay_created": false,
+    "semantic_promotions": 0,
+    "typed_planner_calls_this_stage": 1,
+    "what_it_is_closed": false,
+    "world_model_mutations": 0
+  },
+  "boundary": {
+    "call4_failure_state_preserved": true,
+    "call4_not_retried": true,
+    "call5_complete": true,
+    "call5_is_new_dispatch": true,
+    "final_hypothesis_round": true,
+    "further_repository_action_executed": false,
+    "planner_output_executed": false,
+    "planner_output_is_proposal_only": true,
+    "raw_response_persisted_before_validation": true,
+    "semantic_invocation_reused_exactly": true
+  },
+  "certification": {
+    "name": "025ZZE-2C-R17 live round-2 typed-planner recovery dispatch",
+    "status": "PASS"
+  },
+  "cost_authority": {
+    "aggregate_exam_cap_usd": "2.700000",
+    "call5_conservative_cost_usd": "0.195838",
+    "conservative_exposure_before_call5_usd": "0.663655",
+    "conservative_exposure_through_call5_usd": "0.859493",
+    "indeterminate_call4_reserved_usd": "0.300000",
+    "known_paid_cost_before_indeterminate_call4_usd": "0.363655"
+  },
+  "durability": {
+    "attempt_ledger_path": "/tmp/horizon-025zze2-r17-call5-attempt-ledger.jsonl",
+    "attempt_ledger_sha256": "sha256:574de89a4a6a45429fad71c2d6880110babf8334cb56b8a20750d6c45a2a8a3a",
+    "raw_response_persisted_before_semantic_validation": true,
+    "rerun_allowed": false,
+    "response_spool_path": "/tmp/horizon-025zze2-r17-call5-response-spool/response-0005.json",
+    "response_spool_sha256": "sha256:a66a0f49bbc472a16d1205edff9437ba11178bc0707d24f603d563277df6485a",
+    "result_spool_path": "/tmp/horizon-025zze2-r17-call5-result.json",
+    "result_spool_sha256": "sha256:c65ce3bdc3ec90c563758ddb6bd2723d4308c22bd00277efa7e8ff5cca277219"
+  },
+  "lineage": {
+    "followup_request_id": "semantic-gap-followup-investigation-request:564d2da3b6c6615a4af3ba49cbf6cd026980199baff1e6441e0eb8d396587005",
+    "global_provider_call_ordinal": 5,
+    "hypothesis_round": 2,
+    "planning_proposal_id": "investigation-proposal:718b5d12bc9c7a95389ce878ebfe79ab4a602746b1c0b06d5dc10d18f530192d",
+    "prior_indeterminate_call_ordinal": 4,
+    "recovery_dispatch_id": "typed-planner-recovery-dispatch:5f7430047faf0032baf9c3537d3c237a2cf10de9acd1f0904c64d3187b5c679d",
+    "semantic_canonical_input_hash": "sha256:923ba5c064ee7ac8171f033b5617dfd177a2d40647ef367789e25d6aaf624d1a",
+    "semantic_invocation_id": "semantic-gap-typed-planner-invocation:6b6000f36c91d2567884a709eb09d95fc8ef8983d452cfd036fc074d8027410d",
+    "semantic_provider_input_sha256": "sha256:cf1df7de7aa1e719e24960386602220ee791676b267fb369591c6769e043ad24",
+    "source_r14_preregistration": "artifacts/investigator/025zze2c-r14-round2-typed-planner-preregistration.json",
+    "source_r15r1_timeout_certification": "artifacts/investigator/025zze2c-r15r1-timeout-forensic-certification.json",
+    "source_r16_recovery_preregistration": "artifacts/investigator/025zze2c-r16-round2-planner-recovery-preregistration.json",
+    "transport_envelope_hash": "sha256:5f7430047faf0032baf9c3537d3c237a2cf10de9acd1f0904c64d3187b5c679d"
+  },
+  "next_authorized_stage": "Review and certify the returned call-5 typed-planner output offline. If legal and appropriate, compile the exact bounded InvestigationPlan in a separate stage. Do not execute repository operations until that plan has itself been separately certified.",
+  "planner_output": {
+    "binding_count": 5,
+    "bindings": [
+      {
+        "depends_on_keys": [],
+        "expected_information": "Exact passages defining the intended software understanding, its audience, and the role of cards, including any nearby scope qualifications.",
+        "investigation_question": "At frozen commit 6151aad2081d9a849a6aac7a6081a2d7b32c4334, which exact documentation or source passages define the software understanding intended for AI agents and confirm, qualify, or contradict this primary-purpose interpretation?",
+        "max_seconds": 10,
+        "operation": {
+          "end_line": 95,
+          "path": "CONSTITUTION.md",
+          "start_line": 1,
+          "type": "READ_SOURCE"
+        },
+        "operation_type": "READ_SOURCE",
+        "ordinal": 1,
+        "purpose": "Read the context surrounding the observed purpose statement, agent availability statement, and card-purpose passage.",
+        "step_key": "read_constitution_purpose_and_cards"
+      },
+      {
+        "depends_on_keys": [],
+        "expected_information": "Documented qualifications on what constitutes understanding and how uncertainty affects the primary-purpose interpretation.",
+        "investigation_question": "At frozen commit 6151aad2081d9a849a6aac7a6081a2d7b32c4334, which exact documentation or source passages define the software understanding intended for AI agents and confirm, qualify, or contradict this primary-purpose interpretation?",
+        "max_seconds": 10,
+        "operation": {
+          "end_line": 255,
+          "path": "CONSTITUTION.md",
+          "start_line": 216,
+          "type": "READ_SOURCE"
+        },
+        "operation_type": "READ_SOURCE",
+        "ordinal": 2,
+        "purpose": "Read the context of the observed passage about reconstructing understanding from multiple sources and retaining uncertainty.",
+        "step_key": "read_constitution_understanding_qualifications"
+      },
+      {
+        "depends_on_keys": [],
+        "expected_information": "Observed definition names and locations for a follow-up read or symbol inspection of any implemented reconciliation or maintenance behavior.",
+        "investigation_question": "At that commit, which implementation or test passages, if any, show how that understanding is maintained over time and made available to AI agents, rather than identifying these capabilities only as planned work?",
+        "max_seconds": 10,
+        "operation": {
+          "path_prefix": "src/horizon/world_model/reconciliation.py",
+          "query": "def ",
+          "type": "SEARCH_SOURCE"
+        },
+        "operation_type": "SEARCH_SOURCE",
+        "ordinal": 3,
+        "purpose": "Locate implementation definitions in the observed reconciliation source before selecting precise maintenance-logic passages.",
+        "step_key": "locate_reconciliation_definitions"
+      },
+      {
+        "depends_on_keys": [],
+        "expected_information": "Observed rendering definition names and locations enabling a bounded follow-up inspection; discovery alone will not establish agent-facing availability.",
+        "investigation_question": "At that commit, which implementation or test passages, if any, show how that understanding is maintained over time and made available to AI agents, rather than identifying these capabilities only as planned work?",
+        "max_seconds": 10,
+        "operation": {
+          "path_prefix": "src/horizon/world_model/render.py",
+          "query": "def ",
+          "type": "SEARCH_SOURCE"
+        },
+        "operation_type": "SEARCH_SOURCE",
+        "ordinal": 4,
+        "purpose": "Locate definitions in the observed rendering source to identify implementation passages relevant to exposing maintained understanding.",
+        "step_key": "locate_rendering_definitions"
+      },
+      {
+        "depends_on_keys": [],
+        "expected_information": "Exact test definition names and locations for subsequent inspection of setup and assertions distinguishing tested behavior from planned capabilities.",
+        "investigation_question": "At that commit, which implementation or test passages, if any, show how that understanding is maintained over time and made available to AI agents, rather than identifying these capabilities only as planned work?",
+        "max_seconds": 10,
+        "operation": {
+          "path_prefix": "tests/unit/cards/test_repository_card.py",
+          "query": "def test_",
+          "type": "SEARCH_SOURCE"
+        },
+        "operation_type": "SEARCH_SOURCE",
+        "ordinal": 5,
+        "purpose": "Identify relevant tests in the observed repository-card test file, including candidates concerning updates and produced context.",
+        "step_key": "locate_repository_card_tests"
+      }
+    ],
+    "operation_counts": {
+      "READ_SOURCE": 2,
+      "SEARCH_SOURCE": 3
+    },
+    "planner_output_id": "semantic-gap-typed-planner-output:7fc5dcdc8604f3dfbc76249d71877f52ae6fdfc21606bffadd0d24b122734ecb",
+    "raw_output": {
+      "bindings": [
+        {
+          "depends_on_keys": [],
+          "expected_information": "Exact passages defining the intended software understanding, its audience, and the role of cards, including any nearby scope qualifications.",
+          "investigation_question": "At frozen commit 6151aad2081d9a849a6aac7a6081a2d7b32c4334, which exact documentation or source passages define the software understanding intended for AI agents and confirm, qualify, or contradict this primary-purpose interpretation?",
+          "max_seconds": 10,
+          "operation": {
+            "end_line": 95,
+            "path": "CONSTITUTION.md",
+            "start_line": 1,
+            "type": "READ_SOURCE"
+          },
+          "purpose": "Read the context surrounding the observed purpose statement, agent availability statement, and card-purpose passage.",
+          "step_key": "read_constitution_purpose_and_cards"
+        },
+        {
+          "depends_on_keys": [],
+          "expected_information": "Documented qualifications on what constitutes understanding and how uncertainty affects the primary-purpose interpretation.",
+          "investigation_question": "At frozen commit 6151aad2081d9a849a6aac7a6081a2d7b32c4334, which exact documentation or source passages define the software understanding intended for AI agents and confirm, qualify, or contradict this primary-purpose interpretation?",
+          "max_seconds": 10,
+          "operation": {
+            "end_line": 255,
+            "path": "CONSTITUTION.md",
+            "start_line": 216,
+            "type": "READ_SOURCE"
+          },
+          "purpose": "Read the context of the observed passage about reconstructing understanding from multiple sources and retaining uncertainty.",
+          "step_key": "read_constitution_understanding_qualifications"
+        },
+        {
+          "depends_on_keys": [],
+          "expected_information": "Observed definition names and locations for a follow-up read or symbol inspection of any implemented reconciliation or maintenance behavior.",
+          "investigation_question": "At that commit, which implementation or test passages, if any, show how that understanding is maintained over time and made available to AI agents, rather than identifying these capabilities only as planned work?",
+          "max_seconds": 10,
+          "operation": {
+            "path_prefix": "src/horizon/world_model/reconciliation.py",
+            "query": "def ",
+            "type": "SEARCH_SOURCE"
+          },
+          "purpose": "Locate implementation definitions in the observed reconciliation source before selecting precise maintenance-logic passages.",
+          "step_key": "locate_reconciliation_definitions"
+        },
+        {
+          "depends_on_keys": [],
+          "expected_information": "Observed rendering definition names and locations enabling a bounded follow-up inspection; discovery alone will not establish agent-facing availability.",
+          "investigation_question": "At that commit, which implementation or test passages, if any, show how that understanding is maintained over time and made available to AI agents, rather than identifying these capabilities only as planned work?",
+          "max_seconds": 10,
+          "operation": {
+            "path_prefix": "src/horizon/world_model/render.py",
+            "query": "def ",
+            "type": "SEARCH_SOURCE"
+          },
+          "purpose": "Locate definitions in the observed rendering source to identify implementation passages relevant to exposing maintained understanding.",
+          "step_key": "locate_rendering_definitions"
+        },
+        {
+          "depends_on_keys": [],
+          "expected_information": "Exact test definition names and locations for subsequent inspection of setup and assertions distinguishing tested behavior from planned capabilities.",
+          "investigation_question": "At that commit, which implementation or test passages, if any, show how that understanding is maintained over time and made available to AI agents, rather than identifying these capabilities only as planned work?",
+          "max_seconds": 10,
+          "operation": {
+            "path_prefix": "tests/unit/cards/test_repository_card.py",
+            "query": "def test_",
+            "type": "SEARCH_SOURCE"
+          },
+          "purpose": "Identify relevant tests in the observed repository-card test file, including candidates concerning updates and produced context.",
+          "step_key": "locate_repository_card_tests"
+        }
+      ],
+      "proposal_id": "investigation-proposal:718b5d12bc9c7a95389ce878ebfe79ab4a602746b1c0b06d5dc10d18f530192d",
+      "question_id": "repository-semantic-gap-question:627bdd67d2987320db7e045a86ea8c87a4c256ab4bf3c44c86b90c52d8775ab8"
+    }
+  },
+  "provider": {
+    "api_request_id": "req_e9ff586279774b779673929fa3ca29ea",
+    "conservative_cost_usd": "0.195838",
+    "cost_cap_usd": "0.300000",
+    "input_tokens": 4442,
+    "max_output_tokens": 4096,
+    "output_tokens": 2492,
+    "provider": "OPENAI",
+    "reasoning_effort": "high",
+    "requested_model_id": "gpt-6-astra",
+    "response_id": "resp_07b0d04124023b0f016ac7a2fefb5887d186434a8447773a99",
+    "returned_model_id": "gpt-6-astra"
+  },
+  "run": {
+    "canonical_input_hash": "sha256:923ba5c064ee7ac8171f033b5617dfd177a2d40647ef367789e25d6aaf624d1a",
+    "canonical_output_hash": "sha256:ef73d2cb90c1d37e192df80d17f624d488a6194dd1a13bc7fdd67155406f02e8",
+    "instruction_hash": "sha256:e3f493f369dfbbf2932b5ae78ff437d1f7bddc1668a08c6e15df932e4b8d0056",
+    "operation_semantics_id": "typed-planner-operation-semantics:d2c7d2962cb7e7bad05367508a03c178e1ca8fcbd7a2149ed66ebff5c3681c2c",
+    "rejection_reason": null,
+    "run_id": "semantic-gap-typed-planner-run:40f62f3fe88d936f85df7f487d831ef03aa4df1310f8c1aa7e06ca6e44df5037",
+    "schema_hash": "sha256:efee04989243a3b7745f1969d9f1701827143ebcee147f3411136ca536b05a03",
+    "validation_result": "VALID"
+  },
+  "transport": {
+    "client_request_id": "horizon-025zze2c-call5-c054891315734cadae6cb9269045cbfd2b2b1e0d51617729d8a748ef71fcd11b",
+    "client_request_id_header": "X-Client-Request-Id",
+    "response_store": false,
+    "sdk_retries": 0,
+    "timeout_seconds": 300.0,
+    "wrapper_retries": 0
+  }
+}
