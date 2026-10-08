@@ -83,6 +83,11 @@ class RepositoryDeterministicWorldModel:
         ...,
     ]
 
+    what_it_is_assertion_ids: tuple[
+        str,
+        ...,
+    ] = ()
+
 
 def _support(
     evidence_id: str,

@@ -160,7 +160,9 @@ def _section_assertions(
     tuple[str, ...],
 ]:
     return {
-        RepositorySemanticGapSection.WHAT_IT_IS: (),
+        RepositorySemanticGapSection.WHAT_IT_IS: (
+            model.what_it_is_assertion_ids
+        ),
         RepositorySemanticGapSection.WHERE_IT_SITS: (
             model.where_it_sits_assertion_ids
         ),

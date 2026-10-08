@@ -490,6 +490,10 @@ def _semantic_states(
         )
 
     selections = {
+        RepositorySemanticSection.WHAT_IT_IS: (
+            world_model
+            .what_it_is_assertion_ids
+        ),
         RepositorySemanticSection.WHERE_IT_SITS: (
             world_model
             .where_it_sits_assertion_ids
