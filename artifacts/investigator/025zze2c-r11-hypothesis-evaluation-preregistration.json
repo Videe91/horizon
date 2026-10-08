@@ -1,0 +1,214 @@
+{
+  "authority": {
+    "evaluation_created": false,
+    "model_calls_this_stage": 0,
+    "new_read_source_operations": 0,
+    "new_searches": 0,
+    "new_typed_investigation_operations": 0,
+    "semantic_overlay_created": false,
+    "semantic_promotions": 0,
+    "what_it_is_closed": false,
+    "world_model_mutations": 0
+  },
+  "boundary": {
+    "evaluation_invocation_sealed": true,
+    "followup_request_constructed": true,
+    "provider_call_executed": false,
+    "r10_search_results_interpreted_as_truth": false,
+    "read_source_evidence_present": false,
+    "search_evidence_is_metadata_only_for_evaluator": true
+  },
+  "certification": {
+    "mode": "OFFLINE_ONLY",
+    "name": "025ZZE-2C-R11 Horizon-self hypothesis-evaluation preregistration",
+    "status": "PASS"
+  },
+  "cost_authority": {
+    "aggregate_exam_cap_usd": "2.700000",
+    "historical_investigator_cost_usd": "0.147535",
+    "next_call_cap_usd": "0.300000",
+    "paid_cost_before_r11_usd": "0.293195",
+    "r8_typed_planner_cost_usd": "0.145660"
+  },
+  "evaluation_request_view": {
+    "evidence_record_count": 5,
+    "evidence_records": [
+      {
+        "canonical_payload_bytes": 363,
+        "canonical_payload_sha256": "sha256:41e58f00c98e96527a335cc24281fc30e8d1733f164560af030436ee9c251dbe",
+        "evidence_id": "declared-python-dependency-set:96d09be949466add9c704196f5ef3c2fbb8d72589b613323ebfe8baf5d16aaca",
+        "evidence_kind": "PYTHON_DECLARED_PROJECT_DEPENDENCIES_EVIDENCE",
+        "source_excerpt_present": false
+      },
+      {
+        "canonical_payload_bytes": 970,
+        "canonical_payload_sha256": "sha256:a8a4639cc2dbff166f87f9455e47b5101cce5a9bb086a02633e20eff9513b310",
+        "evidence_id": "git-blob-evidence:04f33da4024e2f63cebd242911b3e16d24683443eb14506a6f24ef3fccf62075",
+        "evidence_kind": "GIT_BLOB_EVIDENCE",
+        "source_excerpt_present": false
+      },
+      {
+        "canonical_payload_bytes": 5663,
+        "canonical_payload_sha256": "sha256:18e0723bb2feff8942e1de3009d05a8c13bbe874fe0b09ebdb8226aa326be512",
+        "evidence_id": "bounded-investigation-search-evidence:18e0723bb2feff8942e1de3009d05a8c13bbe874fe0b09ebdb8226aa326be512",
+        "evidence_kind": "BOUNDED_INVESTIGATION_SEARCH_OBSERVATION",
+        "source_excerpt_present": false
+      },
+      {
+        "canonical_payload_bytes": 10935,
+        "canonical_payload_sha256": "sha256:25c801e4431605ac44cb8c79a9951549006beba6ba3bc19750871f2e85d27067",
+        "evidence_id": "bounded-investigation-search-evidence:25c801e4431605ac44cb8c79a9951549006beba6ba3bc19750871f2e85d27067",
+        "evidence_kind": "BOUNDED_INVESTIGATION_SEARCH_OBSERVATION",
+        "source_excerpt_present": false
+      },
+      {
+        "canonical_payload_bytes": 101525,
+        "canonical_payload_sha256": "sha256:32ae1825765c921751706d043371dec3de425164d6537d3d26d63b0ca3431774",
+        "evidence_id": "bounded-investigation-search-evidence:32ae1825765c921751706d043371dec3de425164d6537d3d26d63b0ca3431774",
+        "evidence_kind": "BOUNDED_INVESTIGATION_SEARCH_OBSERVATION",
+        "source_excerpt_present": false
+      }
+    ],
+    "metadata_only_evidence_count": 5,
+    "view_id": "hypothesis-evaluation-request-view:e1fa122cea2dfbac0ae46836a8679853edd468476a77fc30846b35e66e4ad196",
+    "visible_source_excerpt_count": 0
+  },
+  "followup_request": {
+    "base_evidence_record_count": 2,
+    "bounded_search_evidence": [
+      {
+        "bounded_evidence_id": "bounded-investigation-search-evidence:25c801e4431605ac44cb8c79a9951549006beba6ba3bc19750871f2e85d27067",
+        "bounded_evidence_kind": "BOUNDED_INVESTIGATION_SEARCH_OBSERVATION",
+        "bounded_payload_bytes": 10935,
+        "bounded_payload_sha256": "sha256:25c801e4431605ac44cb8c79a9951549006beba6ba3bc19750871f2e85d27067",
+        "complete_match_count": 21,
+        "complete_observation_id": "investigation-search-observation:c42b57f2519cbe5b09f0c63d3eab97d13fa703b413b1bf41a31835f2010c7657",
+        "query": "understanding"
+      },
+      {
+        "bounded_evidence_id": "bounded-investigation-search-evidence:18e0723bb2feff8942e1de3009d05a8c13bbe874fe0b09ebdb8226aa326be512",
+        "bounded_evidence_kind": "BOUNDED_INVESTIGATION_SEARCH_OBSERVATION",
+        "bounded_payload_bytes": 5663,
+        "bounded_payload_sha256": "sha256:18e0723bb2feff8942e1de3009d05a8c13bbe874fe0b09ebdb8226aa326be512",
+        "complete_match_count": 9,
+        "complete_observation_id": "investigation-search-observation:5a515d56581fafd5d2f57f0d9695daab26e801bc52009110ffe92aaa0ac54ed4",
+        "query": "agent"
+      },
+      {
+        "bounded_evidence_id": "bounded-investigation-search-evidence:32ae1825765c921751706d043371dec3de425164d6537d3d26d63b0ca3431774",
+        "bounded_evidence_kind": "BOUNDED_INVESTIGATION_SEARCH_OBSERVATION",
+        "bounded_payload_bytes": 101525,
+        "bounded_payload_sha256": "sha256:32ae1825765c921751706d043371dec3de425164d6537d3d26d63b0ca3431774",
+        "complete_match_count": 119,
+        "complete_observation_id": "investigation-search-observation:7db03f25497e12ccb8b888c0055b9818649c2d3e9c96a66b260d44ce7a262ce4",
+        "query": "update"
+      }
+    ],
+    "evidence_record_count": 5,
+    "request_id": "semantic-gap-followup-investigation-request:564d2da3b6c6615a4af3ba49cbf6cd026980199baff1e6441e0eb8d396587005",
+    "supplemental_search_evidence_count": 3
+  },
+  "invocation": {
+    "canonical_input": {
+      "cost_cap_usd": "0.300000",
+      "instruction_hash": "sha256:0d776662f5e4d17834dca18d9233df01ef7bcc8bf2b5d0e82a23043d2a22a896",
+      "request": {
+        "evidence_records": [
+          {
+            "canonical_payload_bytes": 363,
+            "canonical_payload_sha256": "sha256:41e58f00c98e96527a335cc24281fc30e8d1733f164560af030436ee9c251dbe",
+            "evidence_id": "declared-python-dependency-set:96d09be949466add9c704196f5ef3c2fbb8d72589b613323ebfe8baf5d16aaca",
+            "evidence_kind": "PYTHON_DECLARED_PROJECT_DEPENDENCIES_EVIDENCE",
+            "source_excerpt": null
+          },
+          {
+            "canonical_payload_bytes": 970,
+            "canonical_payload_sha256": "sha256:a8a4639cc2dbff166f87f9455e47b5101cce5a9bb086a02633e20eff9513b310",
+            "evidence_id": "git-blob-evidence:04f33da4024e2f63cebd242911b3e16d24683443eb14506a6f24ef3fccf62075",
+            "evidence_kind": "GIT_BLOB_EVIDENCE",
+            "source_excerpt": null
+          },
+          {
+            "canonical_payload_bytes": 5663,
+            "canonical_payload_sha256": "sha256:18e0723bb2feff8942e1de3009d05a8c13bbe874fe0b09ebdb8226aa326be512",
+            "evidence_id": "bounded-investigation-search-evidence:18e0723bb2feff8942e1de3009d05a8c13bbe874fe0b09ebdb8226aa326be512",
+            "evidence_kind": "BOUNDED_INVESTIGATION_SEARCH_OBSERVATION",
+            "source_excerpt": null
+          },
+          {
+            "canonical_payload_bytes": 10935,
+            "canonical_payload_sha256": "sha256:25c801e4431605ac44cb8c79a9951549006beba6ba3bc19750871f2e85d27067",
+            "evidence_id": "bounded-investigation-search-evidence:25c801e4431605ac44cb8c79a9951549006beba6ba3bc19750871f2e85d27067",
+            "evidence_kind": "BOUNDED_INVESTIGATION_SEARCH_OBSERVATION",
+            "source_excerpt": null
+          },
+          {
+            "canonical_payload_bytes": 101525,
+            "canonical_payload_sha256": "sha256:32ae1825765c921751706d043371dec3de425164d6537d3d26d63b0ca3431774",
+            "evidence_id": "bounded-investigation-search-evidence:32ae1825765c921751706d043371dec3de425164d6537d3d26d63b0ca3431774",
+            "evidence_kind": "BOUNDED_INVESTIGATION_SEARCH_OBSERVATION",
+            "source_excerpt": null
+          }
+        ],
+        "hypothesis": "Horizon is intended to provide continuously maintained software understanding for AI agents, as explicitly declared in pyproject.toml\u2019s [project].description; the supplied evidence establishes this stated purpose but not its implementation.",
+        "question": "What is this repository's primary software purpose, and what evidence establishes it?",
+        "question_id": "repository-semantic-gap-question:627bdd67d2987320db7e045a86ea8c87a4c256ab4bf3c44c86b90c52d8775ab8",
+        "request_id": "semantic-gap-followup-investigation-request:564d2da3b6c6615a4af3ba49cbf6cd026980199baff1e6441e0eb8d396587005",
+        "semantic_gap_id": "repository-semantic-gap:b530b9c5bd7f0108fe555ddbd2d74250c07ca5e854e2e1ddda5dcc030fb01e5d",
+        "semantic_gap_section": "WHAT_IT_IS",
+        "source_proposal_id": "investigation-proposal:50754d89b43816d8b54d12712690c16815462f9daa0c3b515d0ee3bd6e385103",
+        "test_questions": [
+          "At frozen commit 6151aad2081d9a849a6aac7a6081a2d7b32c4334, which exact documentation or source passages define the software understanding intended for AI agents and confirm, qualify, or contradict this primary-purpose interpretation?",
+          "At that commit, which implementation or test passages, if any, show how that understanding is maintained over time and made available to AI agents, rather than identifying these capabilities only as planned work?"
+        ],
+        "view_id": "hypothesis-evaluation-request-view:e1fa122cea2dfbac0ae46836a8679853edd468476a77fc30846b35e66e4ad196"
+      },
+      "schema_hash": "sha256:386c3c6aefa9749216916d05041c035fdc59d73e6a62278b084d8e82db86ff82",
+      "temperature": null
+    },
+    "canonical_input_bytes": 3322,
+    "canonical_input_hash": "sha256:bc5be0bda750bd75b8f41d98bbde953b9705bd6f2220a7ef68835053ff228691",
+    "cost_cap_usd": "0.300000",
+    "instruction_hash": "sha256:0d776662f5e4d17834dca18d9233df01ef7bcc8bf2b5d0e82a23043d2a22a896",
+    "invocation_id": "hypothesis-evaluation-model-invocation:484f9e4c81e4cbc9f410fc8e858f3d131c918c42cff87d1eafb1adeeef7555e7",
+    "schema_hash": "sha256:386c3c6aefa9749216916d05041c035fdc59d73e6a62278b084d8e82db86ff82",
+    "temperature": null
+  },
+  "lineage": {
+    "base_request_id": "investigation-request:fe6c0526a0667730eba56abe4dc465b958cac79616d78842857198e76a5b5d61",
+    "base_world_model_snapshot_id": "world-model-snapshot:44d0df5367ae7e6a1fa212e80cf6a79eab422cda3dec9b56ed0166944365faff",
+    "question_id": "repository-semantic-gap-question:627bdd67d2987320db7e045a86ea8c87a4c256ab4bf3c44c86b90c52d8775ab8",
+    "repository_observation_id": "git-observation:a453d58352a0769d5fbc954c808c977f2e0a65eb095d862d5f3f8a9566cab5b5",
+    "semantic_gap_id": "repository-semantic-gap:b530b9c5bd7f0108fe555ddbd2d74250c07ca5e854e2e1ddda5dcc030fb01e5d",
+    "source_hypothesis_proposal_id": "investigation-proposal:50754d89b43816d8b54d12712690c16815462f9daa0c3b515d0ee3bd6e385103",
+    "source_r10_artifact": "artifacts/investigator/025zze2c-r10-search-observations.json",
+    "target_commit": "6151aad2081d9a849a6aac7a6081a2d7b32c4334"
+  },
+  "next_authorized_stage": "Execute exactly one paid GPT-6 Astra hypothesis-evaluation provider call using this sealed invocation as global provider call ordinal 3. Persist the raw provider response before semantic validation. Do not execute repository operations, do not run the typed planner, and do not promote the hypothesis in that same stage.",
+  "provider_pre_registration": {
+    "max_output_tokens": 4096,
+    "max_provider_calls": 9,
+    "model_id": "gpt-6-astra",
+    "next_global_provider_call_ordinal": 3,
+    "pricing_usd_per_million_tokens": {
+      "cache_write_per_million": "25.00",
+      "cached_input_per_million": "2.00",
+      "input_per_million": "20.00",
+      "output_per_million": "75.00"
+    },
+    "provider": "OPENAI",
+    "reasoning_effort": "high",
+    "sdk_max_retries": 0,
+    "timeout_seconds": 60.0,
+    "wrapper_retries": 0
+  },
+  "source_hypothesis": {
+    "hypothesis": "Horizon is intended to provide continuously maintained software understanding for AI agents, as explicitly declared in pyproject.toml\u2019s [project].description; the supplied evidence establishes this stated purpose but not its implementation.",
+    "proposal_id": "investigation-proposal:50754d89b43816d8b54d12712690c16815462f9daa0c3b515d0ee3bd6e385103",
+    "selected_pyproject_evidence_reference_id": "claim-evidence-reference:bfa5b811383961808d9e9b45f3fa7e2a9b7acbf1b22638ebca8438be98874f29",
+    "test_questions": [
+      "At frozen commit 6151aad2081d9a849a6aac7a6081a2d7b32c4334, which exact documentation or source passages define the software understanding intended for AI agents and confirm, qualify, or contradict this primary-purpose interpretation?",
+      "At that commit, which implementation or test passages, if any, show how that understanding is maintained over time and made available to AI agents, rather than identifying these capabilities only as planned work?"
+    ]
+  }
+}
