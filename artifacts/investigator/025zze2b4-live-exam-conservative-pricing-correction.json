@@ -1,0 +1,117 @@
+{
+  "authority": {
+    "live_model_calls": 0,
+    "repository_operations": 0,
+    "semantic_promotions": 0,
+    "semantic_store_writes": 0
+  },
+  "capability": "025ZZE-2B4",
+  "correction_id": "autonomous-semantic-live-pricing-authority:6150f9f95dd21e00587b56292c1795872837b0c516f44e60772b3cd76248a5e6",
+  "effective_live_cost_authority": {
+    "aggregate_cost_cap_usd": "2.700000",
+    "hypothesis_evaluator_cost_cap_usd": "0.300000",
+    "investigator_cost_cap_usd": "0.300000",
+    "max_provider_calls": 9,
+    "pricing_usd_per_million_tokens": {
+      "cache_write_per_million": "25.00",
+      "cached_input_per_million": "2.00",
+      "input_per_million": "20.00",
+      "output_per_million": "75.00"
+    },
+    "typed_planner_cost_cap_usd": "0.300000"
+  },
+  "execution_start_authority": {
+    "allowed_paths_since_production_code_head": [
+      "artifacts/investigator/025zze2b2-horizon-self-autonomous-live-exam-seal.json",
+      "artifacts/investigator/025zze2b3-live-exam-host-authority-correction.json",
+      "artifacts/investigator/025zze2b4-live-exam-conservative-pricing-correction.json"
+    ],
+    "forbid_changes_since_production_code_head_under": [
+      "src",
+      "tests",
+      "pyproject.toml"
+    ],
+    "require_clean_worktree": true,
+    "require_production_code_head_is_ancestor": true
+  },
+  "inherited_configuration": {
+    "coordinator_limits": {
+      "max_evidence_record_bytes": 2000000,
+      "max_hypothesis_rounds": 2,
+      "max_investigator_rounds": 3,
+      "max_plan_steps": 6,
+      "max_plan_total_seconds": 120,
+      "max_provider_calls": 9,
+      "max_total_evidence_bytes": 8000000,
+      "max_total_model_cost_usd": "2.700000"
+    },
+    "instructions": {
+      "hypothesis_evaluator": {
+        "bytes": 1443,
+        "sha256": "sha256:0d776662f5e4d17834dca18d9233df01ef7bcc8bf2b5d0e82a23043d2a22a896",
+        "utf8": "Evaluate the supplied source hypothesis only against the evidence visible in the supplied hypothesis-evaluation request.\n\nUse the exact verdict vocabulary and structured-output schema supplied by Horizon.\n\nReturn SUPPORTED only when the visible evidence materially supports the hypothesis, resolves the supplied test questions for the semantic-gap question, contains no material contradiction, and leaves no material evidence question unresolved.\n\nReturn CONTRADICTED only when the visible evidence materially contradicts the hypothesis, supplies no supporting evidence that prevents that conclusion, and leaves no material evidence question unresolved.\n\nReturn STILL_INCOMPLETE whenever the evidence is mixed, insufficient, indirect, or leaves any material question unresolved. In that case, state the remaining evidence questions precisely.\n\nEvery supporting_evidence_id and contradicting_evidence_id must identify evidence present in this exact request.\n\nTreat source_excerpt as observed repository source evidence. Evidence records that expose only identity, kind, hash, and byte size are metadata-only in this invocation: do not invent, infer, or claim knowledge of their hidden canonical payload bodies.\n\nDo not create a claim, epistemic assessment, World Model assertion, semantic proposition, or semantic-gap closure. This output is a non-authoritative evidence evaluation only.\n\nReturn only the required structured evaluation output.\n"
+      },
+      "investigator": {
+        "bytes": 1191,
+        "sha256": "sha256:d71eafb0e9d7fff0ead56c6b26a4e9732eb6502de7dc4c5bf6b754b897faa3b4",
+        "utf8": "Resolve only the supplied repository WHAT_IT_IS semantic gap using the exact evidence present in the InvestigationRequest.\n\nDo not invent repository content, paths, symbols, behavior, relationships, or evidence.\n\nIf the current evidence is insufficient to form a materially supported primary-purpose hypothesis, return PROPOSE_INVESTIGATION with the smallest concrete investigation questions needed to obtain decisive read-only repository evidence.\n\nPrefer questions that can identify exact source passages establishing, qualifying, or contradicting the repository's primary software purpose.\n\nWhen the visible evidence is sufficient to state a bounded primary-purpose interpretation, return PROPOSE_HYPOTHESIS with one concise hypothesis and concrete test questions that could confirm or falsify it from repository evidence.\n\nIf the evidence genuinely cannot support progress, use the existing insufficient-evidence or refinement disposition rather than inventing certainty.\n\nDo not create a claim, epistemic assessment, World Model assertion, semantic proposition, or semantic-gap closure. Model output is proposal authority only.\n\nReturn only the required structured investigator output.\n"
+      },
+      "typed_planner": {
+        "bytes": 874,
+        "sha256": "sha256:e3f493f369dfbbf2932b5ae78ff437d1f7bddc1668a08c6e15df932e4b8d0056",
+        "utf8": "Translate the supplied investigation questions only into legal typed Horizon investigation operations using the supplied operation-semantics contract.\n\nUse the smallest bounded read-only operations that can answer each question.\n\nPrefer READ_SOURCE when an exact path and defensible line range are already known from evidence. Use SEARCH_SOURCE when the exact location is not yet known. INSPECT_SYMBOL may be used when a known symbol definition materially answers the question.\n\nDo not invent repository paths, line numbers, symbols, call coordinates, or hidden source content.\n\nDo not use RESOLVE_CALL in this certification exam because the autonomous coordinator intentionally fails closed for InvestigationCallObservation until a canonical call-observation evidence bridge exists.\n\nDo not mutate the repository.\n\nReturn only the required structured typed-planner output.\n"
+      }
+    },
+    "max_output_tokens": 4096,
+    "model_id": "gpt-6-astra",
+    "reasoning_effort": "high",
+    "sdk": {
+      "max_retries": 0,
+      "timeout_seconds": 60.0
+    },
+    "temperature": null
+  },
+  "pricing_correction": {
+    "aggregate_cost_cap_changed": false,
+    "cost_property": "For current Standard GPT-6 Astra pricing, calculated token cost is greater than or equal to actual token cost for both the short-context and long-context bands.",
+    "effective_conservative_rates": {
+      "cache_write_per_million": "25.00",
+      "cached_input_per_million": "2.00",
+      "input_per_million": "20.00",
+      "output_per_million": "75.00"
+    },
+    "instructions_changed": false,
+    "max_output_tokens_changed": false,
+    "max_provider_calls_changed": false,
+    "model_id_changed": false,
+    "per_call_cost_caps_changed": false,
+    "policy": "Use the long-context rate table for every provider call regardless of actual request size.",
+    "reason": "The original seal priced every GPT-6 Astra request using the short-context rate. The autonomous coordinator allows up to 8,000,000 evidence bytes and therefore does not prove that every later request remains within the 272,000-input-token short-context pricing band. The live exam will conservatively meter every provider response at the long-context rates so calculated cost cannot understate current standard Astra token cost.",
+    "reasoning_effort_changed": false,
+    "sealed_short_context_rates": {
+      "cache_write_per_million": "12.50",
+      "cached_input_per_million": "1.00",
+      "input_per_million": "10.00",
+      "output_per_million": "50.00"
+    },
+    "short_context_threshold_input_tokens": 272000,
+    "target_lineage_changed": false
+  },
+  "production_authority": {
+    "production_code_head": "a2c4dd39d260a644b387d4e9deb52a14d9205aa8"
+  },
+  "result": "AUTONOMOUS_LIVE_EXAM_CONSERVATIVE_PRICING_AUTHORITY",
+  "schema_version": 1,
+  "source_authority": {
+    "025zze2b2": {
+      "path": "artifacts/investigator/025zze2b2-horizon-self-autonomous-live-exam-seal.json",
+      "seal_id": "autonomous-semantic-live-exam-seal:f4da3e963088df7354ac37f51a18029e3d5270706ee17502b7063ef9b4f98adc",
+      "sha256": "sha256:5ee91d96e5619e35643a41fa0719f376c190c98803e6b2fe071a6c57cc35fd53"
+    },
+    "025zze2b3": {
+      "correction_id": "autonomous-semantic-live-host-authority:40eaa351341f754117da7ff4902960dd5082ffc1a4f0a918e92cc5719638a685",
+      "path": "artifacts/investigator/025zze2b3-live-exam-host-authority-correction.json",
+      "sha256": "sha256:78500b312d5d74ac743e0a7d771f951d31bb4a807c5e2a1e4e635ba8f5bcf6b6"
+    }
+  }
+}
