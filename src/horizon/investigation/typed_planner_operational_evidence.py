@@ -18,6 +18,7 @@ from horizon.investigation.bounded_evidence import (
 )
 from horizon.investigation.evidence_records import (
     SEARCH_OBSERVATION_EVIDENCE_KIND,
+    SOURCE_OBSERVATION_EVIDENCE_KIND,
     SYMBOL_OBSERVATION_EVIDENCE_KIND,
 )
 from horizon.investigator.middleware import (
@@ -27,6 +28,10 @@ from horizon.investigator.middleware import (
 
 MAX_VISIBLE_SEARCH_MATCHES = 20
 MAX_SEARCH_LINE_CHARACTERS = 240
+
+MAX_VISIBLE_SOURCE_LINES = 24
+MAX_SOURCE_LINE_CHARACTERS = 240
+
 MAX_VISIBLE_DIRECT_DEFINITIONS = 16
 
 
@@ -70,6 +75,41 @@ class TypedPlannerSearchObservationView:
     frozen=True,
     slots=True,
 )
+class TypedPlannerSourceLineView:
+    line_number: int
+    line_text: str
+    line_text_truncated: bool
+
+
+@dataclass(
+    frozen=True,
+    slots=True,
+)
+class TypedPlannerSourceObservationView:
+    operation_kind: str
+
+    path: str
+    start_line: int
+    end_line: int
+    line_count: int
+
+    observed_source_line_count: int | None
+    ends_at_observed_eof: bool | None
+
+    selection_mode: str
+    visible_line_count: int
+    omitted_line_count: int
+
+    lines: tuple[
+        TypedPlannerSourceLineView,
+        ...,
+    ]
+
+
+@dataclass(
+    frozen=True,
+    slots=True,
+)
 class TypedPlannerDirectDefinitionView:
     kind: str
     name: str
@@ -101,6 +141,7 @@ class TypedPlannerSymbolObservationView:
 
 TypedPlannerOperationalEvidenceView = (
     TypedPlannerSearchObservationView
+    | TypedPlannerSourceObservationView
     | TypedPlannerSymbolObservationView
 )
 
@@ -484,6 +525,342 @@ def _search_view(
     )
 
 
+def _source_view(
+    record: CanonicalEvidenceRecord,
+) -> TypedPlannerSourceObservationView:
+    payload = _payload(
+        record
+    )
+
+    if (
+        payload.get(
+            "operation_kind"
+        )
+        != "READ_SOURCE"
+    ):
+        raise TypedPlannerOperationalEvidenceError(
+            "source evidence operation kind is inconsistent"
+        )
+
+    if (
+        payload.get(
+            "observation_id"
+        )
+        != record.evidence_id
+    ):
+        raise TypedPlannerOperationalEvidenceError(
+            "source observation identity is inconsistent"
+        )
+
+    path = _require_nonempty_text(
+        payload.get(
+            "path"
+        ),
+        name="source path",
+    )
+
+    start_line = _require_positive_int(
+        payload.get(
+            "start_line"
+        ),
+        name="source start line",
+    )
+
+    end_line = _require_positive_int(
+        payload.get(
+            "end_line"
+        ),
+        name="source end line",
+    )
+
+    if (
+        end_line
+        < start_line
+    ):
+        raise TypedPlannerOperationalEvidenceError(
+            "source end line precedes start line"
+        )
+
+    line_count = _require_positive_int(
+        payload.get(
+            "line_count"
+        ),
+        name="source line count",
+    )
+
+    expected_line_count = (
+        end_line
+        - start_line
+        + 1
+    )
+
+    if (
+        line_count
+        != expected_line_count
+    ):
+        raise TypedPlannerOperationalEvidenceError(
+            "source line count does not match coordinates"
+        )
+
+    observed_source_line_count = (
+        payload.get(
+            "observed_source_line_count"
+        )
+    )
+
+    ends_at_observed_eof = (
+        payload.get(
+            "ends_at_observed_eof"
+        )
+    )
+
+    if (
+        observed_source_line_count
+        is None
+    ) != (
+        ends_at_observed_eof
+        is None
+    ):
+        raise TypedPlannerOperationalEvidenceError(
+            "source completeness metadata must be "
+            "present or absent as one unit"
+        )
+
+    if (
+        observed_source_line_count
+        is not None
+    ):
+        observed_source_line_count = (
+            _require_positive_int(
+                observed_source_line_count,
+                name=(
+                    "observed source line count"
+                ),
+            )
+        )
+
+        if (
+            observed_source_line_count
+            < end_line
+        ):
+            raise TypedPlannerOperationalEvidenceError(
+                "observed source line count "
+                "precedes source read end"
+            )
+
+        if not isinstance(
+            ends_at_observed_eof,
+            bool,
+        ):
+            raise TypedPlannerOperationalEvidenceError(
+                "ends_at_observed_eof must be boolean"
+            )
+
+        if (
+            ends_at_observed_eof
+            != (
+                end_line
+                == observed_source_line_count
+            )
+        ):
+            raise TypedPlannerOperationalEvidenceError(
+                "source EOF metadata is inconsistent"
+            )
+
+    raw_lines = _require_list(
+        payload.get(
+            "lines"
+        ),
+        name="source lines",
+    )
+
+    if (
+        len(
+            raw_lines
+        )
+        != line_count
+    ):
+        raise TypedPlannerOperationalEvidenceError(
+            "source line array does not match line count"
+        )
+
+    if (
+        line_count
+        <= MAX_VISIBLE_SOURCE_LINES
+    ):
+        selected_indexes = tuple(
+            range(
+                line_count
+            )
+        )
+
+        selection_mode = "ALL"
+
+    else:
+        head_count = (
+            MAX_VISIBLE_SOURCE_LINES
+            // 2
+        )
+
+        tail_count = (
+            MAX_VISIBLE_SOURCE_LINES
+            - head_count
+        )
+
+        selected_indexes = (
+            tuple(
+                range(
+                    head_count
+                )
+            )
+            + tuple(
+                range(
+                    line_count
+                    - tail_count,
+                    line_count,
+                )
+            )
+        )
+
+        selection_mode = "HEAD_TAIL"
+
+    selected_index_set = set(
+        selected_indexes
+    )
+
+    visible = []
+
+    for index, raw_line in enumerate(
+        raw_lines
+    ):
+        line = _require_dict(
+            raw_line,
+            name="source line",
+        )
+
+        expected_line_number = (
+            start_line
+            + index
+        )
+
+        if (
+            line.get(
+                "line_number"
+            )
+            != expected_line_number
+        ):
+            raise TypedPlannerOperationalEvidenceError(
+                "source line coordinates are not contiguous"
+            )
+
+        encoded = line.get(
+            "content_base64"
+        )
+
+        if not isinstance(
+            encoded,
+            str,
+        ):
+            raise TypedPlannerOperationalEvidenceError(
+                "source line bytes must be base64 text"
+            )
+
+        try:
+            line_bytes = base64.b64decode(
+                encoded,
+                validate=True,
+            )
+        except (
+            binascii.Error,
+            ValueError,
+        ) as exc:
+            raise TypedPlannerOperationalEvidenceError(
+                "source line bytes are not valid base64"
+            ) from exc
+
+        line_text = line_bytes.decode(
+            "utf-8",
+            errors="replace",
+        )
+
+        if (
+            index
+            not in selected_index_set
+        ):
+            continue
+
+        truncated = (
+            len(
+                line_text
+            )
+            > MAX_SOURCE_LINE_CHARACTERS
+        )
+
+        if truncated:
+            line_text = line_text[
+                :MAX_SOURCE_LINE_CHARACTERS
+            ]
+
+        visible.append(
+            TypedPlannerSourceLineView(
+                line_number=(
+                    expected_line_number
+                ),
+                line_text=(
+                    line_text
+                ),
+                line_text_truncated=(
+                    truncated
+                ),
+            )
+        )
+
+    visible_lines = tuple(
+        visible
+    )
+
+    if (
+        len(
+            visible_lines
+        )
+        != len(
+            selected_indexes
+        )
+    ):
+        raise TypedPlannerOperationalEvidenceError(
+            "source visibility projection is inconsistent"
+        )
+
+    return TypedPlannerSourceObservationView(
+        operation_kind="READ_SOURCE",
+        path=path,
+        start_line=start_line,
+        end_line=end_line,
+        line_count=line_count,
+        observed_source_line_count=(
+            observed_source_line_count
+        ),
+        ends_at_observed_eof=(
+            ends_at_observed_eof
+        ),
+        selection_mode=(
+            selection_mode
+        ),
+        visible_line_count=(
+            len(
+                visible_lines
+            )
+        ),
+        omitted_line_count=(
+            line_count
+            - len(
+                visible_lines
+            )
+        ),
+        lines=visible_lines,
+    )
+
+
 def _symbol_view(
     record: CanonicalEvidenceRecord,
 ) -> TypedPlannerSymbolObservationView:
@@ -712,6 +1089,14 @@ def project_typed_planner_operational_evidence(
         }
     ):
         return _search_view(
+            record
+        )
+
+    if (
+        record.evidence_kind
+        == SOURCE_OBSERVATION_EVIDENCE_KIND
+    ):
+        return _source_view(
             record
         )
 

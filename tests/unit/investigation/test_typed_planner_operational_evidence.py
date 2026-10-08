@@ -14,10 +14,13 @@ from horizon.investigation.bounded_evidence import (
 )
 from horizon.investigation.typed_planner_operational_evidence import (
     MAX_SEARCH_LINE_CHARACTERS,
+    MAX_SOURCE_LINE_CHARACTERS,
     MAX_VISIBLE_DIRECT_DEFINITIONS,
     MAX_VISIBLE_SEARCH_MATCHES,
+    MAX_VISIBLE_SOURCE_LINES,
     TypedPlannerOperationalEvidenceError,
     TypedPlannerSearchObservationView,
+    TypedPlannerSourceObservationView,
     TypedPlannerSymbolObservationView,
 )
 from horizon.investigation.typed_planner_request_view import (
@@ -36,6 +39,10 @@ SEARCH_KIND = (
 
 SYMBOL_KIND = (
     "INVESTIGATION_SYMBOL_OBSERVATION"
+)
+
+SOURCE_KIND = (
+    "INVESTIGATION_SOURCE_OBSERVATION"
 )
 
 
@@ -244,6 +251,123 @@ def fact(
         ),
         "evidence_id": identity,
     }
+
+
+def source_payload(
+    *,
+    count: int,
+    identity: str = (
+        "investigation-source-observation:test"
+    ),
+    start_line: int = 10,
+    characters_per_line: int = 20,
+    include_completeness: bool = True,
+    reaches_eof: bool = True,
+) -> dict[str, object]:
+    end_line = (
+        start_line
+        + count
+        - 1
+    )
+
+    lines = []
+
+    for index in range(
+        count
+    ):
+        line_number = (
+            start_line
+            + index
+        )
+
+        text = (
+            "source line "
+            + str(
+                line_number
+            )
+            + " "
+            + (
+                "x"
+                * characters_per_line
+            )
+        )
+
+        lines.append(
+            {
+                "line_number": (
+                    line_number
+                ),
+                "content_base64": (
+                    base64.b64encode(
+                        text.encode(
+                            "utf-8"
+                        )
+                    ).decode(
+                        "ascii"
+                    )
+                ),
+            }
+        )
+
+    payload = {
+        "operation_kind": (
+            "READ_SOURCE"
+        ),
+        "observation_id": (
+            identity
+        ),
+        "path": (
+            "tests/test_repository_behavior.py"
+        ),
+        "start_line": (
+            start_line
+        ),
+        "end_line": (
+            end_line
+        ),
+        "commit_sha": (
+            "b" * 40
+        ),
+        "repository_observation_id": (
+            "git-observation:test"
+        ),
+        "source_blob_evidence_id": (
+            "git-blob-evidence:test-source"
+        ),
+        "source_object_id": (
+            "c" * 40
+        ),
+        "line_count": (
+            count
+        ),
+        "lines": (
+            lines
+        ),
+    }
+
+    if include_completeness:
+        observed_source_line_count = (
+            end_line
+            if reaches_eof
+            else (
+                end_line
+                + 100
+            )
+        )
+
+        payload[
+            "observed_source_line_count"
+        ] = (
+            observed_source_line_count
+        )
+
+        payload[
+            "ends_at_observed_eof"
+        ] = (
+            reaches_eof
+        )
+
+    return payload
 
 
 def symbol_payload(
@@ -512,6 +636,450 @@ def test_bounded_search_evidence_exposes_operational_context() -> None:
         == 1
     )
 
+
+
+def test_source_evidence_exposes_bounded_semantic_context() -> None:
+    count = 30
+
+    value = request(
+        record(
+            identity=(
+                "investigation-source-observation:test"
+            ),
+            kind=SOURCE_KIND,
+            payload=source_payload(
+                count=count,
+            ),
+        )
+    )
+
+    view = (
+        make_typed_planner_request_view(
+            value
+        )
+    )
+
+    evidence = view.evidence_records[
+        0
+    ]
+
+    context = (
+        evidence.operational_context
+    )
+
+    assert isinstance(
+        context,
+        TypedPlannerSourceObservationView,
+    )
+
+    assert (
+        context.operation_kind
+        == "READ_SOURCE"
+    )
+
+    assert (
+        context.path
+        == "tests/test_repository_behavior.py"
+    )
+
+    assert (
+        context.start_line
+        == 10
+    )
+
+    assert (
+        context.end_line
+        == 39
+    )
+
+    assert (
+        context.line_count
+        == count
+    )
+
+    assert (
+        context.observed_source_line_count
+        == 39
+    )
+
+    assert (
+        context.ends_at_observed_eof
+        is True
+    )
+
+    assert (
+        context.selection_mode
+        == "HEAD_TAIL"
+    )
+
+    assert (
+        context.visible_line_count
+        == MAX_VISIBLE_SOURCE_LINES
+    )
+
+    assert (
+        context.omitted_line_count
+        == (
+            count
+            - MAX_VISIBLE_SOURCE_LINES
+        )
+    )
+
+    visible_numbers = tuple(
+        line.line_number
+        for line
+        in context.lines
+    )
+
+    assert visible_numbers == (
+        tuple(
+            range(
+                10,
+                22,
+            )
+        )
+        + tuple(
+            range(
+                28,
+                40,
+            )
+        )
+    )
+
+    assert (
+        context.lines[
+            0
+        ].line_text
+        .startswith(
+            "source line 10 "
+        )
+    )
+
+    assert (
+        context.lines[
+            -1
+        ].line_text
+        .startswith(
+            "source line 39 "
+        )
+    )
+
+
+def test_small_source_read_exposes_all_lines() -> None:
+    value = request(
+        record(
+            identity=(
+                "investigation-source-observation:test"
+            ),
+            kind=SOURCE_KIND,
+            payload=source_payload(
+                count=5,
+            ),
+        )
+    )
+
+    context = (
+        make_typed_planner_request_view(
+            value
+        )
+        .evidence_records[
+            0
+        ]
+        .operational_context
+    )
+
+    assert isinstance(
+        context,
+        TypedPlannerSourceObservationView,
+    )
+
+    assert (
+        context.selection_mode
+        == "ALL"
+    )
+
+    assert (
+        context.visible_line_count
+        == 5
+    )
+
+    assert (
+        context.omitted_line_count
+        == 0
+    )
+
+    assert tuple(
+        line.line_number
+        for line
+        in context.lines
+    ) == (
+        10,
+        11,
+        12,
+        13,
+        14,
+    )
+
+
+def test_source_semantic_lines_are_character_bounded() -> None:
+    value = request(
+        record(
+            identity=(
+                "investigation-source-observation:test"
+            ),
+            kind=SOURCE_KIND,
+            payload=source_payload(
+                count=2,
+                characters_per_line=1000,
+            ),
+        )
+    )
+
+    context = (
+        make_typed_planner_request_view(
+            value
+        )
+        .evidence_records[
+            0
+        ]
+        .operational_context
+    )
+
+    assert isinstance(
+        context,
+        TypedPlannerSourceObservationView,
+    )
+
+    assert (
+        len(
+            context.lines[
+                0
+            ].line_text
+        )
+        == MAX_SOURCE_LINE_CHARACTERS
+    )
+
+    assert (
+        context.lines[
+            0
+        ].line_text_truncated
+        is True
+    )
+
+
+def test_legacy_source_evidence_without_eof_metadata_remains_visible() -> None:
+    value = request(
+        record(
+            identity=(
+                "investigation-source-observation:test"
+            ),
+            kind=SOURCE_KIND,
+            payload=source_payload(
+                count=3,
+                include_completeness=False,
+            ),
+        )
+    )
+
+    context = (
+        make_typed_planner_request_view(
+            value
+        )
+        .evidence_records[
+            0
+        ]
+        .operational_context
+    )
+
+    assert isinstance(
+        context,
+        TypedPlannerSourceObservationView,
+    )
+
+    assert (
+        context.observed_source_line_count
+        is None
+    )
+
+    assert (
+        context.ends_at_observed_eof
+        is None
+    )
+
+
+def test_malformed_source_evidence_fails_closed() -> None:
+    payload = source_payload(
+        count=3,
+    )
+
+    payload[
+        "lines"
+    ][
+        1
+    ][
+        "line_number"
+    ] = 99
+
+    value = request(
+        record(
+            identity=(
+                "investigation-source-observation:test"
+            ),
+            kind=SOURCE_KIND,
+            payload=payload,
+        )
+    )
+
+    with pytest.raises(
+        TypedPlannerOperationalEvidenceError,
+        match="coordinates",
+    ):
+        make_typed_planner_request_view(
+            value
+        )
+
+
+def test_large_source_body_does_not_scale_planner_view() -> None:
+    large = record(
+        identity=(
+            "investigation-source-observation:test"
+        ),
+        kind=SOURCE_KIND,
+        payload=source_payload(
+            count=1000,
+            characters_per_line=400,
+        ),
+    )
+
+    value = request(
+        large
+    )
+
+    view = (
+        make_typed_planner_request_view(
+            value
+        )
+    )
+
+    model_view_bytes = len(
+        canonical(
+            asdict(
+                view
+            )
+        ).encode(
+            "utf-8"
+        )
+    )
+
+    assert (
+        len(
+            large.canonical_payload
+            .encode(
+                "utf-8"
+            )
+        )
+        > 400_000
+    )
+
+    assert (
+        model_view_bytes
+        < 15_000
+    )
+
+    context = (
+        view.evidence_records[
+            0
+        ]
+        .operational_context
+    )
+
+    assert isinstance(
+        context,
+        TypedPlannerSourceObservationView,
+    )
+
+    assert (
+        context.visible_line_count
+        == MAX_VISIBLE_SOURCE_LINES
+    )
+
+    assert (
+        context.omitted_line_count
+        == (
+            1000
+            - MAX_VISIBLE_SOURCE_LINES
+        )
+    )
+
+
+def test_source_operational_context_serializes_into_model_request_view() -> None:
+    value = request(
+        record(
+            identity=(
+                "investigation-source-observation:test"
+            ),
+            kind=SOURCE_KIND,
+            payload=source_payload(
+                count=4,
+            ),
+        )
+    )
+
+    view = (
+        make_typed_planner_request_view(
+            value
+        )
+    )
+
+    payload = asdict(
+        view
+    )
+
+    context = (
+        payload[
+            "evidence_records"
+        ][
+            0
+        ][
+            "operational_context"
+        ]
+    )
+
+    assert (
+        context[
+            "operation_kind"
+        ]
+        == "READ_SOURCE"
+    )
+
+    assert (
+        context[
+            "path"
+        ]
+        == "tests/test_repository_behavior.py"
+    )
+
+    assert (
+        context[
+            "lines"
+        ][
+            0
+        ][
+            "line_text"
+        ]
+        .startswith(
+            "source line 10 "
+        )
+    )
+
+    assert (
+        "canonical_payload"
+        not in payload[
+            "evidence_records"
+        ][
+            0
+        ]
+    )
 
 
 def test_symbol_evidence_exposes_boundaries_not_bulk_facts() -> None:
