@@ -1,0 +1,277 @@
+{
+  "authority": {
+    "claims_materialized": 1,
+    "epistemic_assessments_materialized": 1,
+    "epistemic_status": "SUPPORTED_HYPOTHESIS",
+    "new_live_model_calls": 0,
+    "prefect_repository_mutated": false,
+    "prior_paid_evaluation_calls": 1,
+    "promoted_as_proven": false,
+    "repository_operations_executed": 0,
+    "what_it_is_closed": true,
+    "world_model_assertions_materialized": 1,
+    "world_model_snapshot_changed": true
+  },
+  "capability": "025ZZC",
+  "card": {
+    "after_revision_id": "repository-card-revision:5812d9fed4db8a8b75f0dcb3e366cba819ada4148a2cb9bd0a73df3be92a6bc3",
+    "before_revision_id": "repository-card-revision:f0e2d8f000a05176e06639cb5273ef998844a98b08867f07d9e417ccaad76135",
+    "card_id": "repository-card:06f15d354702ba60ac53c443220030d16db108741aa2c5070057e9846428b95d",
+    "what_it_is": {
+      "evidence_ids": [
+        "investigation-source-observation:1bbbba51000fb63886ea19a66e9cea0cca827eeb1e6077b79bc40e849cc0f4bb",
+        "investigation-source-observation:6e5a493e182a2d1c0fee65d24ac2a940606e21e026007aec30430ab1a56020f2",
+        "investigation-source-observation:d6a91a2dc5d8c5f67e09a85543403ad2654b7eb61f2894934bf104097522fce6",
+        "investigation-source-observation:e4730dd25b7741d5a677881dc98c671db15f2ea96c0f1bc9fbfbfde25590bbc6"
+      ],
+      "reason": "At frozen commit 2338265f658845a9bef8ce7baf07519b89846dc8, this repository primarily implements Prefect as Python software for workflow orchestration and management. This tentative interpretation follows pyproject.toml's description, \"Workflow orchestration and management.\", and is consistent with the visible Flow and Task class declarations; those declarations alone do not establish their operational roles.",
+      "section": "WHAT_IT_IS",
+      "status": "SUPPORTED_HYPOTHESIS"
+    }
+  },
+  "promotion": {
+    "assertion": {
+      "assertion_id": "world-model-assertion:55bb3fe615b2d50fc8320f455367ad40440426be4c5b4f43894ac26fb14819dc",
+      "assessment_id": "epistemic-assessment:38be58c897119296adcb44772b7492715fd1dd84f1b3c738f3f78f1e67553b57",
+      "claim_id": "evidence-backed-claim:a4015f846a8d66fa66b82d14d5745acd949d8f7fa9f1fac662208341b021f880",
+      "object_id": "repository-purpose:4a3f0bd10e9d3b899d0624d8ff7deeab6d413f05f31bab3509b880103e03b393",
+      "relation": "IMPLEMENTS",
+      "subject_id": "git-observation:735c214acf83e7b08e03886c558275f0aaa2c3d0d03d618be9e974edf4b52435"
+    },
+    "assessment": {
+      "assessment_id": "epistemic-assessment:38be58c897119296adcb44772b7492715fd1dd84f1b3c738f3f78f1e67553b57",
+      "basis_reference_ids": [
+        "claim-evidence-reference:694dc030b396806c8897ac45f03066706ec7c1b5717c91abe58d273e77fddc97",
+        "claim-evidence-reference:944918c70bf8e4596eeaeabb01b4110cc6211392bdf6e3f6a202bc58f1ee7c20",
+        "claim-evidence-reference:c89d94be2cb41962db2f60d91ecdd690d83f195af8bce8bf23649fa8b7b6c04d",
+        "claim-evidence-reference:f14e259a5b14fc1c0091a8f58a2be72ac4414d1e3e231d4fd3d61a453559f83d"
+      ],
+      "claim_id": "evidence-backed-claim:a4015f846a8d66fa66b82d14d5745acd949d8f7fa9f1fac662208341b021f880",
+      "rationale": "Horizon materialized canonical hypothesis evaluation hypothesis-evidence-evaluation:ff18bebecdaa0b9dc57ecaf6e771ac61358617420049ead288c063ca85f993f1 after it returned SUPPORTED for exact request semantic-gap-followup-investigation-request:b22d2b8474573cf7334e5eed1292f463d01fff025e7c575ac32a0b79c86e2cdb. This is a supported hypothesis, not PROVEN truth.",
+      "status": "SUPPORTED_HYPOTHESIS"
+    },
+    "base_world_model_snapshot_id": "world-model-snapshot:754b63c7d710a879b18abb65c39750c14351b24f9a2c3ff67794f1bf0e2ed21d",
+    "canonical_promoted_snapshot": {
+      "assertions": [
+        {
+          "assertion_id": "world-model-assertion:55bb3fe615b2d50fc8320f455367ad40440426be4c5b4f43894ac26fb14819dc",
+          "assessment_id": "epistemic-assessment:38be58c897119296adcb44772b7492715fd1dd84f1b3c738f3f78f1e67553b57",
+          "claim_id": "evidence-backed-claim:a4015f846a8d66fa66b82d14d5745acd949d8f7fa9f1fac662208341b021f880",
+          "object_id": "repository-purpose:4a3f0bd10e9d3b899d0624d8ff7deeab6d413f05f31bab3509b880103e03b393",
+          "relation": "IMPLEMENTS",
+          "subject_id": "git-observation:735c214acf83e7b08e03886c558275f0aaa2c3d0d03d618be9e974edf4b52435"
+        },
+        {
+          "assertion_id": "world-model-assertion:6b63a3ca4eba18b43851a8285efb109512c98163b12807867a3ee0cf97729e04",
+          "assessment_id": "epistemic-assessment:cc5560df1bbbc5e5e3de4b6fbdfbd7596b108738c2b7a193f2f591d03c1c0b4c",
+          "claim_id": "evidence-backed-claim:e833a3461c2ea8eea65a015284c6e848baa2fd375e0de554d738592bfb4cd769",
+          "object_id": "python-import-root:src",
+          "relation": "DEPENDS_ON",
+          "subject_id": "python-package:prefect"
+        },
+        {
+          "assertion_id": "world-model-assertion:aa5af60f7194b8e2356f6915b67bb5218aa71c13d01b1ce5bf7e4f22b25fa750",
+          "assessment_id": "epistemic-assessment:6ea3b5d75b3de5c1c533bf910775f0b4518b6c63aed20a5229c73ea8d43800a6",
+          "claim_id": "evidence-backed-claim:35a52d604493e3019c6358b372028dba4c83b4c52a5a1488cc98f6b7c69f670f",
+          "object_id": "declared-python-dependency-set:81b9a8f175c04ae597c85e391a4c7b4a4dac4cdc7004ae08c83873f3a8730906",
+          "relation": "DEPENDS_ON",
+          "subject_id": "python-project:prefect"
+        }
+      ],
+      "assessments": [
+        {
+          "assessment_id": "epistemic-assessment:38be58c897119296adcb44772b7492715fd1dd84f1b3c738f3f78f1e67553b57",
+          "basis_reference_ids": [
+            "claim-evidence-reference:694dc030b396806c8897ac45f03066706ec7c1b5717c91abe58d273e77fddc97",
+            "claim-evidence-reference:944918c70bf8e4596eeaeabb01b4110cc6211392bdf6e3f6a202bc58f1ee7c20",
+            "claim-evidence-reference:c89d94be2cb41962db2f60d91ecdd690d83f195af8bce8bf23649fa8b7b6c04d",
+            "claim-evidence-reference:f14e259a5b14fc1c0091a8f58a2be72ac4414d1e3e231d4fd3d61a453559f83d"
+          ],
+          "claim_id": "evidence-backed-claim:a4015f846a8d66fa66b82d14d5745acd949d8f7fa9f1fac662208341b021f880",
+          "rationale": "Horizon materialized canonical hypothesis evaluation hypothesis-evidence-evaluation:ff18bebecdaa0b9dc57ecaf6e771ac61358617420049ead288c063ca85f993f1 after it returned SUPPORTED for exact request semantic-gap-followup-investigation-request:b22d2b8474573cf7334e5eed1292f463d01fff025e7c575ac32a0b79c86e2cdb. This is a supported hypothesis, not PROVEN truth.",
+          "status": "SUPPORTED_HYPOTHESIS"
+        },
+        {
+          "assessment_id": "epistemic-assessment:6ea3b5d75b3de5c1c533bf910775f0b4518b6c63aed20a5229c73ea8d43800a6",
+          "basis_reference_ids": [
+            "claim-evidence-reference:1c1dd4d5c3face9f473e296487a7a413b0a6c3fdcec6e51bc13db02168b2dce6",
+            "claim-evidence-reference:d56b6c18684011d996b0972ce10d43546cf02c450237dbaac1fdd7b6f5dc1593"
+          ],
+          "claim_id": "evidence-backed-claim:35a52d604493e3019c6358b372028dba4c83b4c52a5a1488cc98f6b7c69f670f",
+          "rationale": "The dependency count and declarations come directly from Horizon's exact pyproject.toml blob evidence.",
+          "status": "PROVEN"
+        },
+        {
+          "assessment_id": "epistemic-assessment:cc5560df1bbbc5e5e3de4b6fbdfbd7596b108738c2b7a193f2f591d03c1c0b4c",
+          "basis_reference_ids": [
+            "claim-evidence-reference:d4fb9419ecedaddf1ec11d4a8548560e3624bdc83d751cf063a698899020ed24",
+            "claim-evidence-reference:d56b6c18684011d996b0972ce10d43546cf02c450237dbaac1fdd7b6f5dc1593",
+            "claim-evidence-reference:dced2bafe1a09f9f220c87f227e32d5e29b7311daa445d9debb5ebec67ebedc3"
+          ],
+          "claim_id": "evidence-backed-claim:e833a3461c2ea8eea65a015284c6e848baa2fd375e0de554d738592bfb4cd769",
+          "rationale": "Horizon derived the package layout from the exact observed pyproject.toml blob at the frozen commit.",
+          "status": "PROVEN"
+        }
+      ],
+      "claims": [
+        {
+          "claim_id": "evidence-backed-claim:35a52d604493e3019c6358b372028dba4c83b4c52a5a1488cc98f6b7c69f670f",
+          "evidence": [
+            {
+              "evidence_id": "declared-python-dependency-set:81b9a8f175c04ae597c85e391a4c7b4a4dac4cdc7004ae08c83873f3a8730906",
+              "evidence_kind": "STATIC",
+              "reference_id": "claim-evidence-reference:1c1dd4d5c3face9f473e296487a7a413b0a6c3fdcec6e51bc13db02168b2dce6",
+              "relation": "SUPPORTS"
+            },
+            {
+              "evidence_id": "git-blob-evidence:927a4cb2a45fd9b51f47926c0484991876b47eaf1558de5b85d840f943d6a1d0",
+              "evidence_kind": "STATIC",
+              "reference_id": "claim-evidence-reference:d56b6c18684011d996b0972ce10d43546cf02c450237dbaac1fdd7b6f5dc1593",
+              "relation": "SUPPORTS"
+            }
+          ],
+          "proposition": "At frozen commit 2338265f658845a9bef8ce7baf07519b89846dc8, project 'prefect' declares 57 direct project dependencies in pyproject.toml.",
+          "scope": "Exact repository observation git-observation:735c214acf83e7b08e03886c558275f0aaa2c3d0d03d618be9e974edf4b52435 at frozen commit 2338265f658845a9bef8ce7baf07519b89846dc8."
+        },
+        {
+          "claim_id": "evidence-backed-claim:a4015f846a8d66fa66b82d14d5745acd949d8f7fa9f1fac662208341b021f880",
+          "evidence": [
+            {
+              "evidence_id": "investigation-source-observation:1bbbba51000fb63886ea19a66e9cea0cca827eeb1e6077b79bc40e849cc0f4bb",
+              "evidence_kind": "STATIC",
+              "reference_id": "claim-evidence-reference:944918c70bf8e4596eeaeabb01b4110cc6211392bdf6e3f6a202bc58f1ee7c20",
+              "relation": "SUPPORTS"
+            },
+            {
+              "evidence_id": "investigation-source-observation:6e5a493e182a2d1c0fee65d24ac2a940606e21e026007aec30430ab1a56020f2",
+              "evidence_kind": "STATIC",
+              "reference_id": "claim-evidence-reference:694dc030b396806c8897ac45f03066706ec7c1b5717c91abe58d273e77fddc97",
+              "relation": "SUPPORTS"
+            },
+            {
+              "evidence_id": "investigation-source-observation:d6a91a2dc5d8c5f67e09a85543403ad2654b7eb61f2894934bf104097522fce6",
+              "evidence_kind": "STATIC",
+              "reference_id": "claim-evidence-reference:c89d94be2cb41962db2f60d91ecdd690d83f195af8bce8bf23649fa8b7b6c04d",
+              "relation": "SUPPORTS"
+            },
+            {
+              "evidence_id": "investigation-source-observation:e4730dd25b7741d5a677881dc98c671db15f2ea96c0f1bc9fbfbfde25590bbc6",
+              "evidence_kind": "STATIC",
+              "reference_id": "claim-evidence-reference:f14e259a5b14fc1c0091a8f58a2be72ac4414d1e3e231d4fd3d61a453559f83d",
+              "relation": "SUPPORTS"
+            }
+          ],
+          "proposition": "At frozen commit 2338265f658845a9bef8ce7baf07519b89846dc8, this repository primarily implements Prefect as Python software for workflow orchestration and management. This tentative interpretation follows pyproject.toml's description, \"Workflow orchestration and management.\", and is consistent with the visible Flow and Task class declarations; those declarations alone do not establish their operational roles.",
+          "scope": "Exact repository observation git-observation:735c214acf83e7b08e03886c558275f0aaa2c3d0d03d618be9e974edf4b52435 at frozen commit 2338265f658845a9bef8ce7baf07519b89846dc8."
+        },
+        {
+          "claim_id": "evidence-backed-claim:e833a3461c2ea8eea65a015284c6e848baa2fd375e0de554d738592bfb4cd769",
+          "evidence": [
+            {
+              "evidence_id": "git-blob-evidence:927a4cb2a45fd9b51f47926c0484991876b47eaf1558de5b85d840f943d6a1d0",
+              "evidence_kind": "STATIC",
+              "reference_id": "claim-evidence-reference:d56b6c18684011d996b0972ce10d43546cf02c450237dbaac1fdd7b6f5dc1593",
+              "relation": "SUPPORTS"
+            },
+            {
+              "evidence_id": "python-import-root:7ad6b0b4ddcd123b600b8b92a02204ae16882e05ebd3e18a5c6ae4765f105390",
+              "evidence_kind": "STATIC",
+              "reference_id": "claim-evidence-reference:d4fb9419ecedaddf1ec11d4a8548560e3624bdc83d751cf063a698899020ed24",
+              "relation": "SUPPORTS"
+            },
+            {
+              "evidence_id": "python-package-layout:215b8c791992a430b2285aff548a856d00d9401f63bda4e98e5c149e9db73667",
+              "evidence_kind": "STATIC",
+              "reference_id": "claim-evidence-reference:dced2bafe1a09f9f220c87f227e32d5e29b7311daa445d9debb5ebec67ebedc3",
+              "relation": "SUPPORTS"
+            }
+          ],
+          "proposition": "At frozen commit 2338265f658845a9bef8ce7baf07519b89846dc8, the declared Python package path is 'src/prefect', under import root 'src', with top-level package 'prefect'.",
+          "scope": "Exact repository observation git-observation:735c214acf83e7b08e03886c558275f0aaa2c3d0d03d618be9e974edf4b52435 at frozen commit 2338265f658845a9bef8ce7baf07519b89846dc8."
+        }
+      ],
+      "snapshot_id": "world-model-snapshot:2476c54c358f5ee6d5085cedd9eca384656863d85cafe2a7927721b4dee9865f"
+    },
+    "claim": {
+      "claim_id": "evidence-backed-claim:a4015f846a8d66fa66b82d14d5745acd949d8f7fa9f1fac662208341b021f880",
+      "evidence": [
+        {
+          "evidence_id": "investigation-source-observation:1bbbba51000fb63886ea19a66e9cea0cca827eeb1e6077b79bc40e849cc0f4bb",
+          "evidence_kind": "STATIC",
+          "reference_id": "claim-evidence-reference:944918c70bf8e4596eeaeabb01b4110cc6211392bdf6e3f6a202bc58f1ee7c20",
+          "relation": "SUPPORTS"
+        },
+        {
+          "evidence_id": "investigation-source-observation:6e5a493e182a2d1c0fee65d24ac2a940606e21e026007aec30430ab1a56020f2",
+          "evidence_kind": "STATIC",
+          "reference_id": "claim-evidence-reference:694dc030b396806c8897ac45f03066706ec7c1b5717c91abe58d273e77fddc97",
+          "relation": "SUPPORTS"
+        },
+        {
+          "evidence_id": "investigation-source-observation:d6a91a2dc5d8c5f67e09a85543403ad2654b7eb61f2894934bf104097522fce6",
+          "evidence_kind": "STATIC",
+          "reference_id": "claim-evidence-reference:c89d94be2cb41962db2f60d91ecdd690d83f195af8bce8bf23649fa8b7b6c04d",
+          "relation": "SUPPORTS"
+        },
+        {
+          "evidence_id": "investigation-source-observation:e4730dd25b7741d5a677881dc98c671db15f2ea96c0f1bc9fbfbfde25590bbc6",
+          "evidence_kind": "STATIC",
+          "reference_id": "claim-evidence-reference:f14e259a5b14fc1c0091a8f58a2be72ac4414d1e3e231d4fd3d61a453559f83d",
+          "relation": "SUPPORTS"
+        }
+      ],
+      "proposition": "At frozen commit 2338265f658845a9bef8ce7baf07519b89846dc8, this repository primarily implements Prefect as Python software for workflow orchestration and management. This tentative interpretation follows pyproject.toml's description, \"Workflow orchestration and management.\", and is consistent with the visible Flow and Task class declarations; those declarations alone do not establish their operational roles.",
+      "scope": "Exact repository observation git-observation:735c214acf83e7b08e03886c558275f0aaa2c3d0d03d618be9e974edf4b52435 at frozen commit 2338265f658845a9bef8ce7baf07519b89846dc8."
+    },
+    "hypothesis": "At frozen commit 2338265f658845a9bef8ce7baf07519b89846dc8, this repository primarily implements Prefect as Python software for workflow orchestration and management. This tentative interpretation follows pyproject.toml's description, \"Workflow orchestration and management.\", and is consistent with the visible Flow and Task class declarations; those declarations alone do not establish their operational roles.",
+    "promoted_world_model_snapshot_id": "world-model-snapshot:2476c54c358f5ee6d5085cedd9eca384656863d85cafe2a7927721b4dee9865f",
+    "repository_world_model_selections": {
+      "what_it_depends_on_assertion_ids": [
+        "world-model-assertion:aa5af60f7194b8e2356f6915b67bb5218aa71c13d01b1ce5bf7e4f22b25fa750"
+      ],
+      "what_it_is_assertion_ids": [
+        "world-model-assertion:55bb3fe615b2d50fc8320f455367ad40440426be4c5b4f43894ac26fb14819dc"
+      ],
+      "where_it_sits_assertion_ids": [
+        "world-model-assertion:6b63a3ca4eba18b43851a8285efb109512c98163b12807867a3ee0cf97729e04"
+      ]
+    },
+    "what_it_is_assertion_ids": [
+      "world-model-assertion:55bb3fe615b2d50fc8320f455367ad40440426be4c5b4f43894ac26fb14819dc"
+    ]
+  },
+  "repository": {
+    "commit_sha": "2338265f658845a9bef8ce7baf07519b89846dc8",
+    "repository_index_id": "python-repository-index:07ba668836204eea53ff478d5a46dfa5feaf9cead048ae80a9abddb85f83ecec",
+    "repository_observation_id": "git-observation:735c214acf83e7b08e03886c558275f0aaa2c3d0d03d618be9e974edf4b52435"
+  },
+  "result": "PREFECT_WHAT_IT_IS_PROMOTION_CERTIFIED",
+  "semantic_gap": {
+    "after_sections": [
+      "WHAT_IT_OWNS",
+      "WHAT_MUST_REMAIN_TRUE"
+    ],
+    "before_sections": [
+      "WHAT_IT_IS",
+      "WHAT_IT_OWNS",
+      "WHAT_MUST_REMAIN_TRUE"
+    ],
+    "other_sections_changed": false,
+    "what_it_is_closed": true
+  },
+  "source": {
+    "025zx_artifact": "artifacts/investigator/025zx-prefect-hypothesis-evaluation-live.json",
+    "025zx_artifact_sha256": "sha256:9eb910206af4e382c151f4a89dfb4d00c0073575b5c881f5ad577db7579e5d25",
+    "025zx_provider_request_id": "req_7141ca06c451440195aeb358b4c51630",
+    "evaluation_id": "hypothesis-evidence-evaluation:ff18bebecdaa0b9dc57ecaf6e771ac61358617420049ead288c063ca85f993f1",
+    "evaluation_verdict": "SUPPORTED",
+    "request_id": "semantic-gap-followup-investigation-request:b22d2b8474573cf7334e5eed1292f463d01fff025e7c575ac32a0b79c86e2cdb",
+    "source_proposal_id": "investigation-proposal:f7de5be6011e548868c8ffc118967b17056ce80c8fc2376f9fc8108a99879295",
+    "supporting_evidence_ids": [
+      "investigation-source-observation:1bbbba51000fb63886ea19a66e9cea0cca827eeb1e6077b79bc40e849cc0f4bb",
+      "investigation-source-observation:6e5a493e182a2d1c0fee65d24ac2a940606e21e026007aec30430ab1a56020f2",
+      "investigation-source-observation:d6a91a2dc5d8c5f67e09a85543403ad2654b7eb61f2894934bf104097522fce6",
+      "investigation-source-observation:e4730dd25b7741d5a677881dc98c671db15f2ea96c0f1bc9fbfbfde25590bbc6"
+    ]
+  }
+}
