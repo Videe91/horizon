@@ -1,0 +1,100 @@
+{
+  "certification": {
+    "mode": "OFFLINE_RECOVERY_CERTIFICATION",
+    "name": "025ZZE-2C-R7 coordinator replay certification",
+    "status": "PASS"
+  },
+  "certified_conclusion": {
+    "next_authorized_stage": "Resume the autonomous exam from the typed-planner boundary using the preserved investigator result as call #1. Do not reissue investigator call #1.",
+    "recovery_path_certified": true,
+    "statement": "The real repository semantic-understanding coordinator can consume the exact preserved paid investigator response as its first investigator result without reissuing that provider call, reach the exact sealed typed-planner boundary, execute bounded read-only repository investigation, and continue through the hypothesis-evaluation boundary while preserving the original failed run and all semantic truth."
+  },
+  "control_repository": {
+    "clean": true,
+    "commit": "2338265f658845a9bef8ce7baf07519b89846dc8",
+    "name": "Prefect"
+  },
+  "coordinator_recovery": {
+    "evaluation_calls": 1,
+    "evaluation_model": "FAKE_R7",
+    "evaluation_run_id": "hypothesis-evaluation-model-run:b4a515d563710c60f7371ddbcd223af2f5230f04afba204e6c4b29fe482e9131",
+    "evaluation_verdict": "STILL_INCOMPLETE",
+    "exact_r5_planner_boundary_reached": true,
+    "final_disposition": "BOUNDED_STOP",
+    "hypothesis_rounds_completed": 1,
+    "investigator_rounds_completed": 1,
+    "operation_observation_ids": [
+      "investigation-search-observation:a5d9395d19257c6b1c5ff975d6bf46da3198125a27b3194c301e8d7964768a69",
+      "investigation-search-observation:f8200d11cb73386d0a09bd6ab5621060ff4228854d2b0bdfb9c66edfe832c0bf"
+    ],
+    "planner_calls": 1,
+    "planner_model": "FAKE_R7",
+    "planning_proposal_id": "investigation-proposal:718b5d12bc9c7a95389ce878ebfe79ab4a602746b1c0b06d5dc10d18f530192d",
+    "real_production_coordinator_used": true,
+    "replay_count": 1,
+    "repository_read_operations_executed": 2,
+    "typed_planner_invocation_id": "semantic-gap-typed-planner-invocation:1e069f7ccfd4b4b37d0c669d04b403f342992dffb54d7f92f299d630a6256a1d",
+    "unexpected_second_investigator_calls": 0
+  },
+  "cost_accounting": {
+    "coordinator_accounted_cost_usd": "0.147535",
+    "historical_paid_cost_usd": "0.147535",
+    "new_network_model_calls": 0,
+    "new_network_model_spend_usd": "0"
+  },
+  "historical_live_run": {
+    "api_request_id": "req_b1a3737d23d64d07821ec8a158eb6f27",
+    "attempt_ledger_sha256": "sha256:9e9f52694fad1575348dc562334be6172b2c88eb1e715de7bf59b22b53914271",
+    "conservative_cost_usd": "0.147535",
+    "failure_result_sha256": "sha256:d6c0656573a0dc09504315a17f38216f192ecb9c2524ed28cd509a736488bee0",
+    "input_tokens": 2668,
+    "lock_sha256": "sha256:477c90611aca84c9726fab3fb9f36030e0b27afff2ecb657740101c65c14f399",
+    "output_tokens": 1078,
+    "provider_call_count": 1,
+    "rerun_permitted": false,
+    "response_sha256": "sha256:a006db96f7b4acd39074eab409cf53b47d23c2ab014c3d4727b011164405f43f",
+    "rewritten": false,
+    "status": "FAILED"
+  },
+  "host": {
+    "branch": "feat/autonomous-semantic-understanding-025",
+    "head": "0c2e85a2ca1484daa495e09016c5cedd7ad671ae",
+    "working_tree_clean": true
+  },
+  "preserved_investigator_result": {
+    "first_invocation_id": "investigator-model-invocation:0f833eeb65766f9cd3b909c94786da06c10895e7ae34ecb4da8e228dcdc0a60c",
+    "hypothesis": "Horizon is intended to provide continuously maintained software understanding for AI agents, as explicitly declared in pyproject.toml\u2019s [project].description; the supplied evidence establishes this stated purpose but not its implementation.",
+    "offline_validation_result": "VALID",
+    "proposal_id": "investigation-proposal:50754d89b43816d8b54d12712690c16815462f9daa0c3b515d0ee3bd6e385103",
+    "proposal_kind": "PROPOSE_HYPOTHESIS",
+    "provider": "OPENAI",
+    "replay_run_id": "investigator-model-run:f1cdae61ee84b13965e6a281f66bb11b08cb53659197470427d37ae0435c3f00",
+    "returned_model": "gpt-6-astra",
+    "selected_assertion_ids": 0,
+    "selected_assessment_ids": 0,
+    "selected_claim_ids": 0,
+    "selected_evidence_reference_ids": 1
+  },
+  "safety": {
+    "default_semantic_overlay_created": false,
+    "new_paid_model_calls": 0,
+    "original_history_rewritten": false,
+    "prefect_changed": false,
+    "repository_mutations": 0,
+    "repository_reads": 2,
+    "semantic_promotions": 0,
+    "target_changed": false,
+    "temporary_semantic_overlay_created": false,
+    "world_model_mutations": 0
+  },
+  "target": {
+    "base_investigation_request_id": "investigation-request:fe6c0526a0667730eba56abe4dc465b958cac79616d78842857198e76a5b5d61",
+    "base_world_model_snapshot_id": "world-model-snapshot:44d0df5367ae7e6a1fa212e80cf6a79eab422cda3dec9b56ed0166944365faff",
+    "clean": true,
+    "commit": "6151aad2081d9a849a6aac7a6081a2d7b32c4334",
+    "remote_free": true,
+    "repository": "Horizon self target",
+    "semantic_overlay_present_before_recovery": false,
+    "what_it_is_known_before_recovery": false
+  }
+}
