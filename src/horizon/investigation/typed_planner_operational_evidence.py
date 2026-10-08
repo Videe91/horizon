@@ -13,6 +13,9 @@ import json
 
 from dataclasses import dataclass
 
+from horizon.investigation.bounded_evidence import (
+    BOUNDED_SEARCH_OBSERVATION_EVIDENCE_KIND,
+)
 from horizon.investigation.evidence_records import (
     SEARCH_OBSERVATION_EVIDENCE_KIND,
     SYMBOL_OBSERVATION_EVIDENCE_KIND,
@@ -215,6 +218,135 @@ def _payload(
     )
 
 
+def _search_matches(
+    record: CanonicalEvidenceRecord,
+    payload: dict[str, object],
+) -> tuple[
+    int,
+    list[object],
+]:
+    if (
+        record.evidence_kind
+        == SEARCH_OBSERVATION_EVIDENCE_KIND
+    ):
+        match_count = (
+            _require_nonnegative_int(
+                payload.get(
+                    "match_count"
+                ),
+                name="search match count",
+            )
+        )
+
+        matches = _require_list(
+            payload.get(
+                "matches"
+            ),
+            name="search matches",
+        )
+
+        if (
+            len(
+                matches
+            )
+            != match_count
+        ):
+            raise TypedPlannerOperationalEvidenceError(
+                "search match count does not match payload"
+            )
+
+        return (
+            match_count,
+            matches,
+        )
+
+    if (
+        record.evidence_kind
+        == BOUNDED_SEARCH_OBSERVATION_EVIDENCE_KIND
+    ):
+        if (
+            payload.get(
+                "source_evidence_kind"
+            )
+            != SEARCH_OBSERVATION_EVIDENCE_KIND
+        ):
+            raise TypedPlannerOperationalEvidenceError(
+                "bounded search source evidence kind is inconsistent"
+            )
+
+        _require_nonempty_text(
+            payload.get(
+                "source_evidence_id"
+            ),
+            name="bounded search source evidence id",
+        )
+
+        total_match_count = (
+            _require_nonnegative_int(
+                payload.get(
+                    "total_match_count"
+                ),
+                name="bounded search total match count",
+            )
+        )
+
+        selected_match_count = (
+            _require_nonnegative_int(
+                payload.get(
+                    "selected_match_count"
+                ),
+                name="bounded search selected match count",
+            )
+        )
+
+        bounded_omitted_count = (
+            _require_nonnegative_int(
+                payload.get(
+                    "omitted_match_count"
+                ),
+                name="bounded search omitted match count",
+            )
+        )
+
+        matches = _require_list(
+            payload.get(
+                "selected_matches"
+            ),
+            name="bounded search selected matches",
+        )
+
+        if (
+            len(
+                matches
+            )
+            != selected_match_count
+        ):
+            raise TypedPlannerOperationalEvidenceError(
+                "bounded search selected match count "
+                "does not match payload"
+            )
+
+        if (
+            selected_match_count
+            + bounded_omitted_count
+            != total_match_count
+        ):
+            raise TypedPlannerOperationalEvidenceError(
+                "bounded search total match count "
+                "does not match selected plus omitted"
+            )
+
+        return (
+            total_match_count,
+            matches,
+        )
+
+    raise TypedPlannerOperationalEvidenceError(
+        "search evidence kind is not recognized"
+    )
+
+
+
 def _search_view(
     record: CanonicalEvidenceRecord,
 ) -> TypedPlannerSearchObservationView:
@@ -254,24 +386,13 @@ def _search_view(
         )
     )
 
-    match_count = _require_nonnegative_int(
-        payload.get(
-            "match_count"
-        ),
-        name="search match count",
+    (
+        match_count,
+        matches,
+    ) = _search_matches(
+        record,
+        payload,
     )
-
-    matches = _require_list(
-        payload.get(
-            "matches"
-        ),
-        name="search matches",
-    )
-
-    if len(matches) != match_count:
-        raise TypedPlannerOperationalEvidenceError(
-            "search match count does not match payload"
-        )
 
     visible = []
 
@@ -585,7 +706,10 @@ def project_typed_planner_operational_evidence(
 
     if (
         record.evidence_kind
-        == SEARCH_OBSERVATION_EVIDENCE_KIND
+        in {
+            SEARCH_OBSERVATION_EVIDENCE_KIND,
+            BOUNDED_SEARCH_OBSERVATION_EVIDENCE_KIND,
+        }
     ):
         return _search_view(
             record

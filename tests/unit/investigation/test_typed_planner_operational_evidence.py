@@ -8,6 +8,10 @@ from dataclasses import asdict
 
 import pytest
 
+from horizon.investigation.bounded_evidence import (
+    BOUNDED_SEARCH_OBSERVATION_EVIDENCE_KIND,
+    bound_search_observation_evidence_record,
+)
 from horizon.investigation.typed_planner_operational_evidence import (
     MAX_SEARCH_LINE_CHARACTERS,
     MAX_VISIBLE_DIRECT_DEFINITIONS,
@@ -423,6 +427,93 @@ def test_search_evidence_exposes_bounded_operational_context() -> None:
     )
 
 
+def test_bounded_search_evidence_exposes_operational_context() -> None:
+    complete = record(
+        identity=(
+            "investigation-search-observation:test"
+        ),
+        kind=SEARCH_KIND,
+        payload=search_payload(
+            count=25
+        ),
+    )
+
+    bounded = (
+        bound_search_observation_evidence_record(
+            complete,
+            max_payload_bytes=100_000,
+        )
+    )
+
+    assert (
+        bounded.evidence_kind
+        == BOUNDED_SEARCH_OBSERVATION_EVIDENCE_KIND
+    )
+
+    value = request(
+        bounded
+    )
+
+    view = (
+        make_typed_planner_request_view(
+            value
+        )
+    )
+
+    evidence = view.evidence_records[
+        0
+    ]
+
+    context = (
+        evidence.operational_context
+    )
+
+    assert isinstance(
+        context,
+        TypedPlannerSearchObservationView,
+    )
+
+    assert context.query == "workflow"
+    assert context.path_prefix == "README.md"
+
+    assert (
+        context.match_count
+        == 25
+    )
+
+    assert (
+        context.visible_match_count
+        == MAX_VISIBLE_SEARCH_MATCHES
+    )
+
+    assert (
+        context.omitted_match_count
+        == 5
+    )
+
+    assert (
+        len(
+            context.matches
+        )
+        == MAX_VISIBLE_SEARCH_MATCHES
+    )
+
+    assert (
+        context.matches[
+            0
+        ].path
+        == "README.md"
+    )
+
+    assert (
+        context.matches[
+            0
+        ].line_number
+        == 1
+    )
+
+
+
 def test_symbol_evidence_exposes_boundaries_not_bulk_facts() -> None:
     value = request(
         record(
@@ -507,7 +598,7 @@ def test_unrecognized_evidence_remains_hash_and_size_only() -> None:
         record(
             identity="evidence:other",
             kind=(
-                "BOUNDED_INVESTIGATION_SEARCH_OBSERVATION"
+                "GIT_BLOB_EVIDENCE"
             ),
             payload="x" * 100_000,
         )
@@ -551,6 +642,28 @@ def test_recognized_malformed_operation_evidence_fails_closed() -> None:
         make_typed_planner_request_view(
             value
         )
+
+
+def test_malformed_bounded_search_evidence_fails_closed() -> None:
+    value = request(
+        record(
+            identity=(
+                "bounded-investigation-search-evidence:bad"
+            ),
+            kind=(
+                BOUNDED_SEARCH_OBSERVATION_EVIDENCE_KIND
+            ),
+            payload="not-json",
+        )
+    )
+
+    with pytest.raises(
+        TypedPlannerOperationalEvidenceError
+    ):
+        make_typed_planner_request_view(
+            value
+        )
+
 
 
 def test_hidden_symbol_body_change_changes_identity_but_not_projection() -> None:

@@ -1,0 +1,125 @@
+{
+  "authority": {
+    "provider_calls_this_stage": 0,
+    "repository_investigation_operations_this_stage": 0,
+    "semantic_promotions": 0,
+    "what_it_is_closed": false,
+    "world_model_mutations": 0
+  },
+  "certification": {
+    "name": "025ZZE-2C-R13 bounded search typed-planner projection repair",
+    "status": "PASS"
+  },
+  "defect": {
+    "classification": "PRODUCTION_BOUNDARY_MISMATCH",
+    "consumer_recognized_before_fix": [
+      "INVESTIGATION_SEARCH_OBSERVATION",
+      "INVESTIGATION_SYMBOL_OBSERVATION"
+    ],
+    "effect_before_fix": "Hypothesis-round-2 typed planning received bounded search evidence as hash/size metadata only; repository paths, line numbers, and visible search lines were not available as operational planning context.",
+    "paid_provider_call_4_prevented": true,
+    "producer_evidence_kind": "BOUNDED_INVESTIGATION_SEARCH_OBSERVATION"
+  },
+  "next_authorized_stage": "Reconstruct the hypothesis-round-2 expanded request under the repaired production code and preregister the next typed-planner invocation offline. Do not make provider call #4 until that invocation is separately certified.",
+  "real_r10_evidence": {
+    "projections": [
+      {
+        "bounded_evidence_id": "bounded-investigation-search-evidence:25c801e4431605ac44cb8c79a9951549006beba6ba3bc19750871f2e85d27067",
+        "first_visible_coordinates": [
+          {
+            "line_number": 5,
+            "path": "CONSTITUTION.md"
+          },
+          {
+            "line_number": 3,
+            "path": "artifacts/cards/prefect-card-baseline-pre-022.md"
+          },
+          {
+            "line_number": 32,
+            "path": "challenges/001-prefect-flow-execution.md"
+          },
+          {
+            "line_number": 8,
+            "path": "pyproject.toml"
+          },
+          {
+            "line_number": 1,
+            "path": "src/horizon/__init__.py"
+          }
+        ],
+        "omitted_match_count": 1,
+        "query": "understanding",
+        "total_match_count": 21,
+        "visible_match_count": 20
+      },
+      {
+        "bounded_evidence_id": "bounded-investigation-search-evidence:18e0723bb2feff8942e1de3009d05a8c13bbe874fe0b09ebdb8226aa326be512",
+        "first_visible_coordinates": [
+          {
+            "line_number": 5,
+            "path": "CONSTITUTION.md"
+          },
+          {
+            "line_number": 29,
+            "path": "artifacts/cards/prefect-card-baseline-pre-022.md"
+          },
+          {
+            "line_number": 264,
+            "path": "challenges/001-prefect-flow-execution.md"
+          },
+          {
+            "line_number": 3,
+            "path": "docs/superpowers/plans/2026-10-06-world-model-snapshot-018.md"
+          },
+          {
+            "line_number": 14,
+            "path": "docs/superpowers/specs/2026-10-06-ai-investigator-021-design.md"
+          }
+        ],
+        "omitted_match_count": 0,
+        "query": "agent",
+        "total_match_count": 9,
+        "visible_match_count": 9
+      },
+      {
+        "bounded_evidence_id": "bounded-investigation-search-evidence:32ae1825765c921751706d043371dec3de425164d6537d3d26d63b0ca3431774",
+        "first_visible_coordinates": [
+          {
+            "line_number": 167,
+            "path": "artifacts/investigator/021k-prefect-astra-37f4906f98d341bb.json"
+          },
+          {
+            "line_number": 1048,
+            "path": "artifacts/investigator/025y-prefect-hypothesis-evidence-execution.json"
+          },
+          {
+            "line_number": 517,
+            "path": "src/horizon/investigation/semantic_understanding_coordinator.py"
+          },
+          {
+            "line_number": 727,
+            "path": "src/horizon/investigator/proposal.py"
+          },
+          {
+            "line_number": 156,
+            "path": "src/horizon/languages/python/bindings.py"
+          }
+        ],
+        "omitted_match_count": 99,
+        "query": "update",
+        "total_match_count": 119,
+        "visible_match_count": 20
+      }
+    ],
+    "search_count": 3,
+    "source_artifact": "artifacts/investigator/025zze2c-r10-search-observations.json"
+  },
+  "repair": {
+    "bounded_search_recognized": true,
+    "malformed_bounded_evidence_fails_closed": true,
+    "planner_visible_match_cap": 20,
+    "production_file": "src/horizon/investigation/typed_planner_operational_evidence.py",
+    "selected_matches_projected": true,
+    "total_count_preserved": true
+  }
+}

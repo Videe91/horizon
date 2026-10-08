@@ -30,7 +30,7 @@ def evidence(
     return CanonicalEvidenceRecord(
         evidence_id=identity,
         evidence_kind=(
-            "BOUNDED_INVESTIGATION_SEARCH_OBSERVATION"
+            "GIT_BLOB_EVIDENCE"
         ),
         canonical_payload=payload,
     )
@@ -228,7 +228,7 @@ def test_evidence_body_becomes_hash_and_size_only() -> None:
     assert (
         first.evidence_kind
         == (
-            "BOUNDED_INVESTIGATION_SEARCH_OBSERVATION"
+            "GIT_BLOB_EVIDENCE"
         )
     )
 
