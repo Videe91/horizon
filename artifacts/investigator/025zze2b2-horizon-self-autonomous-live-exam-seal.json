@@ -1,0 +1,130 @@
+{
+  "attempt_spool_protocol": {
+    "after_each_completed_provider_response": [
+      "serialize status, returned model, API request id, output text and usage",
+      "write response-NNNN.json using exclusive creation",
+      "flush and fsync response spool",
+      "calculate spool SHA-256",
+      "append RESPONSE_SPOOLED event to ledger",
+      "flush and fsync ledger"
+    ],
+    "after_provider_exception": [
+      "append FAILED event to ledger with exception class and message",
+      "flush and fsync ledger",
+      "perform no automatic retry",
+      "leave all existing ledger and response spool evidence intact"
+    ],
+    "attempt_ledger_path": "/tmp/horizon-025zze2-live-attempt-ledger.jsonl",
+    "before_each_provider_request": [
+      "verify provider-call ordinal does not exceed max_provider_calls",
+      "append ATTEMPT event to ledger",
+      "include ordinal, provider role, model configuration and canonical request-call hash",
+      "flush and fsync ledger before underlying responses.create"
+    ],
+    "final_result_spool_path": "/tmp/horizon-025zze2-live-result.json",
+    "live_lock_path": "/tmp/horizon-025zze2-live.lock",
+    "lock_rule": "create live lock with exclusive creation before loading API credential",
+    "max_provider_calls": 9,
+    "rerun_policy": "if any live lock, attempt ledger, response spool, result spool, or semantic overlay exists, stop and inspect; do not casually rerun the paid exam",
+    "response_spool_directory": "/tmp/horizon-025zze2-live-response-spool",
+    "schema_version": 1,
+    "sdk_max_retries": 0,
+    "start_guards": [
+      "live lock must not already exist",
+      "attempt ledger must not already exist",
+      "response spool directory must not already exist",
+      "final result spool must not already exist",
+      "target commit must equal sealed target commit",
+      "target worktree must be clean",
+      "target must have no git remote",
+      "semantic overlay must not already exist",
+      "host HEAD must equal sealed host commit"
+    ],
+    "wrapper_retries": 0
+  },
+  "authority": {
+    "claims_created": 0,
+    "epistemic_assessments_created": 0,
+    "live_model_calls": 0,
+    "repository_operations": 0,
+    "semantic_promotions": 0,
+    "semantic_store_writes": 0,
+    "world_model_assertions_created": 0
+  },
+  "capability": "025ZZE-2B2",
+  "configuration": {
+    "coordinator_limits": {
+      "max_evidence_record_bytes": 2000000,
+      "max_hypothesis_rounds": 2,
+      "max_investigator_rounds": 3,
+      "max_plan_steps": 6,
+      "max_plan_total_seconds": 120,
+      "max_provider_calls": 9,
+      "max_total_evidence_bytes": 8000000,
+      "max_total_model_cost_usd": "2.700000"
+    },
+    "instructions": {
+      "hypothesis_evaluator": {
+        "bytes": 1443,
+        "sha256": "sha256:0d776662f5e4d17834dca18d9233df01ef7bcc8bf2b5d0e82a23043d2a22a896",
+        "utf8": "Evaluate the supplied source hypothesis only against the evidence visible in the supplied hypothesis-evaluation request.\n\nUse the exact verdict vocabulary and structured-output schema supplied by Horizon.\n\nReturn SUPPORTED only when the visible evidence materially supports the hypothesis, resolves the supplied test questions for the semantic-gap question, contains no material contradiction, and leaves no material evidence question unresolved.\n\nReturn CONTRADICTED only when the visible evidence materially contradicts the hypothesis, supplies no supporting evidence that prevents that conclusion, and leaves no material evidence question unresolved.\n\nReturn STILL_INCOMPLETE whenever the evidence is mixed, insufficient, indirect, or leaves any material question unresolved. In that case, state the remaining evidence questions precisely.\n\nEvery supporting_evidence_id and contradicting_evidence_id must identify evidence present in this exact request.\n\nTreat source_excerpt as observed repository source evidence. Evidence records that expose only identity, kind, hash, and byte size are metadata-only in this invocation: do not invent, infer, or claim knowledge of their hidden canonical payload bodies.\n\nDo not create a claim, epistemic assessment, World Model assertion, semantic proposition, or semantic-gap closure. This output is a non-authoritative evidence evaluation only.\n\nReturn only the required structured evaluation output.\n"
+      },
+      "investigator": {
+        "bytes": 1191,
+        "sha256": "sha256:d71eafb0e9d7fff0ead56c6b26a4e9732eb6502de7dc4c5bf6b754b897faa3b4",
+        "utf8": "Resolve only the supplied repository WHAT_IT_IS semantic gap using the exact evidence present in the InvestigationRequest.\n\nDo not invent repository content, paths, symbols, behavior, relationships, or evidence.\n\nIf the current evidence is insufficient to form a materially supported primary-purpose hypothesis, return PROPOSE_INVESTIGATION with the smallest concrete investigation questions needed to obtain decisive read-only repository evidence.\n\nPrefer questions that can identify exact source passages establishing, qualifying, or contradicting the repository's primary software purpose.\n\nWhen the visible evidence is sufficient to state a bounded primary-purpose interpretation, return PROPOSE_HYPOTHESIS with one concise hypothesis and concrete test questions that could confirm or falsify it from repository evidence.\n\nIf the evidence genuinely cannot support progress, use the existing insufficient-evidence or refinement disposition rather than inventing certainty.\n\nDo not create a claim, epistemic assessment, World Model assertion, semantic proposition, or semantic-gap closure. Model output is proposal authority only.\n\nReturn only the required structured investigator output.\n"
+      },
+      "typed_planner": {
+        "bytes": 874,
+        "sha256": "sha256:e3f493f369dfbbf2932b5ae78ff437d1f7bddc1668a08c6e15df932e4b8d0056",
+        "utf8": "Translate the supplied investigation questions only into legal typed Horizon investigation operations using the supplied operation-semantics contract.\n\nUse the smallest bounded read-only operations that can answer each question.\n\nPrefer READ_SOURCE when an exact path and defensible line range are already known from evidence. Use SEARCH_SOURCE when the exact location is not yet known. INSPECT_SYMBOL may be used when a known symbol definition materially answers the question.\n\nDo not invent repository paths, line numbers, symbols, call coordinates, or hidden source content.\n\nDo not use RESOLVE_CALL in this certification exam because the autonomous coordinator intentionally fails closed for InvestigationCallObservation until a canonical call-observation evidence bridge exists.\n\nDo not mutate the repository.\n\nReturn only the required structured typed-planner output.\n"
+      }
+    },
+    "model": {
+      "id": "gpt-6-astra",
+      "max_output_tokens": 4096,
+      "pricing_usd_per_million_tokens": {
+        "cache_write_per_million": "12.50",
+        "cached_input_per_million": "1.00",
+        "input_per_million": "10.00",
+        "output_per_million": "50.00"
+      },
+      "reasoning_effort": "high",
+      "temperature": null
+    },
+    "per_call_cost_caps_usd": {
+      "hypothesis_evaluator": "0.300000",
+      "investigator": "0.300000",
+      "typed_planner": "0.300000"
+    },
+    "sdk": {
+      "max_retries": 0,
+      "timeout_seconds": 60.0
+    }
+  },
+  "host": {
+    "head": "a2c4dd39d260a644b387d4e9deb52a14d9205aa8"
+  },
+  "result": "AUTONOMOUS_LIVE_SEMANTIC_EXAM_SEALED",
+  "schema_version": 1,
+  "seal_id": "autonomous-semantic-live-exam-seal:f4da3e963088df7354ac37f51a18029e3d5270706ee17502b7063ef9b4f98adc",
+  "source_preflight": {
+    "path": "/tmp/horizon-025zze2a-preflight.json",
+    "sha256": "sha256:b0bd3ce2079c836547542fb77bce9418b15bd34e6d607797da788e05ae499e4b"
+  },
+  "target": {
+    "base_investigation_request_id": "investigation-request:fe6c0526a0667730eba56abe4dc465b958cac79616d78842857198e76a5b5d61",
+    "base_world_model_snapshot_id": "world-model-snapshot:44d0df5367ae7e6a1fa212e80cf6a79eab422cda3dec9b56ed0166944365faff",
+    "commit": "6151aad2081d9a849a6aac7a6081a2d7b32c4334",
+    "initial_evidence_ids": [
+      "declared-python-dependency-set:96d09be949466add9c704196f5ef3c2fbb8d72589b613323ebfe8baf5d16aaca",
+      "git-blob-evidence:04f33da4024e2f63cebd242911b3e16d24683443eb14506a6f24ef3fccf62075"
+    ],
+    "path": "/Users/vineetpandey/dev/horizon/.targets/horizon-self-025zze2",
+    "repository_observation_id": "git-observation:a453d58352a0769d5fbc954c808c977f2e0a65eb095d862d5f3f8a9566cab5b5",
+    "semantic_overlay_path": "/Users/vineetpandey/.horizon/state/repository-semantic-world-model/repository-semantic-overlay-d329d3b43241ca002e16779b83f7caa2de0e729d9c078f71c5952261c3297def.json",
+    "semantic_overlay_present": false,
+    "what_it_is_gap_id": "repository-semantic-gap:b530b9c5bd7f0108fe555ddbd2d74250c07ca5e854e2e1ddda5dcc030fb01e5d",
+    "what_it_is_question_id": "repository-semantic-gap-question:627bdd67d2987320db7e045a86ea8c87a4c256ab4bf3c44c86b90c52d8775ab8"
+  }
+}
