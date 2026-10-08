@@ -1,0 +1,76 @@
+{
+  "authority": {
+    "investigation_plan_compiled": false,
+    "investigation_plan_executed": false,
+    "provider_calls_this_forensic_stage": 0,
+    "read_source_operations_this_forensic_stage": 0,
+    "repository_operations_this_forensic_stage": 0,
+    "semantic_promotions": 0,
+    "what_it_is_closed": false,
+    "world_model_mutations": 0
+  },
+  "boundary": {
+    "any_future_network_dispatch_requires_new_authority": true,
+    "any_future_network_dispatch_requires_new_global_provider_call_ordinal": true,
+    "call_4_must_not_be_silently_retried": true,
+    "call_4_output_must_not_be_invented": true,
+    "call_4_remote_outcome_is_indeterminate": true,
+    "failed_live_state_preserved": true
+  },
+  "certification": {
+    "mode": "OFFLINE_FORENSIC_ONLY",
+    "name": "025ZZE-2C-R15-R1 round-2 typed-planner timeout forensic certification",
+    "status": "PASS"
+  },
+  "cost_authority": {
+    "aggregate_exam_cap_usd": "2.700000",
+    "conservative_cost_exposure_through_r15_usd": "0.663655",
+    "known_paid_cost_before_r15_usd": "0.363655",
+    "uncertain_r15_call_reserved_at_full_cap_usd": "0.300000",
+    "unknown_usage_is_not_assumed_zero": true
+  },
+  "durability": {
+    "attempt_ledger_path": "/tmp/horizon-025zze2-r15-live-attempt-ledger.jsonl",
+    "attempt_ledger_sha256": "sha256:7d9d2eaa1e0bd6adf7e854df54b0cfa353d1f13a432aff6aa145475b878b43af",
+    "expected_response_spool_path": "/tmp/horizon-025zze2-r15-live-response-spool/response-0004.json",
+    "live_lock_path": "/tmp/horizon-025zze2-r15-live.lock",
+    "live_lock_sha256": "sha256:d93803186ab672723c3ea662c53cd0edd703c1221fe8c29233f6826f48059d25",
+    "preserve_all_failure_state": true,
+    "response_spool_directory": "/tmp/horizon-025zze2-r15-live-response-spool",
+    "response_spool_exists": false,
+    "result_spool_exists": false,
+    "successful_r15_artifact_exists": false
+  },
+  "failure": {
+    "api_request_id_available": false,
+    "class": "TRANSPORT_READ_TIMEOUT_AFTER_DISPATCH_ATTEMPT",
+    "exception_class": "APITimeoutError",
+    "message": "Request timed out.",
+    "planner_semantic_failure_observed": false,
+    "product_defect_discovered": false,
+    "response_id_available": false,
+    "response_received": false,
+    "structured_output_received": false
+  },
+  "lineage": {
+    "attempted_global_provider_call_ordinal": 4,
+    "canonical_input_hash": "sha256:923ba5c064ee7ac8171f033b5617dfd177a2d40647ef367789e25d6aaf624d1a",
+    "hypothesis_round": 2,
+    "invocation_id": "semantic-gap-typed-planner-invocation:6b6000f36c91d2567884a709eb09d95fc8ef8983d452cfd036fc074d8027410d",
+    "provider_input_sha256": "sha256:cf1df7de7aa1e719e24960386602220ee791676b267fb369591c6769e043ad24",
+    "request_call_sha256": "sha256:e5410a8f94903b923fd8b5d6c2637a9ca4a5eb1d41df088b00d714fb598f052f",
+    "source_preregistration_artifact": "artifacts/investigator/025zze2c-r14-round2-typed-planner-preregistration.json"
+  },
+  "next_authorized_stage": "Design and preregister an explicit recovery for a new provider dispatch. Treat global provider call ordinal 4 as an indeterminate attempted call and reserve its full cost cap. Any new request must use a new global provider call ordinal and must not overwrite or delete the R15 lock, ledger, or spool directory.",
+  "provider_outcome": {
+    "billable_usage_status": "UNKNOWN",
+    "client_dispatch_attempt_count": 1,
+    "exact_call_4_retry_authorized": false,
+    "sdk_retry_count": 0,
+    "semantic_output_available": false,
+    "server_completed_model_execution": "UNKNOWN",
+    "server_received_request": "UNKNOWN",
+    "server_started_model_execution": "UNKNOWN",
+    "wrapper_retry_count": 0
+  }
+}
