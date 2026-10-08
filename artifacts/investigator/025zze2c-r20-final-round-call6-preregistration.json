@@ -1,0 +1,74 @@
+{
+  "boundary": {
+    "call6_executed": false,
+    "call6_preregistered": true,
+    "plan_compiled": false,
+    "repository_operations": 0,
+    "what_it_is_closed": false,
+    "world_model_mutations": 0
+  },
+  "call6": {
+    "canonical_input_hash": "sha256:a203d91cc139aa211a19e083c00ea5d34ffd5144e946a4fab554c2d886db3032",
+    "instruction_hash": "sha256:49168578fe00f479e2fd7321400e8feba7bcd7d70f405f3eb7142b66d652c1e2",
+    "instruction_utf8": "Translate each supplied investigation question into the smallest legal bounded read-only Horizon investigation plan permitted by the supplied operation-semantics contract. Use only repository paths and coordinates defensible from the evidence visible in the request. Do not invent paths, symbols, line numbers, coordinates, or source content. Do not use RESOLVE_CALL. Do not mutate the repository. Return only the required structured typed-planner output.\n\nHorizon bounded hypothesis-round execution context:\ncurrent_hypothesis_round=2\nmax_hypothesis_rounds=2\nremaining_hypothesis_rounds_after_this=0\nfinal_hypothesis_round=true\nfinal_round_rule=There is no future hypothesis-test replan after this response.\nfinal_round_material_evidence_rule=For every exact investigation question, this returned plan must contain at least one legal READ_SOURCE operation capable of gathering material source evidence for that question. SEARCH_SOURCE may not be the only evidence path for any question on the final round. Dependencies are ordering-only; SEARCH_SOURCE results cannot dynamically populate a later operation in the same compiled plan.\n",
+    "invocation_id": "semantic-gap-typed-planner-invocation:7aa870158f207b6027f2a1ab05b2e5fab08292c737e6ce0e16e3d01cef9b174d",
+    "new_semantic_invocation": true,
+    "provider_input_bytes": 14729,
+    "provider_input_sha256": "sha256:cf1df7de7aa1e719e24960386602220ee791676b267fb369591c6769e043ad24",
+    "provider_json_reused_exactly": true
+  },
+  "certification": {
+    "mode": "OFFLINE_PREREGISTRATION_ONLY",
+    "stage": "025ZZE-2C-R20",
+    "status": "PASS"
+  },
+  "cost": {
+    "aggregate_exam_cap_usd": "2.700000",
+    "call6_cap_usd": "0.300000",
+    "conservative_exposure_through_call5_usd": "0.859493",
+    "worst_case_through_call6_usd": "1.159493"
+  },
+  "final_round_contract": {
+    "final_hypothesis_round": true,
+    "no_future_replan": true,
+    "read_source_required_per_question": true,
+    "search_only_question_forbidden": true
+  },
+  "historical_r17": {
+    "canonical_hash_reproduced": true,
+    "canonical_input_hash": "sha256:923ba5c064ee7ac8171f033b5617dfd177a2d40647ef367789e25d6aaf624d1a",
+    "instruction_bytes_available": false,
+    "instruction_hash": "sha256:e3f493f369dfbbf2932b5ae78ff437d1f7bddc1668a08c6e15df932e4b8d0056",
+    "invocation_id": "semantic-gap-typed-planner-invocation:6b6000f36c91d2567884a709eb09d95fc8ef8983d452cfd036fc074d8027410d",
+    "invocation_id_reproduced": true,
+    "output_executable": false
+  },
+  "lineage": {
+    "global_provider_call_ordinal": 6,
+    "hypothesis_round": 2,
+    "max_hypothesis_rounds": 2,
+    "proposal_id": "investigation-proposal:718b5d12bc9c7a95389ce878ebfe79ab4a602746b1c0b06d5dc10d18f530192d",
+    "remaining_hypothesis_rounds": 0,
+    "request_id": "semantic-gap-followup-investigation-request:564d2da3b6c6615a4af3ba49cbf6cd026980199baff1e6441e0eb8d396587005",
+    "source_r19_head": "68aabd3ebf8544cd9978bfe0de8ed158aef7c609",
+    "target_commit": "6151aad2081d9a849a6aac7a6081a2d7b32c4334"
+  },
+  "next_authorized_stage": "Execute exactly one OpenAI typed-planner provider dispatch as global provider call #6 using the exact instruction, provider JSON, invocation identity and transport preregistered here. Persist the raw response before validation. Do not compile or execute the returned plan in that live-call stage.",
+  "provider": {
+    "cost_cap_usd": "0.300000",
+    "max_output_tokens": 4096,
+    "model": "gpt-6-astra",
+    "provider": "OPENAI",
+    "reasoning_effort": "high",
+    "temperature": null
+  },
+  "transport": {
+    "client_request_id": "horizon-025zze2c-call6-8e307fa4a954137a2d74f437fd6695305d4c3cc37edc50c14e56851b0e948aef",
+    "client_request_id_header": "X-Client-Request-Id",
+    "raw_response_before_validation": true,
+    "response_store": false,
+    "sdk_max_retries": 0,
+    "timeout_seconds": 300,
+    "wrapper_retries": 0
+  }
+}
