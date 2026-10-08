@@ -1,0 +1,47 @@
+{
+  "authority": {
+    "automatic_card_recovered_semantics": true,
+    "epistemic_status": "SUPPORTED_HYPOTHESIS",
+    "fresh_process_reload": true,
+    "new_live_model_calls": 0,
+    "prefect_repository_mutations": 0,
+    "promoted_as_proven": false,
+    "repository_operations_executed": 0,
+    "semantic_store_writes": 1,
+    "what_it_is_closed_after_restart": true
+  },
+  "capability": "025ZZD",
+  "fresh_process": {
+    "card_id": "repository-card:06f15d354702ba60ac53c443220030d16db108741aa2c5070057e9846428b95d",
+    "card_revision_id": "repository-card-revision:5812d9fed4db8a8b75f0dcb3e366cba819ada4148a2cb9bd0a73df3be92a6bc3",
+    "process_boundary": "SEPARATE_PYTHON_INTERPRETER",
+    "promoted_as_proven": false,
+    "reloaded_snapshot_id": "world-model-snapshot:2476c54c358f5ee6d5085cedd9eca384656863d85cafe2a7927721b4dee9865f",
+    "what_it_is_closed": true,
+    "what_it_is_evidence_ids": [
+      "investigation-source-observation:1bbbba51000fb63886ea19a66e9cea0cca827eeb1e6077b79bc40e849cc0f4bb",
+      "investigation-source-observation:6e5a493e182a2d1c0fee65d24ac2a940606e21e026007aec30430ab1a56020f2",
+      "investigation-source-observation:d6a91a2dc5d8c5f67e09a85543403ad2654b7eb61f2894934bf104097522fce6",
+      "investigation-source-observation:e4730dd25b7741d5a677881dc98c671db15f2ea96c0f1bc9fbfbfde25590bbc6"
+    ],
+    "what_it_is_reason": "At frozen commit 2338265f658845a9bef8ce7baf07519b89846dc8, this repository primarily implements Prefect as Python software for workflow orchestration and management. This tentative interpretation follows pyproject.toml's description, \"Workflow orchestration and management.\", and is consistent with the visible Flow and Task class declarations; those declarations alone do not establish their operational roles.",
+    "what_it_is_status": "SUPPORTED_HYPOTHESIS"
+  },
+  "result": "PREFECT_SEMANTIC_WORLD_MODEL_DURABLE_RELOAD_CERTIFIED",
+  "source": {
+    "025zzc_artifact": "artifacts/investigator/025zzc-prefect-what-it-is-promotion.json",
+    "025zzc_sha256": "sha256:6bf683ad6905fd28294aca2fa57e08d81e876ca1de53dc7b7e19a1a10a363fbf",
+    "base_snapshot_id": "world-model-snapshot:754b63c7d710a879b18abb65c39750c14351b24f9a2c3ff67794f1bf0e2ed21d",
+    "promoted_snapshot_id": "world-model-snapshot:2476c54c358f5ee6d5085cedd9eca384656863d85cafe2a7927721b4dee9865f",
+    "what_it_is_assertion_ids": [
+      "world-model-assertion:55bb3fe615b2d50fc8320f455367ad40440426be4c5b4f43894ac26fb14819dc"
+    ]
+  },
+  "store": {
+    "overlay_filename": "repository-semantic-overlay-456cefdbc8d08640c5737212ad045d2abfe230425b0514cb86ab34064ebde942.json",
+    "overlay_id": "repository-semantic-overlay:c45e93409cf2ffdfec96bc8eae5504a7fa9fcdafeea95e93cb95ebaabe9ade6b",
+    "overlay_sha256": "sha256:4edac759a083034546e8c2b68d9ec4d685457d8579158fa86f5d5174d0400b33",
+    "schema_version": 1,
+    "uses_default_state_location": true
+  }
+}

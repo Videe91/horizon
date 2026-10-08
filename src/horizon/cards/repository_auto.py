@@ -46,6 +46,13 @@ from horizon.world_model.repository_deterministic import (
 )
 
 
+from horizon.world_model.repository_semantic_store import (
+    RepositorySemanticWorldModelStore,
+    RepositorySemanticWorldModelStoreError,
+    default_repository_semantic_world_model_store_root,
+)
+
+
 class RepositoryAutomaticCardError(
     ValueError
 ):
@@ -116,6 +123,24 @@ def _discover_project_dependencies(
         )
     except PythonProjectDependencyEvidenceError:
         return None
+
+
+def _load_persisted_semantic_world_model(
+    world_model,
+):
+    try:
+        store = RepositorySemanticWorldModelStore(
+            default_repository_semantic_world_model_store_root()
+        )
+
+        return store.load(
+            world_model
+        )
+
+    except RepositorySemanticWorldModelStoreError as exc:
+        raise RepositoryAutomaticCardError(
+            "persisted semantic World Model is invalid"
+        ) from exc
 
 
 def build_repository_card_automatically(
@@ -193,6 +218,12 @@ def build_repository_card_automatically(
             project_dependencies=(
                 project_dependencies
             ),
+        )
+    )
+
+    world_model = (
+        _load_persisted_semantic_world_model(
+            world_model
         )
     )
 
