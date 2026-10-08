@@ -1,0 +1,182 @@
+{
+  "authority": {
+    "hypothesis_evaluator_calls_this_stage": 0,
+    "investigation_plan_compiled": false,
+    "investigation_plan_executed": false,
+    "provider_calls_this_stage": 0,
+    "read_source_operations_this_stage": 0,
+    "repository_operations_this_stage": 0,
+    "semantic_promotions": 0,
+    "typed_planner_calls_this_stage": 0,
+    "what_it_is_closed": false,
+    "world_model_mutations": 0
+  },
+  "boundary": {
+    "production_fix_required_before_execution": true,
+    "r17_paid_result_preserved": true,
+    "r17_plan_not_compiled": true,
+    "r17_plan_not_executed": true
+  },
+  "certification": {
+    "mode": "OFFLINE_REVIEW_ONLY",
+    "name": "025ZZE-2C-R18 final-round typed-planner semantic viability certification",
+    "status": "PASS"
+  },
+  "defect": {
+    "astra_structured_output_valid": true,
+    "astra_visible_contract_followed": true,
+    "classification": "FINAL_ROUND_PLANNING_CONTRACT_MISMATCH",
+    "components": [
+      "ROUND_BUDGET_NOT_EXPOSED_TO_TYPED_PLANNER",
+      "SEARCH_THEN_REPLAN_RULE_CONFLICTS_WITH_FINAL_ROUND",
+      "QUESTION_2_HAS_NO_MATERIAL_READ_SOURCE_PATH",
+      "NO_PREEXECUTION_FINAL_ROUND_MATERIAL_SUFFICIENCY_GATE"
+    ],
+    "final_round_plan_materially_sufficient": false,
+    "product_defect_discovered": true,
+    "safe_to_compile_unchanged": false,
+    "safe_to_execute_unchanged": false
+  },
+  "lineage": {
+    "hypothesis_round": 2,
+    "max_hypothesis_rounds": 2,
+    "planner_output_id": "semantic-gap-typed-planner-output:7fc5dcdc8604f3dfbc76249d71877f52ae6fdfc21606bffadd0d24b122734ecb",
+    "planner_run_id": "semantic-gap-typed-planner-run:40f62f3fe88d936f85df7f487d831ef03aa4df1310f8c1aa7e06ca6e44df5037",
+    "remaining_hypothesis_rounds": 0,
+    "source_r14_preregistration": "artifacts/investigator/025zze2c-r14-round2-typed-planner-preregistration.json",
+    "source_r17_live_result": "artifacts/investigator/025zze2c-r17-live-round2-planner-recovery.json"
+  },
+  "next_authorized_stage": "Repair and certify the production final-round planning contract before compiling or executing the R17 planner output. Do not make another model call as part of that repair.",
+  "planner_context_review": {
+    "contract_mismatch": true,
+    "current_hypothesis_round_exposed": false,
+    "final_hypothesis_round_exposed": false,
+    "max_hypothesis_rounds_exposed": false,
+    "remaining_hypothesis_rounds_exposed": false,
+    "search_then_replan_law_exposed": true
+  },
+  "planner_output_review": {
+    "binding_count": 5,
+    "question_1_has_material_read_path": true,
+    "question_2_discovery_steps_requiring_future_followup": 3,
+    "question_2_has_material_read_path": false,
+    "question_2_is_discovery_only": true,
+    "question_analysis": [
+      {
+        "binding_count": 2,
+        "bindings": [
+          {
+            "depends_on_keys": [],
+            "expected_information": "Exact passages defining the intended software understanding, its audience, and the role of cards, including any nearby scope qualifications.",
+            "investigation_question": "At frozen commit 6151aad2081d9a849a6aac7a6081a2d7b32c4334, which exact documentation or source passages define the software understanding intended for AI agents and confirm, qualify, or contradict this primary-purpose interpretation?",
+            "max_seconds": 10,
+            "operation": {
+              "end_line": 95,
+              "path": "CONSTITUTION.md",
+              "start_line": 1,
+              "type": "READ_SOURCE"
+            },
+            "operation_type": "READ_SOURCE",
+            "ordinal": 1,
+            "purpose": "Read the context surrounding the observed purpose statement, agent availability statement, and card-purpose passage.",
+            "step_key": "read_constitution_purpose_and_cards"
+          },
+          {
+            "depends_on_keys": [],
+            "expected_information": "Documented qualifications on what constitutes understanding and how uncertainty affects the primary-purpose interpretation.",
+            "investigation_question": "At frozen commit 6151aad2081d9a849a6aac7a6081a2d7b32c4334, which exact documentation or source passages define the software understanding intended for AI agents and confirm, qualify, or contradict this primary-purpose interpretation?",
+            "max_seconds": 10,
+            "operation": {
+              "end_line": 255,
+              "path": "CONSTITUTION.md",
+              "start_line": 216,
+              "type": "READ_SOURCE"
+            },
+            "operation_type": "READ_SOURCE",
+            "ordinal": 2,
+            "purpose": "Read the context of the observed passage about reconstructing understanding from multiple sources and retaining uncertainty.",
+            "step_key": "read_constitution_understanding_qualifications"
+          }
+        ],
+        "can_produce_material_source_evidence": true,
+        "operation_counts": {
+          "READ_SOURCE": 2
+        },
+        "ordinal": 1,
+        "question": "At frozen commit 6151aad2081d9a849a6aac7a6081a2d7b32c4334, which exact documentation or source passages define the software understanding intended for AI agents and confirm, qualify, or contradict this primary-purpose interpretation?",
+        "read_source_count": 2,
+        "search_source_count": 0
+      },
+      {
+        "binding_count": 3,
+        "bindings": [
+          {
+            "depends_on_keys": [],
+            "expected_information": "Observed definition names and locations for a follow-up read or symbol inspection of any implemented reconciliation or maintenance behavior.",
+            "investigation_question": "At that commit, which implementation or test passages, if any, show how that understanding is maintained over time and made available to AI agents, rather than identifying these capabilities only as planned work?",
+            "max_seconds": 10,
+            "operation": {
+              "path_prefix": "src/horizon/world_model/reconciliation.py",
+              "query": "def ",
+              "type": "SEARCH_SOURCE"
+            },
+            "operation_type": "SEARCH_SOURCE",
+            "ordinal": 3,
+            "purpose": "Locate implementation definitions in the observed reconciliation source before selecting precise maintenance-logic passages.",
+            "step_key": "locate_reconciliation_definitions"
+          },
+          {
+            "depends_on_keys": [],
+            "expected_information": "Observed rendering definition names and locations enabling a bounded follow-up inspection; discovery alone will not establish agent-facing availability.",
+            "investigation_question": "At that commit, which implementation or test passages, if any, show how that understanding is maintained over time and made available to AI agents, rather than identifying these capabilities only as planned work?",
+            "max_seconds": 10,
+            "operation": {
+              "path_prefix": "src/horizon/world_model/render.py",
+              "query": "def ",
+              "type": "SEARCH_SOURCE"
+            },
+            "operation_type": "SEARCH_SOURCE",
+            "ordinal": 4,
+            "purpose": "Locate definitions in the observed rendering source to identify implementation passages relevant to exposing maintained understanding.",
+            "step_key": "locate_rendering_definitions"
+          },
+          {
+            "depends_on_keys": [],
+            "expected_information": "Exact test definition names and locations for subsequent inspection of setup and assertions distinguishing tested behavior from planned capabilities.",
+            "investigation_question": "At that commit, which implementation or test passages, if any, show how that understanding is maintained over time and made available to AI agents, rather than identifying these capabilities only as planned work?",
+            "max_seconds": 10,
+            "operation": {
+              "path_prefix": "tests/unit/cards/test_repository_card.py",
+              "query": "def test_",
+              "type": "SEARCH_SOURCE"
+            },
+            "operation_type": "SEARCH_SOURCE",
+            "ordinal": 5,
+            "purpose": "Identify relevant tests in the observed repository-card test file, including candidates concerning updates and produced context.",
+            "step_key": "locate_repository_card_tests"
+          }
+        ],
+        "can_produce_material_source_evidence": false,
+        "operation_counts": {
+          "SEARCH_SOURCE": 3
+        },
+        "ordinal": 2,
+        "question": "At that commit, which implementation or test passages, if any, show how that understanding is maintained over time and made available to AI agents, rather than identifying these capabilities only as planned work?",
+        "read_source_count": 0,
+        "search_source_count": 3
+      }
+    ],
+    "structured_output_validation": "VALID"
+  },
+  "production_semantics": {
+    "after_final_round_without_promotion": "BOUNDED_STOP",
+    "automatic_promotion_material_evidence_kind": "READ_SOURCE_ONLY",
+    "search_source_is_material_for_automatic_promotion": false,
+    "still_incomplete_within_round_bound": "CONTINUE"
+  },
+  "recommended_repair": {
+    "deterministic_gate": "Before executing a final-round hypothesis-test plan, reject plans that leave an exact investigation question with discovery-only operations when that question still requires material source evidence.",
+    "planner_contract": "On the final round, SEARCH_SOURCE may not be treated as a bridge to a future replan unless another already-bound operation in the same executable plan can produce the required material evidence without dynamic output substitution.",
+    "primary": "Expose bounded hypothesis-round execution context to the typed planner, including current round, maximum rounds, remaining replans, and whether this is the final hypothesis round."
+  }
+}
