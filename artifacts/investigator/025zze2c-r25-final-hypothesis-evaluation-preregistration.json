@@ -1,0 +1,4306 @@
+{
+  "boundary": {
+    "evaluation_invocation_sealed": true,
+    "evaluation_performed": false,
+    "hypothesis_verdict": null,
+    "provider_calls_this_stage": 0,
+    "semantic_promotions": 0,
+    "what_it_is_closed": false,
+    "world_model_mutations": 0
+  },
+  "certification": {
+    "mode": "OFFLINE_FINAL_HYPOTHESIS_EVALUATION_PREREGISTRATION",
+    "stage": "025ZZE-2C-R25",
+    "status": "PASS"
+  },
+  "cost_authority": {
+    "aggregate_exam_cap_usd": "2.700000",
+    "call7_cost_cap_usd": "0.300000",
+    "conservative_exposure_through_call6_usd": "1.099953",
+    "worst_case_exposure_through_call7_usd": "1.399953"
+  },
+  "evidence_authority": {
+    "final_evidence_record_count": 8,
+    "material_source_evidence_ids": [
+      "investigation-source-observation:3b06e684baaf0b22c91bb9738604083bba325c726c56547dea21f70768664881",
+      "investigation-source-observation:8d04604e99465ae1b496b2bb2f2bc39140eece5627acef35f777445bcde33a1f",
+      "investigation-source-observation:a1dc234f3e1a4c6f8ca9f036e45b65ad27cc1d75ce2f8409c406b125cbf72a64"
+    ],
+    "material_source_paths": [
+      "CONSTITUTION.md",
+      "src/horizon/world_model/reconciliation.py",
+      "tests/unit/cards/test_repository_card.py"
+    ],
+    "new_material_source_record_count": 3,
+    "prior_evidence_record_count": 5,
+    "visible_source_excerpt_count": 3
+  },
+  "invocation": {
+    "canonical_input": {
+      "cost_cap_usd": "0.300000",
+      "instruction_hash": "sha256:0d776662f5e4d17834dca18d9233df01ef7bcc8bf2b5d0e82a23043d2a22a896",
+      "request": {
+        "evidence_records": [
+          {
+            "canonical_payload_bytes": 363,
+            "canonical_payload_sha256": "sha256:41e58f00c98e96527a335cc24281fc30e8d1733f164560af030436ee9c251dbe",
+            "evidence_id": "declared-python-dependency-set:96d09be949466add9c704196f5ef3c2fbb8d72589b613323ebfe8baf5d16aaca",
+            "evidence_kind": "PYTHON_DECLARED_PROJECT_DEPENDENCIES_EVIDENCE",
+            "source_excerpt": null
+          },
+          {
+            "canonical_payload_bytes": 970,
+            "canonical_payload_sha256": "sha256:a8a4639cc2dbff166f87f9455e47b5101cce5a9bb086a02633e20eff9513b310",
+            "evidence_id": "git-blob-evidence:04f33da4024e2f63cebd242911b3e16d24683443eb14506a6f24ef3fccf62075",
+            "evidence_kind": "GIT_BLOB_EVIDENCE",
+            "source_excerpt": null
+          },
+          {
+            "canonical_payload_bytes": 5663,
+            "canonical_payload_sha256": "sha256:18e0723bb2feff8942e1de3009d05a8c13bbe874fe0b09ebdb8226aa326be512",
+            "evidence_id": "bounded-investigation-search-evidence:18e0723bb2feff8942e1de3009d05a8c13bbe874fe0b09ebdb8226aa326be512",
+            "evidence_kind": "BOUNDED_INVESTIGATION_SEARCH_OBSERVATION",
+            "source_excerpt": null
+          },
+          {
+            "canonical_payload_bytes": 10935,
+            "canonical_payload_sha256": "sha256:25c801e4431605ac44cb8c79a9951549006beba6ba3bc19750871f2e85d27067",
+            "evidence_id": "bounded-investigation-search-evidence:25c801e4431605ac44cb8c79a9951549006beba6ba3bc19750871f2e85d27067",
+            "evidence_kind": "BOUNDED_INVESTIGATION_SEARCH_OBSERVATION",
+            "source_excerpt": null
+          },
+          {
+            "canonical_payload_bytes": 101525,
+            "canonical_payload_sha256": "sha256:32ae1825765c921751706d043371dec3de425164d6537d3d26d63b0ca3431774",
+            "evidence_id": "bounded-investigation-search-evidence:32ae1825765c921751706d043371dec3de425164d6537d3d26d63b0ca3431774",
+            "evidence_kind": "BOUNDED_INVESTIGATION_SEARCH_OBSERVATION",
+            "source_excerpt": null
+          },
+          {
+            "canonical_payload_bytes": 26849,
+            "canonical_payload_sha256": "sha256:69d62d5071a6cb4c8d70ac9f6ea1a8af1990efd1d43d0248889a4247e1ed94cb",
+            "evidence_id": "investigation-source-observation:3b06e684baaf0b22c91bb9738604083bba325c726c56547dea21f70768664881",
+            "evidence_kind": "INVESTIGATION_SOURCE_OBSERVATION",
+            "source_excerpt": {
+              "end_line": 371,
+              "lines": [
+                {
+                  "line_number": 1,
+                  "text": "\"\"\"Declared relationship semantics for world-model reconciliation."
+                },
+                {
+                  "line_number": 2,
+                  "text": ""
+                },
+                {
+                  "line_number": 3,
+                  "text": "Capability 019 describes relationships between assertions. It never"
+                },
+                {
+                  "line_number": 4,
+                  "text": "decides which assertion is true."
+                },
+                {
+                  "line_number": 5,
+                  "text": ""
+                },
+                {
+                  "line_number": 6,
+                  "text": "Relationship cardinality is explicit human-authored policy data. It is"
+                },
+                {
+                  "line_number": 7,
+                  "text": "not inferred from graph shape, evidence strength, or epistemic status."
+                },
+                {
+                  "line_number": 8,
+                  "text": ""
+                },
+                {
+                  "line_number": 9,
+                  "text": "Evidence lineage is supplied explicitly. Reconciliation does not infer"
+                },
+                {
+                  "line_number": 10,
+                  "text": "lineage from evidence IDs. A future evidence-layer helper should derive"
+                },
+                {
+                  "line_number": 11,
+                  "text": "root sets by walking the existing evidence ``depends_on`` edges"
+                },
+                {
+                  "line_number": 12,
+                  "text": "transitively to their leaves and pass those roots into this module."
+                },
+                {
+                  "line_number": 13,
+                  "text": ""
+                },
+                {
+                  "line_number": 14,
+                  "text": "Supersession is an explicit event. It is never inferred from assertion"
+                },
+                {
+                  "line_number": 15,
+                  "text": "age, ordering, evidence strength, or ordinary relationship analysis."
+                },
+                {
+                  "line_number": 16,
+                  "text": ""
+                },
+                {
+                  "line_number": 17,
+                  "text": "Every conflict produces a deterministic open question for a later"
+                },
+                {
+                  "line_number": 18,
+                  "text": "investigator. This module does not investigate or resolve that question."
+                },
+                {
+                  "line_number": 19,
+                  "text": "\"\"\""
+                },
+                {
+                  "line_number": 20,
+                  "text": ""
+                },
+                {
+                  "line_number": 21,
+                  "text": "from __future__ import annotations"
+                },
+                {
+                  "line_number": 22,
+                  "text": ""
+                },
+                {
+                  "line_number": 23,
+                  "text": "import hashlib"
+                },
+                {
+                  "line_number": 24,
+                  "text": "import json"
+                },
+                {
+                  "line_number": 25,
+                  "text": "import re"
+                },
+                {
+                  "line_number": 26,
+                  "text": ""
+                },
+                {
+                  "line_number": 27,
+                  "text": "from collections.abc import Mapping, Set"
+                },
+                {
+                  "line_number": 28,
+                  "text": "from dataclasses import dataclass"
+                },
+                {
+                  "line_number": 29,
+                  "text": "from enum import Enum"
+                },
+                {
+                  "line_number": 30,
+                  "text": "from itertools import combinations"
+                },
+                {
+                  "line_number": 31,
+                  "text": ""
+                },
+                {
+                  "line_number": 32,
+                  "text": "from horizon.world_model.assertion import ("
+                },
+                {
+                  "line_number": 33,
+                  "text": "    WorldModelRelationKind,"
+                },
+                {
+                  "line_number": 34,
+                  "text": ")"
+                },
+                {
+                  "line_number": 35,
+                  "text": "from horizon.world_model.snapshot import ("
+                },
+                {
+                  "line_number": 36,
+                  "text": "    WorldModelSnapshot,"
+                },
+                {
+                  "line_number": 37,
+                  "text": ")"
+                },
+                {
+                  "line_number": 38,
+                  "text": ""
+                },
+                {
+                  "line_number": 39,
+                  "text": ""
+                },
+                {
+                  "line_number": 40,
+                  "text": "class WorldModelRelationshipCardinality("
+                },
+                {
+                  "line_number": 41,
+                  "text": "    str,"
+                },
+                {
+                  "line_number": 42,
+                  "text": "    Enum,"
+                },
+                {
+                  "line_number": 43,
+                  "text": "):"
+                },
+                {
+                  "line_number": 44,
+                  "text": "    MANY_TO_MANY = \"MANY_TO_MANY\""
+                },
+                {
+                  "line_number": 45,
+                  "text": "    ONE_SUBJECT_PER_OBJECT = \"ONE_SUBJECT_PER_OBJECT\""
+                },
+                {
+                  "line_number": 46,
+                  "text": ""
+                },
+                {
+                  "line_number": 47,
+                  "text": ""
+                },
+                {
+                  "line_number": 48,
+                  "text": "@dataclass("
+                },
+                {
+                  "line_number": 49,
+                  "text": "    frozen=True,"
+                },
+                {
+                  "line_number": 50,
+                  "text": "    slots=True,"
+                },
+                {
+                  "line_number": 51,
+                  "text": ")"
+                },
+                {
+                  "line_number": 52,
+                  "text": "class WorldModelRelationshipPolicy:"
+                },
+                {
+                  "line_number": 53,
+                  "text": "    cardinality: WorldModelRelationshipCardinality"
+                },
+                {
+                  "line_number": 54,
+                  "text": ""
+                },
+                {
+                  "line_number": 55,
+                  "text": ""
+                },
+                {
+                  "line_number": 56,
+                  "text": "WORLD_MODEL_RELATIONSHIP_POLICIES = {"
+                },
+                {
+                  "line_number": 57,
+                  "text": "    WorldModelRelationKind.CALLS: WorldModelRelationshipPolicy("
+                },
+                {
+                  "line_number": 58,
+                  "text": "        cardinality=("
+                },
+                {
+                  "line_number": 59,
+                  "text": "            WorldModelRelationshipCardinality.MANY_TO_MANY"
+                },
+                {
+                  "line_number": 60,
+                  "text": "        ),"
+                },
+                {
+                  "line_number": 61,
+                  "text": "    ),"
+                },
+                {
+                  "line_number": 62,
+                  "text": "    WorldModelRelationKind.DEPENDS_ON: WorldModelRelationshipPolicy("
+                },
+                {
+                  "line_number": 63,
+                  "text": "        cardinality=("
+                },
+                {
+                  "line_number": 64,
+                  "text": "            WorldModelRelationshipCardinality.MANY_TO_MANY"
+                },
+                {
+                  "line_number": 65,
+                  "text": "        ),"
+                },
+                {
+                  "line_number": 66,
+                  "text": "    ),"
+                },
+                {
+                  "line_number": 67,
+                  "text": "    WorldModelRelationKind.AFFECTS_BEHAVIOR_OF: ("
+                },
+                {
+                  "line_number": 68,
+                  "text": "        WorldModelRelationshipPolicy("
+                },
+                {
+                  "line_number": 69,
+                  "text": "            cardinality=("
+                },
+                {
+                  "line_number": 70,
+                  "text": "                WorldModelRelationshipCardinality.MANY_TO_MANY"
+                },
+                {
+                  "line_number": 71,
+                  "text": "            ),"
+                },
+                {
+                  "line_number": 72,
+                  "text": "        )"
+                },
+                {
+                  "line_number": 73,
+                  "text": "    ),"
+                },
+                {
+                  "line_number": 74,
+                  "text": "    WorldModelRelationKind.OWNS_RESPONSIBILITY_FOR: ("
+                },
+                {
+                  "line_number": 75,
+                  "text": "        WorldModelRelationshipPolicy("
+                },
+                {
+                  "line_number": 76,
+                  "text": "            cardinality=("
+                },
+                {
+                  "line_number": 77,
+                  "text": "                WorldModelRelationshipCardinality.ONE_SUBJECT_PER_OBJECT"
+                },
+                {
+                  "line_number": 78,
+                  "text": "            ),"
+                },
+                {
+                  "line_number": 79,
+                  "text": "        )"
+                },
+                {
+                  "line_number": 80,
+                  "text": "    ),"
+                },
+                {
+                  "line_number": 81,
+                  "text": "}"
+                },
+                {
+                  "line_number": 82,
+                  "text": ""
+                },
+                {
+                  "line_number": 83,
+                  "text": "# IMPLEMENTS is intentionally non-exclusive at the relationship layer."
+                },
+                {
+                  "line_number": 84,
+                  "text": "#"
+                },
+                {
+                  "line_number": 85,
+                  "text": "# A repository may implement more than one capability or purpose."
+                },
+                {
+                  "line_number": 86,
+                  "text": "# Repository-section selection decides which assertion represents"
+                },
+                {
+                  "line_number": 87,
+                  "text": "# WHAT_IT_IS; relationship reconciliation must not invent exclusivity."
+                },
+                {
+                  "line_number": 88,
+                  "text": "WORLD_MODEL_RELATIONSHIP_POLICIES = {"
+                },
+                {
+                  "line_number": 89,
+                  "text": "    **WORLD_MODEL_RELATIONSHIP_POLICIES,"
+                },
+                {
+                  "line_number": 90,
+                  "text": "    WorldModelRelationKind.IMPLEMENTS: ("
+                },
+                {
+                  "line_number": 91,
+                  "text": "        WORLD_MODEL_RELATIONSHIP_POLICIES["
+                },
+                {
+                  "line_number": 92,
+                  "text": "            WorldModelRelationKind.DEPENDS_ON"
+                },
+                {
+                  "line_number": 93,
+                  "text": "        ]"
+                },
+                {
+                  "line_number": 94,
+                  "text": "    ),"
+                },
+                {
+                  "line_number": 95,
+                  "text": "}"
+                },
+                {
+                  "line_number": 96,
+                  "text": ""
+                },
+                {
+                  "line_number": 97,
+                  "text": ""
+                },
+                {
+                  "line_number": 98,
+                  "text": ""
+                },
+                {
+                  "line_number": 99,
+                  "text": "class WorldModelRelationshipKind("
+                },
+                {
+                  "line_number": 100,
+                  "text": "    str,"
+                },
+                {
+                  "line_number": 101,
+                  "text": "    Enum,"
+                },
+                {
+                  "line_number": 102,
+                  "text": "):"
+                },
+                {
+                  "line_number": 103,
+                  "text": "    AGREE = \"AGREE\""
+                },
+                {
+                  "line_number": 104,
+                  "text": "    CONFLICT = \"CONFLICT\""
+                },
+                {
+                  "line_number": 105,
+                  "text": "    COEXIST = \"COEXIST\""
+                },
+                {
+                  "line_number": 106,
+                  "text": ""
+                },
+                {
+                  "line_number": 107,
+                  "text": ""
+                },
+                {
+                  "line_number": 108,
+                  "text": "class WorldModelRelationshipReason("
+                },
+                {
+                  "line_number": 109,
+                  "text": "    str,"
+                },
+                {
+                  "line_number": 110,
+                  "text": "    Enum,"
+                },
+                {
+                  "line_number": 111,
+                  "text": "):"
+                },
+                {
+                  "line_number": 112,
+                  "text": "    SHARED_ROOT = \"shared_root\""
+                },
+                {
+                  "line_number": 113,
+                  "text": "    LINEAGE_UNKNOWN = \"lineage_unknown\""
+                },
+                {
+                  "line_number": 114,
+                  "text": ""
+                },
+                {
+                  "line_number": 115,
+                  "text": ""
+                },
+                {
+                  "line_number": 116,
+                  "text": "@dataclass("
+                },
+                {
+                  "line_number": 117,
+                  "text": "    frozen=True,"
+                },
+                {
+                  "line_number": 118,
+                  "text": "    slots=True,"
+                },
+                {
+                  "line_number": 119,
+                  "text": ")"
+                },
+                {
+                  "line_number": 120,
+                  "text": "class WorldModelRelationship:"
+                },
+                {
+                  "line_number": 121,
+                  "text": "    kind: WorldModelRelationshipKind"
+                },
+                {
+                  "line_number": 122,
+                  "text": "    assertion_ids: tuple[str, ...]"
+                },
+                {
+                  "line_number": 123,
+                  "text": "    relationship_id: str"
+                },
+                {
+                  "line_number": 124,
+                  "text": "    reason: WorldModelRelationshipReason | None = None"
+                },
+                {
+                  "line_number": 125,
+                  "text": ""
+                },
+                {
+                  "line_number": 126,
+                  "text": ""
+                },
+                {
+                  "line_number": 127,
+                  "text": "def _make_world_model_relationship("
+                },
+                {
+                  "line_number": 128,
+                  "text": "    *,"
+                },
+                {
+                  "line_number": 129,
+                  "text": "    kind: WorldModelRelationshipKind,"
+                },
+                {
+                  "line_number": 130,
+                  "text": "    assertion_ids: tuple[str, ...],"
+                },
+                {
+                  "line_number": 131,
+                  "text": "    reason: WorldModelRelationshipReason | None = None,"
+                },
+                {
+                  "line_number": 132,
+                  "text": ") -> WorldModelRelationship:"
+                },
+                {
+                  "line_number": 133,
+                  "text": "    canonical_assertion_ids = tuple("
+                },
+                {
+                  "line_number": 134,
+                  "text": "        sorted(assertion_ids)"
+                },
+                {
+                  "line_number": 135,
+                  "text": "    )"
+                },
+                {
+                  "line_number": 136,
+                  "text": ""
+                },
+                {
+                  "line_number": 137,
+                  "text": "    payload = {"
+                },
+                {
+                  "line_number": 138,
+                  "text": "        \"assertion_ids\": canonical_assertion_ids,"
+                },
+                {
+                  "line_number": 139,
+                  "text": "        \"kind\": kind.value,"
+                },
+                {
+                  "line_number": 140,
+                  "text": "        \"reason\": ("
+                },
+                {
+                  "line_number": 141,
+                  "text": "            reason.value"
+                },
+                {
+                  "line_number": 142,
+                  "text": "            if reason is not None"
+                },
+                {
+                  "line_number": 143,
+                  "text": "            else None"
+                },
+                {
+                  "line_number": 144,
+                  "text": "        ),"
+                },
+                {
+                  "line_number": 145,
+                  "text": "    }"
+                },
+                {
+                  "line_number": 146,
+                  "text": ""
+                },
+                {
+                  "line_number": 147,
+                  "text": "    encoded = json.dumps("
+                },
+                {
+                  "line_number": 148,
+                  "text": "        payload,"
+                },
+                {
+                  "line_number": 149,
+                  "text": "        sort_keys=True,"
+                },
+                {
+                  "line_number": 150,
+                  "text": "        separators=(\",\", \":\"),"
+                },
+                {
+                  "line_number": 151,
+                  "text": "    ).encode(\"utf-8\")"
+                },
+                {
+                  "line_number": 152,
+                  "text": ""
+                },
+                {
+                  "line_number": 153,
+                  "text": "    relationship_id = ("
+                },
+                {
+                  "line_number": 154,
+                  "text": "        \"world-model-relationship:\""
+                },
+                {
+                  "line_number": 155,
+                  "text": "        + hashlib.sha256(encoded).hexdigest()"
+                },
+                {
+                  "line_number": 156,
+                  "text": "    )"
+                },
+                {
+                  "line_number": 157,
+                  "text": ""
+                },
+                {
+                  "line_number": 158,
+                  "text": "    return WorldModelRelationship("
+                },
+                {
+                  "line_number": 159,
+                  "text": "        kind=kind,"
+                },
+                {
+                  "line_number": 160,
+                  "text": "        assertion_ids=canonical_assertion_ids,"
+                },
+                {
+                  "line_number": 161,
+                  "text": "        relationship_id=relationship_id,"
+                },
+                {
+                  "line_number": 162,
+                  "text": "        reason=reason,"
+                },
+                {
+                  "line_number": 163,
+                  "text": "    )"
+                },
+                {
+                  "line_number": 164,
+                  "text": ""
+                },
+                {
+                  "line_number": 165,
+                  "text": ""
+                },
+                {
+                  "line_number": 166,
+                  "text": "@dataclass("
+                },
+                {
+                  "line_number": 167,
+                  "text": "    frozen=True,"
+                },
+                {
+                  "line_number": 168,
+                  "text": "    slots=True,"
+                },
+                {
+                  "line_number": 169,
+                  "text": ")"
+                },
+                {
+                  "line_number": 170,
+                  "text": "class WorldModelSupersession:"
+                },
+                {
+                  "line_number": 171,
+                  "text": "    superseded_assertion_id: str"
+                },
+                {
+                  "line_number": 172,
+                  "text": "    replacement_assertion_id: str"
+                },
+                {
+                  "line_number": 173,
+                  "text": "    reason: str"
+                },
+                {
+                  "line_number": 174,
+                  "text": "    evidence_reference_ids: tuple[str, ...]"
+                },
+                {
+                  "line_number": 175,
+                  "text": "    supersession_id: str"
+                },
+                {
+                  "line_number": 176,
+                  "text": ""
+                },
+                {
+                  "line_number": 177,
+                  "text": ""
+                },
+                {
+                  "line_number": 178,
+                  "text": "def make_world_model_supersession("
+                },
+                {
+                  "line_number": 179,
+                  "text": "    *,"
+                },
+                {
+                  "line_number": 180,
+                  "text": "    superseded_assertion_id: str,"
+                },
+                {
+                  "line_number": 181,
+                  "text": "    replacement_assertion_id: str,"
+                },
+                {
+                  "line_number": 182,
+                  "text": "    reason: str,"
+                },
+                {
+                  "line_number": 183,
+                  "text": "    evidence_reference_ids: tuple[str, ...],"
+                },
+                {
+                  "line_number": 184,
+                  "text": ") -> WorldModelSupersession:"
+                },
+                {
+                  "line_number": 185,
+                  "text": "    canonical_evidence_reference_ids = tuple("
+                },
+                {
+                  "line_number": 186,
+                  "text": "        sorted(evidence_reference_ids)"
+                },
+                {
+                  "line_number": 187,
+                  "text": "    )"
+                },
+                {
+                  "line_number": 188,
+                  "text": ""
+                },
+                {
+                  "line_number": 189,
+                  "text": "    payload = {"
+                },
+                {
+                  "line_number": 190,
+                  "text": "        \"evidence_reference_ids\": ("
+                },
+                {
+                  "line_number": 191,
+                  "text": "            canonical_evidence_reference_ids"
+                },
+                {
+                  "line_number": 192,
+                  "text": "        ),"
+                },
+                {
+                  "line_number": 193,
+                  "text": "        \"reason\": reason,"
+                },
+                {
+                  "line_number": 194,
+                  "text": "        \"replacement_assertion_id\": ("
+                },
+                {
+                  "line_number": 195,
+                  "text": "            replacement_assertion_id"
+                },
+                {
+                  "line_number": 196,
+                  "text": "        ),"
+                },
+                {
+                  "line_number": 197,
+                  "text": "        \"superseded_assertion_id\": ("
+                },
+                {
+                  "line_number": 198,
+                  "text": "            superseded_assertion_id"
+                },
+                {
+                  "line_number": 199,
+                  "text": "        ),"
+                },
+                {
+                  "line_number": 200,
+                  "text": "    }"
+                },
+                {
+                  "line_number": 201,
+                  "text": ""
+                },
+                {
+                  "line_number": 202,
+                  "text": "    encoded = json.dumps("
+                },
+                {
+                  "line_number": 203,
+                  "text": "        payload,"
+                },
+                {
+                  "line_number": 204,
+                  "text": "        sort_keys=True,"
+                },
+                {
+                  "line_number": 205,
+                  "text": "        separators=(\",\", \":\"),"
+                },
+                {
+                  "line_number": 206,
+                  "text": "    ).encode(\"utf-8\")"
+                },
+                {
+                  "line_number": 207,
+                  "text": ""
+                },
+                {
+                  "line_number": 208,
+                  "text": "    supersession_id = ("
+                },
+                {
+                  "line_number": 209,
+                  "text": "        \"world-model-supersession:\""
+                },
+                {
+                  "line_number": 210,
+                  "text": "        + hashlib.sha256(encoded).hexdigest()"
+                },
+                {
+                  "line_number": 211,
+                  "text": "    )"
+                },
+                {
+                  "line_number": 212,
+                  "text": ""
+                },
+                {
+                  "line_number": 213,
+                  "text": "    return WorldModelSupersession("
+                },
+                {
+                  "line_number": 214,
+                  "text": "        superseded_assertion_id=("
+                },
+                {
+                  "line_number": 215,
+                  "text": "            superseded_assertion_id"
+                },
+                {
+                  "line_number": 216,
+                  "text": "        ),"
+                },
+                {
+                  "line_number": 217,
+                  "text": "        replacement_assertion_id=("
+                },
+                {
+                  "line_number": 218,
+                  "text": "            replacement_assertion_id"
+                },
+                {
+                  "line_number": 219,
+                  "text": "        ),"
+                },
+                {
+                  "line_number": 220,
+                  "text": "        reason=reason,"
+                },
+                {
+                  "line_number": 221,
+                  "text": "        evidence_reference_ids=("
+                },
+                {
+                  "line_number": 222,
+                  "text": "            canonical_evidence_reference_ids"
+                },
+                {
+                  "line_number": 223,
+                  "text": "        ),"
+                },
+                {
+                  "line_number": 224,
+                  "text": "        supersession_id=supersession_id,"
+                },
+                {
+                  "line_number": 225,
+                  "text": "    )"
+                },
+                {
+                  "line_number": 226,
+                  "text": ""
+                },
+                {
+                  "line_number": 227,
+                  "text": ""
+                },
+                {
+                  "line_number": 228,
+                  "text": "@dataclass("
+                },
+                {
+                  "line_number": 229,
+                  "text": "    frozen=True,"
+                },
+                {
+                  "line_number": 230,
+                  "text": "    slots=True,"
+                },
+                {
+                  "line_number": 231,
+                  "text": ")"
+                },
+                {
+                  "line_number": 232,
+                  "text": "class WorldModelOpenQuestion:"
+                },
+                {
+                  "line_number": 233,
+                  "text": "    question: str"
+                },
+                {
+                  "line_number": 234,
+                  "text": "    relationship_id: str"
+                },
+                {
+                  "line_number": 235,
+                  "text": "    assertion_ids: tuple[str, ...]"
+                },
+                {
+                  "line_number": 236,
+                  "text": "    evidence_reference_ids: tuple[str, ...]"
+                },
+                {
+                  "line_number": 237,
+                  "text": "    question_id: str"
+                },
+                {
+                  "line_number": 238,
+                  "text": ""
+                },
+                {
+                  "line_number": 239,
+                  "text": ""
+                },
+                {
+                  "line_number": 240,
+                  "text": "def _humanize_identifier("
+                },
+                {
+                  "line_number": 241,
+                  "text": "    value: str,"
+                },
+                {
+                  "line_number": 242,
+                  "text": ") -> str:"
+                },
+                {
+                  "line_number": 243,
+                  "text": "    _, separator, tail = value.partition(\":\")"
+                },
+                {
+                  "line_number": 244,
+                  "text": ""
+                },
+                {
+                  "line_number": 245,
+                  "text": "    text = tail if separator else value"
+                },
+                {
+                  "line_number": 246,
+                  "text": ""
+                },
+                {
+                  "line_number": 247,
+                  "text": "    text = re.sub("
+                },
+                {
+                  "line_number": 248,
+                  "text": "        r\"[._:/_-]+\","
+                },
+                {
+                  "line_number": 249,
+                  "text": "        \" \","
+                },
+                {
+                  "line_number": 250,
+                  "text": "        text,"
+                },
+                {
+                  "line_number": 251,
+                  "text": "    )"
+                },
+                {
+                  "line_number": 252,
+                  "text": ""
+                },
+                {
+                  "line_number": 253,
+                  "text": "    return \" \".join(text.split())"
+                },
+                {
+                  "line_number": 254,
+                  "text": ""
+                },
+                {
+                  "line_number": 255,
+                  "text": ""
+                },
+                {
+                  "line_number": 256,
+                  "text": "def _question_text_for_conflict("
+                },
+                {
+                  "line_number": 257,
+                  "text": "    *,"
+                },
+                {
+                  "line_number": 258,
+                  "text": "    relation: WorldModelRelationKind,"
+                },
+                {
+                  "line_number": 259,
+                  "text": "    object_id: str,"
+                },
+                {
+                  "line_number": 260,
+                  "text": ") -> str:"
+                },
+                {
+                  "line_number": 261,
+                  "text": "    object_text = _humanize_identifier("
+                },
+                {
+                  "line_number": 262,
+                  "text": "        object_id"
+                },
+                {
+                  "line_number": 263,
+                  "text": "    )"
+                },
+                {
+                  "line_number": 264,
+                  "text": ""
+                },
+                {
+                  "line_number": 265,
+                  "text": "    if ("
+                },
+                {
+                  "line_number": 266,
+                  "text": "        relation"
+                },
+                {
+                  "line_number": 267,
+                  "text": "        is WorldModelRelationKind.OWNS_RESPONSIBILITY_FOR"
+                },
+                {
+                  "line_number": 268,
+                  "text": "    ):"
+                },
+                {
+                  "line_number": 269,
+                  "text": "        return ("
+                },
+                {
+                  "line_number": 270,
+                  "text": "            \"Who owns responsibility for \""
+                },
+                {
+                  "line_number": 271,
+                  "text": "            f\"{object_text}?\""
+                },
+                {
+                  "line_number": 272,
+                  "text": "        )"
+                },
+                {
+                  "line_number": 273,
+                  "text": ""
+                },
+                {
+                  "line_number": 274,
+                  "text": "    relation_text = ("
+                },
+                {
+                  "line_number": 275,
+                  "text": "        relation.value"
+                },
+                {
+                  "line_number": 276,
+                  "text": "        .lower()"
+                },
+                {
+                  "line_number": 277,
+                  "text": "        .replace(\"_\", \" \")"
+                },
+                {
+                  "line_number": 278,
+                  "text": "    )"
+                },
+                {
+                  "line_number": 279,
+                  "text": ""
+                },
+                {
+                  "line_number": 280,
+                  "text": "    return ("
+                },
+                {
+                  "line_number": 281,
+                  "text": "        \"How should the conflict over \""
+                },
+                {
+                  "line_number": 282,
+                  "text": "        f\"{relation_text} for {object_text} \""
+                },
+                {
+                  "line_number": 283,
+                  "text": "        \"be understood?\""
+                },
+                {
+                  "line_number": 284,
+                  "text": "    )"
+                },
+                {
+                  "line_number": 285,
+                  "text": ""
+                },
+                {
+                  "line_number": 286,
+                  "text": ""
+                },
+                {
+                  "line_number": 287,
+                  "text": "def _make_open_question("
+                },
+                {
+                  "line_number": 288,
+                  "text": "    *,"
+                },
+                {
+                  "line_number": 289,
+                  "text": "    relationship: WorldModelRelationship,"
+                },
+                {
+                  "line_number": 290,
+                  "text": "    relation: WorldModelRelationKind,"
+                },
+                {
+                  "line_number": 291,
+                  "text": "    object_id: str,"
+                },
+                {
+                  "line_number": 292,
+                  "text": "    evidence_reference_ids: tuple[str, ...],"
+                },
+                {
+                  "line_number": 293,
+                  "text": ") -> WorldModelOpenQuestion:"
+                },
+                {
+                  "line_number": 294,
+                  "text": "    canonical_evidence_reference_ids = tuple("
+                },
+                {
+                  "line_number": 295,
+                  "text": "        sorted("
+                },
+                {
+                  "line_number": 296,
+                  "text": "            set(evidence_reference_ids)"
+                },
+                {
+                  "line_number": 297,
+                  "text": "        )"
+                },
+                {
+                  "line_number": 298,
+                  "text": "    )"
+                },
+                {
+                  "line_number": 299,
+                  "text": ""
+                },
+                {
+                  "line_number": 300,
+                  "text": "    question = _question_text_for_conflict("
+                },
+                {
+                  "line_number": 301,
+                  "text": "        relation=relation,"
+                },
+                {
+                  "line_number": 302,
+                  "text": "        object_id=object_id,"
+                },
+                {
+                  "line_number": 303,
+                  "text": "    )"
+                },
+                {
+                  "line_number": 304,
+                  "text": ""
+                },
+                {
+                  "line_number": 305,
+                  "text": "    payload = {"
+                },
+                {
+                  "line_number": 306,
+                  "text": "        \"assertion_ids\": relationship.assertion_ids,"
+                },
+                {
+                  "line_number": 307,
+                  "text": "        \"evidence_reference_ids\": ("
+                },
+                {
+                  "line_number": 308,
+                  "text": "            canonical_evidence_reference_ids"
+                },
+                {
+                  "line_number": 309,
+                  "text": "        ),"
+                },
+                {
+                  "line_number": 310,
+                  "text": "        \"question\": question,"
+                },
+                {
+                  "line_number": 311,
+                  "text": "        \"relationship_id\": relationship.relationship_id,"
+                },
+                {
+                  "line_number": 312,
+                  "text": "    }"
+                },
+                {
+                  "line_number": 313,
+                  "text": ""
+                },
+                {
+                  "line_number": 314,
+                  "text": "    encoded = json.dumps("
+                },
+                {
+                  "line_number": 315,
+                  "text": "        payload,"
+                },
+                {
+                  "line_number": 316,
+                  "text": "        sort_keys=True,"
+                },
+                {
+                  "line_number": 317,
+                  "text": "        separators=(\",\", \":\"),"
+                },
+                {
+                  "line_number": 318,
+                  "text": "    ).encode(\"utf-8\")"
+                },
+                {
+                  "line_number": 319,
+                  "text": ""
+                },
+                {
+                  "line_number": 320,
+                  "text": "    question_id = ("
+                },
+                {
+                  "line_number": 321,
+                  "text": "        \"world-model-open-question:\""
+                },
+                {
+                  "line_number": 322,
+                  "text": "        + hashlib.sha256(encoded).hexdigest()"
+                },
+                {
+                  "line_number": 323,
+                  "text": "    )"
+                },
+                {
+                  "line_number": 324,
+                  "text": ""
+                },
+                {
+                  "line_number": 325,
+                  "text": "    return WorldModelOpenQuestion("
+                },
+                {
+                  "line_number": 326,
+                  "text": "        question=question,"
+                },
+                {
+                  "line_number": 327,
+                  "text": "        relationship_id=("
+                },
+                {
+                  "line_number": 328,
+                  "text": "            relationship.relationship_id"
+                },
+                {
+                  "line_number": 329,
+                  "text": "        ),"
+                },
+                {
+                  "line_number": 330,
+                  "text": "        assertion_ids=relationship.assertion_ids,"
+                },
+                {
+                  "line_number": 331,
+                  "text": "        evidence_reference_ids=("
+                },
+                {
+                  "line_number": 332,
+                  "text": "            canonical_evidence_reference_ids"
+                },
+                {
+                  "line_number": 333,
+                  "text": "        ),"
+                },
+                {
+                  "line_number": 334,
+                  "text": "        question_id=question_id,"
+                },
+                {
+                  "line_number": 335,
+                  "text": "    )"
+                },
+                {
+                  "line_number": 336,
+                  "text": ""
+                },
+                {
+                  "line_number": 337,
+                  "text": ""
+                },
+                {
+                  "line_number": 338,
+                  "text": "@dataclass("
+                },
+                {
+                  "line_number": 339,
+                  "text": "    frozen=True,"
+                },
+                {
+                  "line_number": 340,
+                  "text": "    slots=True,"
+                },
+                {
+                  "line_number": 341,
+                  "text": ")"
+                },
+                {
+                  "line_number": 342,
+                  "text": "class WorldModelRelationshipAnalysis:"
+                },
+                {
+                  "line_number": 343,
+                  "text": "    relationships: tuple[WorldModelRelationship, ...]"
+                },
+                {
+                  "line_number": 344,
+                  "text": "    supersessions: tuple[WorldModelSupersession, ...] = ()"
+                },
+                {
+                  "line_number": 345,
+                  "text": "    open_questions: tuple[WorldModelOpenQuestion, ...] = ()"
+                },
+                {
+                  "line_number": 346,
+                  "text": ""
+                },
+                {
+                  "line_number": 347,
+                  "text": ""
+                },
+                {
+                  "line_number": 348,
+                  "text": "def _roots_for_assertion("
+                },
+                {
+                  "line_number": 349,
+                  "text": "    *,"
+                },
+                {
+                  "line_number": 350,
+                  "text": "    assertion,"
+                },
+                {
+                  "line_number": 351,
+                  "text": "    claims_by_id,"
+                },
+                {
+                  "line_number": 352,
+                  "text": "    evidence_roots: Mapping[str, Set[str]] | None,"
+                },
+                {
+                  "line_number": 353,
+                  "text": ") -> frozenset[str] | None:"
+                },
+                {
+                  "line_number": 354,
+                  "text": "    if evidence_roots is None:"
+                },
+                {
+                  "line_number": 355,
+                  "text": "        return None"
+                },
+                {
+                  "line_number": 356,
+                  "text": ""
+                },
+                {
+                  "line_number": 357,
+                  "text": "    claim = claims_by_id["
+                },
+                {
+                  "line_number": 358,
+                  "text": "        assertion.claim_id"
+                },
+                {
+                  "line_number": 359,
+                  "text": "    ]"
+                },
+                {
+                  "line_number": 360,
+                  "text": ""
+                },
+                {
+                  "line_number": 361,
+                  "text": "    roots: set[str] = set()"
+                },
+                {
+                  "line_number": 362,
+                  "text": ""
+                },
+                {
+                  "line_number": 363,
+                  "text": "    for reference in claim.evidence:"
+                },
+                {
+                  "line_number": 364,
+                  "text": "        reference_roots = evidence_roots.get("
+                },
+                {
+                  "line_number": 365,
+                  "text": "            reference.evidence_id"
+                },
+                {
+                  "line_number": 366,
+                  "text": "        )"
+                },
+                {
+                  "line_number": 367,
+                  "text": ""
+                },
+                {
+                  "line_number": 368,
+                  "text": "        if not reference_roots:"
+                },
+                {
+                  "line_number": 369,
+                  "text": "            return None"
+                },
+                {
+                  "line_number": 370,
+                  "text": ""
+                },
+                {
+                  "line_number": 371,
+                  "text": "        roots.update("
+                }
+              ],
+              "path": "src/horizon/world_model/reconciliation.py",
+              "start_line": 1
+            }
+          },
+          {
+            "canonical_payload_bytes": 18979,
+            "canonical_payload_sha256": "sha256:81302ebc587302f3e4080a6f7904bcbed5c551d1261642a7d3e02010f61bba92",
+            "evidence_id": "investigation-source-observation:8d04604e99465ae1b496b2bb2f2bc39140eece5627acef35f777445bcde33a1f",
+            "evidence_kind": "INVESTIGATION_SOURCE_OBSERVATION",
+            "source_excerpt": {
+              "end_line": 278,
+              "lines": [
+                {
+                  "line_number": 1,
+                  "text": "# HORIZON CONSTITUTION"
+                },
+                {
+                  "line_number": 2,
+                  "text": ""
+                },
+                {
+                  "line_number": 3,
+                  "text": "## Mission"
+                },
+                {
+                  "line_number": 4,
+                  "text": ""
+                },
+                {
+                  "line_number": 5,
+                  "text": "Horizon gives AI agents a continuously maintained understanding of software."
+                },
+                {
+                  "line_number": 6,
+                  "text": ""
+                },
+                {
+                  "line_number": 7,
+                  "text": "It must understand software at both:"
+                },
+                {
+                  "line_number": 8,
+                  "text": ""
+                },
+                {
+                  "line_number": 9,
+                  "text": "- code level"
+                },
+                {
+                  "line_number": 10,
+                  "text": "- architectural level"
+                },
+                {
+                  "line_number": 11,
+                  "text": ""
+                },
+                {
+                  "line_number": 12,
+                  "text": "and make that understanding available to agents through dynamically compiled"
+                },
+                {
+                  "line_number": 13,
+                  "text": "Horizon Cards."
+                },
+                {
+                  "line_number": 14,
+                  "text": ""
+                },
+                {
+                  "line_number": 15,
+                  "text": "Horizon supports two starting conditions:"
+                },
+                {
+                  "line_number": 16,
+                  "text": ""
+                },
+                {
+                  "line_number": 17,
+                  "text": "### Greenfield"
+                },
+                {
+                  "line_number": 18,
+                  "text": ""
+                },
+                {
+                  "line_number": 19,
+                  "text": "Horizon is present while software is created."
+                },
+                {
+                  "line_number": 20,
+                  "text": ""
+                },
+                {
+                  "line_number": 21,
+                  "text": "It captures:"
+                },
+                {
+                  "line_number": 22,
+                  "text": ""
+                },
+                {
+                  "line_number": 23,
+                  "text": "- requirements"
+                },
+                {
+                  "line_number": 24,
+                  "text": "- architectural decisions"
+                },
+                {
+                  "line_number": 25,
+                  "text": "- rejected alternatives"
+                },
+                {
+                  "line_number": 26,
+                  "text": "- responsibilities"
+                },
+                {
+                  "line_number": 27,
+                  "text": "- ownership"
+                },
+                {
+                  "line_number": 28,
+                  "text": "- constraints"
+                },
+                {
+                  "line_number": 29,
+                  "text": "- invariants"
+                },
+                {
+                  "line_number": 30,
+                  "text": "- implementation changes"
+                },
+                {
+                  "line_number": 31,
+                  "text": "- tests"
+                },
+                {
+                  "line_number": 32,
+                  "text": "- runtime behavior"
+                },
+                {
+                  "line_number": 33,
+                  "text": ""
+                },
+                {
+                  "line_number": 34,
+                  "text": "It then continuously compares intended architecture with the software that"
+                },
+                {
+                  "line_number": 35,
+                  "text": "actually exists."
+                },
+                {
+                  "line_number": 36,
+                  "text": ""
+                },
+                {
+                  "line_number": 37,
+                  "text": "### Brownfield"
+                },
+                {
+                  "line_number": 38,
+                  "text": ""
+                },
+                {
+                  "line_number": 39,
+                  "text": "Horizon enters software whose architecture, decisions, or intent may be"
+                },
+                {
+                  "line_number": 40,
+                  "text": "missing, incomplete, stale, or undocumented."
+                },
+                {
+                  "line_number": 41,
+                  "text": ""
+                },
+                {
+                  "line_number": 42,
+                  "text": "It reconstructs the software world model using available evidence and active"
+                },
+                {
+                  "line_number": 43,
+                  "text": "investigation."
+                },
+                {
+                  "line_number": 44,
+                  "text": ""
+                },
+                {
+                  "line_number": 45,
+                  "text": "---"
+                },
+                {
+                  "line_number": 46,
+                  "text": ""
+                },
+                {
+                  "line_number": 47,
+                  "text": "## 1. The World Model Is The Product"
+                },
+                {
+                  "line_number": 48,
+                  "text": ""
+                },
+                {
+                  "line_number": 49,
+                  "text": "Horizon maintains a living model of the software system."
+                },
+                {
+                  "line_number": 50,
+                  "text": ""
+                },
+                {
+                  "line_number": 51,
+                  "text": "The model may contain concepts such as:"
+                },
+                {
+                  "line_number": 52,
+                  "text": ""
+                },
+                {
+                  "line_number": 53,
+                  "text": "- systems"
+                },
+                {
+                  "line_number": 54,
+                  "text": "- subsystems"
+                },
+                {
+                  "line_number": 55,
+                  "text": "- components"
+                },
+                {
+                  "line_number": 56,
+                  "text": "- capabilities"
+                },
+                {
+                  "line_number": 57,
+                  "text": "- responsibilities"
+                },
+                {
+                  "line_number": 58,
+                  "text": "- ownership"
+                },
+                {
+                  "line_number": 59,
+                  "text": "- dependencies"
+                },
+                {
+                  "line_number": 60,
+                  "text": "- APIs"
+                },
+                {
+                  "line_number": 61,
+                  "text": "- data"
+                },
+                {
+                  "line_number": 62,
+                  "text": "- state machines"
+                },
+                {
+                  "line_number": 63,
+                  "text": "- business rules"
+                },
+                {
+                  "line_number": 64,
+                  "text": "- invariants"
+                },
+                {
+                  "line_number": 65,
+                  "text": "- behaviors"
+                },
+                {
+                  "line_number": 66,
+                  "text": "- side effects"
+                },
+                {
+                  "line_number": 67,
+                  "text": "- decisions"
+                },
+                {
+                  "line_number": 68,
+                  "text": "- change history"
+                },
+                {
+                  "line_number": 69,
+                  "text": "- failure modes"
+                },
+                {
+                  "line_number": 70,
+                  "text": ""
+                },
+                {
+                  "line_number": 71,
+                  "text": "Files and symbols are evidence about this world."
+                },
+                {
+                  "line_number": 72,
+                  "text": ""
+                },
+                {
+                  "line_number": 73,
+                  "text": "They are not themselves the complete world model."
+                },
+                {
+                  "line_number": 74,
+                  "text": ""
+                },
+                {
+                  "line_number": 75,
+                  "text": "---"
+                },
+                {
+                  "line_number": 76,
+                  "text": ""
+                },
+                {
+                  "line_number": 77,
+                  "text": "## 2. Cards Are Views, Not Truth Storage"
+                },
+                {
+                  "line_number": 78,
+                  "text": ""
+                },
+                {
+                  "line_number": 79,
+                  "text": "Horizon Cards are compiled from the current world model."
+                },
+                {
+                  "line_number": 80,
+                  "text": ""
+                },
+                {
+                  "line_number": 81,
+                  "text": "Cards exist to give AI agents the minimum high-value context required to"
+                },
+                {
+                  "line_number": 82,
+                  "text": "reason correctly about a task."
+                },
+                {
+                  "line_number": 83,
+                  "text": ""
+                },
+                {
+                  "line_number": 84,
+                  "text": "Possible views include:"
+                },
+                {
+                  "line_number": 85,
+                  "text": ""
+                },
+                {
+                  "line_number": 86,
+                  "text": "- System Card"
+                },
+                {
+                  "line_number": 87,
+                  "text": "- Subsystem Card"
+                },
+                {
+                  "line_number": 88,
+                  "text": "- Component Card"
+                },
+                {
+                  "line_number": 89,
+                  "text": "- File Card"
+                },
+                {
+                  "line_number": 90,
+                  "text": "- Symbol Card"
+                },
+                {
+                  "line_number": 91,
+                  "text": "- Invariant Card"
+                },
+                {
+                  "line_number": 92,
+                  "text": "- Decision Card"
+                },
+                {
+                  "line_number": 93,
+                  "text": "- Change Card"
+                },
+                {
+                  "line_number": 94,
+                  "text": "- Task Card"
+                },
+                {
+                  "line_number": 95,
+                  "text": ""
+                },
+                {
+                  "line_number": 96,
+                  "text": "A card must never become an independent stale copy of reality."
+                },
+                {
+                  "line_number": 97,
+                  "text": ""
+                },
+                {
+                  "line_number": 98,
+                  "text": "Update the world model; regenerate the card."
+                },
+                {
+                  "line_number": 99,
+                  "text": ""
+                },
+                {
+                  "line_number": 100,
+                  "text": "---"
+                },
+                {
+                  "line_number": 101,
+                  "text": ""
+                },
+                {
+                  "line_number": 102,
+                  "text": "## 3. Horizon Has Epistemic States"
+                },
+                {
+                  "line_number": 103,
+                  "text": ""
+                },
+                {
+                  "line_number": 104,
+                  "text": "Horizon does not force every conclusion into TRUE or UNKNOWN."
+                },
+                {
+                  "line_number": 105,
+                  "text": ""
+                },
+                {
+                  "line_number": 106,
+                  "text": "A claim may be:"
+                },
+                {
+                  "line_number": 107,
+                  "text": ""
+                },
+                {
+                  "line_number": 108,
+                  "text": "### PROVEN"
+                },
+                {
+                  "line_number": 109,
+                  "text": ""
+                },
+                {
+                  "line_number": 110,
+                  "text": "Available evidence satisfies the claim's proof requirements."
+                },
+                {
+                  "line_number": 111,
+                  "text": ""
+                },
+                {
+                  "line_number": 112,
+                  "text": "### SUPPORTED_HYPOTHESIS"
+                },
+                {
+                  "line_number": 113,
+                  "text": ""
+                },
+                {
+                  "line_number": 114,
+                  "text": "There is meaningful evidence supporting the claim, but proof is incomplete."
+                },
+                {
+                  "line_number": 115,
+                  "text": ""
+                },
+                {
+                  "line_number": 116,
+                  "text": "### DISPUTED"
+                },
+                {
+                  "line_number": 117,
+                  "text": ""
+                },
+                {
+                  "line_number": 118,
+                  "text": "Relevant evidence supports incompatible conclusions."
+                },
+                {
+                  "line_number": 119,
+                  "text": ""
+                },
+                {
+                  "line_number": 120,
+                  "text": "### UNKNOWN"
+                },
+                {
+                  "line_number": 121,
+                  "text": ""
+                },
+                {
+                  "line_number": 122,
+                  "text": "Horizon does not currently have enough information for a useful conclusion."
+                },
+                {
+                  "line_number": 123,
+                  "text": ""
+                },
+                {
+                  "line_number": 124,
+                  "text": "Hypotheses are allowed."
+                },
+                {
+                  "line_number": 125,
+                  "text": ""
+                },
+                {
+                  "line_number": 126,
+                  "text": "Pretending hypotheses are proven facts is not."
+                },
+                {
+                  "line_number": 127,
+                  "text": ""
+                },
+                {
+                  "line_number": 128,
+                  "text": "---"
+                },
+                {
+                  "line_number": 129,
+                  "text": ""
+                },
+                {
+                  "line_number": 130,
+                  "text": "## 4. The Model May Reason, But It Does Not Own Truth"
+                },
+                {
+                  "line_number": 131,
+                  "text": ""
+                },
+                {
+                  "line_number": 132,
+                  "text": "AI models may:"
+                },
+                {
+                  "line_number": 133,
+                  "text": ""
+                },
+                {
+                  "line_number": 134,
+                  "text": "- propose architecture"
+                },
+                {
+                  "line_number": 135,
+                  "text": "- identify patterns"
+                },
+                {
+                  "line_number": 136,
+                  "text": "- generate hypotheses"
+                },
+                {
+                  "line_number": 137,
+                  "text": "- rank explanations"
+                },
+                {
+                  "line_number": 138,
+                  "text": "- choose investigations"
+                },
+                {
+                  "line_number": 139,
+                  "text": "- interpret evidence"
+                },
+                {
+                  "line_number": 140,
+                  "text": "- discover possible relationships"
+                },
+                {
+                  "line_number": 141,
+                  "text": ""
+                },
+                {
+                  "line_number": 142,
+                  "text": "They may not silently promote their own output into proven system truth."
+                },
+                {
+                  "line_number": 143,
+                  "text": ""
+                },
+                {
+                  "line_number": 144,
+                  "text": "Determinism belongs primarily in Horizon's trust kernel:"
+                },
+                {
+                  "line_number": 145,
+                  "text": ""
+                },
+                {
+                  "line_number": 146,
+                  "text": "- evidence identity"
+                },
+                {
+                  "line_number": 147,
+                  "text": "- provenance"
+                },
+                {
+                  "line_number": 148,
+                  "text": "- snapshots"
+                },
+                {
+                  "line_number": 149,
+                  "text": "- proof dependencies"
+                },
+                {
+                  "line_number": 150,
+                  "text": "- coverage"
+                },
+                {
+                  "line_number": 151,
+                  "text": "- freshness"
+                },
+                {
+                  "line_number": 152,
+                  "text": "- contradiction tracking"
+                },
+                {
+                  "line_number": 153,
+                  "text": ""
+                },
+                {
+                  "line_number": 154,
+                  "text": "Intelligence above that kernel may be probabilistic and exploratory."
+                },
+                {
+                  "line_number": 155,
+                  "text": ""
+                },
+                {
+                  "line_number": 156,
+                  "text": "---"
+                },
+                {
+                  "line_number": 157,
+                  "text": ""
+                },
+                {
+                  "line_number": 158,
+                  "text": "## 5. Horizon Must Investigate"
+                },
+                {
+                  "line_number": 159,
+                  "text": ""
+                },
+                {
+                  "line_number": 160,
+                  "text": "Horizon is not limited to passive indexing."
+                },
+                {
+                  "line_number": 161,
+                  "text": ""
+                },
+                {
+                  "line_number": 162,
+                  "text": "When it cannot answer an important question, it should determine:"
+                },
+                {
+                  "line_number": 163,
+                  "text": ""
+                },
+                {
+                  "line_number": 164,
+                  "text": "1. what exact information is missing"
+                },
+                {
+                  "line_number": 165,
+                  "text": "2. what evidence could reduce that uncertainty"
+                },
+                {
+                  "line_number": 166,
+                  "text": "3. what investigation can obtain that evidence"
+                },
+                {
+                  "line_number": 167,
+                  "text": ""
+                },
+                {
+                  "line_number": 168,
+                  "text": "Possible investigations include:"
+                },
+                {
+                  "line_number": 169,
+                  "text": ""
+                },
+                {
+                  "line_number": 170,
+                  "text": "- inspect source"
+                },
+                {
+                  "line_number": 171,
+                  "text": "- inspect compiler/type information"
+                },
+                {
+                  "line_number": 172,
+                  "text": "- inspect tests"
+                },
+                {
+                  "line_number": 173,
+                  "text": "- inspect Git history"
+                },
+                {
+                  "line_number": 174,
+                  "text": "- inspect documentation"
+                },
+                {
+                  "line_number": 175,
+                  "text": "- inspect configuration"
+                },
+                {
+                  "line_number": 176,
+                  "text": "- trace runtime execution"
+                },
+                {
+                  "line_number": 177,
+                  "text": "- run targeted tests"
+                },
+                {
+                  "line_number": 178,
+                  "text": "- instrument behavior"
+                },
+                {
+                  "line_number": 179,
+                  "text": "- inspect persistence"
+                },
+                {
+                  "line_number": 180,
+                  "text": "- inspect network activity"
+                },
+                {
+                  "line_number": 181,
+                  "text": "- create a reversible experiment"
+                },
+                {
+                  "line_number": 182,
+                  "text": "- test a counterfactual"
+                },
+                {
+                  "line_number": 183,
+                  "text": ""
+                },
+                {
+                  "line_number": 184,
+                  "text": "The fundamental loop is:"
+                },
+                {
+                  "line_number": 185,
+                  "text": ""
+                },
+                {
+                  "line_number": 186,
+                  "text": "QUESTION"
+                },
+                {
+                  "line_number": 187,
+                  "text": "\u2192 CURRENT KNOWLEDGE"
+                },
+                {
+                  "line_number": 188,
+                  "text": "\u2192 KNOWLEDGE GAP"
+                },
+                {
+                  "line_number": 189,
+                  "text": "\u2192 INVESTIGATION"
+                },
+                {
+                  "line_number": 190,
+                  "text": "\u2192 NEW EVIDENCE"
+                },
+                {
+                  "line_number": 191,
+                  "text": "\u2192 UPDATED WORLD MODEL"
+                },
+                {
+                  "line_number": 192,
+                  "text": "\u2192 ANSWER"
+                },
+                {
+                  "line_number": 193,
+                  "text": ""
+                },
+                {
+                  "line_number": 194,
+                  "text": "---"
+                },
+                {
+                  "line_number": 195,
+                  "text": ""
+                },
+                {
+                  "line_number": 196,
+                  "text": "## 6. Greenfield Intent Is First-Class Evidence"
+                },
+                {
+                  "line_number": 197,
+                  "text": ""
+                },
+                {
+                  "line_number": 198,
+                  "text": "For greenfield projects, Horizon must preserve why software was created."
+                },
+                {
+                  "line_number": 199,
+                  "text": ""
+                },
+                {
+                  "line_number": 200,
+                  "text": "Declared intent includes:"
+                },
+                {
+                  "line_number": 201,
+                  "text": ""
+                },
+                {
+                  "line_number": 202,
+                  "text": "- requirement"
+                },
+                {
+                  "line_number": 203,
+                  "text": "- architectural decision"
+                },
+                {
+                  "line_number": 204,
+                  "text": "- intended responsibility"
+                },
+                {
+                  "line_number": 205,
+                  "text": "- intended ownership"
+                },
+                {
+                  "line_number": 206,
+                  "text": "- constraint"
+                },
+                {
+                  "line_number": 207,
+                  "text": "- invariant"
+                },
+                {
+                  "line_number": 208,
+                  "text": "- rejected alternative"
+                },
+                {
+                  "line_number": 209,
+                  "text": ""
+                },
+                {
+                  "line_number": 210,
+                  "text": "Horizon must later be able to compare:"
+                },
+                {
+                  "line_number": 211,
+                  "text": ""
+                },
+                {
+                  "line_number": 212,
+                  "text": "DECLARED INTENT"
+                },
+                {
+                  "line_number": 213,
+                  "text": "vs"
+                },
+                {
+                  "line_number": 214,
+                  "text": "CURRENT IMPLEMENTATION"
+                },
+                {
+                  "line_number": 215,
+                  "text": "vs"
+                },
+                {
+                  "line_number": 216,
+                  "text": "OBSERVED BEHAVIOR"
+                },
+                {
+                  "line_number": 217,
+                  "text": ""
+                },
+                {
+                  "line_number": 218,
+                  "text": "This allows architectural drift and contradiction to be detected."
+                },
+                {
+                  "line_number": 219,
+                  "text": ""
+                },
+                {
+                  "line_number": 220,
+                  "text": "---"
+                },
+                {
+                  "line_number": 221,
+                  "text": ""
+                },
+                {
+                  "line_number": 222,
+                  "text": "## 7. Brownfield Architecture Is Discovered, Not Assumed"
+                },
+                {
+                  "line_number": 223,
+                  "text": ""
+                },
+                {
+                  "line_number": 224,
+                  "text": "For brownfield projects, documentation and names are evidence, not truth."
+                },
+                {
+                  "line_number": 225,
+                  "text": ""
+                },
+                {
+                  "line_number": 226,
+                  "text": "Horizon reconstructs understanding from multiple sources and keeps uncertainty"
+                },
+                {
+                  "line_number": 227,
+                  "text": "explicit."
+                },
+                {
+                  "line_number": 228,
+                  "text": ""
+                },
+                {
+                  "line_number": 229,
+                  "text": "It must be able to distinguish:"
+                },
+                {
+                  "line_number": 230,
+                  "text": ""
+                },
+                {
+                  "line_number": 231,
+                  "text": "\"This appears to own billing\""
+                },
+                {
+                  "line_number": 232,
+                  "text": ""
+                },
+                {
+                  "line_number": 233,
+                  "text": "from:"
+                },
+                {
+                  "line_number": 234,
+                  "text": ""
+                },
+                {
+                  "line_number": 235,
+                  "text": "\"This has been established to own billing.\""
+                },
+                {
+                  "line_number": 236,
+                  "text": ""
+                },
+                {
+                  "line_number": 237,
+                  "text": "---"
+                },
+                {
+                  "line_number": 238,
+                  "text": ""
+                },
+                {
+                  "line_number": 239,
+                  "text": "## 8. Architecture Must Be Understandable Above Code"
+                },
+                {
+                  "line_number": 240,
+                  "text": ""
+                },
+                {
+                  "line_number": 241,
+                  "text": "Horizon should eventually answer questions such as:"
+                },
+                {
+                  "line_number": 242,
+                  "text": ""
+                },
+                {
+                  "line_number": 243,
+                  "text": "- What does this system do?"
+                },
+                {
+                  "line_number": 244,
+                  "text": "- What are its major subsystems?"
+                },
+                {
+                  "line_number": 245,
+                  "text": "- Which component owns this responsibility?"
+                },
+                {
+                  "line_number": 246,
+                  "text": "- Where is a decision actually made?"
+                },
+                {
+                  "line_number": 247,
+                  "text": "- What state does this component own?"
+                },
+                {
+                  "line_number": 248,
+                  "text": "- What invariants must remain true?"
+                },
+                {
+                  "line_number": 249,
+                  "text": "- What happens end-to-end during this operation?"
+                },
+                {
+                  "line_number": 250,
+                  "text": "- Why does this abstraction exist?"
+                },
+                {
+                  "line_number": 251,
+                  "text": "- What would break if this changed?"
+                },
+                {
+                  "line_number": 252,
+                  "text": "- Which parts of this answer are not proven?"
+                },
+                {
+                  "line_number": 253,
+                  "text": ""
+                },
+                {
+                  "line_number": 254,
+                  "text": "A list of files, imports, or calls is not sufficient architectural"
+                },
+                {
+                  "line_number": 255,
+                  "text": "understanding."
+                },
+                {
+                  "line_number": 256,
+                  "text": ""
+                },
+                {
+                  "line_number": 257,
+                  "text": "---"
+                },
+                {
+                  "line_number": 258,
+                  "text": ""
+                },
+                {
+                  "line_number": 259,
+                  "text": "## 9. Real Problems Drive Horizon's Architecture"
+                },
+                {
+                  "line_number": 260,
+                  "text": ""
+                },
+                {
+                  "line_number": 261,
+                  "text": "Horizon will not be built from a predetermined checklist of analyzers."
+                },
+                {
+                  "line_number": 262,
+                  "text": ""
+                },
+                {
+                  "line_number": 263,
+                  "text": "We will select real software and ask difficult understanding questions."
+                },
+                {
+                  "line_number": 264,
+                  "text": ""
+                },
+                {
+                  "line_number": 265,
+                  "text": "When Horizon fails, we determine why."
+                },
+                {
+                  "line_number": 266,
+                  "text": ""
+                },
+                {
+                  "line_number": 267,
+                  "text": "The missing capability becomes the next thing we build."
+                },
+                {
+                  "line_number": 268,
+                  "text": ""
+                },
+                {
+                  "line_number": 269,
+                  "text": "Do not build a capability merely because sophisticated static-analysis systems"
+                },
+                {
+                  "line_number": 270,
+                  "text": "usually contain it."
+                },
+                {
+                  "line_number": 271,
+                  "text": ""
+                },
+                {
+                  "line_number": 272,
+                  "text": "---"
+                },
+                {
+                  "line_number": 273,
+                  "text": ""
+                },
+                {
+                  "line_number": 274,
+                  "text": "## 10. Generalization Is Mandatory"
+                },
+                {
+                  "line_number": 275,
+                  "text": ""
+                },
+                {
+                  "line_number": 276,
+                  "text": "Project-specific hardcoding is failure."
+                },
+                {
+                  "line_number": 277,
+                  "text": ""
+                },
+                {
+                  "line_number": 278,
+                  "text": "A capability learned while understanding one project must be tested against an"
+                }
+              ],
+              "path": "CONSTITUTION.md",
+              "start_line": 1
+            }
+          },
+          {
+            "canonical_payload_bytes": 23968,
+            "canonical_payload_sha256": "sha256:fad73efc40c007c9fd36a3695c83e04fd73390b50ebc2b09dd2c3dbf4ecd0e65",
+            "evidence_id": "investigation-source-observation:a1dc234f3e1a4c6f8ca9f036e45b65ad27cc1d75ce2f8409c406b125cbf72a64",
+            "evidence_kind": "INVESTIGATION_SOURCE_OBSERVATION",
+            "source_excerpt": {
+              "end_line": 381,
+              "lines": [
+                {
+                  "line_number": 1,
+                  "text": "from __future__ import annotations"
+                },
+                {
+                  "line_number": 2,
+                  "text": ""
+                },
+                {
+                  "line_number": 3,
+                  "text": "import subprocess"
+                },
+                {
+                  "line_number": 4,
+                  "text": ""
+                },
+                {
+                  "line_number": 5,
+                  "text": "from pathlib import Path"
+                },
+                {
+                  "line_number": 6,
+                  "text": ""
+                },
+                {
+                  "line_number": 7,
+                  "text": "from horizon.cache.content import ("
+                },
+                {
+                  "line_number": 8,
+                  "text": "    ContentAddressedExtractionCache,"
+                },
+                {
+                  "line_number": 9,
+                  "text": ")"
+                },
+                {
+                  "line_number": 10,
+                  "text": "from horizon.cards.repository import ("
+                },
+                {
+                  "line_number": 11,
+                  "text": "    RepositoryCardPhase,"
+                },
+                {
+                  "line_number": 12,
+                  "text": "    RepositorySemanticSection,"
+                },
+                {
+                  "line_number": 13,
+                  "text": "    build_repository_card,"
+                },
+                {
+                  "line_number": 14,
+                  "text": "    render_repository_card,"
+                },
+                {
+                  "line_number": 15,
+                  "text": ")"
+                },
+                {
+                  "line_number": 16,
+                  "text": "from horizon.claims.epistemic import ("
+                },
+                {
+                  "line_number": 17,
+                  "text": "    EpistemicStatus,"
+                },
+                {
+                  "line_number": 18,
+                  "text": ")"
+                },
+                {
+                  "line_number": 19,
+                  "text": "from horizon.repository.git_observation import ("
+                },
+                {
+                  "line_number": 20,
+                  "text": "    observe_git_commit,"
+                },
+                {
+                  "line_number": 21,
+                  "text": ")"
+                },
+                {
+                  "line_number": 22,
+                  "text": "from horizon.repository.python_index import ("
+                },
+                {
+                  "line_number": 23,
+                  "text": "    index_python_repository,"
+                },
+                {
+                  "line_number": 24,
+                  "text": ")"
+                },
+                {
+                  "line_number": 25,
+                  "text": "from horizon.repository.python_progressive import ("
+                },
+                {
+                  "line_number": 26,
+                  "text": "    execute_python_structure_batch,"
+                },
+                {
+                  "line_number": 27,
+                  "text": "    plan_python_structure_extraction,"
+                },
+                {
+                  "line_number": 28,
+                  "text": ")"
+                },
+                {
+                  "line_number": 29,
+                  "text": ""
+                },
+                {
+                  "line_number": 30,
+                  "text": ""
+                },
+                {
+                  "line_number": 31,
+                  "text": "def git("
+                },
+                {
+                  "line_number": 32,
+                  "text": "    repository: Path,"
+                },
+                {
+                  "line_number": 33,
+                  "text": "    *args: str,"
+                },
+                {
+                  "line_number": 34,
+                  "text": ") -> str:"
+                },
+                {
+                  "line_number": 35,
+                  "text": "    completed = subprocess.run("
+                },
+                {
+                  "line_number": 36,
+                  "text": "        ["
+                },
+                {
+                  "line_number": 37,
+                  "text": "            \"git\","
+                },
+                {
+                  "line_number": 38,
+                  "text": "            \"-C\","
+                },
+                {
+                  "line_number": 39,
+                  "text": "            str(repository),"
+                },
+                {
+                  "line_number": 40,
+                  "text": "            *args,"
+                },
+                {
+                  "line_number": 41,
+                  "text": "        ],"
+                },
+                {
+                  "line_number": 42,
+                  "text": "        check=True,"
+                },
+                {
+                  "line_number": 43,
+                  "text": "        stdout=subprocess.PIPE,"
+                },
+                {
+                  "line_number": 44,
+                  "text": "        stderr=subprocess.PIPE,"
+                },
+                {
+                  "line_number": 45,
+                  "text": "        text=True,"
+                },
+                {
+                  "line_number": 46,
+                  "text": "    )"
+                },
+                {
+                  "line_number": 47,
+                  "text": ""
+                },
+                {
+                  "line_number": 48,
+                  "text": "    return completed.stdout.strip()"
+                },
+                {
+                  "line_number": 49,
+                  "text": ""
+                },
+                {
+                  "line_number": 50,
+                  "text": ""
+                },
+                {
+                  "line_number": 51,
+                  "text": "def create_repository("
+                },
+                {
+                  "line_number": 52,
+                  "text": "    tmp_path: Path,"
+                },
+                {
+                  "line_number": 53,
+                  "text": ") -> Path:"
+                },
+                {
+                  "line_number": 54,
+                  "text": "    repository = ("
+                },
+                {
+                  "line_number": 55,
+                  "text": "        tmp_path"
+                },
+                {
+                  "line_number": 56,
+                  "text": "        / \"repo\""
+                },
+                {
+                  "line_number": 57,
+                  "text": "    )"
+                },
+                {
+                  "line_number": 58,
+                  "text": ""
+                },
+                {
+                  "line_number": 59,
+                  "text": "    repository.mkdir()"
+                },
+                {
+                  "line_number": 60,
+                  "text": ""
+                },
+                {
+                  "line_number": 61,
+                  "text": "    git("
+                },
+                {
+                  "line_number": 62,
+                  "text": "        repository,"
+                },
+                {
+                  "line_number": 63,
+                  "text": "        \"init\","
+                },
+                {
+                  "line_number": 64,
+                  "text": "        \"-q\","
+                },
+                {
+                  "line_number": 65,
+                  "text": "        \"-b\","
+                },
+                {
+                  "line_number": 66,
+                  "text": "        \"main\","
+                },
+                {
+                  "line_number": 67,
+                  "text": "    )"
+                },
+                {
+                  "line_number": 68,
+                  "text": ""
+                },
+                {
+                  "line_number": 69,
+                  "text": "    git("
+                },
+                {
+                  "line_number": 70,
+                  "text": "        repository,"
+                },
+                {
+                  "line_number": 71,
+                  "text": "        \"config\","
+                },
+                {
+                  "line_number": 72,
+                  "text": "        \"user.name\","
+                },
+                {
+                  "line_number": 73,
+                  "text": "        \"Horizon Test\","
+                },
+                {
+                  "line_number": 74,
+                  "text": "    )"
+                },
+                {
+                  "line_number": 75,
+                  "text": ""
+                },
+                {
+                  "line_number": 76,
+                  "text": "    git("
+                },
+                {
+                  "line_number": 77,
+                  "text": "        repository,"
+                },
+                {
+                  "line_number": 78,
+                  "text": "        \"config\","
+                },
+                {
+                  "line_number": 79,
+                  "text": "        \"user.email\","
+                },
+                {
+                  "line_number": 80,
+                  "text": "        \"horizon@example.invalid\","
+                },
+                {
+                  "line_number": 81,
+                  "text": "    )"
+                },
+                {
+                  "line_number": 82,
+                  "text": ""
+                },
+                {
+                  "line_number": 83,
+                  "text": "    return repository"
+                },
+                {
+                  "line_number": 84,
+                  "text": ""
+                },
+                {
+                  "line_number": 85,
+                  "text": ""
+                },
+                {
+                  "line_number": 86,
+                  "text": "def commit_all("
+                },
+                {
+                  "line_number": 87,
+                  "text": "    repository: Path,"
+                },
+                {
+                  "line_number": 88,
+                  "text": ") -> str:"
+                },
+                {
+                  "line_number": 89,
+                  "text": "    git("
+                },
+                {
+                  "line_number": 90,
+                  "text": "        repository,"
+                },
+                {
+                  "line_number": 91,
+                  "text": "        \"add\","
+                },
+                {
+                  "line_number": 92,
+                  "text": "        \"-A\","
+                },
+                {
+                  "line_number": 93,
+                  "text": "    )"
+                },
+                {
+                  "line_number": 94,
+                  "text": ""
+                },
+                {
+                  "line_number": 95,
+                  "text": "    git("
+                },
+                {
+                  "line_number": 96,
+                  "text": "        repository,"
+                },
+                {
+                  "line_number": 97,
+                  "text": "        \"commit\","
+                },
+                {
+                  "line_number": 98,
+                  "text": "        \"-q\","
+                },
+                {
+                  "line_number": 99,
+                  "text": "        \"-m\","
+                },
+                {
+                  "line_number": 100,
+                  "text": "        \"fixture\","
+                },
+                {
+                  "line_number": 101,
+                  "text": "    )"
+                },
+                {
+                  "line_number": 102,
+                  "text": ""
+                },
+                {
+                  "line_number": 103,
+                  "text": "    return git("
+                },
+                {
+                  "line_number": 104,
+                  "text": "        repository,"
+                },
+                {
+                  "line_number": 105,
+                  "text": "        \"rev-parse\","
+                },
+                {
+                  "line_number": 106,
+                  "text": "        \"HEAD\","
+                },
+                {
+                  "line_number": 107,
+                  "text": "    )"
+                },
+                {
+                  "line_number": 108,
+                  "text": ""
+                },
+                {
+                  "line_number": 109,
+                  "text": ""
+                },
+                {
+                  "line_number": 110,
+                  "text": "def cache("
+                },
+                {
+                  "line_number": 111,
+                  "text": "    tmp_path: Path,"
+                },
+                {
+                  "line_number": 112,
+                  "text": ") -> ContentAddressedExtractionCache:"
+                },
+                {
+                  "line_number": 113,
+                  "text": "    return ("
+                },
+                {
+                  "line_number": 114,
+                  "text": "        ContentAddressedExtractionCache("
+                },
+                {
+                  "line_number": 115,
+                  "text": "            tmp_path"
+                },
+                {
+                  "line_number": 116,
+                  "text": "            / \"cache\""
+                },
+                {
+                  "line_number": 117,
+                  "text": "        )"
+                },
+                {
+                  "line_number": 118,
+                  "text": "    )"
+                },
+                {
+                  "line_number": 119,
+                  "text": ""
+                },
+                {
+                  "line_number": 120,
+                  "text": ""
+                },
+                {
+                  "line_number": 121,
+                  "text": "def test_card_is_available_from_index_without_parsing("
+                },
+                {
+                  "line_number": 122,
+                  "text": "    tmp_path: Path,"
+                },
+                {
+                  "line_number": 123,
+                  "text": ") -> None:"
+                },
+                {
+                  "line_number": 124,
+                  "text": "    repository = create_repository("
+                },
+                {
+                  "line_number": 125,
+                  "text": "        tmp_path"
+                },
+                {
+                  "line_number": 126,
+                  "text": "    )"
+                },
+                {
+                  "line_number": 127,
+                  "text": ""
+                },
+                {
+                  "line_number": 128,
+                  "text": "    ("
+                },
+                {
+                  "line_number": 129,
+                  "text": "        repository"
+                },
+                {
+                  "line_number": 130,
+                  "text": "        / \"good.py\""
+                },
+                {
+                  "line_number": 131,
+                  "text": "    ).write_text("
+                },
+                {
+                  "line_number": 132,
+                  "text": "        \"def good():\\n\""
+                },
+                {
+                  "line_number": 133,
+                  "text": "        \"    return 1\\n\""
+                },
+                {
+                  "line_number": 134,
+                  "text": "    )"
+                },
+                {
+                  "line_number": 135,
+                  "text": ""
+                },
+                {
+                  "line_number": 136,
+                  "text": "    # Deliberately invalid Python."
+                },
+                {
+                  "line_number": 137,
+                  "text": "    #"
+                },
+                {
+                  "line_number": 138,
+                  "text": "    # The instant Card must still appear because indexing does not"
+                },
+                {
+                  "line_number": 139,
+                  "text": "    # require structural parsing."
+                },
+                {
+                  "line_number": 140,
+                  "text": "    ("
+                },
+                {
+                  "line_number": 141,
+                  "text": "        repository"
+                },
+                {
+                  "line_number": 142,
+                  "text": "        / \"broken.py\""
+                },
+                {
+                  "line_number": 143,
+                  "text": "    ).write_text("
+                },
+                {
+                  "line_number": 144,
+                  "text": "        \"def broken(:\\n\""
+                },
+                {
+                  "line_number": 145,
+                  "text": "    )"
+                },
+                {
+                  "line_number": 146,
+                  "text": ""
+                },
+                {
+                  "line_number": 147,
+                  "text": "    commit = commit_all("
+                },
+                {
+                  "line_number": 148,
+                  "text": "        repository"
+                },
+                {
+                  "line_number": 149,
+                  "text": "    )"
+                },
+                {
+                  "line_number": 150,
+                  "text": ""
+                },
+                {
+                  "line_number": 151,
+                  "text": "    observation = observe_git_commit("
+                },
+                {
+                  "line_number": 152,
+                  "text": "        repository,"
+                },
+                {
+                  "line_number": 153,
+                  "text": "        commit,"
+                },
+                {
+                  "line_number": 154,
+                  "text": "    )"
+                },
+                {
+                  "line_number": 155,
+                  "text": ""
+                },
+                {
+                  "line_number": 156,
+                  "text": "    index = index_python_repository("
+                },
+                {
+                  "line_number": 157,
+                  "text": "        repository,"
+                },
+                {
+                  "line_number": 158,
+                  "text": "        observation,"
+                },
+                {
+                  "line_number": 159,
+                  "text": "        cache("
+                },
+                {
+                  "line_number": 160,
+                  "text": "            tmp_path"
+                },
+                {
+                  "line_number": 161,
+                  "text": "        ),"
+                },
+                {
+                  "line_number": 162,
+                  "text": "    )"
+                },
+                {
+                  "line_number": 163,
+                  "text": ""
+                },
+                {
+                  "line_number": 164,
+                  "text": "    card = build_repository_card("
+                },
+                {
+                  "line_number": 165,
+                  "text": "        index"
+                },
+                {
+                  "line_number": 166,
+                  "text": "    )"
+                },
+                {
+                  "line_number": 167,
+                  "text": ""
+                },
+                {
+                  "line_number": 168,
+                  "text": "    assert ("
+                },
+                {
+                  "line_number": 169,
+                  "text": "        card.tracked_python_file_count"
+                },
+                {
+                  "line_number": 170,
+                  "text": "        == 2"
+                },
+                {
+                  "line_number": 171,
+                  "text": "    )"
+                },
+                {
+                  "line_number": 172,
+                  "text": ""
+                },
+                {
+                  "line_number": 173,
+                  "text": "    assert ("
+                },
+                {
+                  "line_number": 174,
+                  "text": "        card.phase"
+                },
+                {
+                  "line_number": 175,
+                  "text": "        is RepositoryCardPhase.INDEXED"
+                },
+                {
+                  "line_number": 176,
+                  "text": "    )"
+                },
+                {
+                  "line_number": 177,
+                  "text": ""
+                },
+                {
+                  "line_number": 178,
+                  "text": "    assert ("
+                },
+                {
+                  "line_number": 179,
+                  "text": "        card.structure_cache_present_count"
+                },
+                {
+                  "line_number": 180,
+                  "text": "        == 0"
+                },
+                {
+                  "line_number": 181,
+                  "text": "    )"
+                },
+                {
+                  "line_number": 182,
+                  "text": ""
+                },
+                {
+                  "line_number": 183,
+                  "text": "    assert ("
+                },
+                {
+                  "line_number": 184,
+                  "text": "        card.structure_cache_missing_count"
+                },
+                {
+                  "line_number": 185,
+                  "text": "        == 2"
+                },
+                {
+                  "line_number": 186,
+                  "text": "    )"
+                },
+                {
+                  "line_number": 187,
+                  "text": ""
+                },
+                {
+                  "line_number": 188,
+                  "text": ""
+                },
+                {
+                  "line_number": 189,
+                  "text": "def test_instant_card_proves_only_deterministic_inventory("
+                },
+                {
+                  "line_number": 190,
+                  "text": "    tmp_path: Path,"
+                },
+                {
+                  "line_number": 191,
+                  "text": ") -> None:"
+                },
+                {
+                  "line_number": 192,
+                  "text": "    repository = create_repository("
+                },
+                {
+                  "line_number": 193,
+                  "text": "        tmp_path"
+                },
+                {
+                  "line_number": 194,
+                  "text": "    )"
+                },
+                {
+                  "line_number": 195,
+                  "text": ""
+                },
+                {
+                  "line_number": 196,
+                  "text": "    ("
+                },
+                {
+                  "line_number": 197,
+                  "text": "        repository"
+                },
+                {
+                  "line_number": 198,
+                  "text": "        / \"app.py\""
+                },
+                {
+                  "line_number": 199,
+                  "text": "    ).write_text("
+                },
+                {
+                  "line_number": 200,
+                  "text": "        \"def app():\\n\""
+                },
+                {
+                  "line_number": 201,
+                  "text": "        \"    return 1\\n\""
+                },
+                {
+                  "line_number": 202,
+                  "text": "    )"
+                },
+                {
+                  "line_number": 203,
+                  "text": ""
+                },
+                {
+                  "line_number": 204,
+                  "text": "    commit = commit_all("
+                },
+                {
+                  "line_number": 205,
+                  "text": "        repository"
+                },
+                {
+                  "line_number": 206,
+                  "text": "    )"
+                },
+                {
+                  "line_number": 207,
+                  "text": ""
+                },
+                {
+                  "line_number": 208,
+                  "text": "    observation = observe_git_commit("
+                },
+                {
+                  "line_number": 209,
+                  "text": "        repository,"
+                },
+                {
+                  "line_number": 210,
+                  "text": "        commit,"
+                },
+                {
+                  "line_number": 211,
+                  "text": "    )"
+                },
+                {
+                  "line_number": 212,
+                  "text": ""
+                },
+                {
+                  "line_number": 213,
+                  "text": "    index = index_python_repository("
+                },
+                {
+                  "line_number": 214,
+                  "text": "        repository,"
+                },
+                {
+                  "line_number": 215,
+                  "text": "        observation,"
+                },
+                {
+                  "line_number": 216,
+                  "text": "        cache("
+                },
+                {
+                  "line_number": 217,
+                  "text": "            tmp_path"
+                },
+                {
+                  "line_number": 218,
+                  "text": "        ),"
+                },
+                {
+                  "line_number": 219,
+                  "text": "    )"
+                },
+                {
+                  "line_number": 220,
+                  "text": ""
+                },
+                {
+                  "line_number": 221,
+                  "text": "    card = build_repository_card("
+                },
+                {
+                  "line_number": 222,
+                  "text": "        index"
+                },
+                {
+                  "line_number": 223,
+                  "text": "    )"
+                },
+                {
+                  "line_number": 224,
+                  "text": ""
+                },
+                {
+                  "line_number": 225,
+                  "text": "    assert ("
+                },
+                {
+                  "line_number": 226,
+                  "text": "        card.source_snapshot.status"
+                },
+                {
+                  "line_number": 227,
+                  "text": "        is EpistemicStatus.PROVEN"
+                },
+                {
+                  "line_number": 228,
+                  "text": "    )"
+                },
+                {
+                  "line_number": 229,
+                  "text": ""
+                },
+                {
+                  "line_number": 230,
+                  "text": "    assert ("
+                },
+                {
+                  "line_number": 231,
+                  "text": "        card.python_inventory.status"
+                },
+                {
+                  "line_number": 232,
+                  "text": "        is EpistemicStatus.PROVEN"
+                },
+                {
+                  "line_number": 233,
+                  "text": "    )"
+                },
+                {
+                  "line_number": 234,
+                  "text": ""
+                },
+                {
+                  "line_number": 235,
+                  "text": "    assert ("
+                },
+                {
+                  "line_number": 236,
+                  "text": "        card.source_snapshot.evidence_ids"
+                },
+                {
+                  "line_number": 237,
+                  "text": "        == ("
+                },
+                {
+                  "line_number": 238,
+                  "text": "            observation.observation_id,"
+                },
+                {
+                  "line_number": 239,
+                  "text": "        )"
+                },
+                {
+                  "line_number": 240,
+                  "text": "    )"
+                },
+                {
+                  "line_number": 241,
+                  "text": ""
+                },
+                {
+                  "line_number": 242,
+                  "text": "    assert ("
+                },
+                {
+                  "line_number": 243,
+                  "text": "        card.python_inventory.evidence_ids"
+                },
+                {
+                  "line_number": 244,
+                  "text": "        == ("
+                },
+                {
+                  "line_number": 245,
+                  "text": "            index.index_id,"
+                },
+                {
+                  "line_number": 246,
+                  "text": "        )"
+                },
+                {
+                  "line_number": 247,
+                  "text": "    )"
+                },
+                {
+                  "line_number": 248,
+                  "text": ""
+                },
+                {
+                  "line_number": 249,
+                  "text": ""
+                },
+                {
+                  "line_number": 250,
+                  "text": "def test_semantic_sections_are_unknown_at_instant_index_stage("
+                },
+                {
+                  "line_number": 251,
+                  "text": "    tmp_path: Path,"
+                },
+                {
+                  "line_number": 252,
+                  "text": ") -> None:"
+                },
+                {
+                  "line_number": 253,
+                  "text": "    repository = create_repository("
+                },
+                {
+                  "line_number": 254,
+                  "text": "        tmp_path"
+                },
+                {
+                  "line_number": 255,
+                  "text": "    )"
+                },
+                {
+                  "line_number": 256,
+                  "text": ""
+                },
+                {
+                  "line_number": 257,
+                  "text": "    ("
+                },
+                {
+                  "line_number": 258,
+                  "text": "        repository"
+                },
+                {
+                  "line_number": 259,
+                  "text": "        / \"app.py\""
+                },
+                {
+                  "line_number": 260,
+                  "text": "    ).write_text("
+                },
+                {
+                  "line_number": 261,
+                  "text": "        \"class Service:\\n\""
+                },
+                {
+                  "line_number": 262,
+                  "text": "        \"    pass\\n\""
+                },
+                {
+                  "line_number": 263,
+                  "text": "    )"
+                },
+                {
+                  "line_number": 264,
+                  "text": ""
+                },
+                {
+                  "line_number": 265,
+                  "text": "    commit = commit_all("
+                },
+                {
+                  "line_number": 266,
+                  "text": "        repository"
+                },
+                {
+                  "line_number": 267,
+                  "text": "    )"
+                },
+                {
+                  "line_number": 268,
+                  "text": ""
+                },
+                {
+                  "line_number": 269,
+                  "text": "    observation = observe_git_commit("
+                },
+                {
+                  "line_number": 270,
+                  "text": "        repository,"
+                },
+                {
+                  "line_number": 271,
+                  "text": "        commit,"
+                },
+                {
+                  "line_number": 272,
+                  "text": "    )"
+                },
+                {
+                  "line_number": 273,
+                  "text": ""
+                },
+                {
+                  "line_number": 274,
+                  "text": "    index = index_python_repository("
+                },
+                {
+                  "line_number": 275,
+                  "text": "        repository,"
+                },
+                {
+                  "line_number": 276,
+                  "text": "        observation,"
+                },
+                {
+                  "line_number": 277,
+                  "text": "        cache("
+                },
+                {
+                  "line_number": 278,
+                  "text": "            tmp_path"
+                },
+                {
+                  "line_number": 279,
+                  "text": "        ),"
+                },
+                {
+                  "line_number": 280,
+                  "text": "    )"
+                },
+                {
+                  "line_number": 281,
+                  "text": ""
+                },
+                {
+                  "line_number": 282,
+                  "text": "    card = build_repository_card("
+                },
+                {
+                  "line_number": 283,
+                  "text": "        index"
+                },
+                {
+                  "line_number": 284,
+                  "text": "    )"
+                },
+                {
+                  "line_number": 285,
+                  "text": ""
+                },
+                {
+                  "line_number": 286,
+                  "text": "    assert {"
+                },
+                {
+                  "line_number": 287,
+                  "text": "        section.section"
+                },
+                {
+                  "line_number": 288,
+                  "text": "        for section"
+                },
+                {
+                  "line_number": 289,
+                  "text": "        in card.semantic_sections"
+                },
+                {
+                  "line_number": 290,
+                  "text": "    } == set("
+                },
+                {
+                  "line_number": 291,
+                  "text": "        RepositorySemanticSection"
+                },
+                {
+                  "line_number": 292,
+                  "text": "    )"
+                },
+                {
+                  "line_number": 293,
+                  "text": ""
+                },
+                {
+                  "line_number": 294,
+                  "text": "    assert all("
+                },
+                {
+                  "line_number": 295,
+                  "text": "        section.status"
+                },
+                {
+                  "line_number": 296,
+                  "text": "        is EpistemicStatus.UNKNOWN"
+                },
+                {
+                  "line_number": 297,
+                  "text": "        for section"
+                },
+                {
+                  "line_number": 298,
+                  "text": "        in card.semantic_sections"
+                },
+                {
+                  "line_number": 299,
+                  "text": "    )"
+                },
+                {
+                  "line_number": 300,
+                  "text": ""
+                },
+                {
+                  "line_number": 301,
+                  "text": "    assert all("
+                },
+                {
+                  "line_number": 302,
+                  "text": "        section.evidence_ids"
+                },
+                {
+                  "line_number": 303,
+                  "text": "        == ()"
+                },
+                {
+                  "line_number": 304,
+                  "text": "        for section"
+                },
+                {
+                  "line_number": 305,
+                  "text": "        in card.semantic_sections"
+                },
+                {
+                  "line_number": 306,
+                  "text": "    )"
+                },
+                {
+                  "line_number": 307,
+                  "text": ""
+                },
+                {
+                  "line_number": 308,
+                  "text": ""
+                },
+                {
+                  "line_number": 309,
+                  "text": "def test_card_progresses_after_background_extraction("
+                },
+                {
+                  "line_number": 310,
+                  "text": "    tmp_path: Path,"
+                },
+                {
+                  "line_number": 311,
+                  "text": ") -> None:"
+                },
+                {
+                  "line_number": 312,
+                  "text": "    repository = create_repository("
+                },
+                {
+                  "line_number": 313,
+                  "text": "        tmp_path"
+                },
+                {
+                  "line_number": 314,
+                  "text": "    )"
+                },
+                {
+                  "line_number": 315,
+                  "text": ""
+                },
+                {
+                  "line_number": 316,
+                  "text": "    ("
+                },
+                {
+                  "line_number": 317,
+                  "text": "        repository"
+                },
+                {
+                  "line_number": 318,
+                  "text": "        / \"a.py\""
+                },
+                {
+                  "line_number": 319,
+                  "text": "    ).write_text("
+                },
+                {
+                  "line_number": 320,
+                  "text": "        \"def a():\\n\""
+                },
+                {
+                  "line_number": 321,
+                  "text": "        \"    return 1\\n\""
+                },
+                {
+                  "line_number": 322,
+                  "text": "    )"
+                },
+                {
+                  "line_number": 323,
+                  "text": ""
+                },
+                {
+                  "line_number": 324,
+                  "text": "    ("
+                },
+                {
+                  "line_number": 325,
+                  "text": "        repository"
+                },
+                {
+                  "line_number": 326,
+                  "text": "        / \"b.py\""
+                },
+                {
+                  "line_number": 327,
+                  "text": "    ).write_text("
+                },
+                {
+                  "line_number": 328,
+                  "text": "        \"def b():\\n\""
+                },
+                {
+                  "line_number": 329,
+                  "text": "        \"    return 2\\n\""
+                },
+                {
+                  "line_number": 330,
+                  "text": "    )"
+                },
+                {
+                  "line_number": 331,
+                  "text": ""
+                },
+                {
+                  "line_number": 332,
+                  "text": "    commit = commit_all("
+                },
+                {
+                  "line_number": 333,
+                  "text": "        repository"
+                },
+                {
+                  "line_number": 334,
+                  "text": "    )"
+                },
+                {
+                  "line_number": 335,
+                  "text": ""
+                },
+                {
+                  "line_number": 336,
+                  "text": "    observation = observe_git_commit("
+                },
+                {
+                  "line_number": 337,
+                  "text": "        repository,"
+                },
+                {
+                  "line_number": 338,
+                  "text": "        commit,"
+                },
+                {
+                  "line_number": 339,
+                  "text": "    )"
+                },
+                {
+                  "line_number": 340,
+                  "text": ""
+                },
+                {
+                  "line_number": 341,
+                  "text": "    extraction_cache = cache("
+                },
+                {
+                  "line_number": 342,
+                  "text": "        tmp_path"
+                },
+                {
+                  "line_number": 343,
+                  "text": "    )"
+                },
+                {
+                  "line_number": 344,
+                  "text": ""
+                },
+                {
+                  "line_number": 345,
+                  "text": "    initial_index = ("
+                },
+                {
+                  "line_number": 346,
+                  "text": "        index_python_repository("
+                },
+                {
+                  "line_number": 347,
+                  "text": "            repository,"
+                },
+                {
+                  "line_number": 348,
+                  "text": "            observation,"
+                },
+                {
+                  "line_number": 349,
+                  "text": "            extraction_cache,"
+                },
+                {
+                  "line_number": 350,
+                  "text": "        )"
+                },
+                {
+                  "line_number": 351,
+                  "text": "    )"
+                },
+                {
+                  "line_number": 352,
+                  "text": ""
+                },
+                {
+                  "line_number": 353,
+                  "text": "    initial_card = ("
+                },
+                {
+                  "line_number": 354,
+                  "text": "        build_repository_card("
+                },
+                {
+                  "line_number": 355,
+                  "text": "            initial_index"
+                },
+                {
+                  "line_number": 356,
+                  "text": "        )"
+                },
+                {
+                  "line_number": 357,
+                  "text": "    )"
+                },
+                {
+                  "line_number": 358,
+                  "text": ""
+                },
+                {
+                  "line_number": 359,
+                  "text": "    plan = ("
+                },
+                {
+                  "line_number": 360,
+                  "text": "        plan_python_structure_extraction("
+                },
+                {
+                  "line_number": 361,
+                  "text": "            initial_index"
+                },
+                {
+                  "line_number": 362,
+                  "text": "        )"
+                },
+                {
+                  "line_number": 363,
+                  "text": "    )"
+                },
+                {
+                  "line_number": 364,
+                  "text": ""
+                },
+                {
+                  "line_number": 365,
+                  "text": "    batch = ("
+                },
+                {
+                  "line_number": 366,
+                  "text": "        execute_python_structure_batch("
+                },
+                {
+                  "line_number": 367,
+                  "text": "            repository,"
+                },
+                {
+                  "line_number": 368,
+                  "text": "            observation,"
+                },
+                {
+                  "line_number": 369,
+                  "text": "            plan,"
+                },
+                {
+                  "line_number": 370,
+                  "text": "            extraction_cache,"
+                },
+                {
+                  "line_number": 371,
+                  "text": "            offset=0,"
+                },
+                {
+                  "line_number": 372,
+                  "text": "            limit=1,"
+                },
+                {
+                  "line_number": 373,
+                  "text": "        )"
+                },
+                {
+                  "line_number": 374,
+                  "text": "    )"
+                },
+                {
+                  "line_number": 375,
+                  "text": ""
+                },
+                {
+                  "line_number": 376,
+                  "text": "    assert ("
+                },
+                {
+                  "line_number": 377,
+                  "text": "        batch.completed_file_count"
+                },
+                {
+                  "line_number": 378,
+                  "text": "        == 1"
+                },
+                {
+                  "line_number": 379,
+                  "text": "    )"
+                },
+                {
+                  "line_number": 380,
+                  "text": ""
+                },
+                {
+                  "line_number": 381,
+                  "text": "    updated_index = ("
+                }
+              ],
+              "path": "tests/unit/cards/test_repository_card.py",
+              "start_line": 1
+            }
+          }
+        ],
+        "hypothesis": "Horizon is intended to provide continuously maintained software understanding for AI agents, as explicitly declared in pyproject.toml\u2019s [project].description; the supplied evidence establishes this stated purpose but not its implementation.",
+        "question": "What is this repository's primary software purpose, and what evidence establishes it?",
+        "question_id": "repository-semantic-gap-question:627bdd67d2987320db7e045a86ea8c87a4c256ab4bf3c44c86b90c52d8775ab8",
+        "request_id": "semantic-gap-followup-investigation-request:caac516f5171707b77c16a7a47fc3c946b8b78e3746960dd4e8d7ce6790bfa9f",
+        "semantic_gap_id": "repository-semantic-gap:b530b9c5bd7f0108fe555ddbd2d74250c07ca5e854e2e1ddda5dcc030fb01e5d",
+        "semantic_gap_section": "WHAT_IT_IS",
+        "source_proposal_id": "investigation-proposal:50754d89b43816d8b54d12712690c16815462f9daa0c3b515d0ee3bd6e385103",
+        "test_questions": [
+          "At frozen commit 6151aad2081d9a849a6aac7a6081a2d7b32c4334, which exact documentation or source passages define the software understanding intended for AI agents and confirm, qualify, or contradict this primary-purpose interpretation?",
+          "At that commit, which implementation or test passages, if any, show how that understanding is maintained over time and made available to AI agents, rather than identifying these capabilities only as planned work?"
+        ],
+        "view_id": "hypothesis-evaluation-request-view:23480aab3369d07765cec164121f506130a00a17471b711d9e51a98d9cac0179"
+      },
+      "schema_hash": "sha256:386c3c6aefa9749216916d05041c035fdc59d73e6a62278b084d8e82db86ff82",
+      "temperature": null
+    },
+    "canonical_input_hash": "sha256:7c6f43d6a5cba69d5490a6c9ee475a9a3a9e6b2e90251144181709aacc9c95a6",
+    "cost_cap_usd": "0.300000",
+    "instruction_hash": "sha256:0d776662f5e4d17834dca18d9233df01ef7bcc8bf2b5d0e82a23043d2a22a896",
+    "invocation_id": "hypothesis-evaluation-model-invocation:5438c9012a2b2c12e0388f95c3979197789a3b3cc04e597574754690debd586a",
+    "provider_input_bytes": 54891,
+    "provider_input_sha256": "sha256:7c6f43d6a5cba69d5490a6c9ee475a9a3a9e6b2e90251144181709aacc9c95a6",
+    "request_view_id": "hypothesis-evaluation-request-view:23480aab3369d07765cec164121f506130a00a17471b711d9e51a98d9cac0179",
+    "schema_hash": "sha256:386c3c6aefa9749216916d05041c035fdc59d73e6a62278b084d8e82db86ff82",
+    "temperature": null
+  },
+  "lineage": {
+    "final_request_id": "semantic-gap-followup-investigation-request:caac516f5171707b77c16a7a47fc3c946b8b78e3746960dd4e8d7ce6790bfa9f",
+    "prior_request_id": "semantic-gap-followup-investigation-request:564d2da3b6c6615a4af3ba49cbf6cd026980199baff1e6441e0eb8d396587005",
+    "question_id": "repository-semantic-gap-question:627bdd67d2987320db7e045a86ea8c87a4c256ab4bf3c44c86b90c52d8775ab8",
+    "repository_observation_id": "git-observation:a453d58352a0769d5fbc954c808c977f2e0a65eb095d862d5f3f8a9566cab5b5",
+    "semantic_gap_id": "repository-semantic-gap:b530b9c5bd7f0108fe555ddbd2d74250c07ca5e854e2e1ddda5dcc030fb01e5d",
+    "semantic_gap_section": "WHAT_IT_IS",
+    "source_hypothesis_proposal_id": "investigation-proposal:50754d89b43816d8b54d12712690c16815462f9daa0c3b515d0ee3bd6e385103",
+    "source_r24_artifact": "artifacts/investigator/025zze2c-r24-final-round-source-evidence-execution.json",
+    "source_r24_git_commit": "31a69080a51958b4be2f5fef56cbfc025fc0ae77",
+    "target_commit": "6151aad2081d9a849a6aac7a6081a2d7b32c4334"
+  },
+  "next_authorized_stage": "Execute exactly one live GPT-6 Astra hypothesis-evaluation call using this sealed R25 invocation as global provider call ordinal 7. Persist the raw provider response before semantic validation. Do not promote or mutate the World Model in the live-call stage.",
+  "provider_pre_registration": {
+    "client_request_id": "horizon-025zze2c-call7-1699a3274886fc936027ddff6cd83ffd420960b7bf8770e8292c92bf81b77347",
+    "global_provider_call_ordinal": 7,
+    "max_output_tokens": 4096,
+    "model_id": "gpt-6-astra",
+    "pricing_usd_per_million_tokens": {
+      "cache_write_per_million": "25.00",
+      "cached_input_per_million": "2.00",
+      "input_per_million": "20.00",
+      "output_per_million": "75.00"
+    },
+    "provider": "OPENAI",
+    "raw_response_must_be_persisted_before_validation": true,
+    "reasoning_effort": "high",
+    "sdk_max_retries": 0,
+    "store": false,
+    "temperature": null,
+    "timeout_seconds": 300,
+    "wrapper_retries": 0
+  },
+  "source_hypothesis": {
+    "hypothesis": "Horizon is intended to provide continuously maintained software understanding for AI agents, as explicitly declared in pyproject.toml\u2019s [project].description; the supplied evidence establishes this stated purpose but not its implementation.",
+    "proposal_id": "investigation-proposal:50754d89b43816d8b54d12712690c16815462f9daa0c3b515d0ee3bd6e385103",
+    "test_questions": [
+      "At frozen commit 6151aad2081d9a849a6aac7a6081a2d7b32c4334, which exact documentation or source passages define the software understanding intended for AI agents and confirm, qualify, or contradict this primary-purpose interpretation?",
+      "At that commit, which implementation or test passages, if any, show how that understanding is maintained over time and made available to AI agents, rather than identifying these capabilities only as planned work?"
+    ]
+  }
+}
