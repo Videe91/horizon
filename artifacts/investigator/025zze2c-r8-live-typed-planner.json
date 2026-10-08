@@ -1,0 +1,155 @@
+{
+  "authority": {
+    "evaluation_model_calls": 0,
+    "new_repository_operations": 0,
+    "planner_output_executed": false,
+    "repository_mutations": 0,
+    "semantic_overlay_created": false,
+    "semantic_promotions": 0,
+    "what_it_is_closed": false,
+    "world_model_mutations": 0
+  },
+  "certification": {
+    "name": "025ZZE-2C-R8 live typed-planner recovery",
+    "status": "PASS"
+  },
+  "durability": {
+    "attempt_ledger_sha256": "sha256:64126df2f41f921e3e89f849eedb5505484bbac1e4710f15663444112a6f8763",
+    "rerun_allowed": false,
+    "response_spool_sha256": "sha256:2207ea1699714f6d967849f90959a04e4419fac1e3123b46194710cb8428fb16",
+    "result_spool_sha256": "sha256:f5b2b1e53f3891c767fcb6fbd329708eaf62c74aa281a47e1ce18fa9c7fa405e"
+  },
+  "lineage": {
+    "base_request_id": "investigation-request:fe6c0526a0667730eba56abe4dc465b958cac79616d78842857198e76a5b5d61",
+    "global_provider_call_ordinal": 2,
+    "historical_investigator_call": 1,
+    "historical_investigator_reissued": false,
+    "planning_proposal_id": "investigation-proposal:718b5d12bc9c7a95389ce878ebfe79ab4a602746b1c0b06d5dc10d18f530192d",
+    "recovery_provider_call_ordinal": 1,
+    "source_hypothesis_proposal_id": "investigation-proposal:50754d89b43816d8b54d12712690c16815462f9daa0c3b515d0ee3bd6e385103"
+  },
+  "live_result": {
+    "api_request_id": "req_70fc0e412b654965ab1f79a06472f9cd",
+    "cost_usd": "0.145660",
+    "input_tokens": 2062,
+    "output_tokens": 1255,
+    "parsed_planner_output": {
+      "bindings": [
+        {
+          "draft": {
+            "depends_on_keys": [],
+            "expected_information": "Literal matches with observed paths and evidence identities that can anchor subsequent bounded reads of definitions, purpose statements, and qualifications.",
+            "max_seconds": 30,
+            "operation": {
+              "path_prefix": null,
+              "query": "understanding"
+            },
+            "purpose": "Locate passages describing software understanding and its intended purpose without assuming repository paths.",
+            "step_key": "discover_understanding_passages"
+          },
+          "investigation_question": "At frozen commit 6151aad2081d9a849a6aac7a6081a2d7b32c4334, which exact documentation or source passages define the software understanding intended for AI agents and confirm, qualify, or contradict this primary-purpose interpretation?"
+        },
+        {
+          "draft": {
+            "depends_on_keys": [],
+            "expected_information": "Observed locations mentioning agents, suitable for replanning bounded reads of access mechanisms and their implementation status. Matches alone will not establish working functionality.",
+            "max_seconds": 30,
+            "operation": {
+              "path_prefix": null,
+              "query": "agent"
+            },
+            "purpose": "Locate candidate agent-facing interfaces, tests, and documentation for distinguishing implemented access from planned capabilities.",
+            "step_key": "discover_agent_access_passages"
+          },
+          "investigation_question": "At that commit, which implementation or test passages, if any, show how that understanding is maintained over time and made available to AI agents, rather than identifying these capabilities only as planned work?"
+        },
+        {
+          "draft": {
+            "depends_on_keys": [],
+            "expected_information": "Observed update-related locations for subsequent bounded inspection of maintenance behavior and tests. Unrelated or absent matches will require replanning, not a conclusion that maintenance is unimplemented.",
+            "max_seconds": 30,
+            "operation": {
+              "path_prefix": null,
+              "query": "update"
+            },
+            "purpose": "Locate candidate update mechanisms, tests, and planning statements relevant to maintaining software understanding over time.",
+            "step_key": "discover_maintenance_passages"
+          },
+          "investigation_question": "At that commit, which implementation or test passages, if any, show how that understanding is maintained over time and made available to AI agents, rather than identifying these capabilities only as planned work?"
+        }
+      ],
+      "planner_output_id": "semantic-gap-typed-planner-output:a1d746c869b660bb680abeb254f6dc8dfbc96ae49f9ad030e5d82fd2d4276dfc",
+      "proposal_id": "investigation-proposal:718b5d12bc9c7a95389ce878ebfe79ab4a602746b1c0b06d5dc10d18f530192d",
+      "question_id": "repository-semantic-gap-question:627bdd67d2987320db7e045a86ea8c87a4c256ab4bf3c44c86b90c52d8775ab8"
+    },
+    "planner_output_id": "semantic-gap-typed-planner-output:a1d746c869b660bb680abeb254f6dc8dfbc96ae49f9ad030e5d82fd2d4276dfc",
+    "raw_planner_output": {
+      "bindings": [
+        {
+          "depends_on_keys": [],
+          "expected_information": "Literal matches with observed paths and evidence identities that can anchor subsequent bounded reads of definitions, purpose statements, and qualifications.",
+          "investigation_question": "At frozen commit 6151aad2081d9a849a6aac7a6081a2d7b32c4334, which exact documentation or source passages define the software understanding intended for AI agents and confirm, qualify, or contradict this primary-purpose interpretation?",
+          "max_seconds": 30,
+          "operation": {
+            "path_prefix": null,
+            "query": "understanding",
+            "type": "SEARCH_SOURCE"
+          },
+          "purpose": "Locate passages describing software understanding and its intended purpose without assuming repository paths.",
+          "step_key": "discover_understanding_passages"
+        },
+        {
+          "depends_on_keys": [],
+          "expected_information": "Observed locations mentioning agents, suitable for replanning bounded reads of access mechanisms and their implementation status. Matches alone will not establish working functionality.",
+          "investigation_question": "At that commit, which implementation or test passages, if any, show how that understanding is maintained over time and made available to AI agents, rather than identifying these capabilities only as planned work?",
+          "max_seconds": 30,
+          "operation": {
+            "path_prefix": null,
+            "query": "agent",
+            "type": "SEARCH_SOURCE"
+          },
+          "purpose": "Locate candidate agent-facing interfaces, tests, and documentation for distinguishing implemented access from planned capabilities.",
+          "step_key": "discover_agent_access_passages"
+        },
+        {
+          "depends_on_keys": [],
+          "expected_information": "Observed update-related locations for subsequent bounded inspection of maintenance behavior and tests. Unrelated or absent matches will require replanning, not a conclusion that maintenance is unimplemented.",
+          "investigation_question": "At that commit, which implementation or test passages, if any, show how that understanding is maintained over time and made available to AI agents, rather than identifying these capabilities only as planned work?",
+          "max_seconds": 30,
+          "operation": {
+            "path_prefix": null,
+            "query": "update",
+            "type": "SEARCH_SOURCE"
+          },
+          "purpose": "Locate candidate update mechanisms, tests, and planning statements relevant to maintaining software understanding over time.",
+          "step_key": "discover_maintenance_passages"
+        }
+      ],
+      "proposal_id": "investigation-proposal:718b5d12bc9c7a95389ce878ebfe79ab4a602746b1c0b06d5dc10d18f530192d",
+      "question_id": "repository-semantic-gap-question:627bdd67d2987320db7e045a86ea8c87a4c256ab4bf3c44c86b90c52d8775ab8"
+    },
+    "rejection_reason": null,
+    "run_id": "semantic-gap-typed-planner-run:139a74e5a8a8b7542d6d7f09c232f236023156e6299baabf3a40b62433a62fc7",
+    "validation_result": "VALID"
+  },
+  "next_authorized_stage": "Review and certify the returned typed investigation plan offline before executing any operation.",
+  "provider_configuration": {
+    "max_output_tokens": 4096,
+    "provider": "OPENAI",
+    "reasoning_effort": "high",
+    "requested_model": "gpt-6-astra",
+    "returned_model": "gpt-6-astra",
+    "sdk_retries": 0,
+    "timeout_seconds": "60.0",
+    "wrapper_retries": 0
+  },
+  "sealed_invocation": {
+    "canonical_input_hash": "sha256:91a16be3126e35afd151b95d00d4df57abb5f14706caea680bb21a30212de47b",
+    "cost_cap_usd": "0.300000",
+    "instruction_hash": "sha256:e3f493f369dfbbf2932b5ae78ff437d1f7bddc1668a08c6e15df932e4b8d0056",
+    "invocation_id": "semantic-gap-typed-planner-invocation:1e069f7ccfd4b4b37d0c669d04b403f342992dffb54d7f92f299d630a6256a1d",
+    "operation_semantics_id": "typed-planner-operation-semantics:d2c7d2962cb7e7bad05367508a03c178e1ca8fcbd7a2149ed66ebff5c3681c2c",
+    "schema_hash": "sha256:efee04989243a3b7745f1969d9f1701827143ebcee147f3411136ca536b05a03",
+    "temperature": null
+  }
+}
