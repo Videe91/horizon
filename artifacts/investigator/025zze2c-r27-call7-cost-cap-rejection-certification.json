@@ -1,0 +1,67 @@
+{
+  "boundary": {
+    "hypothesis_evaluation_performed": false,
+    "new_evidence_records": 0,
+    "new_repository_operations": 0,
+    "provider_calls_this_stage": 0,
+    "semantic_promotions": 0,
+    "what_it_is_closed": false,
+    "world_model_mutations": 0
+  },
+  "certification": {
+    "mode": "OFFLINE_CALL7_FAILURE_CLASSIFICATION",
+    "stage": "025ZZE-2C-R27",
+    "status": "PASS"
+  },
+  "cost_authority": {
+    "actual_exposure_through_call7_usd": "1.538588",
+    "aggregate_exam_cap_usd": "2.700000",
+    "remaining_exam_budget_usd": "1.161412"
+  },
+  "failure_classification": {
+    "budget_contract_failure": true,
+    "failure_class": "PRE_REGISTERED_COST_CAP_EXCEEDED",
+    "product_understanding_failure": false,
+    "provider_transport_failure": false,
+    "reason": "The provider returned a response, but actual cost exceeded the sealed per-call cost cap before semantic evaluation could be accepted.",
+    "rejection_reason": "actual model cost exceeded pre-registered cost cap",
+    "repository_execution_failure": false,
+    "semantic_evaluation_accepted": false,
+    "world_model_failure": false
+  },
+  "lineage": {
+    "canonical_input_hash": "sha256:7c6f43d6a5cba69d5490a6c9ee475a9a3a9e6b2e90251144181709aacc9c95a6",
+    "final_request_id": "semantic-gap-followup-investigation-request:caac516f5171707b77c16a7a47fc3c946b8b78e3746960dd4e8d7ce6790bfa9f",
+    "global_provider_call_ordinal": 7,
+    "invocation_id": "hypothesis-evaluation-model-invocation:5438c9012a2b2c12e0388f95c3979197789a3b3cc04e597574754690debd586a",
+    "source_r25_artifact": "artifacts/investigator/025zze2c-r25-final-hypothesis-evaluation-preregistration.json",
+    "source_r26_result": "/tmp/horizon-025zze2-r26-call7-result.json"
+  },
+  "provider_result": {
+    "actual_cost_usd": "0.438635",
+    "api_request_id": "req_a62765552fd8467ebff5105877cc5677",
+    "input_tokens": 14591,
+    "output_tokens": 985,
+    "provider_response_received": true,
+    "raw_response_persisted_before_validation": true,
+    "registered_cost_cap_usd": "0.300000",
+    "response_id": "resp_0572f34f86172f5c016ac7ce0ff7e487d1b2396b9340e9d723",
+    "returned_model": "gpt-6-astra"
+  },
+  "recovery_authority": {
+    "call7_may_not_be_rerun": true,
+    "call7_may_not_be_reused_for_promotion": true,
+    "new_provider_call_required": true,
+    "next_global_provider_call_ordinal": 8,
+    "next_step": "Preregister one new final hypothesis evaluation invocation for provider call #8 with a cost cap sufficient for the already-sealed 14,591-token input while remaining inside the aggregate exam cap.",
+    "same_evidence_may_be_reused": true,
+    "same_hypothesis_may_be_reused": true
+  },
+  "safety": {
+    "call7_consumed": true,
+    "call7_rerun_allowed": false,
+    "hypothesis_promoted": false,
+    "what_it_is_closed": false,
+    "world_model_mutations": 0
+  }
+}
