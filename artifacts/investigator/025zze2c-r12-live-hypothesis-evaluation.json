@@ -1,0 +1,84 @@
+{
+  "authority": {
+    "claims_created": 0,
+    "epistemic_assessments_created": 0,
+    "live_model_calls_this_stage": 1,
+    "read_source_operations_this_stage": 0,
+    "repository_operations_this_stage": 0,
+    "semantic_overlay_created": false,
+    "semantic_promotions": 0,
+    "typed_planner_calls_this_stage": 0,
+    "what_it_is_closed": false,
+    "world_model_assertions_created": 0,
+    "world_model_mutations": 0
+  },
+  "boundary": {
+    "evaluation_is_non_authoritative": true,
+    "further_action_executed": false,
+    "hypothesis_promoted": false,
+    "provider_call_complete": true,
+    "search_evidence_remained_metadata_only": true,
+    "source_excerpt_count": 0
+  },
+  "certification": {
+    "name": "025ZZE-2C-R12 live Horizon-self hypothesis evaluation",
+    "status": "PASS"
+  },
+  "cost_authority": {
+    "aggregate_exam_cap_usd": "2.700000",
+    "paid_cost_before_r12_usd": "0.293195",
+    "paid_cost_through_r12_usd": "0.363655",
+    "r12_cost_usd": "0.07046"
+  },
+  "durability": {
+    "attempt_ledger_path": "/tmp/horizon-025zze2-r12-live-attempt-ledger.jsonl",
+    "attempt_ledger_sha256": "sha256:302fa80e15a89b8f41dc89927a3294259163673d45228174a2e4e70e4c3341c4",
+    "paid_response_persisted_before_validation": true,
+    "rerun_allowed": false,
+    "response_spool_path": "/tmp/horizon-025zze2-r12-live-response-spool/response-0003.json",
+    "response_spool_sha256": "sha256:51c00e7311dacede110c076ee2559c37a4e795faff1f7ac01f83a9d735d2034a",
+    "result_spool_path": "/tmp/horizon-025zze2-r12-live-result.json",
+    "result_spool_sha256": "sha256:7e0b42c22c8d86f8fe8014a3049e2a5884bd2496fadcc50159e01fb4a522052c"
+  },
+  "evaluation": {
+    "contradicting_evidence_ids": [],
+    "evaluation_id": "hypothesis-evidence-evaluation:45a147f4eb04588ede4446d01d08cda7fd14e2fd81cda735ef2286090540cc25",
+    "missing_evidence_questions": [
+      "What is the exact pyproject.toml [project].description at frozen commit 6151aad2081d9a849a6aac7a6081a2d7b32c4334, and does it explicitly declare continuously maintained software understanding for AI agents as Horizon's purpose? The supplied records expose metadata only, not source passages.",
+      "At that commit, which exact documentation or source passages define the software understanding intended for AI agents and confirm, qualify, or contradict this primary-purpose interpretation?",
+      "At that commit, which implementation or test passages, if any, demonstrate how software understanding is maintained over time and made available to AI agents, and which passages distinguish implemented capabilities from planned work?"
+    ],
+    "supporting_evidence_ids": [],
+    "verdict": "STILL_INCOMPLETE"
+  },
+  "lineage": {
+    "canonical_input_hash": "sha256:bc5be0bda750bd75b8f41d98bbde953b9705bd6f2220a7ef68835053ff228691",
+    "followup_request_id": "semantic-gap-followup-investigation-request:564d2da3b6c6615a4af3ba49cbf6cd026980199baff1e6441e0eb8d396587005",
+    "global_provider_call_ordinal": 3,
+    "invocation_id": "hypothesis-evaluation-model-invocation:484f9e4c81e4cbc9f410fc8e858f3d131c918c42cff87d1eafb1adeeef7555e7",
+    "source_hypothesis_proposal_id": "investigation-proposal:50754d89b43816d8b54d12712690c16815462f9daa0c3b515d0ee3bd6e385103",
+    "source_preregistration_artifact": "artifacts/investigator/025zze2c-r11-hypothesis-evaluation-preregistration.json"
+  },
+  "provider": {
+    "api_request_id": "req_4a1411aa20cf4bbd94a3cf86ba3fc237",
+    "conservative_cost_usd": "0.07046",
+    "cost_cap_usd": "0.300000",
+    "input_tokens": 1472,
+    "max_output_tokens": 4096,
+    "model_id": "gpt-6-astra",
+    "output_tokens": 449,
+    "provider": "OPENAI",
+    "reasoning_effort": "high",
+    "sdk_retries": 0,
+    "wrapper_retries": 0
+  },
+  "run": {
+    "canonical_input_hash": "sha256:bc5be0bda750bd75b8f41d98bbde953b9705bd6f2220a7ef68835053ff228691",
+    "canonical_output_hash": "sha256:1c4042448ef1a8a1e59b0f0f1af3f19aafff1795ca6965ec39a7b1fb3d7ab7cd",
+    "instruction_hash": "sha256:0d776662f5e4d17834dca18d9233df01ef7bcc8bf2b5d0e82a23043d2a22a896",
+    "rejection_reason": null,
+    "run_id": "hypothesis-evaluation-model-run:70a160014ee3f57ffd8070fc69bf1d921f1f7fb4230bfcf3fe15de85afc2d237",
+    "schema_hash": "sha256:386c3c6aefa9749216916d05041c035fdc59d73e6a62278b084d8e82db86ff82",
+    "validation_result": "VALID"
+  }
+}
