@@ -515,13 +515,67 @@ def _validate_final_hypothesis_round_material_paths(
     proposal: InvestigationProposal,
     bindings,
     final_round: bool,
+    source_basis_paths: tuple[str, ...],
 ) -> None:
-    """Fail closed before compilation when a final-round question is discovery-only."""
+    """Fail closed when final-round material evidence is not source-complete."""
 
     if not final_round:
         return
 
-    missing = []
+    if (
+        not isinstance(
+            source_basis_paths,
+            tuple,
+        )
+        or any(
+            (
+                not isinstance(
+                    path,
+                    str,
+                )
+                or not path.strip()
+            )
+            for path
+            in source_basis_paths
+        )
+    ):
+        raise RepositorySemanticUnderstandingCoordinatorError(
+            "source_basis_paths must be a tuple "
+            "of nonempty paths"
+        )
+
+    if (
+        len(
+            source_basis_paths
+        )
+        != len(
+            set(
+                source_basis_paths
+            )
+        )
+        or source_basis_paths
+        != tuple(
+            sorted(
+                source_basis_paths
+            )
+        )
+    ):
+        raise RepositorySemanticUnderstandingCoordinatorError(
+            "source_basis_paths must be unique "
+            "and canonically ordered"
+        )
+
+    material_read_bindings = tuple(
+        binding
+        for binding
+        in bindings
+        if isinstance(
+            binding.draft.operation,
+            ReadSourceOperation,
+        )
+    )
+
+    missing_questions = []
 
     for question in (
         proposal.investigation_questions
@@ -531,32 +585,52 @@ def _validate_final_hypothesis_round_material_paths(
                 binding.investigation_question
                 == question
             )
-            and isinstance(
-                binding.draft.operation,
-                ReadSourceOperation,
-            )
             for binding
-            in bindings
+            in material_read_bindings
         )
 
         if not has_material_read:
-            missing.append(
+            missing_questions.append(
                 question
             )
 
-    if missing:
+    if missing_questions:
         raise RepositorySemanticUnderstandingCoordinatorError(
             "final hypothesis round requires at least one "
             "READ_SOURCE material-evidence path for every exact "
             "investigation question; missing material path for "
             + str(
                 len(
-                    missing
+                    missing_questions
                 )
             )
             + " question(s): "
             + " | ".join(
-                missing
+                missing_questions
+            )
+        )
+
+    material_read_paths = {
+        binding.draft.operation.path
+        for binding
+        in material_read_bindings
+    }
+
+    missing_source_basis_paths = tuple(
+        path
+        for path
+        in source_basis_paths
+        if path not in material_read_paths
+    )
+
+    if missing_source_basis_paths:
+        raise RepositorySemanticUnderstandingCoordinatorError(
+            "final hypothesis round requires READ_SOURCE "
+            "coverage for every selected source-backed "
+            "hypothesis basis path; missing source basis "
+            "path(s): "
+            + " | ".join(
+                missing_source_basis_paths
             )
         )
 
@@ -1870,6 +1944,9 @@ def run_repository_what_it_is_semantic_understanding(
             ),
             final_round=(
                 final_hypothesis_round
+            ),
+            source_basis_paths=(
+                bridge.source_basis_paths
             ),
         )
 

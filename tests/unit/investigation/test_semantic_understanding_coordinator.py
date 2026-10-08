@@ -443,6 +443,61 @@ class FakePlanner:
             ]
         )
 
+        instruction_text = (
+            invocation
+            .instruction
+            .decode(
+                "utf-8"
+            )
+        )
+
+        final_hypothesis_round = (
+            "final_hypothesis_round=true"
+            in instruction_text
+        )
+
+        source_basis_paths = ()
+
+        for line in (
+            instruction_text
+            .splitlines()
+        ):
+            prefix = (
+                "source_hypothesis_material_basis_paths="
+            )
+
+            if line.startswith(
+                prefix
+            ):
+                parsed = json.loads(
+                    line[
+                        len(
+                            prefix
+                        ):
+                    ]
+                )
+
+                assert isinstance(
+                    parsed,
+                    list,
+                )
+
+                assert all(
+                    isinstance(
+                        path,
+                        str,
+                    )
+                    and path
+                    for path
+                    in parsed
+                )
+
+                source_basis_paths = tuple(
+                    parsed
+                )
+
+                break
+
         if self.mode == "resolve":
             operation = {
                 "type": (
@@ -465,25 +520,55 @@ class FakePlanner:
             }
 
         else:
-            if self.mode == "round_read":
-                line = len(
-                    self.calls
+            if (
+                self.mode
+                == "wrong_basis"
+            ):
+                path = (
+                    "README.md"
                 )
 
+                line = 1
+
             elif (
-                question
-                == DISCOVERY_QUESTION
+                final_hypothesis_round
+                and source_basis_paths
             ):
+                path = (
+                    source_basis_paths[
+                        0
+                    ]
+                )
+
                 line = 1
 
             else:
-                line = 2
+                path = (
+                    "README.md"
+                )
+
+                if (
+                    self.mode
+                    == "round_read"
+                ):
+                    line = len(
+                        self.calls
+                    )
+
+                elif (
+                    question
+                    == DISCOVERY_QUESTION
+                ):
+                    line = 1
+
+                else:
+                    line = 2
 
             operation = {
                 "type": (
                     "READ_SOURCE"
                 ),
-                "path": "README.md",
+                "path": path,
                 "start_line": line,
                 "end_line": line,
             }
@@ -1526,6 +1611,121 @@ def test_hypothesis_typed_planner_receives_exact_round_budget_and_finality(
             1
         ]
         .instruction_hash
+    )
+
+
+def test_final_hypothesis_round_rejects_missing_source_basis_read_before_execution(
+    tmp_path: Path,
+    monkeypatch,
+) -> None:
+    fixture = prepare(
+        tmp_path
+    )
+
+    planner = (
+        FakePlanner(
+            mode=(
+                "wrong_basis"
+            )
+        )
+    )
+
+    evaluator = (
+        FakeEvaluator()
+    )
+
+    executed = []
+
+    def forbidden_executor(
+        *args,
+        **kwargs,
+    ):
+        executed.append(
+            (
+                args,
+                kwargs,
+            )
+        )
+
+        raise AssertionError(
+            "missing hypothesis source-basis "
+            "coverage must fail before execution"
+        )
+
+    monkeypatch.setattr(
+        coordinator_module,
+        "execute_investigation_operation",
+        forbidden_executor,
+    )
+
+    with pytest.raises(
+        RepositorySemanticUnderstandingCoordinatorError,
+        match=(
+            "selected source-backed "
+            "hypothesis basis path"
+        ),
+    ):
+        run(
+            fixture,
+            investigator=(
+                FakeInvestigator(
+                    mode=(
+                        "hypothesis"
+                    )
+                )
+            ),
+            planner=(
+                planner
+            ),
+            evaluator=(
+                evaluator
+            ),
+            value_limits=(
+                limits(
+                    investigator_rounds=1,
+                    hypothesis_rounds=1,
+                )
+            ),
+        )
+
+    assert len(
+        planner.calls
+    ) == 1
+
+    planner_instruction = (
+        planner.calls[
+            0
+        ]
+        .instruction
+        .decode(
+            "utf-8"
+        )
+    )
+
+    assert (
+        "final_hypothesis_round=true"
+        in planner_instruction
+    )
+
+    assert (
+        "source_hypothesis_material_basis_paths="
+        in planner_instruction
+    )
+
+    assert (
+        "pyproject.toml"
+        in planner_instruction
+    )
+
+    assert evaluator.calls == []
+
+    assert executed == []
+
+    assert (
+        fixture.store.load(
+            fixture.base_model
+        )
+        == fixture.base_model
     )
 
 
