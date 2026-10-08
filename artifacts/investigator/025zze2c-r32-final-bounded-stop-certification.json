@@ -1,0 +1,75 @@
+{
+  "boundary": {
+    "new_evidence_records": 0,
+    "provider_calls_this_stage": 0,
+    "repository_operations_this_stage": 0,
+    "semantic_promotions": 0,
+    "what_it_is_closed": false,
+    "world_model_mutations": 0
+  },
+  "budget_authority": {
+    "actual_exposure_through_call8_usd": "1.987198",
+    "aggregate_exam_cap_usd": "2.700000",
+    "budget_remaining": true,
+    "budget_remaining_does_not_create_round_authority": true,
+    "remaining_exam_budget_usd": "0.712802"
+  },
+  "certification": {
+    "classification": "VALID_STILL_INCOMPLETE_AT_FINAL_HYPOTHESIS_ROUND",
+    "stage": "025ZZE-2C-R32",
+    "status": "PASS"
+  },
+  "diagnostic_summary": {
+    "budget_failure": false,
+    "evidence_insufficient": true,
+    "product_understanding_contradicted": false,
+    "product_understanding_proven": false,
+    "provider_failure": false,
+    "validation_failure": false
+  },
+  "disposition": {
+    "expected_coordinator_disposition": "BOUNDED_STOP",
+    "hypothesis_promoted": false,
+    "what_it_is_closed": false,
+    "world_model_mutations": 0
+  },
+  "lineage": {
+    "evaluation_id": "hypothesis-evidence-evaluation:1b7ab0e80cbf5ce3f694316fb98dad570c41619f264172cbb0f951672785ebcd",
+    "final_request_id": "semantic-gap-followup-investigation-request:caac516f5171707b77c16a7a47fc3c946b8b78e3746960dd4e8d7ce6790bfa9f",
+    "global_provider_call_ordinal": 8,
+    "invocation_id": "hypothesis-evaluation-model-invocation:4c64b85c04dd29c6de6ae13109475d0343fb70c27cb8ecc8a856c900fb0db8c4",
+    "source_r22_artifact": "artifacts/investigator/025zze2c-r22-live-final-round-planner-certification.json",
+    "source_r30_artifact": "artifacts/investigator/025zze2c-r30-adaptive-call8-hypothesis-evaluation-preregistration.json",
+    "source_r31_result": "/tmp/horizon-025zze2-r31-call8-result.json"
+  },
+  "next_authority": {
+    "current_self_test_must_stop": true,
+    "do_not_use_call9_to_continue_current_final_round": true,
+    "next_work": "Diagnose and repair final-round evidence sufficiency before starting a separately sealed semantic-understanding attempt. The repair must not mutate the frozen target."
+  },
+  "round_authority": {
+    "final_hypothesis_round": true,
+    "hypothesis_round": 2,
+    "max_hypothesis_rounds": 2,
+    "reason": "STILL_INCOMPLETE may continue only within the pre-registered hypothesis-round bound. Round 2 of 2 is exhausted.",
+    "remaining_hypothesis_rounds": 0,
+    "same_run_additional_hypothesis_evaluation_authorized": false,
+    "same_run_replan_authorized": false
+  },
+  "semantic_result": {
+    "contradicting_evidence_ids": [],
+    "missing_evidence_question_count": 3,
+    "missing_evidence_questions": [
+      "What is the exact pyproject.toml [project].description at frozen commit 6151aad2081d9a849a6aac7a6081a2d7b32c4334, and does it explicitly declare the hypothesized purpose?",
+      "At that commit, which implementation or complete test passages demonstrate maintaining semantic software understanding over time, beyond the visible inventory and structural-extraction tests, or explicitly identify that maintenance as planned work?",
+      "At that commit, which implementation or test passages demonstrate compiling current world-model understanding into Horizon Cards and making it available to AI agents, or explicitly identify those capabilities as planned work?"
+    ],
+    "supporting_evidence_ids": [
+      "investigation-source-observation:8d04604e99465ae1b496b2bb2f2bc39140eece5627acef35f777445bcde33a1f",
+      "investigation-source-observation:a1dc234f3e1a4c6f8ca9f036e45b65ad27cc1d75ce2f8409c406b125cbf72a64"
+    ],
+    "supporting_evidence_is_material": true,
+    "validation": "VALID",
+    "verdict": "STILL_INCOMPLETE"
+  }
+}
