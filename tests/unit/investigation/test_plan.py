@@ -515,3 +515,22 @@ def test_plan_is_not_world_model_truth() -> None:
         plan,
         WorldModelAssertion,
     )
+
+
+
+def test_read_source_may_request_observed_eof() -> None:
+    operation = ReadSourceOperation(
+        path="src/prefect/flow_engine.py",
+        start_line=20,
+        end_line=None,
+    )
+
+    assert (
+        operation.start_line
+        == 20
+    )
+
+    assert (
+        operation.end_line
+        is None
+    )

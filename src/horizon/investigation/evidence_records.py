@@ -851,6 +851,80 @@ def canonical_source_observation_evidence_record(
             "end line must not precede start line"
         )
 
+    completeness_values = (
+        observation.observed_source_line_count,
+        observation.ends_at_observed_eof,
+    )
+
+    if (
+        completeness_values[
+            0
+        ]
+        is None
+    ) != (
+        completeness_values[
+            1
+        ]
+        is None
+    ):
+        raise InvestigationEvidenceRecordError(
+            "source completeness metadata must be "
+            "present or absent as one unit"
+        )
+
+    if (
+        observation.observed_source_line_count
+        is not None
+    ):
+        observed_source_line_count = (
+            observation.observed_source_line_count
+        )
+
+        if (
+            isinstance(
+                observed_source_line_count,
+                bool,
+            )
+            or not isinstance(
+                observed_source_line_count,
+                int,
+            )
+            or observed_source_line_count <= 0
+        ):
+            raise InvestigationEvidenceRecordError(
+                "observed source line count "
+                "must be a positive integer"
+            )
+
+        if (
+            observed_source_line_count
+            < observation.end_line
+        ):
+            raise InvestigationEvidenceRecordError(
+                "observed source line count "
+                "may not precede read end line"
+            )
+
+        if not isinstance(
+            observation.ends_at_observed_eof,
+            bool,
+        ):
+            raise InvestigationEvidenceRecordError(
+                "ends_at_observed_eof must be boolean"
+            )
+
+        if (
+            observation.ends_at_observed_eof
+            != (
+                observation.end_line
+                == observed_source_line_count
+            )
+        ):
+            raise InvestigationEvidenceRecordError(
+                "source EOF metadata is inconsistent "
+                "with observed source line count"
+            )
+
     if not isinstance(
         observation.lines,
         tuple,
@@ -928,6 +1002,22 @@ def canonical_source_observation_evidence_record(
             line_payloads
         ),
     }
+
+    if (
+        observation.observed_source_line_count
+        is not None
+    ):
+        payload[
+            "observed_source_line_count"
+        ] = (
+            observation.observed_source_line_count
+        )
+
+        payload[
+            "ends_at_observed_eof"
+        ] = (
+            observation.ends_at_observed_eof
+        )
 
     canonical_payload = json.dumps(
         payload,

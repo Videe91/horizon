@@ -114,6 +114,9 @@ class InvestigationSourceObservation:
 
     observation_id: str
 
+    observed_source_line_count: int | None = None
+    ends_at_observed_eof: bool | None = None
+
 
 @dataclass(
     frozen=True,
@@ -357,6 +360,7 @@ def _source_observation_identity(
     observation: GitCommitObservation,
     source_blob_evidence_id: str,
     source_object_id: str,
+    effective_end_line: int,
 ) -> str:
     payload = {
         "operation_kind": (
@@ -367,7 +371,7 @@ def _source_observation_identity(
             operation.start_line
         ),
         "end_line": (
-            operation.end_line
+            effective_end_line
         ),
         "commit_sha": (
             observation.commit_sha
@@ -423,11 +427,27 @@ def _execute_read_source(
         blob.content.splitlines()
     )
 
+    observed_source_line_count = len(
+        source_lines
+    )
+
     if (
-        operation.end_line
-        > len(
-            source_lines
+        operation.start_line
+        > observed_source_line_count
+    ):
+        raise InvestigationExecutionError(
+            "requested line window exceeds observed source"
         )
+
+    effective_end_line = (
+        observed_source_line_count
+        if operation.end_line is None
+        else operation.end_line
+    )
+
+    if (
+        effective_end_line
+        > observed_source_line_count
     ):
         raise InvestigationExecutionError(
             "requested line window exceeds observed source"
@@ -447,7 +467,7 @@ def _execute_read_source(
         for line_number
         in range(
             operation.start_line,
-            operation.end_line + 1,
+            effective_end_line + 1,
         )
     )
 
@@ -457,7 +477,7 @@ def _execute_read_source(
             operation.start_line
         ),
         end_line=(
-            operation.end_line
+            effective_end_line
         ),
         commit_sha=(
             observation.commit_sha
@@ -482,7 +502,17 @@ def _execute_read_source(
                 source_object_id=(
                     blob.object_id
                 ),
+                effective_end_line=(
+                    effective_end_line
+                ),
             )
+        ),
+        observed_source_line_count=(
+            observed_source_line_count
+        ),
+        ends_at_observed_eof=(
+            effective_end_line
+            == observed_source_line_count
         ),
     )
 

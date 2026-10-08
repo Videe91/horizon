@@ -208,7 +208,21 @@ def test_read_source_coordinates_are_explicit() -> None:
 
     assert rules[
         "END_LINE"
-    ] == "ONE_BASED_INCLUSIVE"
+    ] == (
+        "ONE_BASED_INCLUSIVE_OR_NULL"
+    )
+
+    assert rules[
+        "NULL_END_LINE"
+    ] == (
+        "READ_THROUGH_OBSERVED_SOURCE_EOF"
+    )
+
+    assert rules[
+        "INTEGER_END_LINE_REQUIREMENT"
+    ] == (
+        "MUST_NOT_EXCEED_OBSERVED_SOURCE_LENGTH"
+    )
 
 
 def test_symbol_lookup_semantics_are_explicit() -> None:
@@ -480,3 +494,15 @@ def test_openai_model_receives_operation_semantics_in_bounded_input() -> None:
     assert rules[
         "REGEX_SUPPORTED"
     ] == "NO"
+
+
+
+def test_read_source_eof_semantics_are_versioned() -> None:
+    contract = (
+        semantic_gap_typed_planner_operation_semantics()
+    )
+
+    assert (
+        contract.schema_version
+        == 2
+    )

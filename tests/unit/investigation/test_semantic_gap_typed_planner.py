@@ -654,3 +654,144 @@ def test_typed_planner_output_is_not_world_model_truth() -> None:
         parsed,
         WorldModelAssertion,
     )
+
+
+
+def test_read_source_accepts_null_end_line_for_observed_eof() -> None:
+    value = request()
+
+    proposed = parse_investigation_proposal(
+        value,
+        {
+            "type": "PROPOSE_INVESTIGATION",
+            "question_id": (
+                value.question_id
+            ),
+            "relationship_id": None,
+            "assertion_ids": [],
+            "claim_ids": [],
+            "assessment_ids": [],
+            "evidence_reference_ids": [],
+            "investigation_questions": [
+                "Read complete known source.",
+            ],
+        },
+    )
+
+    parsed = (
+        parse_semantic_gap_typed_planner_output(
+            request=value,
+            proposal=proposed,
+            raw={
+                "proposal_id": (
+                    proposed.proposal_id
+                ),
+                "question_id": (
+                    proposed.question_id
+                ),
+                "bindings": [
+                    {
+                        "investigation_question": (
+                            "Read complete known source."
+                        ),
+                        "step_key": (
+                            "read-complete"
+                        ),
+                        "purpose": (
+                            "Read through observed EOF."
+                        ),
+                        "operation": {
+                            "type": (
+                                "READ_SOURCE"
+                            ),
+                            "path": (
+                                "tests/test_example.py"
+                            ),
+                            "start_line": 1,
+                            "end_line": None,
+                        },
+                        "depends_on_keys": [],
+                        "expected_information": (
+                            "Complete frozen source suffix."
+                        ),
+                        "max_seconds": 10,
+                    },
+                ],
+            },
+        )
+    )
+
+    operation = (
+        parsed.bindings[
+            0
+        ].draft.operation
+    )
+
+    assert isinstance(
+        operation,
+        ReadSourceOperation,
+    )
+
+    assert (
+        operation.end_line
+        is None
+    )
+
+
+def test_read_source_schema_explicitly_allows_null_end_line() -> None:
+    schema = (
+        semantic_gap_typed_planner_schema()
+    )
+
+    binding = (
+        schema[
+            "properties"
+        ][
+            "bindings"
+        ][
+            "items"
+        ]
+    )
+
+    read_source = next(
+        alternative
+        for alternative
+        in binding[
+            "properties"
+        ][
+            "operation"
+        ][
+            "oneOf"
+        ]
+        if (
+            alternative[
+                "properties"
+            ][
+                "type"
+            ][
+                "const"
+            ]
+            == "READ_SOURCE"
+        )
+    )
+
+    end_line = (
+        read_source[
+            "properties"
+        ][
+            "end_line"
+        ]
+    )
+
+    assert {
+        option[
+            "type"
+        ]
+        for option
+        in end_line[
+            "oneOf"
+        ]
+    } == {
+        "integer",
+        "null",
+    }

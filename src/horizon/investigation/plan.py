@@ -195,7 +195,7 @@ class SearchSourceOperation:
 class ReadSourceOperation:
     path: str
     start_line: int
-    end_line: int
+    end_line: int | None
 
     @property
     def kind(
@@ -223,6 +223,9 @@ class ReadSourceOperation:
             self.start_line,
             name="start line",
         )
+
+        if self.end_line is None:
+            return
 
         _require_positive_integer(
             self.end_line,

@@ -1141,3 +1141,145 @@ def test_compact_view_does_not_scale_with_hidden_non_source_body() -> None:
         large_view.view_id
         != small_view.view_id
     )
+
+
+
+def test_source_read_exposes_observed_eof_completeness_to_evaluator() -> None:
+    raw = json.loads(
+        source_record()
+        .canonical_payload
+    )
+
+    raw[
+        "observed_source_line_count"
+    ] = 11
+
+    raw[
+        "ends_at_observed_eof"
+    ] = True
+
+    complete = CanonicalEvidenceRecord(
+        evidence_id=(
+            raw[
+                "observation_id"
+            ]
+        ),
+        evidence_kind=(
+            "INVESTIGATION_SOURCE_OBSERVATION"
+        ),
+        canonical_payload=json.dumps(
+            raw,
+            sort_keys=True,
+            separators=(
+                ",",
+                ":",
+            ),
+            ensure_ascii=True,
+        ),
+    )
+
+    value = request(
+        source=complete
+    )
+
+    view = (
+        make_hypothesis_evaluation_request_view(
+            request=value,
+            source_proposal=hypothesis(
+                value
+            ),
+        )
+    )
+
+    excerpt = (
+        view.evidence_records[
+            1
+        ].source_excerpt
+    )
+
+    assert excerpt is not None
+
+    assert (
+        excerpt.observed_source_line_count
+        == 11
+    )
+
+    assert (
+        excerpt.ends_at_observed_eof
+        is True
+    )
+
+    canonical = (
+        canonical_hypothesis_evaluation_model_input(
+            make_hypothesis_evaluation_model_invocation(
+                request=value,
+                source_proposal=hypothesis(
+                    value
+                ),
+                instruction=(
+                    b"Evaluate only supplied evidence."
+                ),
+                temperature=None,
+                cost_cap_usd=Decimal(
+                    "0.200000"
+                ),
+            )
+        )
+    )
+
+    source_payload = (
+        canonical[
+            "request"
+        ][
+            "evidence_records"
+        ][
+            1
+        ][
+            "source_excerpt"
+        ]
+    )
+
+    assert (
+        source_payload[
+            "observed_source_line_count"
+        ]
+        == 11
+    )
+
+    assert (
+        source_payload[
+            "ends_at_observed_eof"
+        ]
+        is True
+    )
+
+
+def test_legacy_source_read_without_completeness_metadata_remains_valid() -> None:
+    value = request()
+
+    view = (
+        make_hypothesis_evaluation_request_view(
+            request=value,
+            source_proposal=hypothesis(
+                value
+            ),
+        )
+    )
+
+    excerpt = (
+        view.evidence_records[
+            1
+        ].source_excerpt
+    )
+
+    assert excerpt is not None
+
+    assert (
+        excerpt.observed_source_line_count
+        is None
+    )
+
+    assert (
+        excerpt.ends_at_observed_eof
+        is None
+    )

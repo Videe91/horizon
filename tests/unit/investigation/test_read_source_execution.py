@@ -425,3 +425,138 @@ def test_read_source_result_is_observation_not_truth(
         result,
         WorldModelAssertion,
     )
+
+
+
+def test_read_source_null_end_line_reads_through_observed_eof(
+    tmp_path: Path,
+) -> None:
+    repository, commit = (
+        _repository(
+            tmp_path
+        )
+    )
+
+    observation = observe_git_commit(
+        repository,
+        commit,
+    )
+
+    result = execute_investigation_operation(
+        repository,
+        observation,
+        ReadSourceOperation(
+            path="src/pkg/policy.py",
+            start_line=2,
+            end_line=None,
+        ),
+    )
+
+    assert (
+        result.start_line
+        == 2
+    )
+
+    assert (
+        result.end_line
+        == 6
+    )
+
+    assert (
+        result.observed_source_line_count
+        == 6
+    )
+
+    assert (
+        result.ends_at_observed_eof
+        is True
+    )
+
+    assert tuple(
+        line.line_number
+        for line
+        in result.lines
+    ) == (
+        2,
+        3,
+        4,
+        5,
+        6,
+    )
+
+
+def test_read_source_explicit_partial_window_reports_not_eof(
+    tmp_path: Path,
+) -> None:
+    repository, commit = (
+        _repository(
+            tmp_path
+        )
+    )
+
+    observation = observe_git_commit(
+        repository,
+        commit,
+    )
+
+    result = execute_investigation_operation(
+        repository,
+        observation,
+        ReadSourceOperation(
+            path="src/pkg/policy.py",
+            start_line=2,
+            end_line=4,
+        ),
+    )
+
+    assert (
+        result.observed_source_line_count
+        == 6
+    )
+
+    assert (
+        result.ends_at_observed_eof
+        is False
+    )
+
+
+def test_eof_read_and_exact_explicit_eof_read_share_observation_identity(
+    tmp_path: Path,
+) -> None:
+    repository, commit = (
+        _repository(
+            tmp_path
+        )
+    )
+
+    observation = observe_git_commit(
+        repository,
+        commit,
+    )
+
+    eof = execute_investigation_operation(
+        repository,
+        observation,
+        ReadSourceOperation(
+            path="src/pkg/policy.py",
+            start_line=2,
+            end_line=None,
+        ),
+    )
+
+    explicit = execute_investigation_operation(
+        repository,
+        observation,
+        ReadSourceOperation(
+            path="src/pkg/policy.py",
+            start_line=2,
+            end_line=6,
+        ),
+    )
+
+    assert (
+        eof.observation_id
+        == explicit.observation_id
+    )
+
+    assert eof == explicit

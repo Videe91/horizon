@@ -193,7 +193,7 @@ def semantic_gap_typed_planner_operation_semantics(
 ) -> TypedPlannerOperationSemanticsContract:
     """Return the exact executor semantics exposed to planner models."""
 
-    schema_version = 1
+    schema_version = 2
 
     planner_laws = (
         (
@@ -265,10 +265,14 @@ def semantic_gap_typed_planner_operation_semantics(
                 ),
                 (
                     "END_LINE",
-                    "ONE_BASED_INCLUSIVE",
+                    "ONE_BASED_INCLUSIVE_OR_NULL",
                 ),
                 (
-                    "END_LINE_REQUIREMENT",
+                    "NULL_END_LINE",
+                    "READ_THROUGH_OBSERVED_SOURCE_EOF",
+                ),
+                (
+                    "INTEGER_END_LINE_REQUIREMENT",
                     "MUST_NOT_EXCEED_OBSERVED_SOURCE_LENGTH",
                 ),
                 (

@@ -461,3 +461,52 @@ def test_batch_rejects_duplicate_observation_identity() -> None:
                 second,
             )
         )
+
+
+
+def test_source_completeness_metadata_is_canonical_when_present() -> None:
+    value = replace(
+        observation(),
+        observed_source_line_count=11,
+        ends_at_observed_eof=True,
+    )
+
+    record = (
+        canonical_source_observation_evidence_record(
+            value
+        )
+    )
+
+    payload = json.loads(
+        record.canonical_payload
+    )
+
+    assert (
+        payload[
+            "observed_source_line_count"
+        ]
+        == 11
+    )
+
+    assert (
+        payload[
+            "ends_at_observed_eof"
+        ]
+        is True
+    )
+
+
+def test_inconsistent_source_completeness_metadata_is_rejected() -> None:
+    value = replace(
+        observation(),
+        observed_source_line_count=20,
+        ends_at_observed_eof=True,
+    )
+
+    with pytest.raises(
+        InvestigationEvidenceRecordError,
+        match="EOF metadata",
+    ):
+        canonical_source_observation_evidence_record(
+            value
+        )

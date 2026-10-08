@@ -75,6 +75,9 @@ class HypothesisEvaluationSourceExcerptView:
         ...,
     ]
 
+    observed_source_line_count: int | None = None
+    ends_at_observed_eof: bool | None = None
+
 
 @dataclass(
     frozen=True,
@@ -501,6 +504,78 @@ def _source_excerpt(
             "source end line precedes start line"
         )
 
+    observed_source_line_count = (
+        payload.get(
+            "observed_source_line_count"
+        )
+    )
+
+    ends_at_observed_eof = (
+        payload.get(
+            "ends_at_observed_eof"
+        )
+    )
+
+    if (
+        observed_source_line_count
+        is None
+    ) != (
+        ends_at_observed_eof
+        is None
+    ):
+        raise HypothesisEvaluationModelError(
+            "source completeness metadata must be "
+            "present or absent as one unit"
+        )
+
+    if (
+        observed_source_line_count
+        is not None
+    ):
+        if (
+            isinstance(
+                observed_source_line_count,
+                bool,
+            )
+            or not isinstance(
+                observed_source_line_count,
+                int,
+            )
+            or observed_source_line_count <= 0
+        ):
+            raise HypothesisEvaluationModelError(
+                "observed source line count "
+                "must be a positive integer"
+            )
+
+        if (
+            observed_source_line_count
+            < end_line
+        ):
+            raise HypothesisEvaluationModelError(
+                "observed source line count "
+                "precedes excerpt end"
+            )
+
+        if not isinstance(
+            ends_at_observed_eof,
+            bool,
+        ):
+            raise HypothesisEvaluationModelError(
+                "ends_at_observed_eof must be boolean"
+            )
+
+        if (
+            ends_at_observed_eof
+            != (
+                end_line
+                == observed_source_line_count
+            )
+        ):
+            raise HypothesisEvaluationModelError(
+                "source EOF metadata is inconsistent"
+            )
+
     lines = payload.get(
         "lines"
     )
@@ -607,6 +682,12 @@ def _source_excerpt(
             lines=tuple(
                 rendered
             ),
+            observed_source_line_count=(
+                observed_source_line_count
+            ),
+            ends_at_observed_eof=(
+                ends_at_observed_eof
+            ),
         )
     )
 
@@ -706,7 +787,7 @@ def _source_excerpt_payload(
     if value is None:
         return None
 
-    return {
+    payload = {
         "path": (
             value.path
         ),
@@ -724,6 +805,24 @@ def _source_excerpt_payload(
             in value.lines
         ],
     }
+
+    if (
+        value.observed_source_line_count
+        is not None
+    ):
+        payload[
+            "observed_source_line_count"
+        ] = (
+            value.observed_source_line_count
+        )
+
+        payload[
+            "ends_at_observed_eof"
+        ] = (
+            value.ends_at_observed_eof
+        )
+
+    return payload
 
 
 def _evidence_payload(

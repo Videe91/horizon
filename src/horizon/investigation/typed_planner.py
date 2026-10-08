@@ -952,8 +952,15 @@ def semantic_gap_typed_planner_schema() -> dict[
                 "minimum": 1,
             },
             "end_line": {
-                "type": "integer",
-                "minimum": 1,
+                "oneOf": [
+                    {
+                        "type": "integer",
+                        "minimum": 1,
+                    },
+                    {
+                        "type": "null",
+                    },
+                ],
             },
         },
         (
