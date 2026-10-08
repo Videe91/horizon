@@ -758,6 +758,7 @@ def run(
     evaluator,
     value_limits=None,
     investigator_temperature=0.0,
+    legacy_cost_cap: str = "0.010000",
 ):
     return (
         run_repository_what_it_is_semantic_understanding(
@@ -794,7 +795,7 @@ def run(
             ),
             investigator_cost_cap_usd=(
                 Decimal(
-                    "0.010000"
+                    legacy_cost_cap
                 )
             ),
             typed_planner_instruction=(
@@ -805,7 +806,7 @@ def run(
             ),
             typed_planner_cost_cap_usd=(
                 Decimal(
-                    "0.010000"
+                    legacy_cost_cap
                 )
             ),
             evaluation_instruction=(
@@ -816,7 +817,7 @@ def run(
             ),
             evaluation_cost_cap_usd=(
                 Decimal(
-                    "0.010000"
+                    legacy_cost_cap
                 )
             ),
             limits=(
@@ -1770,4 +1771,214 @@ def test_remaining_model_budget_rejects_invalid_current_cost(
                 ),
             )
         )
+
+def test_autonomous_model_calls_use_remaining_aggregate_budget_not_fixed_caps(
+    tmp_path: Path,
+) -> None:
+    fixture = prepare(
+        tmp_path
+    )
+
+    investigator = (
+        FakeInvestigator()
+    )
+
+    planner = (
+        FakePlanner()
+    )
+
+    evaluator = (
+        FakeEvaluator()
+    )
+
+    result = run(
+        fixture,
+        investigator=(
+            investigator
+        ),
+        planner=(
+            planner
+        ),
+        evaluator=(
+            evaluator
+        ),
+        value_limits=(
+            limits(
+                total_model_cost=(
+                    "0.050000"
+                )
+            )
+        ),
+
+        # Deliberately far below every fake model's
+        # actual $0.001000 cost.
+        #
+        # If the legacy fixed caps still controlled
+        # authorization, this run would fail.
+        legacy_cost_cap=(
+            "0.000001"
+        ),
+    )
+
+    assert (
+        result.disposition
+        is RepositorySemanticUnderstandingDisposition
+        .PROMOTED
+    )
+
+    assert (
+        result.total_model_cost_usd
+        == Decimal(
+            "0.005000"
+        )
+    )
+
+    assert [
+        call.cost_cap_usd
+        for call
+        in investigator.calls
+    ] == [
+        Decimal(
+            "0.050000"
+        ),
+        Decimal(
+            "0.048000"
+        ),
+    ]
+
+    assert [
+        call.cost_cap_usd
+        for call
+        in planner.calls
+    ] == [
+        Decimal(
+            "0.049000"
+        ),
+        Decimal(
+            "0.047000"
+        ),
+    ]
+
+    assert [
+        call.cost_cap_usd
+        for call
+        in evaluator.calls
+    ] == [
+        Decimal(
+            "0.046000"
+        ),
+    ]
+
+    assert all(
+        call.cost_cap_usd
+        > Decimal(
+            "0.000001"
+        )
+        for call
+        in (
+            *investigator.calls,
+            *planner.calls,
+            *evaluator.calls,
+        )
+    )
+
+
+def test_coordinator_fails_before_next_model_call_when_aggregate_budget_exhausted(
+    tmp_path: Path,
+) -> None:
+    fixture = prepare(
+        tmp_path
+    )
+
+    investigator = (
+        FakeInvestigator()
+    )
+
+    planner = (
+        FakePlanner()
+    )
+
+    evaluator = (
+        FakeEvaluator()
+    )
+
+    with pytest.raises(
+        RepositorySemanticUnderstandingCoordinatorError,
+        match=(
+            "no model budget remains"
+        ),
+    ):
+        run(
+            fixture,
+            investigator=(
+                investigator
+            ),
+            planner=(
+                planner
+            ),
+            evaluator=(
+                evaluator
+            ),
+            value_limits=(
+                limits(
+                    total_model_cost=(
+                        "0.003000"
+                    )
+                )
+            ),
+            legacy_cost_cap=(
+                "99.000000"
+            ),
+        )
+
+    #
+    # Exact call sequence before exhaustion:
+    #
+    # investigator #1 -> $0.001
+    # planner      #1 -> $0.001
+    # investigator #2 -> $0.001
+    #
+    # Aggregate budget is now zero.
+    #
+    # The hypothesis-test planner MUST NOT be
+    # dispatched.
+    #
+    assert len(
+        investigator.calls
+    ) == 2
+
+    assert len(
+        planner.calls
+    ) == 1
+
+    assert len(
+        evaluator.calls
+    ) == 0
+
+    assert (
+        investigator.calls[
+            0
+        ].cost_cap_usd
+        == Decimal(
+            "0.003000"
+        )
+    )
+
+    assert (
+        planner.calls[
+            0
+        ].cost_cap_usd
+        == Decimal(
+            "0.002000"
+        )
+    )
+
+    assert (
+        investigator.calls[
+            1
+        ].cost_cap_usd
+        == Decimal(
+            "0.001000"
+        )
+    )
 

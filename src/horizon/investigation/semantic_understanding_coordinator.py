@@ -1113,7 +1113,15 @@ def run_repository_what_it_is_semantic_understanding(
     limits: RepositorySemanticUnderstandingLimits,
     pyright_typeserver: str | Path | None = None,
 ) -> RepositorySemanticUnderstandingExecution:
-    """Run one bounded WHAT_IT_IS semantic-understanding state machine."""
+    """Run one bounded WHAT_IT_IS semantic-understanding state machine.
+
+    Autonomous provider calls derive their hard call authority from the
+    aggregate model budget remaining at the exact moment of dispatch.
+
+    The three caller-supplied per-role cost-cap arguments are retained
+    temporarily for API compatibility only. They no longer determine
+    autonomous call authorization.
+    """
 
     repository_path = Path(
         repository
@@ -1352,7 +1360,10 @@ def run_repository_what_it_is_semantic_understanding(
                     investigator_temperature
                 ),
                 cost_cap_usd=(
-                    investigator_cost_cap_usd
+                    _remaining_model_budget(
+                        total_model_cost,
+                        limits=limits,
+                    )
                 ),
             )
         )
@@ -1508,7 +1519,10 @@ def run_repository_what_it_is_semantic_understanding(
                     typed_planner_temperature
                 ),
                 cost_cap_usd=(
-                    typed_planner_cost_cap_usd
+                    _remaining_model_budget(
+                        total_model_cost,
+                        limits=limits,
+                    )
                 ),
             )
         )
@@ -1709,7 +1723,10 @@ def run_repository_what_it_is_semantic_understanding(
                     typed_planner_temperature
                 ),
                 cost_cap_usd=(
-                    typed_planner_cost_cap_usd
+                    _remaining_model_budget(
+                        total_model_cost,
+                        limits=limits,
+                    )
                 ),
             )
         )
@@ -1840,7 +1857,10 @@ def run_repository_what_it_is_semantic_understanding(
                     evaluation_temperature
                 ),
                 cost_cap_usd=(
-                    evaluation_cost_cap_usd
+                    _remaining_model_budget(
+                        total_model_cost,
+                        limits=limits,
+                    )
                 ),
             )
         )
