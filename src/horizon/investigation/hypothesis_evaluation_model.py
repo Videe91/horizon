@@ -21,11 +21,20 @@ import hashlib
 import json
 import math
 
+from collections.abc import Mapping
 from dataclasses import dataclass
 from decimal import Decimal
+from enum import Enum
+from typing import (
+    Protocol,
+    runtime_checkable,
+)
 
 from horizon.investigation.hypothesis_evaluation import (
+    HypothesisEvidenceEvaluation,
+    HypothesisEvaluationError,
     hypothesis_evaluation_schema,
+    parse_hypothesis_evaluation,
 )
 from horizon.investigator.middleware import (
     CanonicalEvidenceRecord,
@@ -1150,4 +1159,419 @@ def make_hypothesis_evaluation_model_invocation(
                 invocation_id
             ),
         )
+    )
+
+
+class HypothesisEvaluationModelValidationResult(
+    str,
+    Enum,
+):
+    VALID = "VALID"
+    INVALID = "INVALID"
+
+
+@dataclass(
+    frozen=True,
+    slots=True,
+)
+class HypothesisEvaluationModelResult:
+    provider: str
+    model_id: str
+
+    output: Mapping[
+        str,
+        object,
+    ]
+
+    input_tokens: int
+    output_tokens: int
+
+    cost_usd: Decimal
+    api_request_id: str | None
+
+
+@dataclass(
+    frozen=True,
+    slots=True,
+)
+class HypothesisEvaluationModelRun:
+    cost_usd: Decimal
+    cost_cap_usd: Decimal
+
+    provider: str
+    model_id: str
+    temperature: float | None
+
+    instruction_hash: str
+    schema_hash: str
+
+    canonical_input_hash: str
+    canonical_output_hash: str
+
+    input_tokens: int
+    output_tokens: int
+
+    api_request_id: str | None
+
+    validation_result: (
+        HypothesisEvaluationModelValidationResult
+    )
+
+    rejection_reason: str | None
+
+    invocation_id: str
+    run_id: str
+
+
+@dataclass(
+    frozen=True,
+    slots=True,
+)
+class HypothesisEvaluationModelExecution:
+    invocation: (
+        HypothesisEvaluationModelInvocation
+    )
+
+    result: (
+        HypothesisEvaluationModelResult
+    )
+
+    evaluation: (
+        HypothesisEvidenceEvaluation
+        | None
+    )
+
+    run: (
+        HypothesisEvaluationModelRun
+    )
+
+
+@runtime_checkable
+class HypothesisEvaluationModel(
+    Protocol,
+):
+    def invoke(
+        self,
+        invocation: (
+            HypothesisEvaluationModelInvocation
+        ),
+    ) -> HypothesisEvaluationModelResult:
+        ...
+
+
+def _validate_model_result(
+    result: HypothesisEvaluationModelResult,
+) -> None:
+    if not isinstance(
+        result,
+        HypothesisEvaluationModelResult,
+    ):
+        raise HypothesisEvaluationModelError(
+            "model result must be a "
+            "HypothesisEvaluationModelResult"
+        )
+
+    _require_nonempty_text(
+        result.provider,
+        field="provider",
+    )
+
+    _require_nonempty_text(
+        result.model_id,
+        field="model id",
+    )
+
+    if not isinstance(
+        result.output,
+        Mapping,
+    ):
+        raise HypothesisEvaluationModelError(
+            "model output must be an object"
+        )
+
+    try:
+        _canonical_bytes(
+            dict(
+                result.output
+            )
+        )
+    except (
+        TypeError,
+        ValueError,
+    ) as exc:
+        raise HypothesisEvaluationModelError(
+            "model output is not canonical JSON"
+        ) from exc
+
+    for name, value in (
+        (
+            "input tokens",
+            result.input_tokens,
+        ),
+        (
+            "output tokens",
+            result.output_tokens,
+        ),
+    ):
+        if (
+            isinstance(
+                value,
+                bool,
+            )
+            or not isinstance(
+                value,
+                int,
+            )
+            or value < 0
+        ):
+            raise HypothesisEvaluationModelError(
+                name
+                + " must be a nonnegative integer"
+            )
+
+    if (
+        not isinstance(
+            result.cost_usd,
+            Decimal,
+        )
+        or not result.cost_usd.is_finite()
+        or result.cost_usd < 0
+    ):
+        raise HypothesisEvaluationModelError(
+            "model cost must be a finite "
+            "nonnegative Decimal"
+        )
+
+    if (
+        result.api_request_id
+        is not None
+    ):
+        _require_nonempty_text(
+            result.api_request_id,
+            field="api request id",
+        )
+
+
+def _make_evaluation_run(
+    *,
+    invocation: HypothesisEvaluationModelInvocation,
+    result: HypothesisEvaluationModelResult,
+    validation_result: (
+        HypothesisEvaluationModelValidationResult
+    ),
+    rejection_reason: str | None,
+) -> HypothesisEvaluationModelRun:
+    canonical_output_hash = _sha256(
+        _canonical_bytes(
+            dict(
+                result.output
+            )
+        )
+    )
+
+    run_id = _identity(
+        "hypothesis-evaluation-model-run:",
+        {
+            "invocation_id": (
+                invocation.invocation_id
+            ),
+            "provider": (
+                result.provider
+            ),
+            "model_id": (
+                result.model_id
+            ),
+            "canonical_output_hash": (
+                canonical_output_hash
+            ),
+            "input_tokens": (
+                result.input_tokens
+            ),
+            "output_tokens": (
+                result.output_tokens
+            ),
+            "cost_usd": str(
+                result.cost_usd
+            ),
+            "api_request_id": (
+                result.api_request_id
+            ),
+            "validation_result": (
+                validation_result.value
+            ),
+            "rejection_reason": (
+                rejection_reason
+            ),
+        },
+    )
+
+    return HypothesisEvaluationModelRun(
+        cost_usd=(
+            result.cost_usd
+        ),
+        cost_cap_usd=(
+            invocation.cost_cap_usd
+        ),
+        provider=(
+            result.provider
+        ),
+        model_id=(
+            result.model_id
+        ),
+        temperature=(
+            invocation.temperature
+        ),
+        instruction_hash=(
+            invocation.instruction_hash
+        ),
+        schema_hash=(
+            invocation.schema_hash
+        ),
+        canonical_input_hash=(
+            invocation.canonical_input_hash
+        ),
+        canonical_output_hash=(
+            canonical_output_hash
+        ),
+        input_tokens=(
+            result.input_tokens
+        ),
+        output_tokens=(
+            result.output_tokens
+        ),
+        api_request_id=(
+            result.api_request_id
+        ),
+        validation_result=(
+            validation_result
+        ),
+        rejection_reason=(
+            rejection_reason
+        ),
+        invocation_id=(
+            invocation.invocation_id
+        ),
+        run_id=run_id,
+    )
+
+
+def execute_hypothesis_evaluation_model(
+    *,
+    model: HypothesisEvaluationModel,
+    request: InvestigationRequest,
+    source_proposal: InvestigationProposal,
+    instruction: bytes,
+    temperature: float | None,
+    cost_cap_usd: Decimal,
+) -> HypothesisEvaluationModelExecution:
+    """Execute one model call and validate only a typed evidence evaluation."""
+
+    invocation = (
+        make_hypothesis_evaluation_model_invocation(
+            request=request,
+            source_proposal=(
+                source_proposal
+            ),
+            instruction=instruction,
+            temperature=temperature,
+            cost_cap_usd=(
+                cost_cap_usd
+            ),
+        )
+    )
+
+    if not isinstance(
+        model,
+        HypothesisEvaluationModel,
+    ):
+        raise HypothesisEvaluationModelError(
+            "model must implement "
+            "HypothesisEvaluationModel"
+        )
+
+    result = model.invoke(
+        invocation
+    )
+
+    _validate_model_result(
+        result
+    )
+
+    if (
+        result.cost_usd
+        > invocation.cost_cap_usd
+    ):
+        run = _make_evaluation_run(
+            invocation=invocation,
+            result=result,
+            validation_result=(
+                HypothesisEvaluationModelValidationResult
+                .INVALID
+            ),
+            rejection_reason=(
+                "actual model cost exceeded "
+                "pre-registered cost cap"
+            ),
+        )
+
+        return (
+            HypothesisEvaluationModelExecution(
+                invocation=invocation,
+                result=result,
+                evaluation=None,
+                run=run,
+            )
+        )
+
+    try:
+        evaluation = (
+            parse_hypothesis_evaluation(
+                request=request,
+                source_proposal=(
+                    source_proposal
+                ),
+                raw=result.output,
+            )
+        )
+    except HypothesisEvaluationError as exc:
+        run = _make_evaluation_run(
+            invocation=invocation,
+            result=result,
+            validation_result=(
+                HypothesisEvaluationModelValidationResult
+                .INVALID
+            ),
+            rejection_reason=(
+                "hypothesis evaluation validation "
+                "failed: "
+                + str(
+                    exc
+                )
+            ),
+        )
+
+        return (
+            HypothesisEvaluationModelExecution(
+                invocation=invocation,
+                result=result,
+                evaluation=None,
+                run=run,
+            )
+        )
+
+    run = _make_evaluation_run(
+        invocation=invocation,
+        result=result,
+        validation_result=(
+            HypothesisEvaluationModelValidationResult
+            .VALID
+        ),
+        rejection_reason=None,
+    )
+
+    return HypothesisEvaluationModelExecution(
+        invocation=invocation,
+        result=result,
+        evaluation=evaluation,
+        run=run,
     )
