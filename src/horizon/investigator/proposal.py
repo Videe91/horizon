@@ -29,6 +29,7 @@ from typing import Any
 
 from horizon.investigator.middleware import (
     InvestigationRequest,
+    InvestigationRequestOrigin,
 )
 
 
@@ -227,15 +228,22 @@ def _require_identifier_subset(
     *,
     field: str,
     allowed: tuple[str, ...],
+    minimum: int | None = None,
 ) -> tuple[str, ...]:
-    identifiers = _require_text_sequence(
-        value,
-        field=field,
-        minimum=(
+    effective_minimum = (
+        (
             1
             if allowed
             else 0
-        ),
+        )
+        if minimum is None
+        else minimum
+    )
+
+    identifiers = _require_text_sequence(
+        value,
+        field=field,
+        minimum=effective_minimum,
     )
 
     allowed_set = set(
@@ -546,12 +554,23 @@ def parse_investigation_proposal(
                 "relationship_id is outside the request"
             )
 
+    identifier_minimum = (
+        0
+        if (
+            request.origin
+            is InvestigationRequestOrigin
+            .REPOSITORY_SEMANTIC_GAP
+        )
+        else None
+    )
+
     assertion_ids = _require_identifier_subset(
         raw[
             "assertion_ids"
         ],
         field="assertion_ids",
         allowed=request.assertion_ids,
+        minimum=identifier_minimum,
     )
 
     claim_ids = _require_identifier_subset(
@@ -560,6 +579,7 @@ def parse_investigation_proposal(
         ],
         field="claim_ids",
         allowed=request.claim_ids,
+        minimum=identifier_minimum,
     )
 
     assessment_ids = _require_identifier_subset(
@@ -568,6 +588,7 @@ def parse_investigation_proposal(
         ],
         field="assessment_ids",
         allowed=request.assessment_ids,
+        minimum=identifier_minimum,
     )
 
     evidence_reference_ids = (
@@ -579,6 +600,7 @@ def parse_investigation_proposal(
             allowed=(
                 request.evidence_reference_ids
             ),
+            minimum=identifier_minimum,
         )
     )
 
