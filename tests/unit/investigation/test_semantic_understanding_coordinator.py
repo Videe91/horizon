@@ -1,0 +1,1331 @@
+from __future__ import annotations
+
+import json
+import subprocess
+
+from dataclasses import dataclass
+from decimal import Decimal
+from pathlib import Path
+
+import pytest
+
+import horizon.investigation.semantic_understanding_coordinator as coordinator_module
+
+from horizon.cache.content import (
+    ContentAddressedExtractionCache,
+)
+from horizon.claims.epistemic import (
+    EpistemicStatus,
+)
+from horizon.investigation.deterministic_evidence_records import (
+    canonical_repository_deterministic_evidence_records,
+)
+from horizon.investigation.hypothesis_evaluation import (
+    HypothesisEvaluationVerdict,
+)
+from horizon.investigation.hypothesis_evaluation_model import (
+    HypothesisEvaluationModelResult,
+)
+from horizon.investigation.providers.openai_responses import (
+    SemanticGapTypedPlannerModelResult,
+)
+from horizon.investigation.semantic_gap import (
+    RepositorySemanticGapSection,
+    discover_repository_semantic_gaps,
+)
+from horizon.investigation.semantic_understanding_coordinator import (
+    RepositorySemanticUnderstandingCoordinatorError,
+    RepositorySemanticUnderstandingDisposition,
+    RepositorySemanticUnderstandingLimits,
+    run_repository_what_it_is_semantic_understanding,
+)
+from horizon.investigator.model import (
+    InvestigatorModelResult,
+)
+from horizon.languages.python.project_dependencies import (
+    discover_declared_project_dependencies,
+)
+from horizon.languages.python.repository_modules import (
+    discover_hatch_wheel_import_roots,
+)
+from horizon.repository.git_blob import (
+    read_observed_blob,
+)
+from horizon.repository.git_observation import (
+    observe_git_commit,
+)
+from horizon.repository.python_index import (
+    index_python_repository,
+)
+from horizon.world_model.repository_deterministic import (
+    build_repository_deterministic_world_model,
+)
+from horizon.world_model.repository_semantic_store import (
+    RepositorySemanticWorldModelStore,
+)
+
+
+DISCOVERY_QUESTION = (
+    "Which exact README statement describes "
+    "the repository's software purpose?"
+)
+
+HYPOTHESIS = (
+    "At this frozen repository snapshot, "
+    "the repository primarily implements "
+    "workflow orchestration software."
+)
+
+TEST_QUESTION = (
+    "Does the exact README source support "
+    "workflow orchestration as the repository purpose?"
+)
+
+
+@dataclass(
+    frozen=True,
+)
+class Fixture:
+    repository: Path
+    observation: object
+    index: object
+    base_model: object
+    initial_evidence: tuple
+    store: RepositorySemanticWorldModelStore
+
+
+def git(
+    repository: Path,
+    *arguments: str,
+) -> str:
+    result = subprocess.run(
+        [
+            "git",
+            "-C",
+            str(
+                repository
+            ),
+            *arguments,
+        ],
+        check=True,
+        capture_output=True,
+        text=True,
+    )
+
+    return result.stdout.strip()
+
+
+def prepare(
+    tmp_path: Path,
+) -> Fixture:
+    repository = (
+        tmp_path
+        / "repository"
+    )
+
+    repository.mkdir()
+
+    git(
+        repository,
+        "init",
+        "-q",
+    )
+
+    git(
+        repository,
+        "config",
+        "user.email",
+        "horizon@example.invalid",
+    )
+
+    git(
+        repository,
+        "config",
+        "user.name",
+        "Horizon Test",
+    )
+
+    (
+        repository
+        / "pyproject.toml"
+    ).write_text(
+        """[project]
+name = "semantic-demo"
+dependencies = ["requests>=2"]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/demo"]
+""",
+        encoding="utf-8",
+    )
+
+    (
+        repository
+        / "README.md"
+    ).write_text(
+        (
+            "Semantic Demo provides workflow orchestration software.\n"
+            "It coordinates and executes declared workflow tasks.\n"
+        ),
+        encoding="utf-8",
+    )
+
+    package = (
+        repository
+        / "src"
+        / "demo"
+    )
+
+    package.mkdir(
+        parents=True
+    )
+
+    (
+        package
+        / "__init__.py"
+    ).write_text(
+        (
+            '"""Semantic demo package."""\n'
+            "\n"
+            "def run():\n"
+            "    return None\n"
+        ),
+        encoding="utf-8",
+    )
+
+    git(
+        repository,
+        "add",
+        ".",
+    )
+
+    git(
+        repository,
+        "commit",
+        "-q",
+        "-m",
+        "initial",
+    )
+
+    commit = git(
+        repository,
+        "rev-parse",
+        "HEAD",
+    )
+
+    observation = observe_git_commit(
+        repository,
+        commit,
+    )
+
+    cache = ContentAddressedExtractionCache(
+        tmp_path
+        / "cache"
+    )
+
+    index = index_python_repository(
+        repository,
+        observation,
+        cache,
+    )
+
+    pyproject_blob = read_observed_blob(
+        repository,
+        observation,
+        "pyproject.toml",
+    )
+
+    package_layout = (
+        discover_hatch_wheel_import_roots(
+            pyproject_blob
+        )
+    )
+
+    dependencies = (
+        discover_declared_project_dependencies(
+            pyproject_blob
+        )
+    )
+
+    base_model = (
+        build_repository_deterministic_world_model(
+            index,
+            pyproject_blob=(
+                pyproject_blob
+            ),
+            package_layout=(
+                package_layout
+            ),
+            project_dependencies=(
+                dependencies
+            ),
+        )
+    )
+
+    initial_evidence = (
+        canonical_repository_deterministic_evidence_records(
+            pyproject_blob=(
+                pyproject_blob
+            ),
+            package_layout=(
+                package_layout
+            ),
+            project_dependencies=(
+                dependencies
+            ),
+        )
+    )
+
+    store = (
+        RepositorySemanticWorldModelStore(
+            tmp_path
+            / "semantic-state"
+        )
+    )
+
+    return Fixture(
+        repository=repository,
+        observation=observation,
+        index=index,
+        base_model=base_model,
+        initial_evidence=(
+            initial_evidence
+        ),
+        store=store,
+    )
+
+
+def common(
+    request,
+) -> dict[
+    str,
+    object,
+]:
+    return {
+        "question_id": (
+            request.question_id
+        ),
+        "relationship_id": (
+            request.relationship_id
+        ),
+        "assertion_ids": list(
+            request.assertion_ids
+        ),
+        "claim_ids": list(
+            request.claim_ids
+        ),
+        "assessment_ids": list(
+            request.assessment_ids
+        ),
+        "evidence_reference_ids": list(
+            request.evidence_reference_ids
+        ),
+    }
+
+
+class FakeInvestigator:
+    def __init__(
+        self,
+        mode: str = "sequence",
+    ) -> None:
+        self.mode = mode
+        self.calls = []
+
+    def invoke(
+        self,
+        invocation,
+    ):
+        self.calls.append(
+            invocation
+        )
+
+        request = (
+            invocation.request
+        )
+
+        call_number = len(
+            self.calls
+        )
+
+        if (
+            self.mode
+            == "hypothesis"
+        ):
+            kind = "hypothesis"
+
+        elif (
+            self.mode
+            == "investigation_forever"
+        ):
+            kind = "investigation"
+
+        elif call_number == 1:
+            kind = "investigation"
+
+        else:
+            kind = "hypothesis"
+
+        if kind == "investigation":
+            output = {
+                "type": (
+                    "PROPOSE_INVESTIGATION"
+                ),
+                **common(
+                    request
+                ),
+                "investigation_questions": [
+                    DISCOVERY_QUESTION,
+                ],
+            }
+
+        else:
+            output = {
+                "type": (
+                    "PROPOSE_HYPOTHESIS"
+                ),
+                **common(
+                    request
+                ),
+                "hypothesis": (
+                    HYPOTHESIS
+                ),
+                "test_questions": [
+                    TEST_QUESTION,
+                ],
+            }
+
+        return InvestigatorModelResult(
+            provider=(
+                "FAKE_INVESTIGATOR"
+            ),
+            model_id=(
+                "fake-investigator-v1"
+            ),
+            output=output,
+            input_tokens=10,
+            output_tokens=5,
+            cost_usd=Decimal(
+                "0.001000"
+            ),
+            api_request_id=(
+                "fake-investigator-"
+                + str(
+                    call_number
+                )
+            ),
+        )
+
+
+class FakePlanner:
+    def __init__(
+        self,
+        mode: str = "read",
+    ) -> None:
+        self.mode = mode
+        self.calls = []
+
+    def invoke(
+        self,
+        invocation,
+    ):
+        self.calls.append(
+            invocation
+        )
+
+        proposal = (
+            invocation.proposal
+        )
+
+        question = (
+            proposal
+            .investigation_questions[
+                0
+            ]
+        )
+
+        if self.mode == "resolve":
+            operation = {
+                "type": (
+                    "RESOLVE_CALL"
+                ),
+                "path": (
+                    "src/demo/__init__.py"
+                ),
+                "line": 4,
+                "character": 4,
+            }
+
+        else:
+            if (
+                question
+                == DISCOVERY_QUESTION
+            ):
+                line = 1
+
+            else:
+                line = 2
+
+            operation = {
+                "type": (
+                    "READ_SOURCE"
+                ),
+                "path": "README.md",
+                "start_line": line,
+                "end_line": line,
+            }
+
+        output = {
+            "proposal_id": (
+                proposal.proposal_id
+            ),
+            "question_id": (
+                invocation
+                .request
+                .question_id
+            ),
+            "bindings": [
+                {
+                    "investigation_question": (
+                        question
+                    ),
+                    "step_key": (
+                        "step_"
+                        + str(
+                            len(
+                                self.calls
+                            )
+                        )
+                    ),
+                    "purpose": (
+                        "Gather exact frozen "
+                        "repository evidence."
+                    ),
+                    "operation": (
+                        operation
+                    ),
+                    "depends_on_keys": [],
+                    "expected_information": (
+                        "Exact source evidence "
+                        "for the semantic question."
+                    ),
+                    "max_seconds": 5,
+                },
+            ],
+        }
+
+        return (
+            SemanticGapTypedPlannerModelResult(
+                provider=(
+                    "FAKE_PLANNER"
+                ),
+                model_id=(
+                    "fake-planner-v1"
+                ),
+                output=output,
+                input_tokens=10,
+                output_tokens=5,
+                cost_usd=Decimal(
+                    "0.001000"
+                ),
+                api_request_id=(
+                    "fake-planner-"
+                    + str(
+                        len(
+                            self.calls
+                        )
+                    )
+                ),
+            )
+        )
+
+
+class FakeEvaluator:
+    def __init__(
+        self,
+        mode: str = "supported",
+    ) -> None:
+        self.mode = mode
+        self.calls = []
+
+    def invoke(
+        self,
+        invocation,
+    ):
+        self.calls.append(
+            invocation
+        )
+
+        request = (
+            invocation.request
+        )
+
+        source_ids = [
+            record.evidence_id
+            for record
+            in request.evidence_records
+            if (
+                record.evidence_id
+                .startswith(
+                    "investigation-source-observation:"
+                )
+            )
+        ]
+
+        assert source_ids
+
+        if (
+            self.mode
+            == "supported_metadata"
+        ):
+            metadata = next(
+                record.evidence_id
+                for record
+                in request.evidence_records
+                if (
+                    record.evidence_id
+                    not in source_ids
+                )
+            )
+
+            verdict = "SUPPORTED"
+
+            supporting = [
+                metadata,
+            ]
+
+            contradicting = []
+            missing = []
+
+        elif (
+            self.mode
+            == "incomplete"
+        ):
+            verdict = (
+                "STILL_INCOMPLETE"
+            )
+
+            supporting = [
+                source_ids[
+                    -1
+                ],
+            ]
+
+            contradicting = []
+
+            missing = [
+                (
+                    "Inspect another exact "
+                    "source location."
+                ),
+            ]
+
+        elif (
+            self.mode
+            == "contradicted"
+        ):
+            verdict = "CONTRADICTED"
+
+            supporting = []
+
+            contradicting = [
+                source_ids[
+                    -1
+                ],
+            ]
+
+            missing = []
+
+        else:
+            verdict = "SUPPORTED"
+
+            supporting = list(
+                source_ids
+            )
+
+            contradicting = []
+            missing = []
+
+        output = {
+            "request_id": (
+                request.request_id
+            ),
+            "question_id": (
+                request.question_id
+            ),
+            "source_proposal_id": (
+                invocation
+                .source_proposal
+                .proposal_id
+            ),
+            "verdict": verdict,
+            "supporting_evidence_ids": (
+                supporting
+            ),
+            "contradicting_evidence_ids": (
+                contradicting
+            ),
+            "missing_evidence_questions": (
+                missing
+            ),
+        }
+
+        return (
+            HypothesisEvaluationModelResult(
+                provider=(
+                    "FAKE_EVALUATOR"
+                ),
+                model_id=(
+                    "fake-evaluator-v1"
+                ),
+                output=output,
+                input_tokens=10,
+                output_tokens=5,
+                cost_usd=Decimal(
+                    "0.001000"
+                ),
+                api_request_id=(
+                    "fake-evaluator-"
+                    + str(
+                        len(
+                            self.calls
+                        )
+                    )
+                ),
+            )
+        )
+
+
+class ExplodingModel:
+    def invoke(
+        self,
+        invocation,
+    ):
+        raise AssertionError(
+            "model must not be called"
+        )
+
+
+def limits(
+    *,
+    investigator_rounds: int = 2,
+    hypothesis_rounds: int = 1,
+    total_model_cost: str = "0.050000",
+) -> RepositorySemanticUnderstandingLimits:
+    return (
+        RepositorySemanticUnderstandingLimits(
+            max_investigator_rounds=(
+                investigator_rounds
+            ),
+            max_hypothesis_rounds=(
+                hypothesis_rounds
+            ),
+            max_plan_steps=4,
+            max_plan_total_seconds=30,
+            max_evidence_record_bytes=(
+                250_000
+            ),
+            max_total_evidence_bytes=(
+                1_000_000
+            ),
+            max_total_model_cost_usd=(
+                Decimal(
+                    total_model_cost
+                )
+            ),
+        )
+    )
+
+
+def run(
+    fixture: Fixture,
+    *,
+    investigator,
+    planner,
+    evaluator,
+    value_limits=None,
+):
+    return (
+        run_repository_what_it_is_semantic_understanding(
+            repository=(
+                fixture.repository
+            ),
+            observation=(
+                fixture.observation
+            ),
+            index=fixture.index,
+            base_model=(
+                fixture.base_model
+            ),
+            initial_evidence_records=(
+                fixture.initial_evidence
+            ),
+            semantic_store=(
+                fixture.store
+            ),
+            investigator_model=(
+                investigator
+            ),
+            typed_planner_model=(
+                planner
+            ),
+            evaluation_model=(
+                evaluator
+            ),
+            investigator_instruction=(
+                b"Propose only bounded semantic investigation."
+            ),
+            investigator_temperature=0.0,
+            investigator_cost_cap_usd=(
+                Decimal(
+                    "0.010000"
+                )
+            ),
+            typed_planner_instruction=(
+                b"Translate questions into legal typed operations only."
+            ),
+            typed_planner_temperature=(
+                None
+            ),
+            typed_planner_cost_cap_usd=(
+                Decimal(
+                    "0.010000"
+                )
+            ),
+            evaluation_instruction=(
+                b"Evaluate only against visible repository evidence."
+            ),
+            evaluation_temperature=(
+                None
+            ),
+            evaluation_cost_cap_usd=(
+                Decimal(
+                    "0.010000"
+                )
+            ),
+            limits=(
+                value_limits
+                or limits()
+            ),
+        )
+    )
+
+
+def test_full_offline_loop_discovers_tests_evaluates_promotes_and_persists(
+    tmp_path: Path,
+) -> None:
+    fixture = prepare(
+        tmp_path
+    )
+
+    investigator = (
+        FakeInvestigator()
+    )
+
+    planner = FakePlanner()
+
+    evaluator = (
+        FakeEvaluator()
+    )
+
+    result = run(
+        fixture,
+        investigator=(
+            investigator
+        ),
+        planner=planner,
+        evaluator=evaluator,
+    )
+
+    assert (
+        result.disposition
+        is RepositorySemanticUnderstandingDisposition
+        .PROMOTED
+    )
+
+    assert (
+        result.investigator_rounds_completed
+        == 2
+    )
+
+    assert (
+        result.hypothesis_rounds_completed
+        == 1
+    )
+
+    assert len(
+        investigator.calls
+    ) == 2
+
+    assert len(
+        planner.calls
+    ) == 2
+
+    assert len(
+        evaluator.calls
+    ) == 1
+
+    assert len(
+        result.operation_observation_ids
+    ) == 2
+
+    assert (
+        result.total_model_cost_usd
+        == Decimal(
+            "0.005000"
+        )
+    )
+
+    assert len(
+        result.final_model
+        .what_it_is_assertion_ids
+    ) == 1
+
+    assert (
+        result.persisted_overlay_path
+        is not None
+    )
+
+    assert (
+        fixture.store.load(
+            fixture.base_model
+        )
+        == result.final_model
+    )
+
+    remaining = {
+        question.section
+        for question
+        in discover_repository_semantic_gaps(
+            fixture.index,
+            result.final_model,
+        ).questions
+    }
+
+    assert (
+        RepositorySemanticGapSection
+        .WHAT_IT_IS
+        not in remaining
+    )
+
+    assertion_id = (
+        result.final_model
+        .what_it_is_assertion_ids[
+            0
+        ]
+    )
+
+    assertion = next(
+        value
+        for value
+        in result
+        .final_model
+        .snapshot
+        .assertions
+        if (
+            value.assertion_id
+            == assertion_id
+        )
+    )
+
+    assessment = next(
+        value
+        for value
+        in result
+        .final_model
+        .snapshot
+        .assessments
+        if (
+            value.assessment_id
+            == assertion.assessment_id
+        )
+    )
+
+    assert (
+        assessment.status
+        is EpistemicStatus
+        .SUPPORTED_HYPOTHESIS
+    )
+
+
+def test_existing_semantic_knowledge_short_circuits_without_any_model_call(
+    tmp_path: Path,
+) -> None:
+    fixture = prepare(
+        tmp_path
+    )
+
+    first = run(
+        fixture,
+        investigator=(
+            FakeInvestigator()
+        ),
+        planner=FakePlanner(),
+        evaluator=(
+            FakeEvaluator()
+        ),
+    )
+
+    assert (
+        first.disposition
+        is RepositorySemanticUnderstandingDisposition
+        .PROMOTED
+    )
+
+    second = run(
+        fixture,
+        investigator=(
+            ExplodingModel()
+        ),
+        planner=(
+            ExplodingModel()
+        ),
+        evaluator=(
+            ExplodingModel()
+        ),
+    )
+
+    assert (
+        second.disposition
+        is RepositorySemanticUnderstandingDisposition
+        .ALREADY_KNOWN
+    )
+
+    assert (
+        second.total_model_cost_usd
+        == Decimal(
+            "0"
+        )
+    )
+
+    assert (
+        second.operation_observation_ids
+        == ()
+    )
+
+    assert (
+        second.final_model
+        == first.final_model
+    )
+
+
+def test_supported_metadata_only_evaluation_cannot_promote(
+    tmp_path: Path,
+) -> None:
+    fixture = prepare(
+        tmp_path
+    )
+
+    result = run(
+        fixture,
+        investigator=(
+            FakeInvestigator(
+                mode="hypothesis"
+            )
+        ),
+        planner=FakePlanner(),
+        evaluator=(
+            FakeEvaluator(
+                mode=(
+                    "supported_metadata"
+                )
+            )
+        ),
+        value_limits=(
+            limits(
+                investigator_rounds=1,
+                hypothesis_rounds=1,
+            )
+        ),
+    )
+
+    assert (
+        result.disposition
+        is RepositorySemanticUnderstandingDisposition
+        .BOUNDED_STOP
+    )
+
+    assert (
+        result.evaluation
+        is not None
+    )
+
+    assert (
+        result.evaluation.verdict
+        is HypothesisEvaluationVerdict
+        .SUPPORTED
+    )
+
+    assert (
+        result.final_model
+        == fixture.base_model
+    )
+
+    assert (
+        fixture.store.load(
+            fixture.base_model
+        )
+        == fixture.base_model
+    )
+
+
+def test_incomplete_evaluation_stops_without_promotion_when_bound_is_reached(
+    tmp_path: Path,
+) -> None:
+    fixture = prepare(
+        tmp_path
+    )
+
+    result = run(
+        fixture,
+        investigator=(
+            FakeInvestigator(
+                mode="hypothesis"
+            )
+        ),
+        planner=FakePlanner(),
+        evaluator=(
+            FakeEvaluator(
+                mode="incomplete"
+            )
+        ),
+        value_limits=(
+            limits(
+                investigator_rounds=1,
+                hypothesis_rounds=1,
+            )
+        ),
+    )
+
+    assert (
+        result.disposition
+        is RepositorySemanticUnderstandingDisposition
+        .BOUNDED_STOP
+    )
+
+    assert (
+        result.evaluation
+        is not None
+    )
+
+    assert (
+        result.evaluation.verdict
+        is HypothesisEvaluationVerdict
+        .STILL_INCOMPLETE
+    )
+
+    assert (
+        fixture.store.load(
+            fixture.base_model
+        )
+        == fixture.base_model
+    )
+
+
+def test_contradicted_evaluation_stops_without_promotion(
+    tmp_path: Path,
+) -> None:
+    fixture = prepare(
+        tmp_path
+    )
+
+    result = run(
+        fixture,
+        investigator=(
+            FakeInvestigator(
+                mode="hypothesis"
+            )
+        ),
+        planner=FakePlanner(),
+        evaluator=(
+            FakeEvaluator(
+                mode="contradicted"
+            )
+        ),
+        value_limits=(
+            limits(
+                investigator_rounds=1,
+                hypothesis_rounds=1,
+            )
+        ),
+    )
+
+    assert (
+        result.disposition
+        is RepositorySemanticUnderstandingDisposition
+        .EVALUATION_NOT_SUPPORTED
+    )
+
+    assert (
+        result.evaluation.verdict
+        is HypothesisEvaluationVerdict
+        .CONTRADICTED
+    )
+
+    assert (
+        fixture.store.load(
+            fixture.base_model
+        )
+        == fixture.base_model
+    )
+
+
+def test_total_model_cost_budget_fails_closed(
+    tmp_path: Path,
+) -> None:
+    fixture = prepare(
+        tmp_path
+    )
+
+    planner = FakePlanner()
+
+    with pytest.raises(
+        RepositorySemanticUnderstandingCoordinatorError,
+        match="total model cost",
+    ):
+        run(
+            fixture,
+            investigator=(
+                FakeInvestigator()
+            ),
+            planner=planner,
+            evaluator=(
+                FakeEvaluator()
+            ),
+            value_limits=(
+                limits(
+                    total_model_cost=(
+                        "0.000500"
+                    )
+                )
+            ),
+        )
+
+    assert planner.calls == []
+
+    assert (
+        fixture.store.load(
+            fixture.base_model
+        )
+        == fixture.base_model
+    )
+
+
+def test_resolve_call_fails_before_operation_execution_without_evidence_bridge(
+    tmp_path: Path,
+    monkeypatch,
+) -> None:
+    fixture = prepare(
+        tmp_path
+    )
+
+    executed = []
+
+    def forbidden_executor(
+        *args,
+        **kwargs,
+    ):
+        executed.append(
+            (
+                args,
+                kwargs,
+            )
+        )
+
+        raise AssertionError(
+            "RESOLVE_CALL must be rejected before execution"
+        )
+
+    monkeypatch.setattr(
+        coordinator_module,
+        "execute_investigation_operation",
+        forbidden_executor,
+    )
+
+    with pytest.raises(
+        RepositorySemanticUnderstandingCoordinatorError,
+        match="RESOLVE_CALL",
+    ):
+        run(
+            fixture,
+            investigator=(
+                FakeInvestigator(
+                    mode=(
+                        "investigation_forever"
+                    )
+                )
+            ),
+            planner=(
+                FakePlanner(
+                    mode="resolve"
+                )
+            ),
+            evaluator=(
+                FakeEvaluator()
+            ),
+            value_limits=(
+                limits(
+                    investigator_rounds=1,
+                )
+            ),
+        )
+
+    assert executed == []
+
+
+def test_discovery_round_limit_is_hard(
+    tmp_path: Path,
+) -> None:
+    fixture = prepare(
+        tmp_path
+    )
+
+    evaluator = (
+        FakeEvaluator()
+    )
+
+    result = run(
+        fixture,
+        investigator=(
+            FakeInvestigator(
+                mode=(
+                    "investigation_forever"
+                )
+            )
+        ),
+        planner=FakePlanner(),
+        evaluator=evaluator,
+        value_limits=(
+            limits(
+                investigator_rounds=1,
+            )
+        ),
+    )
+
+    assert (
+        result.disposition
+        is RepositorySemanticUnderstandingDisposition
+        .BOUNDED_STOP
+    )
+
+    assert (
+        result.investigator_rounds_completed
+        == 1
+    )
+
+    assert (
+        result.hypothesis_rounds_completed
+        == 0
+    )
+
+    assert len(
+        result.operation_observation_ids
+    ) == 1
+
+    assert evaluator.calls == []
+
+    assert (
+        fixture.store.load(
+            fixture.base_model
+        )
+        == fixture.base_model
+    )
