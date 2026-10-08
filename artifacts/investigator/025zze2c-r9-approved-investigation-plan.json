@@ -1,0 +1,91 @@
+{
+  "approved_plan": {
+    "max_steps": 6,
+    "max_total_seconds": 120,
+    "plan_id": "investigation-plan:8d35fec67cb64f58ca08961025d62660230b0eecf443f04648518b68bce9f10c",
+    "planned_total_seconds": 90,
+    "proposal_id": "investigation-proposal:718b5d12bc9c7a95389ce878ebfe79ab4a602746b1c0b06d5dc10d18f530192d",
+    "question_id": "repository-semantic-gap-question:627bdd67d2987320db7e045a86ea8c87a4c256ab4bf3c44c86b90c52d8775ab8",
+    "step_count": 3,
+    "steps": [
+      {
+        "depends_on_step_ids": [],
+        "expected_information": "Literal matches with observed paths and evidence identities that can anchor subsequent bounded reads of definitions, purpose statements, and qualifications.",
+        "max_seconds": 30,
+        "operation": {
+          "path_prefix": null,
+          "query": "understanding",
+          "type": "SEARCH_SOURCE"
+        },
+        "purpose": "Locate passages describing software understanding and its intended purpose without assuming repository paths.",
+        "source_step_key": "discover_understanding_passages",
+        "step_id": "investigation-step:8ec9ec53cfac02e67cf82786ba403835d530deaa8cacf4324a2c7b28bb83f4fa"
+      },
+      {
+        "depends_on_step_ids": [],
+        "expected_information": "Observed locations mentioning agents, suitable for replanning bounded reads of access mechanisms and their implementation status. Matches alone will not establish working functionality.",
+        "max_seconds": 30,
+        "operation": {
+          "path_prefix": null,
+          "query": "agent",
+          "type": "SEARCH_SOURCE"
+        },
+        "purpose": "Locate candidate agent-facing interfaces, tests, and documentation for distinguishing implemented access from planned capabilities.",
+        "source_step_key": "discover_agent_access_passages",
+        "step_id": "investigation-step:f6c68dc4ff46dc731738921022864dbbe18bb7a058fa599b97568d17eddae4bf"
+      },
+      {
+        "depends_on_step_ids": [],
+        "expected_information": "Observed update-related locations for subsequent bounded inspection of maintenance behavior and tests. Unrelated or absent matches will require replanning, not a conclusion that maintenance is unimplemented.",
+        "max_seconds": 30,
+        "operation": {
+          "path_prefix": null,
+          "query": "update",
+          "type": "SEARCH_SOURCE"
+        },
+        "purpose": "Locate candidate update mechanisms, tests, and planning statements relevant to maintaining software understanding over time.",
+        "source_step_key": "discover_maintenance_passages",
+        "step_id": "investigation-step:fd15f30c135d56887c6944f1b0990286ccb49a376d78e8d5aaebc66adefd9272"
+      }
+    ]
+  },
+  "authority": {
+    "model_calls_this_stage": 0,
+    "plan_executed": false,
+    "repository_mutations": 0,
+    "repository_operations_executed": 0,
+    "semantic_promotions": 0,
+    "what_it_is_closed": false,
+    "world_model_mutations": 0
+  },
+  "certification": {
+    "name": "025ZZE-2C-R9 offline investigation-plan approval",
+    "status": "PASS"
+  },
+  "lineage": {
+    "planning_proposal_id": "investigation-proposal:718b5d12bc9c7a95389ce878ebfe79ab4a602746b1c0b06d5dc10d18f530192d",
+    "request_id": "investigation-request:fe6c0526a0667730eba56abe4dc465b958cac79616d78842857198e76a5b5d61",
+    "source_hypothesis_proposal_id": "investigation-proposal:50754d89b43816d8b54d12712690c16815462f9daa0c3b515d0ee3bd6e385103"
+  },
+  "next_authorized_stage": "Execute exactly the three approved SEARCH_SOURCE operations against frozen Horizon commit 6151aad2081d9a849a6aac7a6081a2d7b32c4334, record their observations as immutable evidence, and do not call any model.",
+  "review": {
+    "all_operations_read_only": true,
+    "all_path_prefixes_unrestricted": true,
+    "approved_for_execution": true,
+    "mutating_operation_present": false,
+    "questions_covered_by_planner": true,
+    "resolve_call_present": false,
+    "search_source_only": true,
+    "within_step_limit": true,
+    "within_time_limit": true
+  },
+  "source_live_planner": {
+    "api_request_id": "req_70fc0e412b654965ab1f79a06472f9cd",
+    "artifact": "artifacts/investigator/025zze2c-r8-live-typed-planner.json",
+    "cost_usd": "0.145660",
+    "live_validation_result": "VALID",
+    "offline_revalidation_result": "VALID",
+    "planner_output_id": "semantic-gap-typed-planner-output:a1d746c869b660bb680abeb254f6dc8dfbc96ae49f9ad030e5d82fd2d4276dfc",
+    "run_id": "semantic-gap-typed-planner-run:139a74e5a8a8b7542d6d7f09c232f236023156e6299baabf3a40b62433a62fc7"
+  }
+}
