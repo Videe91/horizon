@@ -15,7 +15,7 @@ The state machine is bounded by:
 - plan wall-clock budgets;
 - evidence-record bytes;
 - total evidence bytes;
-- per-call model cost caps;
+- adaptive per-call model budget authority derived from remaining aggregate budget;
 - aggregate model cost.
 
 Only canonical READ_SOURCE observations gathered by this coordinator are
@@ -671,6 +671,56 @@ def _validate_evidence_budget(
         raise RepositorySemanticUnderstandingCoordinatorError(
             "total evidence exceeds coordinator byte limit"
         )
+
+
+def _remaining_model_budget(
+    current: Decimal,
+    *,
+    limits: RepositorySemanticUnderstandingLimits,
+) -> Decimal:
+    """Return the exact budget still authorized before the next model call."""
+
+    if not isinstance(
+        limits,
+        RepositorySemanticUnderstandingLimits,
+    ):
+        raise RepositorySemanticUnderstandingCoordinatorError(
+            "limits must be RepositorySemanticUnderstandingLimits"
+        )
+
+    if (
+        not isinstance(
+            current,
+            Decimal,
+        )
+        or not current.is_finite()
+        or current < 0
+    ):
+        raise RepositorySemanticUnderstandingCoordinatorError(
+            "current model cost must be a finite nonnegative Decimal"
+        )
+
+    maximum = (
+        limits.max_total_model_cost_usd
+    )
+
+    if current > maximum:
+        raise RepositorySemanticUnderstandingCoordinatorError(
+            "current model cost already exceeds coordinator budget"
+        )
+
+    remaining = (
+        maximum
+        - current
+    )
+
+    if remaining <= 0:
+        raise RepositorySemanticUnderstandingCoordinatorError(
+            "no model budget remains for another provider call"
+        )
+
+    return remaining
+
 
 
 def _add_model_cost(

@@ -1594,3 +1594,180 @@ def test_final_hypothesis_round_rejects_discovery_only_plan_before_execution(
         == fixture.base_model
     )
 
+def test_remaining_model_budget_starts_with_full_aggregate_budget() -> None:
+    remaining = (
+        coordinator_module
+        ._remaining_model_budget(
+            Decimal(
+                "0"
+            ),
+            limits=(
+                limits(
+                    total_model_cost=(
+                        "2.700000"
+                    )
+                )
+            ),
+        )
+    )
+
+    assert (
+        remaining
+        == Decimal(
+            "2.700000"
+        )
+    )
+
+
+def test_remaining_model_budget_adapts_to_actual_spend() -> None:
+    remaining = (
+        coordinator_module
+        ._remaining_model_budget(
+            Decimal(
+                "1.538588"
+            ),
+            limits=(
+                limits(
+                    total_model_cost=(
+                        "2.700000"
+                    )
+                )
+            ),
+        )
+    )
+
+    assert (
+        remaining
+        == Decimal(
+            "1.161412"
+        )
+    )
+
+
+def test_remaining_model_budget_changes_after_each_actual_cost() -> None:
+    value_limits = limits(
+        total_model_cost=(
+            "2.700000"
+        )
+    )
+
+    first = (
+        coordinator_module
+        ._remaining_model_budget(
+            Decimal(
+                "0.500000"
+            ),
+            limits=(
+                value_limits
+            ),
+        )
+    )
+
+    second = (
+        coordinator_module
+        ._remaining_model_budget(
+            Decimal(
+                "1.250000"
+            ),
+            limits=(
+                value_limits
+            ),
+        )
+    )
+
+    assert (
+        first
+        == Decimal(
+            "2.200000"
+        )
+    )
+
+    assert (
+        second
+        == Decimal(
+            "1.450000"
+        )
+    )
+
+    assert second < first
+
+
+def test_remaining_model_budget_fails_closed_when_budget_is_exhausted() -> None:
+    with pytest.raises(
+        RepositorySemanticUnderstandingCoordinatorError,
+        match=(
+            "no model budget remains"
+        ),
+    ):
+        (
+            coordinator_module
+            ._remaining_model_budget(
+                Decimal(
+                    "2.700000"
+                ),
+                limits=(
+                    limits(
+                        total_model_cost=(
+                            "2.700000"
+                        )
+                    )
+                ),
+            )
+        )
+
+
+def test_remaining_model_budget_rejects_already_overspent_state() -> None:
+    with pytest.raises(
+        RepositorySemanticUnderstandingCoordinatorError,
+        match=(
+            "already exceeds coordinator budget"
+        ),
+    ):
+        (
+            coordinator_module
+            ._remaining_model_budget(
+                Decimal(
+                    "2.700001"
+                ),
+                limits=(
+                    limits(
+                        total_model_cost=(
+                            "2.700000"
+                        )
+                    )
+                ),
+            )
+        )
+
+
+@pytest.mark.parametrize(
+    "current",
+    [
+        Decimal("-0.000001"),
+        Decimal("NaN"),
+        Decimal("Infinity"),
+    ],
+)
+def test_remaining_model_budget_rejects_invalid_current_cost(
+    current: Decimal,
+) -> None:
+    with pytest.raises(
+        RepositorySemanticUnderstandingCoordinatorError,
+        match=(
+            "finite nonnegative Decimal"
+        ),
+    ):
+        (
+            coordinator_module
+            ._remaining_model_budget(
+                current,
+                limits=(
+                    limits(
+                        total_model_cost=(
+                            "2.700000"
+                        )
+                    )
+                ),
+            )
+        )
+
