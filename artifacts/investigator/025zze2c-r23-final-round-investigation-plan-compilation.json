@@ -1,0 +1,91 @@
+{
+  "boundary": {
+    "evidence_records_created": 0,
+    "investigation_plan_compiled": true,
+    "investigation_plan_executed": false,
+    "planner_output_changed": false,
+    "provider_calls_this_stage": 0,
+    "read_source_operations_executed": 0,
+    "repository_operations": 0,
+    "semantic_promotions": 0,
+    "what_it_is_closed": false,
+    "world_model_mutations": 0
+  },
+  "certification": {
+    "mode": "OFFLINE_DETERMINISTIC_PLAN_COMPILATION",
+    "stage": "025ZZE-2C-R23",
+    "status": "PASS"
+  },
+  "compilation": {
+    "compiler": "compile_semantic_gap_proposal_plan",
+    "deterministic_recompile_equal": true,
+    "max_steps": 3,
+    "max_total_seconds": 30,
+    "plan_id": "investigation-plan:1c1c23f01e1d4f8ddec645fa324265d95264c4b423d15461d837b4429ccc8b2d",
+    "read_source_count": 3,
+    "search_source_count": 0,
+    "step_count": 3,
+    "total_step_seconds": 30
+  },
+  "lineage": {
+    "planner_output_id": "semantic-gap-typed-planner-output:a5d2e7f7c618b2deaf29ff92a914e6f8a9b2a90b11163f2187664ed4b70d16f3",
+    "proposal_id": "investigation-proposal:718b5d12bc9c7a95389ce878ebfe79ab4a602746b1c0b06d5dc10d18f530192d",
+    "question_id": "repository-semantic-gap-question:627bdd67d2987320db7e045a86ea8c87a4c256ab4bf3c44c86b90c52d8775ab8",
+    "source_r22_artifact": "artifacts/investigator/025zze2c-r22-live-final-round-planner-certification.json",
+    "source_r22_git_commit": "e96d92bbd93775fa5c472cfbc174117125ec2459",
+    "source_r22_sha256": "sha256:9b9ab812f203b2d6384a4bc0b311d586e133876da8a61f7dd2fb054e1159e14f",
+    "target_commit": "6151aad2081d9a849a6aac7a6081a2d7b32c4334"
+  },
+  "next_authorized_stage": "Execute exactly the certified R23 InvestigationPlan against frozen target commit 6151aad2081d9a849a6aac7a6081a2d7b32c4334, collect only its three READ_SOURCE observations, and stop before final hypothesis evaluation or World Model mutation.",
+  "plan": {
+    "max_steps": 3,
+    "max_total_seconds": 30,
+    "plan_id": "investigation-plan:1c1c23f01e1d4f8ddec645fa324265d95264c4b423d15461d837b4429ccc8b2d",
+    "proposal_id": "investigation-proposal:718b5d12bc9c7a95389ce878ebfe79ab4a602746b1c0b06d5dc10d18f530192d",
+    "question_id": "repository-semantic-gap-question:627bdd67d2987320db7e045a86ea8c87a4c256ab4bf3c44c86b90c52d8775ab8",
+    "steps": [
+      {
+        "depends_on_step_ids": [],
+        "expected_information": "Test setup and assertions showing what repository cards expose and any maintenance behavior covered in this range, distinguishing tested card generation from demonstrated agent delivery or continuously running maintenance.",
+        "max_seconds": 10,
+        "operation": {
+          "end_line": 381,
+          "path": "tests/unit/cards/test_repository_card.py",
+          "start_line": 1,
+          "type": "READ_SOURCE"
+        },
+        "purpose": "Inspect repository-card tests for concrete output behavior and any change-handling scenarios within the observed bounds.",
+        "source_step_key": "read_repository_card_tests",
+        "step_id": "investigation-step:147f93e47da26ca6fc278e0616a73d966151862058d374b8a5fea7a649c0bbe9"
+      },
+      {
+        "depends_on_step_ids": [],
+        "expected_information": "Exact passages defining the intended software understanding and agent-facing context, including distinctions between architectural intent, limitations, and future work.",
+        "max_seconds": 10,
+        "operation": {
+          "end_line": 278,
+          "path": "CONSTITUTION.md",
+          "start_line": 1,
+          "type": "READ_SOURCE"
+        },
+        "purpose": "Read the stated purpose, understanding model, card rationale, and surrounding qualifications within the observed documentation bounds.",
+        "source_step_key": "read_purpose_and_scope",
+        "step_id": "investigation-step:27798c1e683080d8b1cf729636650202b842a730d263efdbb05aac2db8e265f0"
+      },
+      {
+        "depends_on_step_ids": [],
+        "expected_information": "Implemented reconciliation behavior, inputs, and limits visible in this range; evidence supporting or qualifying maintenance over time without assuming continuous execution.",
+        "max_seconds": 10,
+        "operation": {
+          "end_line": 371,
+          "path": "src/horizon/world_model/reconciliation.py",
+          "start_line": 1,
+          "type": "READ_SOURCE"
+        },
+        "purpose": "Inspect world-model reconciliation implementation for concrete maintenance behavior rather than relying on purpose statements.",
+        "source_step_key": "read_maintenance_implementation",
+        "step_id": "investigation-step:f13515dac3b392c0a32cfdbb2a6df01f681432c17662ea40b086a63fcdc020bf"
+      }
+    ]
+  }
+}
