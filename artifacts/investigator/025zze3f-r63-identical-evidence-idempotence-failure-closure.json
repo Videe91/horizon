@@ -1,0 +1,121 @@
+{
+  "attempt": {
+    "attempt_id": "horizon-self-025zze3f",
+    "fresh_attempt_required_after_repair": true,
+    "namespace_reuse_allowed": false,
+    "rerun_allowed": false,
+    "state": "PERMANENTLY_CLOSED"
+  },
+  "authority": {
+    "frozen_target_head": "6151aad2081d9a849a6aac7a6081a2d7b32c4334",
+    "frozen_target_tree": "373ebadeac1ad41fa2532c113f4a850ca379d962",
+    "production_src_tree": "a3a3fb351e35e1292a3afefd6ef6365c532d936d",
+    "r61_head": "6b420be5f108cb97a8174f4b60724caf04500fba"
+  },
+  "certification": {
+    "mode": "PERMANENT_LIVE_FAILURE_CLOSURE",
+    "stage": "025ZZE-3F-R63",
+    "status": "PASS"
+  },
+  "classification": "IDENTICAL_EVIDENCE_IDEMPOTENCE_GAP",
+  "closure_id": "fresh-autonomous-semantic-self-test-closure:9e19b1eec87cce1d3592d18ff643731c16ad4bbaf2b50f5b6d4bc3476b134b57",
+  "defect": {
+    "budget_change_required": false,
+    "component": "semantic-gap follow-up evidence composition",
+    "current_behavior": "extend_semantic_gap_investigation_request rejects any supplemental evidence id already present in the request, including a byte-identical canonical evidence record",
+    "evidence_identity_change_required": false,
+    "planner_contract_change_required": false,
+    "provider_change_required": false,
+    "required_safe_behavior": [
+      "if supplemental evidence id is new, append the canonical record normally",
+      "if supplemental evidence id already exists and evidence_kind plus canonical_payload are exactly identical, treat the record as idempotently already present",
+      "if supplemental evidence id already exists but evidence_kind or canonical_payload differs, fail closed",
+      "do not create any new semantic authority from duplicate evidence"
+    ],
+    "world_model_rule_change_required": false
+  },
+  "duplicate_evidence_proof": {
+    "different_evidence_payload_detected": false,
+    "evidence_id": "investigation-source-observation:33abb5ebd55ce3aa83fe867d3373a6f4e22691fd3657aa5b0c82aedc2911929d",
+    "evidence_kind": "INVESTIGATION_SOURCE_OBSERVATION",
+    "final_round_planner_read": {
+      "effective_end_line": 1331,
+      "requested_end_line": 1331,
+      "start_line": 1
+    },
+    "first_planner_read": {
+      "effective_end_line": 1331,
+      "requested_end_line": null,
+      "start_line": 1
+    },
+    "frozen_source_line_count": 1331,
+    "observation_id": "investigation-source-observation:33abb5ebd55ce3aa83fe867d3373a6f4e22691fd3657aa5b0c82aedc2911929d",
+    "same_canonical_payload": true,
+    "same_evidence_id": true,
+    "same_evidence_kind": true,
+    "same_observation_id": true,
+    "source_path": "tests/unit/investigation/test_semantic_understanding_coordinator.py"
+  },
+  "live_outcome": {
+    "automatic_retry": false,
+    "completed_provider_responses": 4,
+    "exception_class": "SemanticGapFollowupRequestError",
+    "exception_message": "supplemental evidence already exists in base request",
+    "final_hypothesis_evaluator_dispatched": false,
+    "final_round_planner_completed": true,
+    "first_hypothesis_evaluator_completed": true,
+    "first_hypothesis_evaluator_verdict": "STILL_INCOMPLETE",
+    "model_cost_usd": "1.164915",
+    "provider_requests_attempted": 4,
+    "provider_transport_failures": 0,
+    "semantic_overlay_created": false,
+    "status": "FAILED",
+    "world_model_mutations": 0
+  },
+  "next_authorized_stage": "Commit and push this exact R63 closure. After the closure is durable and remote-exact, repair the identical-evidence idempotence gap entirely offline. Preserve fail-closed behavior for same-id/different-payload collisions. Never rerun or reuse 025ZZE-3F.",
+  "preserved_live_authority": {
+    "attempt_ledger_path": "/tmp/horizon-025zze3f-live-attempt-ledger.jsonl",
+    "attempt_ledger_sha256": "sha256:5fe0bdca85da7373073f0671654508d070ce28082fb2c4f3fbae94fba5203e4c",
+    "final_result_path": "/tmp/horizon-025zze3f-live-result.json",
+    "final_result_sha256": "sha256:d72cf6cbf73858ff7b2b0c770cea75b516ee40dd92b321a8996f03c4a9129d31",
+    "live_lock_path": "/tmp/horizon-025zze3f-live.lock",
+    "live_lock_sha256": "sha256:5ea032222ab84518ae128cb66c250ea7dc3e1972e08c0a591b65a0b00a438870",
+    "response_spool_directory": "/tmp/horizon-025zze3f-live-response-spool",
+    "response_spool_file_count": 4,
+    "response_spool_manifest": [
+      {
+        "ordinal": 1,
+        "provider_role": "INVESTIGATOR",
+        "response_path": "/tmp/horizon-025zze3f-live-response-spool/response-0001.json",
+        "response_sha256": "sha256:ce4c5350d2e0898fafdff9d5ddabe9fb9b5a05b38380153ea9fb6f8663ff5a14"
+      },
+      {
+        "ordinal": 2,
+        "provider_role": "TYPED_PLANNER",
+        "response_path": "/tmp/horizon-025zze3f-live-response-spool/response-0002.json",
+        "response_sha256": "sha256:c41e56d4752721ca1f6084d1aa394aa4bdf87c8ab8aaf7223dc36b2f4150e6f7"
+      },
+      {
+        "ordinal": 3,
+        "provider_role": "HYPOTHESIS_EVALUATOR",
+        "response_path": "/tmp/horizon-025zze3f-live-response-spool/response-0003.json",
+        "response_sha256": "sha256:d2fe5ad260e648f00ce887943a20df72078be84b52e6d8ee08951fa52cb7b3ce"
+      },
+      {
+        "ordinal": 4,
+        "provider_role": "TYPED_PLANNER",
+        "response_path": "/tmp/horizon-025zze3f-live-response-spool/response-0004.json",
+        "response_sha256": "sha256:6a7b245768a1bc0e83ace23930d9a3b665549f6c8e0649b2cd01b0cc805e9f6f"
+      }
+    ]
+  },
+  "safety": {
+    "3f_state_deleted": false,
+    "3f_state_modified": false,
+    "historical_paid_responses_replayed_live": false,
+    "paid_calls_this_stage": 0,
+    "production_source_changes_this_stage": 0,
+    "provider_calls_this_stage": 0,
+    "world_model_mutations_this_stage": 0
+  }
+}
