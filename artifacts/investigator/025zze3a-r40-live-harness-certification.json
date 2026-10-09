@@ -1,0 +1,63 @@
+{
+  "boundary": {
+    "OPENAI_API_KEY_read": false,
+    "live_attempt_ledger_created": false,
+    "live_lock_created": false,
+    "live_response_spool_created": false,
+    "live_result_spool_created": false,
+    "live_world_model_mutations": 0,
+    "paid_calls": 0,
+    "provider_network_calls": 0
+  },
+  "certification": "R40_EXACT_LIVE_HARNESS_OFFLINE_CERTIFICATION",
+  "harness_contract": {
+    "aggregate_cost_cap_usd": "2.700000",
+    "attempt_event_fsynced_before_provider_dispatch": true,
+    "current_committed_certificate_required_for_live": true,
+    "current_committed_runner_required_for_live": true,
+    "final_result_exclusive_spool": true,
+    "fresh_local_provider_ordinal_starts_at_1": true,
+    "frozen_target_rechecked_before_credential": true,
+    "live_lock_created_before_api_key_read": true,
+    "max_provider_calls_enforced": 9,
+    "prefect_rechecked_before_credential": true,
+    "production_src_tree_immutable": true,
+    "provider_exception_has_no_automatic_retry": true,
+    "remote_exact_current_head_required_for_live": true,
+    "response_spool_fsynced": true,
+    "response_spool_hash_ledgered": true,
+    "response_spooled_before_adapter_validation": true,
+    "semantic_overlay_absent_before_credential": true
+  },
+  "next_authorized_stage": "Commit and push this exact R40 runner and certificate. Only while that exact commit remains current, clean, remote-exact, R39-descended, and production-src-identical may a later explicit live-execution command enter --live.",
+  "offline_boundary_proof": {
+    "cost_meter_valid": true,
+    "fake_sdk_responses": 1,
+    "ledger_event_order": [
+      "ATTEMPT_STARTED",
+      "ATTEMPT",
+      "RESPONSE_SPOOLED"
+    ],
+    "network_provider_calls": 0,
+    "prefect_repository_mutations": 0,
+    "response_spool_hash_verified": true,
+    "semantic_store_mutations": 0,
+    "target_identity_reconstructed": true,
+    "target_repository_mutations": 0
+  },
+  "production_src_tree": "83bf5c9029729a3311023fe2133f2a04321136d0",
+  "r39_head": "02c2952be28037657d8a0519f38a66bbbfa03188",
+  "r39_seal_id": "fresh-autonomous-semantic-self-test-seal:e6b5fe766bce96c1f6b9e971a2568df65362d794472a1e1091a5efc867ae2e54",
+  "r39_seal_sha256": "sha256:a2e947f17a6ff9a5c3bf8438a9974a7bbab29ae87f7f215345ff6febfc3a3836",
+  "runner_path": "artifacts/investigator/025zze3a-live-runner.py",
+  "runner_sha256": "sha256:0400cefcf5cb09ce902e4b756379aba35842349b9f34417ea717faf0f893a7f6",
+  "status": "PASS",
+  "target": {
+    "base_world_model_snapshot_id": "world-model-snapshot:44d0df5367ae7e6a1fa212e80cf6a79eab422cda3dec9b56ed0166944365faff",
+    "commit": "6151aad2081d9a849a6aac7a6081a2d7b32c4334",
+    "repository_observation_id": "git-observation:a453d58352a0769d5fbc954c808c977f2e0a65eb095d862d5f3f8a9566cab5b5",
+    "tree": "373ebadeac1ad41fa2532c113f4a850ca379d962",
+    "what_it_is_gap_id": "repository-semantic-gap:b530b9c5bd7f0108fe555ddbd2d74250c07ca5e854e2e1ddda5dcc030fb01e5d",
+    "what_it_is_question_id": "repository-semantic-gap-question:627bdd67d2987320db7e045a86ea8c87a4c256ab4bf3c44c86b90c52d8775ab8"
+  }
+}
