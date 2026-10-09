@@ -1,0 +1,189 @@
+{
+  "attempt": {
+    "attempt_id": "horizon-self-025zze3d",
+    "automatic_retry_occurred": false,
+    "execution_status": "FAILED_AFTER_PROVIDER_RESPONSES_BEFORE_PLAN_EXECUTION",
+    "failure_class": "InvestigationPlanError",
+    "failure_message": "investigation plan exceeds total time budget",
+    "namespace_reuse_allowed": false,
+    "provider_attempt_events": 4,
+    "provider_calls_completed": 4,
+    "provider_failure_events": 0,
+    "provider_response_events": 4,
+    "rerun_allowed": false,
+    "state": "PERMANENTLY_CLOSED"
+  },
+  "certification": {
+    "purpose": "Durably and permanently close consumed 025ZZE-3D after its safe post-provider deterministic plan compilation failure and preserve all four paid provider responses byte-exact.",
+    "stage": "025ZZE-3D-R53",
+    "status": "PASS"
+  },
+  "closure_id": "fresh-autonomous-semantic-self-test-closure:156d0d2884fc323b493867a29285336db97604665864d3a790936077ce7e0922",
+  "diagnosis": {
+    "addressability_repair_reached_live_final_planner": true,
+    "budget_exhaustion": false,
+    "classification": "PLANNER_TOTAL_TIME_BUDGET_VISIBILITY_GAP",
+    "established_finding": "The fourth live response was the second TYPED_PLANNER response. It returned structurally valid typed bindings, but the sum of their max_seconds values exceeded the sealed 120-second aggregate plan limit. The typed-planner instruction, provider-neutral invocation, and provider payload did not expose that aggregate plan-time limit. The deterministic compiler therefore correctly rejected a plan for violating a constraint the model had not been given.",
+    "final_round_plan_executed": false,
+    "forbidden_shortcut": "Do not fix this by raising the sealed 120-second total plan budget, weakening compile_investigation_plan, silently clipping model-selected timeouts, adding a third hypothesis round, or replaying 025ZZE-3D.",
+    "fourth_planner_max_seconds": [
+      30,
+      30,
+      30,
+      30,
+      30
+    ],
+    "fourth_planner_step_count": 5,
+    "fourth_planner_total_seconds": 150,
+    "model_output_transport_failure": false,
+    "next_product_problem": "Expose the exact aggregate plan-time authority to the typed planner as provider-neutral immutable invocation context, bind it into canonical invocation identity and model-facing input, and validate the returned aggregate timeout before plan compilation. Certify this entirely offline before preregistering a fresh live attempt.",
+    "provider_failure": false,
+    "sealed_max_plan_total_seconds": 120,
+    "semantic_overlay_created": false,
+    "unsafe_promotion": false
+  },
+  "economic_authority": {
+    "aggregate_cap_usd": "2.700000",
+    "independent_spool_meter_cost_usd": "1.144040",
+    "unused_budget_authorizes_rerun": false,
+    "unused_budget_usd": "1.555960"
+  },
+  "next_authorized_stage": "Commit and push this exact R53 closure. After it is durable, repair PLANNER_TOTAL_TIME_BUDGET_VISIBILITY_GAP offline. Preserve the strict 120-second compiler guard. Do not replay 025ZZE-3D and do not preregister another live attempt until the planner-budget contract repair is offline-certified.",
+  "preserved_live_authority": {
+    "attempt_ledger_path": "/tmp/horizon-025zze3d-live-attempt-ledger.jsonl",
+    "attempt_ledger_sha256": "sha256:f6766720396d825af2489d6b5fb1d084592a6a2254ecb682c2e16f9913418bfa",
+    "certificate_path": "artifacts/investigator/025zze3d-r52-live-harness-certification.json",
+    "certificate_sha256": "sha256:beafdfe09e0dd46f7fa9aea57a38e6d95d9fae7592168c4fad68ff27c93357d5",
+    "extraction_cache_present": false,
+    "final_result_path": "/tmp/horizon-025zze3d-live-result.json",
+    "final_result_sha256": "sha256:2d3305c359839196dafbd8beeeef76c5321715deed019e8d576949ad35d521f1",
+    "live_lock_path": "/tmp/horizon-025zze3d-live.lock",
+    "live_lock_sha256": "sha256:2959e475b1a22da971dbb1a04c76bdaa9a48b8d50f454d6812fb79ccb5cd28d7",
+    "response_spool_directory": "/tmp/horizon-025zze3d-live-response-spool",
+    "response_spool_file_count": 4,
+    "response_spool_manifest": [
+      {
+        "api_request_id": "req_550dc682460344dd8f08ad84aa74652a",
+        "conservative_cost_usd": "0.14956",
+        "input_tokens": 2668,
+        "ordinal": 1,
+        "output_tokens": 1105,
+        "provider_role": "INVESTIGATOR",
+        "response_sha256": "sha256:d66253d579fddac9d73809ab07109675aa5ffb074a16c558eb5b04d7fe91b30f"
+      },
+      {
+        "api_request_id": "req_5ae6b13d285947209bc2ea5381cebc6e",
+        "conservative_cost_usd": "0.200185",
+        "input_tokens": 2869,
+        "ordinal": 2,
+        "output_tokens": 1713,
+        "provider_role": "TYPED_PLANNER",
+        "response_sha256": "sha256:3e50a595e43e5aef8dc2828a181ccbf940d6ca8359aa02cc62a9796b493f3cab"
+      },
+      {
+        "api_request_id": "req_a38ec09492fd44738f3e937eb609eae8",
+        "conservative_cost_usd": "0.512935",
+        "input_tokens": 17749,
+        "ordinal": 3,
+        "output_tokens": 923,
+        "provider_role": "HYPOTHESIS_EVALUATOR",
+        "response_sha256": "sha256:6b425f67acc7ab133dccd886db55d2072bd4b9068d3dab21541ca6fbcf17bedd"
+      },
+      {
+        "api_request_id": "req_71a1d8b626bd4e1b8adb8fb08970be39",
+        "conservative_cost_usd": "0.28136",
+        "input_tokens": 4934,
+        "ordinal": 4,
+        "output_tokens": 2107,
+        "provider_role": "TYPED_PLANNER",
+        "response_sha256": "sha256:34588a996ad77e3c40decfb5391182921c377707c975be1f067e14ccac09fe1b"
+      }
+    ],
+    "runner_path": "artifacts/investigator/025zze3d-live-runner.py",
+    "runner_sha256": "sha256:f8e29a36877f3b0ec3ea922c1ef180f19e741c05c7a2db4529963d0996b6d906",
+    "seal_path": "artifacts/investigator/025zze3d-r51-fresh-horizon-self-test-preregistration.json",
+    "seal_sha256": "sha256:e3b6ec05b8bca39887c77260a9d7be0439e0007bf7afef60a64b76f4fc5e518b"
+  },
+  "provider_evidence": {
+    "automatic_retry_allowed": false,
+    "ledger_events": [
+      "ATTEMPT_STARTED",
+      "ATTEMPT",
+      "RESPONSE_SPOOLED",
+      "ATTEMPT",
+      "RESPONSE_SPOOLED",
+      "ATTEMPT",
+      "RESPONSE_SPOOLED",
+      "ATTEMPT",
+      "RESPONSE_SPOOLED",
+      "RUN_FAILED"
+    ],
+    "model_cost_usd": "1.144040",
+    "paid_model_call_occurred": true,
+    "provider_roles": [
+      "INVESTIGATOR",
+      "TYPED_PLANNER",
+      "HYPOTHESIS_EVALUATOR",
+      "TYPED_PLANNER"
+    ],
+    "response_spool_manifest": [
+      {
+        "api_request_id": "req_550dc682460344dd8f08ad84aa74652a",
+        "conservative_cost_usd": "0.14956",
+        "input_tokens": 2668,
+        "ordinal": 1,
+        "output_tokens": 1105,
+        "provider_role": "INVESTIGATOR",
+        "response_sha256": "sha256:d66253d579fddac9d73809ab07109675aa5ffb074a16c558eb5b04d7fe91b30f"
+      },
+      {
+        "api_request_id": "req_5ae6b13d285947209bc2ea5381cebc6e",
+        "conservative_cost_usd": "0.200185",
+        "input_tokens": 2869,
+        "ordinal": 2,
+        "output_tokens": 1713,
+        "provider_role": "TYPED_PLANNER",
+        "response_sha256": "sha256:3e50a595e43e5aef8dc2828a181ccbf940d6ca8359aa02cc62a9796b493f3cab"
+      },
+      {
+        "api_request_id": "req_a38ec09492fd44738f3e937eb609eae8",
+        "conservative_cost_usd": "0.512935",
+        "input_tokens": 17749,
+        "ordinal": 3,
+        "output_tokens": 923,
+        "provider_role": "HYPOTHESIS_EVALUATOR",
+        "response_sha256": "sha256:6b425f67acc7ab133dccd886db55d2072bd4b9068d3dab21541ca6fbcf17bedd"
+      },
+      {
+        "api_request_id": "req_71a1d8b626bd4e1b8adb8fb08970be39",
+        "conservative_cost_usd": "0.28136",
+        "input_tokens": 4934,
+        "ordinal": 4,
+        "output_tokens": 2107,
+        "provider_role": "TYPED_PLANNER",
+        "response_sha256": "sha256:34588a996ad77e3c40decfb5391182921c377707c975be1f067e14ccac09fe1b"
+      }
+    ]
+  },
+  "r53_boundary": {
+    "OPENAI_API_KEY_read": false,
+    "live_state_deleted": false,
+    "live_state_modified": false,
+    "paid_spend_usd": "0",
+    "provider_calls": 0,
+    "world_model_mutations": 0
+  },
+  "repository_authority": {
+    "frozen_horizon_target_head": "6151aad2081d9a849a6aac7a6081a2d7b32c4334",
+    "frozen_prefect_head": "2338265f658845a9bef8ce7baf07519b89846dc8",
+    "host_r52_head": "a2479ef6c8f1a453e26861e99d2be8670c32c1ce",
+    "production_source_modified_by_r53": false
+  },
+  "schema_version": 1,
+  "semantic_authority": {
+    "semantic_overlay_persisted": false,
+    "semantic_promotions": 0,
+    "what_it_is_closed": false,
+    "world_model_mutations": 0
+  }
+}
