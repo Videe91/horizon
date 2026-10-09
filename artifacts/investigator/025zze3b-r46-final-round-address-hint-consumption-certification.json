@@ -1,0 +1,111 @@
+{
+  "authority": {
+    "frozen_target_head": "6151aad2081d9a849a6aac7a6081a2d7b32c4334",
+    "r45_certification_id": "planner-addressability-offline-certification:ce79abfef17fa181a40733789a3253eb5a1520a5982557b491acb1f6944ccf40",
+    "r45_head": "2b948e6e41850c6f36ed2735cfb3b17bbf8b2a69",
+    "source_3b_closure_id": "fresh-autonomous-semantic-self-test-closure:a3c5dd8854376b1e26acf200ee393c721c49ec745bb514034f059e28ecd559e8"
+  },
+  "certification": {
+    "kind": "OFFLINE_FINAL_ROUND_ADDRESS_HINT_CONSUMPTION",
+    "stage": "025ZZE-3B-R46",
+    "status": "PASS"
+  },
+  "certification_id": "final-round-address-hint-consumption-certification:1e4fe612e2b99e741f9393dd84d76ea2b9cc716ed252616bd1265016ff3e143a",
+  "exact_3b_final_round": {
+    "current_hypothesis_round": 2,
+    "final_hypothesis_round": true,
+    "materialized_source_records": [
+      {
+        "canonical_evidence_id": "investigation-source-observation:228672bcbfe0f9c700e13703358ecdcd346ee3c2447a7369d565350ebc2510b3",
+        "ends_at_observed_eof": true,
+        "observation_id": "investigation-source-observation:228672bcbfe0f9c700e13703358ecdcd346ee3c2447a7369d565350ebc2510b3",
+        "observed_source_line_count": 1620,
+        "path": "src/horizon/world_model/repository_semantic_store.py",
+        "question": "At frozen commit 6151aad2081d9a849a6aac7a6081a2d7b32c4334, which implementation or test passages establish what software-understanding assertions build_repository_deterministic_world_model produces and RepositorySemanticWorldModelStore.load restores, beyond the visible inventory and Card projection logic?"
+      },
+      {
+        "canonical_evidence_id": "investigation-source-observation:4221be1a463fd4485108806f2889edd700ead08a2e310d6ee04f5d767c306c4c",
+        "ends_at_observed_eof": true,
+        "observation_id": "investigation-source-observation:4221be1a463fd4485108806f2889edd700ead08a2e310d6ee04f5d767c306c4c",
+        "observed_source_line_count": 445,
+        "path": "tests/unit/world_model/test_repository_semantic_store.py",
+        "question": "At frozen commit 6151aad2081d9a849a6aac7a6081a2d7b32c4334, which implementation or test passages establish what software-understanding assertions build_repository_deterministic_world_model produces and RepositorySemanticWorldModelStore.load restores, beyond the visible inventory and Card projection logic?"
+      },
+      {
+        "canonical_evidence_id": "investigation-source-observation:7eabce8c3966222c925914b283979af655666efbdd510cb48131ed66f69d6ba1",
+        "ends_at_observed_eof": true,
+        "observation_id": "investigation-source-observation:7eabce8c3966222c925914b283979af655666efbdd510cb48131ed66f69d6ba1",
+        "observed_source_line_count": 497,
+        "path": "src/horizon/world_model/repository_deterministic.py",
+        "question": "At that commit, which implementation or test passages demonstrate how changes in repository source or evidence are incorporated into updated World Model state and regenerated Cards over time, rather than only constructing a Card from a supplied snapshot?"
+      },
+      {
+        "canonical_evidence_id": "investigation-source-observation:9f8eb10070273e53066f6b9328d73dc5f1d0899f83759cd5db844d5ed6ae775b",
+        "ends_at_observed_eof": true,
+        "observation_id": "investigation-source-observation:9f8eb10070273e53066f6b9328d73dc5f1d0899f83759cd5db844d5ed6ae775b",
+        "observed_source_line_count": 664,
+        "path": "tests/unit/cards/test_repository_world_model_projection.py",
+        "question": "At that commit, which implementation or test passages demonstrate how changes in repository source or evidence are incorporated into updated World Model state and regenerated Cards over time, rather than only constructing a Card from a supplied snapshot?"
+      },
+      {
+        "canonical_evidence_id": "investigation-source-observation:934c84b9a2792a6a8ee8d82432fc0ca0a6b9fc457d024270cd350d8810ec492c",
+        "ends_at_observed_eof": true,
+        "observation_id": "investigation-source-observation:934c84b9a2792a6a8ee8d82432fc0ca0a6b9fc457d024270cd350d8810ec492c",
+        "observed_source_line_count": 759,
+        "path": "src/horizon/cards/repository.py",
+        "question": "At that commit, which implementation or test passages demonstrate how AI agents receive or retrieve Cards or other software-understanding context, beyond render_repository_card returning a string and the investigator specification describing intended access?"
+      },
+      {
+        "canonical_evidence_id": "investigation-source-observation:bbeafbc3e3e4763c3242a4eb24277b9e5e25d0301f10f62a3d6576d1eda36f90",
+        "ends_at_observed_eof": true,
+        "observation_id": "investigation-source-observation:bbeafbc3e3e4763c3242a4eb24277b9e5e25d0301f10f62a3d6576d1eda36f90",
+        "observed_source_line_count": 21,
+        "path": "pyproject.toml",
+        "question": "At frozen commit 6151aad2081d9a849a6aac7a6081a2d7b32c4334, which implementation or test passages establish what software-understanding assertions build_repository_deterministic_world_model produces and RepositorySemanticWorldModelStore.load restores, beyond the visible inventory and Card projection logic?"
+      }
+    ],
+    "max_hypothesis_rounds": 2,
+    "plan_step_count": 6,
+    "planning_question_count": 3,
+    "selected_read_source_paths": [
+      "src/horizon/world_model/repository_semantic_store.py",
+      "tests/unit/world_model/test_repository_semantic_store.py",
+      "src/horizon/world_model/repository_deterministic.py",
+      "tests/unit/cards/test_repository_world_model_projection.py",
+      "src/horizon/cards/repository.py",
+      "pyproject.toml"
+    ],
+    "source_basis_paths": [
+      "pyproject.toml"
+    ]
+  },
+  "not_proved": {
+    "ai_agent_card_delivery_exists": true,
+    "final_hypothesis_will_be_supported": true,
+    "gpt_6_astra_will_choose_identical_plan_live": true
+  },
+  "proved": {
+    "address_hints_consumable_for_operation_selection": true,
+    "address_hints_present_in_real_planner_instruction": true,
+    "canonical_read_source_evidence_materialized": true,
+    "card_implementation_selected": true,
+    "final_round_every_question_has_material_read": true,
+    "previously_missed_deterministic_world_model_selected": true,
+    "previously_missed_semantic_store_selected": true,
+    "previously_missed_world_model_projection_test_selected": true,
+    "real_investigation_executor_materialized_reads": true,
+    "source_hypothesis_basis_has_material_read": true
+  },
+  "safety": {
+    "3b_replayed": false,
+    "evaluator_weakened": false,
+    "paid_spend_usd": "0",
+    "production_source_changed": false,
+    "promotion_contract_changed": false,
+    "provider_calls": 0,
+    "semantic_overlay_created": false,
+    "third_hypothesis_round_added": false,
+    "world_model_mutations": 0
+  },
+  "schema_version": 1
+}
