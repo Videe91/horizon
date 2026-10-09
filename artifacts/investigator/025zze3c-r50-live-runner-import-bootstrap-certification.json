@@ -1,0 +1,57 @@
+{
+  "authority": {
+    "production_src_tree": "3107f5267aa18aaf2a70645ca9e8fbd14a0b5bae",
+    "r48_source_runner_sha256": "sha256:668cf805efd7822d4f7de941403a6607bd82765bc322270e4b08fa67e7ea1422",
+    "r49_closure_id": "fresh-autonomous-semantic-self-test-closure:3cf19442dd90c30415aa39dcb31ddeac81050317d507e234ad40f3af7eaeb32a",
+    "r49_closure_sha256": "sha256:9a0e28ebee85c021544fef2e4752eee276545f9d5f874923721e14b9c42fd8cf",
+    "r49_head": "2674ca4b8d0d97f8c9419fef5a36c938186195de",
+    "source_runner_path": "artifacts/investigator/025zze3c-live-runner.py",
+    "source_runner_sha256": "sha256:668cf805efd7822d4f7de941403a6607bd82765bc322270e4b08fa67e7ea1422"
+  },
+  "certification": {
+    "kind": "OFFLINE_LIVE_RUNNER_IMPORT_BOOTSTRAP_REPAIR",
+    "stage": "025ZZE-3C-R50",
+    "status": "PASS"
+  },
+  "certification_id": "live-runner-import-bootstrap-certification:1a1ce4d8eace0424440635f7ae55be386ad6bce73569dda7b346d5da4f63e1b2",
+  "historical_safety": {
+    "3c_live_state_modified_by_r50": false,
+    "3c_namespace_reuse_allowed": false,
+    "3c_paid_spend_usd": "0",
+    "3c_provider_calls": 0,
+    "3c_rerun_allowed": false,
+    "3c_state": "PERMANENTLY_CLOSED"
+  },
+  "next_authorized_stage": "Push this exact R50 reference-runner repair and certificate. After R50 is durable, preregister a completely fresh 025ZZE-3D attempt. Do not reuse 3C and do not execute a paid provider call during preregistration.",
+  "offline_proof": {
+    "OPENAI_API_KEY_read": false,
+    "PYTHONHOME_absent": true,
+    "PYTHONPATH_absent": true,
+    "bootstrap_before_first_horizon_import": true,
+    "certified_src_first_on_sys_path": true,
+    "horizon_cache_content_imported": true,
+    "horizon_module_from_exact_repository_src": true,
+    "paid_calls": 0,
+    "probe_launched_outside_repository": true,
+    "provider_network_calls": 0,
+    "python_no_user_site": true,
+    "reference_live_mode_refused": true,
+    "semantic_overlay_created": false,
+    "world_model_mutations": 0
+  },
+  "repair": {
+    "classification": "DETERMINISTIC_SELF_BOOTSTRAPPING_REPOSITORY_SRC_IMPORT_PATH",
+    "depends_on_current_working_directory": false,
+    "depends_on_git_toplevel_discovery": false,
+    "depends_on_shell_pythonpath": false,
+    "original_3c_runner_modified": false,
+    "production_source_modified": false,
+    "reference_live_execution_authorized": false,
+    "reference_runner_path": "artifacts/investigator/025zze3c-r50-live-runner-import-bootstrap-reference.py",
+    "reference_runner_sha256": "sha256:afa03c1ca3f128fd8e2580e5283dd2d4384f1e0d35232fe2aaca2680e68c725b",
+    "repository_root_source": "__file__ artifacts/investigator layout",
+    "src_authority": "<repository>/src",
+    "src_inserted_at_sys_path_index_zero": true
+  },
+  "schema_version": 1
+}
