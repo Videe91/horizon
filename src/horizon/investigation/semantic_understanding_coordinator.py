@@ -83,6 +83,11 @@ from horizon.investigation.semantic_gap import (
     RepositorySemanticGapSection,
     discover_repository_semantic_gaps,
 )
+from horizon.investigation.typed_planner_address_hints import (
+    TypedPlannerRepositoryAddressHints,
+    compile_typed_planner_repository_address_hints,
+    typed_planner_repository_address_hints_payload,
+)
 from horizon.investigation.typed_planner_model import (
     SemanticGapTypedPlannerModel,
     SemanticGapTypedPlannerValidationResult,
@@ -314,6 +319,7 @@ def _hypothesis_round_typed_planner_instruction(
     max_rounds: int,
     source_hypothesis: str,
     source_basis_paths: tuple[str, ...],
+    repository_address_hints: TypedPlannerRepositoryAddressHints,
 ) -> bytes:
     """Seal bounded hypothesis-round authority into planner instructions."""
 
@@ -469,6 +475,40 @@ def _hypothesis_round_typed_planner_instruction(
             ),
         )
         + "\n"
+    )
+
+    if not isinstance(
+        repository_address_hints,
+        TypedPlannerRepositoryAddressHints,
+    ):
+        raise RepositorySemanticUnderstandingCoordinatorError(
+            "repository_address_hints must be "
+            "TypedPlannerRepositoryAddressHints"
+        )
+
+    context += (
+        "repository_address_hints="
+        + json.dumps(
+            typed_planner_repository_address_hints_payload(
+                repository_address_hints
+            ),
+            sort_keys=True,
+            ensure_ascii=True,
+            separators=(
+                ",",
+                ":",
+            ),
+        )
+        + "\n"
+        + "repository_address_hints_rule="
+        + "These deterministic frozen-repository path-name candidates are "
+        + "navigation hints only. They are NOT evidence, claims, proof, "
+        + "support, or contradiction. Use them only to choose legal "
+        + "investigation operations. On a final hypothesis round, when "
+        + "a candidate directly corresponds to implementation or test "
+        + "concepts named in an exact investigation question, prefer "
+        + "material READ_SOURCE coverage of the strongest relevant "
+        + "candidates within the sealed plan-step budget.\n"
     )
 
     if final_round:
@@ -1864,6 +1904,20 @@ def run_repository_what_it_is_semantic_understanding(
             )
         )
 
+        planning_proposal = (
+            bridge.planning_proposal
+        )
+
+        repository_address_hints = (
+            compile_typed_planner_repository_address_hints(
+                index=index,
+                planning_questions=(
+                    planning_proposal
+                    .investigation_questions
+                ),
+            )
+        )
+
         round_typed_planner_instruction = (
             _hypothesis_round_typed_planner_instruction(
                 typed_planner_instruction,
@@ -1879,11 +1933,10 @@ def run_repository_what_it_is_semantic_understanding(
                 source_basis_paths=(
                     bridge.source_basis_paths
                 ),
+                repository_address_hints=(
+                    repository_address_hints
+                ),
             )
-        )
-
-        planning_proposal = (
-            bridge.planning_proposal
         )
 
         planner_execution = (

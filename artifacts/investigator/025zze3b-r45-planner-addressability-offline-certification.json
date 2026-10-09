@@ -1,0 +1,265 @@
+{
+  "authority": {
+    "frozen_target_head": "6151aad2081d9a849a6aac7a6081a2d7b32c4334",
+    "r44_head": "2bdbc8199bb30874f700ec3ac9692c71de54a262",
+    "source_3b_closure_id": "fresh-autonomous-semantic-self-test-closure:a3c5dd8854376b1e26acf200ee393c721c49ec745bb514034f059e28ecd559e8"
+  },
+  "certification": {
+    "kind": "OFFLINE_PRODUCT_REPAIR_CERTIFICATION",
+    "stage": "025ZZE-3B-R45",
+    "status": "PASS"
+  },
+  "certification_id": "planner-addressability-offline-certification:ce79abfef17fa181a40733789a3253eb5a1520a5982557b491acb1f6944ccf40",
+  "exact_3b_replay": {
+    "address_hints": {
+      "address_hints_id": "typed-planner-repository-address-hints:466f6b74f99eabb1ab0f10d01f21511c90e3660b1d934999b71586ca6d94a569",
+      "python_repository_index_id": "python-repository-index:e157b8ec4d3c227cffaf4430172630e75c7a6612fda5452f62a9671df2547e0d",
+      "questions": [
+        {
+          "candidates": [
+            {
+              "matched_tokens": [
+                "model",
+                "repository",
+                "semantic",
+                "store",
+                "world"
+              ],
+              "path": "src/horizon/world_model/repository_semantic_store.py",
+              "score": 65,
+              "test_path": false
+            },
+            {
+              "matched_tokens": [
+                "model",
+                "repository",
+                "semantic",
+                "store",
+                "test",
+                "world"
+              ],
+              "path": "tests/unit/world_model/test_repository_semantic_store.py",
+              "score": 65,
+              "test_path": true
+            },
+            {
+              "matched_tokens": [
+                "deterministic",
+                "model",
+                "repository",
+                "world"
+              ],
+              "path": "src/horizon/world_model/repository_deterministic.py",
+              "score": 55,
+              "test_path": false
+            },
+            {
+              "matched_tokens": [
+                "model",
+                "projection",
+                "repository",
+                "test",
+                "world"
+              ],
+              "path": "tests/unit/cards/test_repository_world_model_projection.py",
+              "score": 55,
+              "test_path": true
+            },
+            {
+              "matched_tokens": [
+                "deterministic",
+                "model",
+                "repository",
+                "test",
+                "world"
+              ],
+              "path": "tests/unit/world_model/test_repository_deterministic.py",
+              "score": 55,
+              "test_path": true
+            },
+            {
+              "matched_tokens": [
+                "implementation",
+                "model",
+                "test",
+                "world"
+              ],
+              "path": "tests/unit/world_model/test_implementation_relation.py",
+              "score": 45,
+              "test_path": true
+            }
+          ],
+          "question": "At frozen commit 6151aad2081d9a849a6aac7a6081a2d7b32c4334, which implementation or test passages establish what software-understanding assertions build_repository_deterministic_world_model produces and RepositorySemanticWorldModelStore.load restores, beyond the visible inventory and Card projection logic?"
+        },
+        {
+          "candidates": [
+            {
+              "matched_tokens": [
+                "cards",
+                "model",
+                "repository",
+                "test",
+                "world"
+              ],
+              "path": "tests/unit/cards/test_repository_world_model_projection.py",
+              "score": 55,
+              "test_path": true
+            },
+            {
+              "matched_tokens": [
+                "model",
+                "repository",
+                "world"
+              ],
+              "path": "src/horizon/world_model/repository_deterministic.py",
+              "score": 45,
+              "test_path": false
+            },
+            {
+              "matched_tokens": [
+                "model",
+                "repository",
+                "world"
+              ],
+              "path": "src/horizon/world_model/repository_semantic_store.py",
+              "score": 45,
+              "test_path": false
+            },
+            {
+              "matched_tokens": [
+                "model",
+                "snapshot",
+                "world"
+              ],
+              "path": "src/horizon/world_model/snapshot.py",
+              "score": 45,
+              "test_path": false
+            },
+            {
+              "matched_tokens": [
+                "card",
+                "cards",
+                "repository",
+                "test"
+              ],
+              "path": "tests/unit/cards/test_repository_card.py",
+              "score": 45,
+              "test_path": true
+            },
+            {
+              "matched_tokens": [
+                "implementation",
+                "model",
+                "test",
+                "world"
+              ],
+              "path": "tests/unit/world_model/test_implementation_relation.py",
+              "score": 45,
+              "test_path": true
+            }
+          ],
+          "question": "At that commit, which implementation or test passages demonstrate how changes in repository source or evidence are incorporated into updated World Model state and regenerated Cards over time, rather than only constructing a Card from a supplied snapshot?"
+        },
+        {
+          "candidates": [
+            {
+              "matched_tokens": [
+                "card",
+                "cards",
+                "repository",
+                "test"
+              ],
+              "path": "tests/unit/cards/test_repository_card.py",
+              "score": 45,
+              "test_path": true
+            },
+            {
+              "matched_tokens": [
+                "cards",
+                "repository"
+              ],
+              "path": "src/horizon/cards/repository.py",
+              "score": 35,
+              "test_path": false
+            },
+            {
+              "matched_tokens": [
+                "cards",
+                "repository"
+              ],
+              "path": "src/horizon/cards/repository_auto.py",
+              "score": 35,
+              "test_path": false
+            },
+            {
+              "matched_tokens": [
+                "cards",
+                "repository",
+                "test"
+              ],
+              "path": "tests/unit/cards/test_repository_dependencies.py",
+              "score": 35,
+              "test_path": true
+            },
+            {
+              "matched_tokens": [
+                "cards",
+                "repository",
+                "test"
+              ],
+              "path": "tests/unit/cards/test_repository_package_placement.py",
+              "score": 35,
+              "test_path": true
+            },
+            {
+              "matched_tokens": [
+                "cards",
+                "repository",
+                "test"
+              ],
+              "path": "tests/unit/cards/test_repository_world_model_projection.py",
+              "score": 35,
+              "test_path": true
+            }
+          ],
+          "question": "At that commit, which implementation or test passages demonstrate how AI agents receive or retrieve Cards or other software-understanding context, beyond render_repository_card returning a string and the investigator specification describing intended access?"
+        }
+      ],
+      "source_commit": "6151aad2081d9a849a6aac7a6081a2d7b32c4334"
+    },
+    "missing_questions": [
+      "At frozen commit 6151aad2081d9a849a6aac7a6081a2d7b32c4334, which implementation or test passages establish what software-understanding assertions build_repository_deterministic_world_model produces and RepositorySemanticWorldModelStore.load restores, beyond the visible inventory and Card projection logic?",
+      "At that commit, which implementation or test passages demonstrate how changes in repository source or evidence are incorporated into updated World Model state and regenerated Cards over time, rather than only constructing a Card from a supplied snapshot?",
+      "At that commit, which implementation or test passages demonstrate how AI agents receive or retrieve Cards or other software-understanding context, beyond render_repository_card returning a string and the investigator specification describing intended access?"
+    ],
+    "question_1_decisive_paths_addressable": true,
+    "question_2_world_model_paths_addressable": true,
+    "question_3_card_paths_addressable": true
+  },
+  "repair": {
+    "classification": "BOUNDED_DETERMINISTIC_REPOSITORY_ADDRESS_HINTS",
+    "creates_claims": false,
+    "creates_evidence": false,
+    "input_authority": [
+      "exact frozen Python repository index",
+      "exact investigation questions"
+    ],
+    "maximum_candidates_per_question": 6,
+    "may_contradict_hypothesis": false,
+    "may_support_hypothesis": false,
+    "project_specific_path_hardcoding": false,
+    "provider_model_required": false,
+    "reads_source_content": false
+  },
+  "safety": {
+    "3b_replayed": false,
+    "evaluator_weakened": false,
+    "paid_spend_usd": "0",
+    "promotion_contract_changed": false,
+    "provider_calls": 0,
+    "semantic_overlay_created": false,
+    "third_hypothesis_round_added": false,
+    "world_model_mutations": 0
+  },
+  "schema_version": 1
+}
