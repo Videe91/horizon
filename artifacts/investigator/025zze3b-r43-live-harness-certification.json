@@ -1,0 +1,69 @@
+{
+  "boundary": {
+    "live_attempt_ledger_created": false,
+    "live_lock_created": false,
+    "live_response_spool_created": false,
+    "live_result_spool_created": false,
+    "live_world_model_mutations": 0,
+    "offline_sentinel_presence_preflight": true,
+    "paid_calls": 0,
+    "provider_network_calls": 0,
+    "real_OPENAI_API_KEY_read": false
+  },
+  "certification": "R43_EXACT_LIVE_HARNESS_OFFLINE_CERTIFICATION",
+  "harness_contract": {
+    "aggregate_cost_cap_usd": "2.700000",
+    "attempt_event_fsynced_before_provider_dispatch": true,
+    "credential_presence_preflight_before_live_namespace": true,
+    "current_committed_certificate_required_for_live": true,
+    "current_committed_runner_required_for_live": true,
+    "final_result_exclusive_spool": true,
+    "fresh_local_provider_ordinal_starts_at_1": true,
+    "frozen_target_rechecked_before_credential": true,
+    "max_provider_calls_enforced": 9,
+    "missing_credential_preflight_burns_no_namespace": true,
+    "prefect_rechecked_before_credential": true,
+    "production_src_tree_immutable": true,
+    "provider_api_key_reloaded_after_live_lock": true,
+    "provider_exception_has_no_automatic_retry": true,
+    "remote_exact_current_head_required_for_live": true,
+    "response_spool_fsynced": true,
+    "response_spool_hash_ledgered": true,
+    "response_spooled_before_adapter_validation": true,
+    "semantic_overlay_absent_before_credential": true
+  },
+  "next_authorized_stage": "Commit and push this exact R43 runner and certificate. Only while that exact commit remains current, clean, remote-exact, R42-descended, and production-src-identical may a later explicit live-execution command enter --live.",
+  "offline_boundary_proof": {
+    "cost_meter_valid": true,
+    "credential_preflight_missing_fails_without_live_state": true,
+    "credential_preflight_nonempty_passes": true,
+    "credential_preflight_sdk_construction": false,
+    "fake_sdk_responses": 1,
+    "ledger_event_order": [
+      "ATTEMPT_STARTED",
+      "ATTEMPT",
+      "RESPONSE_SPOOLED"
+    ],
+    "network_provider_calls": 0,
+    "prefect_repository_mutations": 0,
+    "response_spool_hash_verified": true,
+    "semantic_store_mutations": 0,
+    "target_identity_reconstructed": true,
+    "target_repository_mutations": 0
+  },
+  "production_src_tree": "83bf5c9029729a3311023fe2133f2a04321136d0",
+  "r42_head": "91d7b925bf3cba40d9fa36c78a672000821867c8",
+  "r42_seal_id": "fresh-autonomous-semantic-self-test-seal:b22e629ca5616faec0249993cf706a9c0374da3d46fc9ad998798408cdf3c301",
+  "r42_seal_sha256": "sha256:089f82355f6cc09d51b2543def315fd7763016f18f91d1e7e1aa5e5a7b2f6079",
+  "runner_path": "artifacts/investigator/025zze3b-live-runner.py",
+  "runner_sha256": "sha256:4a481f816f58e6294cde5e33f2da3c83953c0711b5c54a02cb3dd1f05ab99d5d",
+  "status": "PASS",
+  "target": {
+    "base_world_model_snapshot_id": "world-model-snapshot:44d0df5367ae7e6a1fa212e80cf6a79eab422cda3dec9b56ed0166944365faff",
+    "commit": "6151aad2081d9a849a6aac7a6081a2d7b32c4334",
+    "repository_observation_id": "git-observation:a453d58352a0769d5fbc954c808c977f2e0a65eb095d862d5f3f8a9566cab5b5",
+    "tree": "373ebadeac1ad41fa2532c113f4a850ca379d962",
+    "what_it_is_gap_id": "repository-semantic-gap:b530b9c5bd7f0108fe555ddbd2d74250c07ca5e854e2e1ddda5dcc030fb01e5d",
+    "what_it_is_question_id": "repository-semantic-gap-question:627bdd67d2987320db7e045a86ea8c87a4c256ab4bf3c44c86b90c52d8775ab8"
+  }
+}
