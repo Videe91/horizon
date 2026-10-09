@@ -1,0 +1,156 @@
+{
+  "attempt": {
+    "attempt_id": "horizon-self-025zze3b",
+    "automatic_retry_occurred": false,
+    "disposition": "BOUNDED_STOP",
+    "execution_status": "COMPLETED",
+    "hypothesis_rounds_completed": 2,
+    "investigator_rounds_completed": 1,
+    "namespace_reuse_allowed": false,
+    "provider_calls_completed": 5,
+    "provider_failure_events": 0,
+    "rerun_allowed": false,
+    "state": "PERMANENTLY_CLOSED"
+  },
+  "certification": {
+    "purpose": "Durably close the consumed 025ZZE-3B live Horizon self-test after its safe BOUNDED_STOP and preserve the forensic diagnosis of the remaining planning gap.",
+    "stage": "025ZZE-3B-R44",
+    "status": "PASS"
+  },
+  "closure_id": "fresh-autonomous-semantic-self-test-closure:a3c5dd8854376b1e26acf200ee393c721c49ec745bb514034f059e28ecd559e8",
+  "diagnosis": {
+    "available_but_unread_decisive_sources": [
+      "src/horizon/world_model/repository_deterministic.py",
+      "src/horizon/world_model/repository_semantic_store.py",
+      "tests/unit/world_model/test_repository_deterministic.py",
+      "tests/unit/world_model/test_repository_semantic_store.py",
+      "tests/unit/cards/test_repository_world_model_projection.py"
+    ],
+    "budget_failure": false,
+    "classification": "FINAL_ROUND_EVIDENCE_ADDRESSABILITY_GAP",
+    "established_finding": "The final evaluator requested implementation and test evidence that existed in the frozen repository but was not targeted by the final READ_SOURCE plan. Therefore BOUNDED_STOP is safe but cannot be interpreted as evidence that all requested implementation evidence was absent.",
+    "evaluator_visibility_defect": false,
+    "evidence_transport_failure": false,
+    "forbidden_shortcut": "Do not solve this by merely increasing the hypothesis-round limit or weakening the SUPPORTED evaluator contract.",
+    "genuine_gap_not_yet_disproved": "No conclusion is made here that an actual AI-agent Card retrieval/delivery mechanism exists. The third missing question may remain a genuine product gap after planning coverage is repaired.",
+    "next_product_problem": "Make decisive source and test locations addressable before the final READ_SOURCE round so the bounded two-round loop can gather available repository evidence.",
+    "provider_failure": false,
+    "round_1_search_queries": [
+      "Horizon",
+      "agent",
+      "incremental"
+    ],
+    "round_2_read_source_paths": [
+      "pyproject.toml",
+      "CONSTITUTION.md",
+      "docs/superpowers/specs/2026-10-06-ai-investigator-021-design.md",
+      "src/horizon/cards/repository.py",
+      "src/horizon/cards/repository_auto.py",
+      "src/horizon/cache/content.py"
+    ],
+    "unsafe_promotion": false
+  },
+  "economic_authority": {
+    "aggregate_cap_usd": "2.700000",
+    "independent_spool_meter_cost_usd": "1.492275",
+    "total_model_cost_usd": "1.492275",
+    "unused_budget_authorizes_extra_hypothesis_round": false,
+    "unused_budget_usd": "1.207725"
+  },
+  "evaluation": {
+    "contradicting_evidence_ids": [],
+    "final_hypothesis": "Horizon is a Python project intended to provide continuously maintained software understanding for AI agents, as explicitly declared in pyproject.toml's [project].description. The supplied evidence establishes its declared purpose, not its implementation.",
+    "final_verdict": "STILL_INCOMPLETE",
+    "missing_evidence_questions": [
+      "At frozen commit 6151aad2081d9a849a6aac7a6081a2d7b32c4334, which implementation or test passages establish what software-understanding assertions build_repository_deterministic_world_model produces and RepositorySemanticWorldModelStore.load restores, beyond the visible inventory and Card projection logic?",
+      "At that commit, which implementation or test passages demonstrate how changes in repository source or evidence are incorporated into updated World Model state and regenerated Cards over time, rather than only constructing a Card from a supplied snapshot?",
+      "At that commit, which implementation or test passages demonstrate how AI agents receive or retrieve Cards or other software-understanding context, beyond render_repository_card returning a string and the investigator specification describing intended access?"
+    ],
+    "supporting_evidence_ids": [
+      "investigation-source-observation:96011ceabfe4b7fe993132e27f4a9e1775977e801ff2eaab2882f67c467cf49e",
+      "investigation-source-observation:bbeafbc3e3e4763c3242a4eb24277b9e5e25d0301f10f62a3d6576d1eda36f90"
+    ]
+  },
+  "next_authorized_stage": "Push this exact R44 closure commit. After it is durable, repair final-round evidence addressability offline. Do not replay 025ZZE-3B and do not add another paid call to this attempt.",
+  "preserved_live_authority": {
+    "attempt_ledger_path": "/tmp/horizon-025zze3b-live-attempt-ledger.jsonl",
+    "attempt_ledger_sha256": "sha256:6240bc5e5773e3b065018c094b2ab2e7117ec4e6ba47b77c58183e78c57c162e",
+    "certificate_path": "artifacts/investigator/025zze3b-r43-live-harness-certification.json",
+    "certificate_sha256": "sha256:c2939cc0596a23a7a40d966f2fc9d9c996bb6dd444e491fffa005a38e0ca4583",
+    "final_result_path": "/tmp/horizon-025zze3b-live-result.json",
+    "final_result_sha256": "sha256:d8d3f6ebdb77e38c1d05745bfed5eda0a4f34ee4090eeb170ee3ece4232426d2",
+    "live_lock_path": "/tmp/horizon-025zze3b-live.lock",
+    "live_lock_sha256": "sha256:5ef29cc00c2f567ff503388add28d0c027549f831729a43e10028a32b7a9123e",
+    "response_spool_directory": "/tmp/horizon-025zze3b-live-response-spool",
+    "response_spool_manifest": [
+      {
+        "api_request_id": "req_8bf4b9afc12c4833826c26375b1afc7e",
+        "conservative_cost_usd": "0.135535",
+        "input_tokens": 2668,
+        "ordinal": 1,
+        "output_tokens": 918,
+        "provider_role": "INVESTIGATOR",
+        "response_sha256": "sha256:c96c68ac52e3510349600db564ff23490ed1bbcaf0e55b43945be7e70e64fc17"
+      },
+      {
+        "api_request_id": "req_785108e2f3f14a10bdffee40864fc1ae",
+        "conservative_cost_usd": "0.17906",
+        "input_tokens": 2303,
+        "ordinal": 2,
+        "output_tokens": 1620,
+        "provider_role": "TYPED_PLANNER",
+        "response_sha256": "sha256:72bce01178f202bbbae65a43db82fac44678e3140e6084fe5852b142f9ecd85a"
+      },
+      {
+        "api_request_id": "req_262ee7b6cbf44afdae24e3019417966c",
+        "conservative_cost_usd": "0.07556",
+        "input_tokens": 1475,
+        "ordinal": 3,
+        "output_tokens": 516,
+        "provider_role": "HYPOTHESIS_EVALUATOR",
+        "response_sha256": "sha256:14c06c3b1e1853faceb0b0709ca998ecad5f741d8bac2894dc084a52fb528d24"
+      },
+      {
+        "api_request_id": "req_8da7ccd5a22e4a3589c32ea8c070ed1f",
+        "conservative_cost_usd": "0.268785",
+        "input_tokens": 4395,
+        "ordinal": 4,
+        "output_tokens": 2119,
+        "provider_role": "TYPED_PLANNER",
+        "response_sha256": "sha256:a988322208e575d9498d26be606f6a5296a44a64b88f7d02aa5e40fa21c407f1"
+      },
+      {
+        "api_request_id": "req_6362e04573894692872d9fdfd49dfdeb",
+        "conservative_cost_usd": "0.833335",
+        "input_tokens": 29068,
+        "ordinal": 5,
+        "output_tokens": 1422,
+        "provider_role": "HYPOTHESIS_EVALUATOR",
+        "response_sha256": "sha256:a197febbdc5d31991a537bf0135e14215a681543be6fcc91c507b182aca088be"
+      }
+    ],
+    "seal_path": "artifacts/investigator/025zze3b-r42-fresh-horizon-self-test-preregistration.json",
+    "seal_sha256": "sha256:089f82355f6cc09d51b2543def315fd7763016f18f91d1e7e1aa5e5a7b2f6079"
+  },
+  "r44_boundary": {
+    "OPENAI_API_KEY_read": false,
+    "live_state_deleted": false,
+    "live_state_modified": false,
+    "paid_spend_usd": "0",
+    "provider_calls": 0,
+    "world_model_mutations": 0
+  },
+  "repository_authority": {
+    "frozen_horizon_target_head": "6151aad2081d9a849a6aac7a6081a2d7b32c4334",
+    "frozen_prefect_head": "2338265f658845a9bef8ce7baf07519b89846dc8",
+    "host_r43_head": "337846ba8642964b73c3739829369b875618eb69",
+    "production_source_modified_by_r44": false
+  },
+  "schema_version": 1,
+  "semantic_authority": {
+    "semantic_overlay_persisted": false,
+    "semantic_promotions": 0,
+    "what_it_is_closed": false,
+    "world_model_mutations": 0
+  }
+}
