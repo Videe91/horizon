@@ -1,0 +1,128 @@
+{
+  "attempt": {
+    "attempt_id": "horizon-self-025zze3e",
+    "automatic_retry_occurred": false,
+    "completed_provider_responses": 0,
+    "execution_status": "FAILED_PROVIDER_AUTHENTICATION_BEFORE_COMPLETED_RESPONSE",
+    "failure_class": "AuthenticationError",
+    "failure_code": "invalid_api_key",
+    "failure_message_redacted": "HTTP 401 invalid_api_key",
+    "http_status": 401,
+    "namespace_reuse_allowed": false,
+    "provider_attempt_events": 1,
+    "provider_calls_completed": 1,
+    "provider_failure_events": 1,
+    "provider_requests_attempted": 1,
+    "provider_response_events": 0,
+    "provider_response_files": 0,
+    "raw_failure_message_copied_into_closure": false,
+    "raw_failure_message_preserved_in_live_state": true,
+    "rerun_allowed": false,
+    "state": "PERMANENTLY_CLOSED"
+  },
+  "certification": {
+    "purpose": "Durably and permanently close consumed 025ZZE-3E after the first live provider request failed authentication with HTTP 401 invalid_api_key before any completed model response or semantic execution.",
+    "stage": "025ZZE-3E-R58",
+    "status": "PASS"
+  },
+  "closure_id": "fresh-autonomous-semantic-self-test-closure:c6cce9ca07cef80fd7be3e16db47211e7d34f06107a3799994f74565c5157f19",
+  "diagnosis": {
+    "authentication_failure_is_semantic_evidence": false,
+    "classification": "LIVE_PROVIDER_AUTHENTICATION_FAILURE",
+    "completed_provider_response_received": false,
+    "credential_presence_preflight_passed": true,
+    "credential_validity_preflight_was_not_part_of_seal": true,
+    "established_finding": "The certified 025ZZE-3E runner passed all repository, runner, certificate, budget, namespace and credential-presence preflight gates, created the irreversible 3E live lock, durably recorded provider attempt 1 for role INVESTIGATOR, and dispatched the request. OpenAI returned HTTP 401 with error code invalid_api_key before any completed model response. No investigator result, typed plan, hypothesis evaluation, semantic promotion or World Model mutation occurred.",
+    "final_round_addressability_exercised_live": false,
+    "forbidden_action": "Do not rerun, reuse, delete, reset or recreate the 025ZZE-3E namespace. Do not reinterpret the authentication failure as a Horizon semantic result.",
+    "horizon_semantic_defect_established": false,
+    "hypothesis_evaluator_invoked": false,
+    "investigator_completed": false,
+    "next_operational_requirement": "Before any fresh 025ZZE-3F live attempt is consumed, the provider credential must be separately established as valid without reusing any 3E state. The 3E semantic exam itself must never be replayed.",
+    "planner_budget_contract_exercised_live": false,
+    "provider_request_reached_authentication_boundary": true,
+    "semantic_overlay_created": false,
+    "semantic_product_behavior_exercised": false,
+    "semantic_result_exists": false,
+    "typed_planner_invoked": false,
+    "unsafe_promotion": false
+  },
+  "economic_authority": {
+    "aggregate_cap_usd": "2.700000",
+    "completed_response_cost_usd": "0",
+    "independent_spool_meter_cost_usd": "0",
+    "unused_budget_authorizes_rerun": false,
+    "unused_budget_usd": "2.700000"
+  },
+  "next_authorized_stage": "Commit and push this exact R58 permanent 3E closure. Only after the closure is durable may a completely fresh 025ZZE-3F attempt be considered. 3E must never be rerun. Before any future live namespace is consumed, separately establish that the intended OpenAI credential is valid.",
+  "preserved_live_authority": {
+    "attempt_ledger_path": "/tmp/horizon-025zze3e-live-attempt-ledger.jsonl",
+    "attempt_ledger_sha256": "sha256:69978c1522e23fcbe5b9716baf75600f01fbe4ec1b07aeb9fdc9732d4c59052f",
+    "certificate_path": "artifacts/investigator/025zze3e-r57-live-harness-certification.json",
+    "certificate_sha256": "sha256:d53d275e74814de8b33a8870a182972d632d98454f74619774b66129ec24f904",
+    "extraction_cache_present": false,
+    "final_result_path": "/tmp/horizon-025zze3e-live-result.json",
+    "final_result_sha256": "sha256:743dffd0b8b074e35a264d1ee8b50cd57e4ed7ed4f42c363a0986cf6c8f95447",
+    "live_lock_path": "/tmp/horizon-025zze3e-live.lock",
+    "live_lock_sha256": "sha256:b51c6ab7b3c88e0eb189af93d32e1c0d7c7eba9a7339030225d7e51e9f93f796",
+    "raw_provider_failure_preserved_in_final_result": true,
+    "raw_provider_failure_preserved_in_ledger": true,
+    "response_spool_directory": "/tmp/horizon-025zze3e-live-response-spool",
+    "response_spool_file_count": 0,
+    "response_spool_manifest": [],
+    "runner_path": "artifacts/investigator/025zze3e-live-runner.py",
+    "runner_sha256": "sha256:bfe22d64c15ba50667b3d309469d5a3e4bfc216075f0eca4f3ea6546bb377fe3",
+    "seal_path": "artifacts/investigator/025zze3e-r56-fresh-horizon-self-test-preregistration.json",
+    "seal_sha256": "sha256:92241db8af0f8099bf207abefa2dc37abb53782647612b17e46b4f987a3cc170"
+  },
+  "provider_evidence": {
+    "automatic_retry_allowed": false,
+    "completed_provider_responses": 0,
+    "failure_class": "AuthenticationError",
+    "failure_code": "invalid_api_key",
+    "http_status": 401,
+    "ledger_events": [
+      "ATTEMPT_STARTED",
+      "ATTEMPT",
+      "FAILED",
+      "RUN_FAILED"
+    ],
+    "model_cost_usd": "0",
+    "paid_model_call_occurred": false,
+    "paid_model_response_occurred": false,
+    "provider_failure_events": 1,
+    "provider_request_attempts": 1,
+    "provider_response_events": 0,
+    "provider_response_files": 0,
+    "provider_roles": [
+      "INVESTIGATOR"
+    ],
+    "raw_error_message_emitted_by_r58": false,
+    "response_spool_manifest": []
+  },
+  "r58_boundary": {
+    "OPENAI_API_KEY_read": false,
+    "live_state_deleted": false,
+    "live_state_modified": false,
+    "paid_spend_usd": "0",
+    "provider_calls": 0,
+    "provider_network_calls": 0,
+    "semantic_promotions": 0,
+    "world_model_mutations": 0
+  },
+  "repository_authority": {
+    "frozen_horizon_target_head": "6151aad2081d9a849a6aac7a6081a2d7b32c4334",
+    "frozen_prefect_head": "2338265f658845a9bef8ce7baf07519b89846dc8",
+    "host_r57_head": "b7379410fe0ba9d6a9bc0ed114f699bcb2795ca4",
+    "production_source_modified_by_r58": false,
+    "production_src_tree": "a3a3fb351e35e1292a3afefd6ef6365c532d936d"
+  },
+  "schema_version": 1,
+  "semantic_authority": {
+    "semantic_overlay_created": false,
+    "semantic_promotions": 0,
+    "semantic_result_produced": false,
+    "what_it_is_closed": false,
+    "world_model_mutations": 0
+  }
+}
