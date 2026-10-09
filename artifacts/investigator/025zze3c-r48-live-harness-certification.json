@@ -1,0 +1,88 @@
+{
+  "boundary": {
+    "live_attempt_ledger_created": false,
+    "live_lock_created": false,
+    "live_response_spool_created": false,
+    "live_result_spool_created": false,
+    "live_world_model_mutations": 0,
+    "offline_sentinel_presence_preflight": true,
+    "paid_calls": 0,
+    "provider_network_calls": 0,
+    "real_OPENAI_API_KEY_read": false
+  },
+  "certification": "R48_EXACT_LIVE_HARNESS_OFFLINE_CERTIFICATION",
+  "harness_contract": {
+    "aggregate_cost_cap_usd": "2.700000",
+    "attempt_event_fsynced_before_provider_dispatch": true,
+    "credential_presence_preflight_before_live_namespace": true,
+    "current_committed_certificate_required_for_live": true,
+    "current_committed_runner_required_for_live": true,
+    "final_result_exclusive_spool": true,
+    "fresh_local_provider_ordinal_starts_at_1": true,
+    "frozen_target_rechecked_before_credential": true,
+    "max_provider_calls_enforced": 9,
+    "missing_credential_preflight_burns_no_namespace": true,
+    "prefect_rechecked_before_credential": true,
+    "production_src_tree_immutable": true,
+    "provider_api_key_reloaded_after_live_lock": true,
+    "provider_exception_has_no_automatic_retry": true,
+    "remote_exact_current_head_required_for_live": true,
+    "response_spool_fsynced": true,
+    "response_spool_hash_ledgered": true,
+    "response_spooled_before_adapter_validation": true,
+    "semantic_overlay_absent_before_credential": true
+  },
+  "historical_authority_proof": {
+    "closed_3a_revalidated": true,
+    "closed_3b_revalidated": true,
+    "historical_live_bytes_revalidated": true,
+    "revalidated_after_live_lock_before_credential": true,
+    "revalidated_before_live_namespace_entry": true
+  },
+  "next_authorized_stage": "Commit and push this exact R48 runner and certificate. Only while that exact commit remains current, clean, remote-exact, R47-descended, and production-src-identical may a later explicit live-execution command enter --live.",
+  "offline_boundary_proof": {
+    "cost_meter_valid": true,
+    "credential_preflight_missing_fails_without_live_state": true,
+    "credential_preflight_nonempty_passes": true,
+    "credential_preflight_sdk_construction": false,
+    "fake_sdk_responses": 1,
+    "historical_3a_revalidated": true,
+    "historical_3b_revalidated": true,
+    "ledger_event_order": [
+      "ATTEMPT_STARTED",
+      "ATTEMPT",
+      "RESPONSE_SPOOLED"
+    ],
+    "network_provider_calls": 0,
+    "prefect_repository_mutations": 0,
+    "r45_repair_certification_revalidated": true,
+    "r46_consumption_certification_revalidated": true,
+    "response_spool_hash_verified": true,
+    "semantic_store_mutations": 0,
+    "target_identity_reconstructed": true,
+    "target_repository_mutations": 0
+  },
+  "production_src_tree": "3107f5267aa18aaf2a70645ca9e8fbd14a0b5bae",
+  "r47_head": "574f3eaefc12e4db36d8698754c53785a5f009cb",
+  "r47_seal_id": "fresh-autonomous-semantic-self-test-seal:d71e7737a5a1d5857b09e29e6653471751d5f764d6f506127980217266bc3c9d",
+  "r47_seal_sha256": "sha256:762130c4a1571d6e1a148f243215b853ef29a55ede0e66e71c161dda038fa10b",
+  "repair_authority_proof": {
+    "address_hints_non_evidentiary": true,
+    "final_round_hint_consumption_certified": true,
+    "r45_certification_revalidated": true,
+    "r45_product_commit": "2b948e6e41850c6f36ed2735cfb3b17bbf8b2a69",
+    "r46_certification_revalidated": true,
+    "r46_repair_commit": "f275083cd56c734abf0dd23b0d34113ef1b849de"
+  },
+  "runner_path": "artifacts/investigator/025zze3c-live-runner.py",
+  "runner_sha256": "sha256:668cf805efd7822d4f7de941403a6607bd82765bc322270e4b08fa67e7ea1422",
+  "status": "PASS",
+  "target": {
+    "base_world_model_snapshot_id": "world-model-snapshot:44d0df5367ae7e6a1fa212e80cf6a79eab422cda3dec9b56ed0166944365faff",
+    "commit": "6151aad2081d9a849a6aac7a6081a2d7b32c4334",
+    "repository_observation_id": "git-observation:a453d58352a0769d5fbc954c808c977f2e0a65eb095d862d5f3f8a9566cab5b5",
+    "tree": "373ebadeac1ad41fa2532c113f4a850ca379d962",
+    "what_it_is_gap_id": "repository-semantic-gap:b530b9c5bd7f0108fe555ddbd2d74250c07ca5e854e2e1ddda5dcc030fb01e5d",
+    "what_it_is_question_id": "repository-semantic-gap-question:627bdd67d2987320db7e045a86ea8c87a4c256ab4bf3c44c86b90c52d8775ab8"
+  }
+}
