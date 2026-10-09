@@ -1,0 +1,82 @@
+{
+  "attempt": {
+    "attempt_id": "horizon-self-025zze3c",
+    "automatic_retry_occurred": false,
+    "execution_status": "FAILED_PRE_PROVIDER_DISPATCH",
+    "failure_class": "ModuleNotFoundError",
+    "failure_message": "No module named 'horizon'",
+    "namespace_reuse_allowed": false,
+    "provider_attempt_events": 0,
+    "provider_calls_completed": 0,
+    "provider_response_events": 0,
+    "provider_response_files": 0,
+    "rerun_allowed": false,
+    "state": "PERMANENTLY_CLOSED"
+  },
+  "certification": {
+    "purpose": "Durably close the consumed 025ZZE-3C live namespace after a pre-provider-dispatch Python import-path failure.",
+    "stage": "025ZZE-3C-R49",
+    "status": "PASS"
+  },
+  "closure_id": "fresh-autonomous-semantic-self-test-closure:3cf19442dd90c30415aa39dcb31ddeac81050317d507e234ad40f3af7eaeb32a",
+  "diagnosis": {
+    "addressability_repair_exercised_live": false,
+    "classification": "LIVE_RUNNER_IMPORT_PATH_BOOTSTRAP_GAP",
+    "established_finding": "The certified 3C runner created its irreversible live lock and durable attempt ledger, then failed at the first production Horizon import inside prepare_target_authority because the runner process did not have the repository src directory on Python's import path.",
+    "failed_import": "horizon.cache.content",
+    "forbidden_action": "Do not rerun or reuse 025ZZE-3C. Its live namespace is consumed because the exclusive lock and attempt ledger already exist.",
+    "next_engineering_problem": "Make the live runner's Python import environment self-contained and deterministic before namespace entry. The preferred repair is for the runner to bootstrap the exact repository src directory itself rather than rely on the invoking shell to supply PYTHONPATH.",
+    "openai_client_constructed": false,
+    "provider_dispatch_occurred": false,
+    "provider_failure": false,
+    "semantic_product_behavior_exercised": false,
+    "unsafe_promotion": false
+  },
+  "next_authorized_stage": "Push this exact R49 closure. After it is durable, repair and offline-certify deterministic runner import-path bootstrap, then preregister a completely fresh live namespace. Do not reuse 025ZZE-3C.",
+  "preserved_live_authority": {
+    "attempt_ledger_path": "/tmp/horizon-025zze3c-live-attempt-ledger.jsonl",
+    "attempt_ledger_sha256": "sha256:4019c51e024cd84e765b49aececc8de9d7dbcfe9e366e9d4d437758379686b53",
+    "certificate_path": "artifacts/investigator/025zze3c-r48-live-harness-certification.json",
+    "certificate_sha256": "sha256:101fcd7916cafea46759422c5f908af6a02af824e4e7766e5e72701d7b747ede",
+    "final_result_path": "/tmp/horizon-025zze3c-live-result.json",
+    "final_result_sha256": "sha256:829bc1518d534405b0a75277e9efdf25be5c95b81d39a55950144163b9edd836",
+    "live_lock_path": "/tmp/horizon-025zze3c-live.lock",
+    "live_lock_sha256": "sha256:332653566bff4b6ffb00b94c774d0fd30cf9605d627a63cb4bcdb38ebcfdf4da",
+    "response_spool_directory": "/tmp/horizon-025zze3c-live-response-spool",
+    "response_spool_file_count": 0,
+    "seal_path": "artifacts/investigator/025zze3c-r47-fresh-horizon-self-test-preregistration.json",
+    "seal_sha256": "sha256:762130c4a1571d6e1a148f243215b853ef29a55ede0e66e71c161dda038fa10b"
+  },
+  "provider_evidence": {
+    "automatic_retry_allowed": false,
+    "ledger_events": [
+      "ATTEMPT_STARTED",
+      "RUN_FAILED"
+    ],
+    "model_cost_usd": "0",
+    "paid_model_call_occurred": false,
+    "provider_attempt_events": 0,
+    "provider_calls_completed": 0,
+    "provider_response_events": 0,
+    "provider_response_files": 0
+  },
+  "r49_boundary": {
+    "OPENAI_API_KEY_read": false,
+    "live_state_deleted": false,
+    "live_state_modified": false,
+    "paid_spend_usd": "0",
+    "provider_calls": 0,
+    "world_model_mutations": 0
+  },
+  "repository_authority": {
+    "host_r48_head": "2818f4ac27b2502eb6cc8fb113f744e2914da993",
+    "production_source_modified_by_r49": false
+  },
+  "schema_version": 1,
+  "semantic_authority": {
+    "semantic_overlay_created": false,
+    "semantic_promotions": 0,
+    "what_it_is_closed": false,
+    "world_model_mutations": 0
+  }
+}
