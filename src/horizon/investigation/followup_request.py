@@ -126,7 +126,7 @@ def extend_semantic_gap_investigation_request(
         ...,
     ],
 ) -> InvestigationRequest:
-    """Create one content-addressed follow-up request with new evidence."""
+    """Create one content-addressed follow-up request with idempotent evidence merging."""
 
     if not isinstance(
         request,
@@ -181,28 +181,45 @@ def extend_semantic_gap_investigation_request(
             "supplemental evidence contains duplicate identities"
         )
 
-    existing_ids = {
-        record.evidence_id
+    existing_by_id = {
+        record.evidence_id: record
         for record
         in request.evidence_records
     }
 
-    collisions = tuple(
-        evidence_id
-        for evidence_id
-        in supplemental_ids
-        if evidence_id
-        in existing_ids
-    )
+    effective_supplemental: list[
+        CanonicalEvidenceRecord
+    ] = []
 
-    if collisions:
-        raise SemanticGapFollowupRequestError(
-            "supplemental evidence already exists in base request"
+    for record in supplemental_evidence_records:
+        existing = existing_by_id.get(
+            record.evidence_id
         )
+
+        if existing is None:
+            effective_supplemental.append(
+                record
+            )
+
+            continue
+
+        if (
+            existing.evidence_kind
+            != record.evidence_kind
+            or existing.canonical_payload
+            != record.canonical_payload
+        ):
+            raise SemanticGapFollowupRequestError(
+                "supplemental evidence identity conflicts "
+                "with base request"
+            )
+
+    if not effective_supplemental:
+        return request
 
     ordered_supplemental = tuple(
         sorted(
-            supplemental_evidence_records,
+            effective_supplemental,
             key=lambda record: (
                 record.evidence_id,
                 record.evidence_kind,

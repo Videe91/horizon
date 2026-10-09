@@ -1,0 +1,87 @@
+{
+  "authority": {
+    "parent_r63_head": "42bb3a00b6e4ce3e41b5858c1fd988e06c3b8c5d",
+    "pre_repair_src_tree": "a3a3fb351e35e1292a3afefd6ef6365c532d936d",
+    "r63_closure_id": "fresh-autonomous-semantic-self-test-closure:9e19b1eec87cce1d3592d18ff643731c16ad4bbaf2b50f5b6d4bc3476b134b57",
+    "r63_closure_sha256": "sha256:554700364ec65dc3ae83dd98356e9b4bcac45095a4c256fc4836916add40ae5c"
+  },
+  "boundary": {
+    "historical_paid_responses_replayed_live": false,
+    "model_generation_calls": 0,
+    "new_live_namespace_created": false,
+    "openai_api_key_read": false,
+    "paid_calls": 0,
+    "provider_network_calls": 0,
+    "responses_api_calls": 0,
+    "semantic_overlay_created": false,
+    "world_model_mutations": 0
+  },
+  "certification": {
+    "mode": "IDENTICAL_EVIDENCE_IDEMPOTENCE_OFFLINE_REPAIR_CERTIFICATION",
+    "stage": "025ZZE-3F-R64",
+    "status": "PASS"
+  },
+  "certification_id": "identical-evidence-idempotence-repair-certification:d4492a40e1c2f1d0b8c13231ed0dccf41790c0b6effe6f822960b5080585d4ee",
+  "classification_repaired": "IDENTICAL_EVIDENCE_IDEMPOTENCE_GAP",
+  "exact_3f_replay": {
+    "call_3_historical_verdict": "STILL_INCOMPLETE",
+    "call_4_read_records": 4,
+    "duplicate_evidence_id": "investigation-source-observation:33abb5ebd55ce3aa83fe867d3373a6f4e22691fd3657aa5b0c82aedc2911929d",
+    "duplicate_occurs_once_after_merge": true,
+    "historical_failure_replay_after_patch": "GREEN",
+    "historical_failure_reproduced_before_patch": true,
+    "identical_duplicate_records": 1,
+    "identical_only_returns_base_request": true,
+    "mixed_duplicate_plus_new_succeeds": true,
+    "mixed_result_equals_new_only_result": true,
+    "new_records": 3,
+    "same_id_different_kind_fails_closed": true,
+    "same_id_different_payload_fails_closed": true
+  },
+  "next_authorized_stage": "Commit this exact R64 production repair, tests, and offline certification. Push R64 separately. Only after R64 is durable and remote-exact may a new fresh live-attempt namespace be preregistered. Never rerun or reuse 025ZZE-3F.",
+  "preserved_3f_authority": {
+    "3f_namespace_reuse_allowed": false,
+    "3f_rerun_allowed": false,
+    "3f_state": "PERMANENTLY_CLOSED",
+    "attempt_ledger_sha256": "sha256:5fe0bdca85da7373073f0671654508d070ce28082fb2c4f3fbae94fba5203e4c",
+    "final_result_sha256": "sha256:d72cf6cbf73858ff7b2b0c770cea75b516ee40dd92b321a8996f03c4a9129d31",
+    "live_lock_sha256": "sha256:5ea032222ab84518ae128cb66c250ea7dc3e1972e08c0a591b65a0b00a438870"
+  },
+  "repair_contract": {
+    "all_supplemental_records_already_present": "RETURN_BASE_REQUEST_UNCHANGED",
+    "coordinator_state_machine_changed": false,
+    "duplicate_id_within_one_supplemental_tuple_remains_rejected": true,
+    "evidence_identity_algorithm_changed": false,
+    "followup_identity_uses_only_effective_new_records": true,
+    "hypothesis_evaluator_changed": false,
+    "mixed_identical_and_new_records": "IGNORE_IDENTICAL_APPEND_ONLY_NEW",
+    "model_budget_changed": false,
+    "new_evidence_id": "APPEND",
+    "provider_adapter_changed": false,
+    "same_id_different_kind": "FAIL_CLOSED",
+    "same_id_different_payload": "FAIL_CLOSED",
+    "same_id_same_kind_same_payload": "IDEMPOTENT_ALREADY_PRESENT",
+    "typed_planner_contract_changed": false,
+    "world_model_promotion_rule_changed": false
+  },
+  "repair_surface": {
+    "production_files_changed": 1,
+    "production_source_path": "src/horizon/investigation/followup_request.py",
+    "production_source_sha256": "sha256:75f084073572b92e56c10595bb2426b532f47634802ce69edce8f9019a281619",
+    "test_files_changed": 1,
+    "unit_test_path": "tests/unit/investigation/test_semantic_gap_followup_request.py",
+    "unit_test_sha256": "sha256:df23c475a715a64aab8df9845cfdd2f001f29344fbe499991692c6d487f102d9"
+  },
+  "static_checker_recovery": {
+    "previous_failure_was_raw_source_string_assertion_defect": true,
+    "previous_failure_was_repair_failure": false,
+    "production_patch_reapplied": false,
+    "test_patch_reapplied": false
+  },
+  "tests": {
+    "dedicated_followup_contract_suite": "PASS",
+    "direct_contract_probe": "PASS",
+    "full_investigation_unit_suite": "PASS",
+    "semantic_understanding_coordinator_suite": "PASS"
+  }
+}

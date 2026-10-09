@@ -274,25 +274,131 @@ def test_payload_change_changes_followup_identity() -> None:
     )
 
 
-def test_base_evidence_collision_is_rejected() -> None:
+def test_identical_base_evidence_is_idempotent() -> None:
+    existing = _record(
+        "evidence:same"
+    )
+
     base = _request(
         evidence_records=(
-            _record(
-                "evidence:same"
-            ),
+            existing,
         )
     )
 
-    with pytest.raises(
-        SemanticGapFollowupRequestError,
-        match="already exists",
-    ):
+    followup = (
         extend_semantic_gap_investigation_request(
             base,
             supplemental_evidence_records=(
                 (
                     _record(
                         "evidence:same"
+                    ),
+                )
+            ),
+        )
+    )
+
+    assert followup is base
+
+
+def test_identical_base_evidence_is_ignored_when_new_evidence_is_added() -> None:
+    existing = _record(
+        "evidence:same"
+    )
+
+    new_record = _record(
+        "evidence:new"
+    )
+
+    base = _request(
+        evidence_records=(
+            existing,
+        )
+    )
+
+    with_duplicate = (
+        extend_semantic_gap_investigation_request(
+            base,
+            supplemental_evidence_records=(
+                (
+                    existing,
+                    new_record,
+                )
+            ),
+        )
+    )
+
+    new_only = (
+        extend_semantic_gap_investigation_request(
+            base,
+            supplemental_evidence_records=(
+                (
+                    new_record,
+                )
+            ),
+        )
+    )
+
+    assert with_duplicate == new_only
+
+    assert [
+        record.evidence_id
+        for record
+        in with_duplicate.evidence_records
+    ] == [
+        "evidence:same",
+        "evidence:new",
+    ]
+
+
+def test_base_evidence_identity_with_different_payload_is_rejected() -> None:
+    base = _request(
+        evidence_records=(
+            _record(
+                "evidence:same",
+                value="old",
+            ),
+        )
+    )
+
+    with pytest.raises(
+        SemanticGapFollowupRequestError,
+        match="conflicts",
+    ):
+        extend_semantic_gap_investigation_request(
+            base,
+            supplemental_evidence_records=(
+                (
+                    _record(
+                        "evidence:same",
+                        value="new",
+                    ),
+                )
+            ),
+        )
+
+
+def test_base_evidence_identity_with_different_kind_is_rejected() -> None:
+    base = _request(
+        evidence_records=(
+            _record(
+                "evidence:same",
+                kind="OLD_KIND",
+            ),
+        )
+    )
+
+    with pytest.raises(
+        SemanticGapFollowupRequestError,
+        match="conflicts",
+    ):
+        extend_semantic_gap_investigation_request(
+            base,
+            supplemental_evidence_records=(
+                (
+                    _record(
+                        "evidence:same",
+                        kind="NEW_KIND",
                     ),
                 )
             ),
