@@ -86,6 +86,7 @@ def invocation():
                 b"Obey the supplied operation semantics."
             ),
             temperature=None,
+            max_plan_total_seconds=120,
             cost_cap_usd=Decimal(
                 "0.100000"
             ),

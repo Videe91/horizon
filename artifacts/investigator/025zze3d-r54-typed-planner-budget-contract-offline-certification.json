@@ -1,0 +1,77 @@
+{
+  "authority": {
+    "live_failure_plan_seconds": 150,
+    "r53_closure_id": "fresh-autonomous-semantic-self-test-closure:156d0d2884fc323b493867a29285336db97604665864d3a790936077ce7e0922",
+    "r53_closure_sha256": "sha256:96f4c917d48bcec3d04ceefbc105b3a3c90df1f17ec9ada6dff4e800c10ac3d4",
+    "r53_head": "2539b7414bf439837def6eca6983038149d9e9ea",
+    "root_cause": "PLANNER_TOTAL_TIME_BUDGET_VISIBILITY_GAP",
+    "sealed_plan_seconds": 120
+  },
+  "boundary": {
+    "OPENAI_API_KEY_read": false,
+    "paid_calls": 0,
+    "paid_spend_usd": "0",
+    "provider_network_calls": 0,
+    "semantic_overlay_created": false,
+    "world_model_mutations": 0
+  },
+  "certification": {
+    "kind": "OFFLINE_TYPED_PLANNER_PLAN_TIME_BUDGET_CONTRACT_REPAIR",
+    "stage": "025ZZE-3D-R54",
+    "status": "PASS"
+  },
+  "certification_id": "typed-planner-plan-time-budget-contract-certification:a1291ce200b9f8544f1132268b6eecf77225ef8aafeac55e0b31162102536598",
+  "historical_safety": {
+    "3d_live_bytes_modified": false,
+    "3d_namespace_reuse_allowed": false,
+    "3d_paid_provider_calls_preserved": 4,
+    "3d_rerun_allowed": false,
+    "3d_state": "PERMANENTLY_CLOSED"
+  },
+  "next_authorized_stage": "Commit and push this exact R54 production repair and offline certification. Do not preregister a fresh paid attempt until R54 is durable and the exact repaired final-round contract is independently revalidated offline.",
+  "production_files": {
+    "src/horizon/investigation/providers/openai_responses.py": "sha256:d5df1f33c38727fdfec16b77117bc36ae008bc85c4638c32201fd0d9a0c85272",
+    "src/horizon/investigation/semantic_understanding_coordinator.py": "sha256:e30f9400dd900940abcef04032c8ca99a6b48dac0f24de65d51c498480839837",
+    "src/horizon/investigation/typed_planner_model.py": "sha256:5a0e9297c85cbf7900a07c712e8c91f703fee7f7065d4f394e9bf4555cf71aa7"
+  },
+  "red_green": {
+    "all_direct_callers_budget_bound_after_repair": true,
+    "direct_caller_audit_missing_count": 3,
+    "direct_caller_audit_production_missing_count": 0,
+    "direct_caller_audit_red_proved": true,
+    "exact_3d_fourth_response_revalidated_offline": true,
+    "focused_budget_contract_surface_passed": true,
+    "full_investigation_unit_surface_passed": true,
+    "initial_contract_red_proved": true,
+    "initial_red_referenced_max_plan_total_seconds": true
+  },
+  "repair": {
+    "all_direct_planner_callers_bind_budget": true,
+    "compiler_guard_weakened": false,
+    "compiler_limit_raised": false,
+    "coordinator_passes_exact_limits_max_plan_total_seconds": true,
+    "hypothesis_round_limit_changed": false,
+    "legacy_test_callers_updated": 3,
+    "model_facing_input_contains_plan_budget": true,
+    "over_budget_typed_planner_output_rejected_before_plan_compilation": true,
+    "plan_time_budget_bound_into_canonical_input_identity": true,
+    "plan_time_budget_bound_into_invocation_identity": true,
+    "provider_neutral_invocation_carries_exact_plan_time_budget": true,
+    "silent_timeout_clipping": false
+  },
+  "schema_version": 1,
+  "strict_compiler_authority": {
+    "byte_unchanged_by_r54": true,
+    "path": "src/horizon/investigation/plan.py",
+    "sha256": "sha256:a1bf794a6b84e6de5e248dfd864a00c202b01f9c5a2eb8865cf4f41edc79078a",
+    "total_plan_budget_enforcement_preserved": true
+  },
+  "test_files": {
+    "tests/unit/investigation/test_hypothesis_test_planning.py": "sha256:2fa6ddb9921902f75222e0200a69884034a06e03688cfcc3b4a1763c0eb6e88b",
+    "tests/unit/investigation/test_semantic_gap_typed_planner_model.py": "sha256:66539827a719b3ca189e24706ee4be76dfe2df1116c614e3aedc545951d028d0",
+    "tests/unit/investigation/test_typed_planner_openai_responses_adapter.py": "sha256:2dc7f8f9a827c5b42407895eed7a7008715f60dfbe6173bbbf505379a2e101e4",
+    "tests/unit/investigation/test_typed_planner_operation_semantics.py": "sha256:271fc3e761f5d5647e1e9cb8e68e043084198cd1ea927c8a6fd07e80c53b4c3d",
+    "tests/unit/investigation/test_typed_planner_plan_time_budget_contract.py": "sha256:5af9fba090413ff58cf77602f33d6b534bd100a6f1c089e768b683cdb8601650",
+    "tests/unit/investigation/test_typed_planner_request_view.py": "sha256:8f562d6cd67ea5f5aca3bd6caac2d5756f762cefa5f31cc13356597d33a73c0a"
+  }
+}

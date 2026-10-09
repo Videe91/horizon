@@ -1725,6 +1725,9 @@ def run_repository_what_it_is_semantic_understanding(
                 temperature=(
                     typed_planner_temperature
                 ),
+                max_plan_total_seconds=(
+                    limits.max_plan_total_seconds
+                ),
                 cost_cap_usd=(
                     _remaining_model_budget(
                         total_model_cost,
@@ -1953,6 +1956,9 @@ def run_repository_what_it_is_semantic_understanding(
                 ),
                 temperature=(
                     typed_planner_temperature
+                ),
+                max_plan_total_seconds=(
+                    limits.max_plan_total_seconds
                 ),
                 cost_cap_usd=(
                     _remaining_model_budget(

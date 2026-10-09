@@ -164,6 +164,7 @@ def invocation(
                 b"Horizon investigation operations."
             ),
             temperature=temperature,
+            max_plan_total_seconds=120,
             cost_cap_usd=Decimal(
                 "0.100000"
             ),
@@ -330,11 +331,21 @@ def test_adapter_sends_bounded_request_and_proposal_as_input() -> None:
         payload
     ) == {
         "proposal",
+        "plan_budget",
         "request",
         "schema_hash",
         "operation_semantics",
         "operation_semantics_id",
     }
+
+    assert (
+        payload[
+            "plan_budget"
+        ]
+        == {
+            "max_total_seconds": 120,
+        }
+    )
 
     assert (
         payload[

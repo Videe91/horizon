@@ -149,6 +149,7 @@ def test_invocation_is_deterministic_and_records_sealed_contract() -> None:
                 b"Horizon investigation operations."
             ),
             temperature=0.0,
+            max_plan_total_seconds=120,
             cost_cap_usd=Decimal(
                 "0.100000"
             ),
@@ -164,6 +165,7 @@ def test_invocation_is_deterministic_and_records_sealed_contract() -> None:
                 b"Horizon investigation operations."
             ),
             temperature=0.0,
+            max_plan_total_seconds=120,
             cost_cap_usd=Decimal(
                 "0.100000"
             ),
@@ -199,6 +201,7 @@ def test_changed_instruction_changes_invocation_identity() -> None:
             proposal=proposed,
             instruction=b"instruction one",
             temperature=0.0,
+            max_plan_total_seconds=120,
             cost_cap_usd=Decimal(
                 "0.100000"
             ),
@@ -211,6 +214,7 @@ def test_changed_instruction_changes_invocation_identity() -> None:
             proposal=proposed,
             instruction=b"instruction two",
             temperature=0.0,
+            max_plan_total_seconds=120,
             cost_cap_usd=Decimal(
                 "0.100000"
             ),
@@ -262,6 +266,7 @@ def test_valid_fake_model_executes_once_and_returns_validated_output() -> None:
                 b"proposal into legal typed operations."
             ),
             temperature=0.0,
+            max_plan_total_seconds=120,
             cost_cap_usd=Decimal(
                 "0.100000"
             ),
@@ -344,6 +349,7 @@ def test_invalid_output_is_recorded_and_not_returned_as_planner_output() -> None
             proposal=proposed,
             instruction=b"sealed instruction",
             temperature=0.0,
+            max_plan_total_seconds=120,
             cost_cap_usd=Decimal(
                 "0.100000"
             ),
@@ -402,6 +408,7 @@ def test_invented_proposal_identity_is_invalid() -> None:
             proposal=proposed,
             instruction=b"sealed instruction",
             temperature=0.0,
+            max_plan_total_seconds=120,
             cost_cap_usd=Decimal(
                 "0.100000"
             ),
@@ -443,6 +450,7 @@ def test_over_cap_result_is_retained_but_invalid() -> None:
             proposal=proposed,
             instruction=b"sealed instruction",
             temperature=0.0,
+            max_plan_total_seconds=120,
             cost_cap_usd=Decimal(
                 "0.100000"
             ),
@@ -507,6 +515,7 @@ def test_invalid_output_is_not_silently_retried() -> None:
             proposal=proposed,
             instruction=b"sealed instruction",
             temperature=0.0,
+            max_plan_total_seconds=120,
             cost_cap_usd=Decimal(
                 "0.100000"
             ),
@@ -556,6 +565,7 @@ def test_model_result_records_exact_provider_provenance() -> None:
             proposal=proposed,
             instruction=b"sealed instruction",
             temperature=None,
+            max_plan_total_seconds=120,
             cost_cap_usd=Decimal(
                 "0.100000"
             ),
@@ -609,6 +619,7 @@ def test_invocation_requires_positive_cost_cap(
             proposal=proposal(),
             instruction=b"sealed",
             temperature=0.0,
+            max_plan_total_seconds=120,
             cost_cap_usd=cost_cap,
         )
 
@@ -623,6 +634,7 @@ def test_empty_instruction_is_rejected() -> None:
             proposal=proposal(),
             instruction=b"",
             temperature=0.0,
+            max_plan_total_seconds=120,
             cost_cap_usd=Decimal(
                 "0.100000"
             ),
@@ -662,6 +674,7 @@ def test_model_boundary_does_not_create_world_model_truth() -> None:
             proposal=proposed,
             instruction=b"sealed",
             temperature=0.0,
+            max_plan_total_seconds=120,
             cost_cap_usd=Decimal(
                 "0.100"
             ),

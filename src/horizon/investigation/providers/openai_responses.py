@@ -236,6 +236,12 @@ def _canonical_input_json(
         "proposal": (
             invocation.proposal
         ),
+        "plan_budget": {
+            "max_total_seconds": (
+                invocation
+                .max_plan_total_seconds
+            ),
+        },
         "request": (
             make_typed_planner_request_view(
                 invocation.request

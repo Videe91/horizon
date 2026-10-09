@@ -97,6 +97,7 @@ class SemanticGapTypedPlannerModelInvocation:
 
     instruction: bytes
     temperature: float | None
+    max_plan_total_seconds: int
     cost_cap_usd: Decimal
 
     instruction_hash: str
@@ -500,12 +501,33 @@ def _validate_cost_cap(
         )
 
 
+def _validate_max_plan_total_seconds(
+    max_plan_total_seconds: int,
+) -> None:
+    if (
+        isinstance(
+            max_plan_total_seconds,
+            bool,
+        )
+        or not isinstance(
+            max_plan_total_seconds,
+            int,
+        )
+        or max_plan_total_seconds <= 0
+    ):
+        raise SemanticGapTypedPlannerModelError(
+            "max plan total seconds must be "
+            "a positive integer"
+        )
+
+
 def make_semantic_gap_typed_planner_invocation(
     *,
     request: InvestigationRequest,
     proposal: InvestigationProposal,
     instruction: bytes,
     temperature: float | None,
+    max_plan_total_seconds: int,
     cost_cap_usd: Decimal,
 ) -> SemanticGapTypedPlannerModelInvocation:
     """Create one immutable pre-registered typed-planner invocation."""
@@ -527,6 +549,10 @@ def make_semantic_gap_typed_planner_invocation(
 
     _validate_temperature(
         temperature
+    )
+
+    _validate_max_plan_total_seconds(
+        max_plan_total_seconds
     )
 
     _validate_cost_cap(
@@ -583,6 +609,9 @@ def make_semantic_gap_typed_planner_invocation(
                 "temperature": (
                     normalized_temperature
                 ),
+                "max_plan_total_seconds": (
+                    max_plan_total_seconds
+                ),
                 "cost_cap_usd": (
                     str(
                         cost_cap_usd
@@ -619,6 +648,9 @@ def make_semantic_gap_typed_planner_invocation(
             "temperature": (
                 normalized_temperature
             ),
+            "max_plan_total_seconds": (
+                max_plan_total_seconds
+            ),
             "cost_cap_usd": (
                 str(
                     cost_cap_usd
@@ -634,6 +666,9 @@ def make_semantic_gap_typed_planner_invocation(
             instruction=instruction,
             temperature=(
                 normalized_temperature
+            ),
+            max_plan_total_seconds=(
+                max_plan_total_seconds
             ),
             cost_cap_usd=(
                 cost_cap_usd
@@ -898,6 +933,7 @@ def execute_semantic_gap_typed_planner(
     proposal: InvestigationProposal,
     instruction: bytes,
     temperature: float | None,
+    max_plan_total_seconds: int,
     cost_cap_usd: Decimal,
 ) -> SemanticGapTypedPlannerExecution:
     """Execute exactly one caller-selected typed-planner model call."""
@@ -908,6 +944,9 @@ def execute_semantic_gap_typed_planner(
             proposal=proposal,
             instruction=instruction,
             temperature=temperature,
+            max_plan_total_seconds=(
+                max_plan_total_seconds
+            ),
             cost_cap_usd=(
                 cost_cap_usd
             ),
@@ -969,6 +1008,38 @@ def execute_semantic_gap_typed_planner(
                 + str(
                     exc
                 )
+            ),
+        )
+
+        return (
+            SemanticGapTypedPlannerExecution(
+                invocation=invocation,
+                result=result,
+                planner_output=None,
+                run=run,
+            )
+        )
+
+    aggregate_max_seconds = sum(
+        binding.draft.max_seconds
+        for binding
+        in planner_output.bindings
+    )
+
+    if (
+        aggregate_max_seconds
+        > invocation.max_plan_total_seconds
+    ):
+        run = _make_run(
+            invocation=invocation,
+            result=result,
+            validation_result=(
+                SemanticGapTypedPlannerValidationResult
+                .INVALID
+            ),
+            rejection_reason=(
+                "planner output aggregate max_seconds "
+                "exceeds pre-registered plan time budget"
             ),
         )
 

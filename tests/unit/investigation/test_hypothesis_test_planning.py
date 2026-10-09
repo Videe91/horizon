@@ -487,6 +487,7 @@ def test_existing_typed_planner_model_boundary_accepts_derived_proposal() -> Non
                 b"into legal typed Horizon operations."
             ),
             temperature=None,
+            max_plan_total_seconds=120,
             cost_cap_usd=Decimal(
                 "0.100000"
             ),

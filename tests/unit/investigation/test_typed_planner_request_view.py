@@ -123,6 +123,7 @@ def invocation(
                 b"Translate into legal typed operations."
             ),
             temperature=None,
+            max_plan_total_seconds=120,
             cost_cap_usd=Decimal(
                 "0.100000"
             ),
