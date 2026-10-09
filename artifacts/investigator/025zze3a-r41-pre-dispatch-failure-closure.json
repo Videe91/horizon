@@ -1,0 +1,62 @@
+{
+  "attempt": {
+    "attempt_id": "horizon-self-025zze3a",
+    "failure_class": "LiveHarnessError",
+    "failure_message": "OPENAI_API_KEY is absent after live lock creation",
+    "failure_stage": "AFTER_LIVE_LOCK_BEFORE_PROVIDER_DISPATCH",
+    "namespace_reuse_allowed": false,
+    "rerun_allowed": false,
+    "state": "PERMANENTLY_CLOSED"
+  },
+  "certification": {
+    "purpose": "Durably close fresh Horizon self-test 025ZZE-3A after an irreversible live lock was created but before any provider request was dispatched.",
+    "stage": "025ZZE-3A-R41",
+    "status": "PASS"
+  },
+  "closure_id": "fresh-autonomous-semantic-self-test-closure:b0c3b6d11f3066f02127d8cc1dd015be9c4a2ad51d796c8f54e37bc14d822da2",
+  "next_authorized_stage": "Push this exact R41 closure commit. After it is durable, preregister a completely fresh Horizon self-test namespace. Do not reuse horizon-self-025zze3a or any of its live paths.",
+  "preserved_live_authority": {
+    "attempt_ledger_path": "/tmp/horizon-025zze3a-live-attempt-ledger.jsonl",
+    "attempt_ledger_sha256": "sha256:591d7570e4fb2f6f9e25e30b0c3d7f03d7dc28e7023d32aa62fff6019df34b45",
+    "final_result_path": "/tmp/horizon-025zze3a-live-result.json",
+    "final_result_sha256": "sha256:a5ff373730c12acccf261f06032c0da5eb806297ac501b492266f53899f5a50e",
+    "live_lock_path": "/tmp/horizon-025zze3a-live.lock",
+    "live_lock_sha256": "sha256:0f6b6efb67853cd788accb2a80c4f1911333ad6ea4edd12d9cd6747553bcf355",
+    "response_spool_file_count": 0,
+    "response_spool_path": "/tmp/horizon-025zze3a-live-response-spool"
+  },
+  "provider_evidence": {
+    "automatic_retry_allowed": false,
+    "ledger_events": [
+      "ATTEMPT_STARTED",
+      "RUN_FAILED"
+    ],
+    "model_cost_usd": "0",
+    "paid_model_call_occurred": false,
+    "provider_attempt_events": 0,
+    "provider_calls_completed": 0,
+    "provider_response_events": 0,
+    "provider_response_files": 0
+  },
+  "r41_boundary": {
+    "OPENAI_API_KEY_read": false,
+    "live_state_deleted": false,
+    "live_state_modified": false,
+    "paid_spend_usd": "0",
+    "provider_calls": 0,
+    "repository_operations": 0,
+    "world_model_mutations": 0
+  },
+  "repository_authority": {
+    "frozen_horizon_target_head": "6151aad2081d9a849a6aac7a6081a2d7b32c4334",
+    "frozen_prefect_head": "2338265f658845a9bef8ce7baf07519b89846dc8",
+    "host_r40_head": "86aa30a15e657aef2a73cbd6b3cfe687121736bb",
+    "production_source_modified_by_r41": false
+  },
+  "semantic_authority": {
+    "semantic_overlay_created": false,
+    "semantic_promotions": 0,
+    "what_it_is_closed": false,
+    "world_model_mutations": 0
+  }
+}
