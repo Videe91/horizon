@@ -1,0 +1,340 @@
+{
+  "adaptive_loop_contract": {
+    "final_round_addressability_rule": "On the final round, the planner receives the deterministic address hints before operation selection and should prefer the strongest relevant implementation/test candidates within the sealed six-step plan budget.",
+    "final_round_requirement": "every unresolved exact question has material READ_SOURCE coverage and every selected source-backed hypothesis basis path is READ_SOURCE",
+    "hypothesis_source": "fresh investigator output from this attempt",
+    "initial_state": "start from frozen target initial evidence only",
+    "live_plan_not_preordained": "The live model is not required to reproduce the exact offline R46 six-path plan; it remains responsible for selecting a legal bounded plan from visible authority.",
+    "prior_read_visibility": "next planner receives bounded semantic operational context for prior READ_SOURCE evidence",
+    "promotion_requirement": "SUPPORTED is insufficient alone; all supporting evidence IDs used for automatic promotion must be executed material READ_SOURCE evidence",
+    "repository_address_hints": "For every hypothesis planning round, Horizon derives bounded deterministic candidate Python source/test paths from the exact frozen Python repository index and the exact current planning questions.",
+    "repository_address_hints_authority": "Address hints are navigation only. They are not evidence, claims, proof, support or contradiction and cannot cross the semantic promotion boundary.",
+    "repository_address_hints_bound": "At most six deterministic path candidates are exposed per exact planning question.",
+    "round_1_questions": "source hypothesis test questions",
+    "round_exhaustion": "STILL_INCOMPLETE on hypothesis round 2 of 2 must return BOUNDED_STOP with no further provider call",
+    "still_incomplete_transition": "exact evaluator missing_evidence_questions become the next hypothesis-round planning questions",
+    "unknown_source_end_policy": "use READ_SOURCE end_line=null rather than guessing an integer end when true source EOF is not established"
+  },
+  "attempt": {
+    "attempt_id": "horizon-self-025zze3d",
+    "attempt_kind": "FRESH_AUTONOMOUS_SEMANTIC_UNDERSTANDING_ATTEMPT",
+    "closed_3a_namespace_reuse_forbidden": true,
+    "closed_3b_namespace_reuse_forbidden": true,
+    "closed_3c_namespace_reuse_forbidden": true,
+    "continuation_of_025zze2": false,
+    "continuation_of_025zze3a": false,
+    "continuation_of_025zze3b": false,
+    "continuation_of_025zze3c": false,
+    "historical_call_9_reuse_forbidden": true,
+    "historical_closed_025zze2_provider_calls": 8,
+    "historical_closed_025zze3a_provider_calls": 0,
+    "historical_closed_025zze3b_provider_calls": 5,
+    "historical_closed_025zze3b_spend_usd": "1.492275",
+    "historical_closed_025zze3c_provider_calls": 0,
+    "historical_closed_025zze3c_spend_usd": "0",
+    "local_provider_call_ordinal_starts_at": 1
+  },
+  "attempt_spool_protocol": {
+    "after_each_completed_provider_response": [
+      "persist exact provider response to a new response spool file",
+      "flush and fsync response spool before semantic validation",
+      "append RESPONSE_SPOOLED event to attempt ledger",
+      "flush and fsync ledger"
+    ],
+    "after_provider_exception": [
+      "append FAILED event with exception class and message",
+      "flush and fsync ledger",
+      "perform no automatic retry",
+      "preserve all attempt state for forensic recovery"
+    ],
+    "attempt_ledger_path": "/tmp/horizon-025zze3d-live-attempt-ledger.jsonl",
+    "before_each_provider_request": [
+      "verify local provider-call ordinal does not exceed max_provider_calls",
+      "verify remaining aggregate cost authority is positive",
+      "append ATTEMPT event to ledger before network dispatch",
+      "flush and fsync ledger"
+    ],
+    "before_first_provider_credential_use": [
+      "create fresh 3D live lock using exclusive creation",
+      "reverify certified 3D runner HEAD and clean tree",
+      "reverify frozen Horizon target HEAD, cleanliness and remote-free state",
+      "reverify Prefect frozen HEAD and cleanliness",
+      "reverify semantic overlay absent",
+      "reverify 3A, 3B and 3C remain permanently closed and byte-preserved",
+      "reverify the R50 deterministic runner import-bootstrap authority before provider credential access"
+    ],
+    "before_live_namespace_entry": [
+      "execute the certified self-bootstrap before any horizon.* import: derive repository authority from the runner's own __file__ location and place the exact repository src directory first on sys.path",
+      "do not depend on shell PYTHONPATH, launch cwd, or git --show-toplevel for import bootstrap",
+      "perform the sealed local non-printing OPENAI_API_KEY presence/nonempty preflight",
+      "if credential preflight fails, stop before creating any 3D attempt state"
+    ],
+    "extraction_cache_path": "/tmp/horizon-025zze3d-extraction-cache",
+    "final_result_spool_path": "/tmp/horizon-025zze3d-live-result.json",
+    "fresh_namespace_absent_at_preregistration": true,
+    "live_lock_path": "/tmp/horizon-025zze3d-live.lock",
+    "rerun_policy": "If the 3D lock, ledger, response spool, result spool, extraction cache, or semantic overlay exists after live namespace entry, do not rerun. Inspect and certify preserved state first.",
+    "response_spool_directory": "/tmp/horizon-025zze3d-live-response-spool"
+  },
+  "boundary": {
+    "3a_live_state_modified": false,
+    "3b_live_state_modified": false,
+    "3c_live_state_modified": false,
+    "3d_live_namespace_created": false,
+    "OPENAI_API_KEY_read": false,
+    "credential_preflight_performed": false,
+    "live_execution_authorized_inside_r51": false,
+    "live_execution_performed": false,
+    "paid_calls_this_stage": 0,
+    "provider_calls_this_stage": 0,
+    "sdk_client_constructed": false,
+    "semantic_promotions_this_stage": 0,
+    "target_investigation_operations_this_stage": 0,
+    "world_model_mutations_this_stage": 0
+  },
+  "certification": {
+    "mode": "FRESH_REPAIRED_HORIZON_SELF_TEST_PREREGISTRATION",
+    "stage": "025ZZE-3D-R51",
+    "status": "PASS"
+  },
+  "control_repository": {
+    "clean": true,
+    "commit": "2338265f658845a9bef8ce7baf07519b89846dc8",
+    "must_remain_unmodified_during_horizon_self_test": true,
+    "name": "Prefect",
+    "path": "/Users/vineetpandey/dev/horizon/.targets/prefect",
+    "tree": "053e8a0bea66705e8eaca1a4162efe7671e9604e"
+  },
+  "coordinator_limits": {
+    "max_evidence_record_bytes": 2000000,
+    "max_hypothesis_rounds": 2,
+    "max_investigator_rounds": 3,
+    "max_plan_steps": 6,
+    "max_plan_total_seconds": 120,
+    "max_provider_calls": 9,
+    "max_total_evidence_bytes": 8000000,
+    "max_total_model_cost_usd": "2.700000"
+  },
+  "cost_authority": {
+    "aggregate_exam_cap_usd": "2.700000",
+    "authorization_policy": "Every model call receives only the coordinator's remaining aggregate attempt budget. Legacy fixed per-call $0.30 authority is not used.",
+    "exam_budget_scope": "THIS_FRESH_ATTEMPT_ONLY",
+    "historical_025zze2_spend_charged_to_this_attempt": false,
+    "pricing_policy": "Conservatively meter every GPT-6 Astra call using Standard long-context token rates regardless of actual input size.",
+    "pricing_usd_per_million_tokens": {
+      "cache_write_per_million": "25.00",
+      "cached_input_per_million": "2.00",
+      "input_per_million": "20.00",
+      "output_per_million": "75.00"
+    },
+    "pricing_verified_date": "2026-10-09",
+    "short_context_threshold_input_tokens": 272000
+  },
+  "credential_preflight_contract": {
+    "allowed_check": "Locally verify that OPENAI_API_KEY exists and is nonempty without printing, hashing, persisting, logging, transmitting, or validating the credential.",
+    "attempt_ledger_must_not_be_created_by_preflight": true,
+    "credential_value_must_not_be_emitted": true,
+    "credential_value_must_not_be_persisted": true,
+    "failure_policy": "If the local non-printing presence check fails, do not enter the 3D live namespace and do not consume the attempt.",
+    "live_lock_must_not_be_created_by_preflight": true,
+    "live_runner_policy": "The exact certified 3D runner must self-bootstrap the repository src authority independently of shell PYTHONPATH and cwd. After credential presence preflight passes, it must create the exclusive 3D live lock and revalidate all sealed authorities before constructing the OpenAI client or dispatching any provider request.",
+    "provider_network_calls": 0,
+    "purpose": "Prevent the fresh 3D namespace from being burned solely because OPENAI_API_KEY is absent while also preventing recurrence of the 3C import-bootstrap failure.",
+    "required_before_live_namespace_entry": true,
+    "sdk_client_construction": false
+  },
+  "historical_authority": {
+    "closed_attempt_025zze3a_r41": {
+      "attempt_id": "horizon-self-025zze3a",
+      "closure_id": "fresh-autonomous-semantic-self-test-closure:b0c3b6d11f3066f02127d8cc1dd015be9c4a2ad51d796c8f54e37bc14d822da2",
+      "model_cost_usd": "0",
+      "namespace_reuse_forbidden": true,
+      "path": "artifacts/investigator/025zze3a-r41-pre-dispatch-failure-closure.json",
+      "provider_calls_completed": 0,
+      "sha256": "sha256:32feae37c77ee2aec0328c308f9b579f1298fbaaad6295fef56289b86a5cbba6",
+      "state": "PERMANENTLY_CLOSED"
+    },
+    "closed_attempt_025zze3b_r44": {
+      "attempt_id": "horizon-self-025zze3b",
+      "closure_id": "fresh-autonomous-semantic-self-test-closure:a3c5dd8854376b1e26acf200ee393c721c49ec745bb514034f059e28ecd559e8",
+      "model_cost_usd": "1.492275",
+      "namespace_reuse_forbidden": true,
+      "path": "artifacts/investigator/025zze3b-r44-bounded-stop-closure.json",
+      "provider_calls_completed": 5,
+      "sha256": "sha256:8a1840119191149d8eeb79dbecc6d35953ec2086dfb78e4fea28d94eb2940c56",
+      "state": "PERMANENTLY_CLOSED"
+    },
+    "closed_attempt_025zze3c_r49": {
+      "attempt_id": "horizon-self-025zze3c",
+      "closure_id": "fresh-autonomous-semantic-self-test-closure:3cf19442dd90c30415aa39dcb31ddeac81050317d507e234ad40f3af7eaeb32a",
+      "model_cost_usd": "0",
+      "namespace_reuse_forbidden": true,
+      "path": "artifacts/investigator/025zze3c-r49-pre-dispatch-import-failure-closure.json",
+      "provider_calls_completed": 0,
+      "sha256": "sha256:9a0e28ebee85c021544fef2e4752eee276545f9d5f874923721e14b9c42fd8cf",
+      "state": "PERMANENTLY_CLOSED"
+    },
+    "final_round_consumption_certification_r46": {
+      "certification_id": "final-round-address-hint-consumption-certification:1e4fe612e2b99e741f9393dd84d76ea2b9cc716ed252616bd1265016ff3e143a",
+      "path": "artifacts/investigator/025zze3b-r46-final-round-address-hint-consumption-certification.json",
+      "sha256": "sha256:604df18c74bb15f5656674b6b9740f3952a99e9aababfc9b8b3e504c2e0383b9",
+      "status": "PASS"
+    },
+    "live_runner_import_bootstrap_repair_r50": {
+      "certification_id": "live-runner-import-bootstrap-certification:1a1ce4d8eace0424440635f7ae55be386ad6bce73569dda7b346d5da4f63e1b2",
+      "path": "artifacts/investigator/025zze3c-r50-live-runner-import-bootstrap-certification.json",
+      "reference_runner_path": "artifacts/investigator/025zze3c-r50-live-runner-import-bootstrap-reference.py",
+      "reference_runner_sha256": "sha256:afa03c1ca3f128fd8e2580e5283dd2d4384f1e0d35232fe2aaca2680e68c725b",
+      "sha256": "sha256:fdb91c2b055e6e3a9d669b8bd1777aa2c36ff3f2e50a18b24cc914ab4b8a9c78",
+      "status": "PASS"
+    },
+    "planner_addressability_repair_r45": {
+      "certification_id": "planner-addressability-offline-certification:ce79abfef17fa181a40733789a3253eb5a1520a5982557b491acb1f6944ccf40",
+      "path": "artifacts/investigator/025zze3b-r45-planner-addressability-offline-certification.json",
+      "sha256": "sha256:fb1f15a8ffe31d87f5ee083674294af203c8d6fc34d2e0a720d76af157e47fea",
+      "status": "PASS"
+    },
+    "r43_reference_harness": {
+      "certificate_path": "artifacts/investigator/025zze3b-r43-live-harness-certification.json",
+      "certificate_sha256": "sha256:c2939cc0596a23a7a40d966f2fc9d9c996bb6dd444e491fffa005a38e0ca4583",
+      "certification": "R43_EXACT_LIVE_HARNESS_OFFLINE_CERTIFICATION",
+      "direct_live_reuse_for_3d": false,
+      "reason": "R43 is historical durability authority only. Fresh 3D must derive its self-bootstrapping runner from the R50 reference repair and bind it to the R51 seal.",
+      "runner_path": "artifacts/investigator/025zze3b-live-runner.py",
+      "runner_sha256": "sha256:4a481f816f58e6294cde5e33f2da3c83953c0711b5c54a02cb3dd1f05ab99d5d",
+      "status": "PASS"
+    }
+  },
+  "instructions": {
+    "hypothesis_evaluator": {
+      "bytes": 1443,
+      "sha256": "sha256:0d776662f5e4d17834dca18d9233df01ef7bcc8bf2b5d0e82a23043d2a22a896",
+      "utf8": "Evaluate the supplied source hypothesis only against the evidence visible in the supplied hypothesis-evaluation request.\n\nUse the exact verdict vocabulary and structured-output schema supplied by Horizon.\n\nReturn SUPPORTED only when the visible evidence materially supports the hypothesis, resolves the supplied test questions for the semantic-gap question, contains no material contradiction, and leaves no material evidence question unresolved.\n\nReturn CONTRADICTED only when the visible evidence materially contradicts the hypothesis, supplies no supporting evidence that prevents that conclusion, and leaves no material evidence question unresolved.\n\nReturn STILL_INCOMPLETE whenever the evidence is mixed, insufficient, indirect, or leaves any material question unresolved. In that case, state the remaining evidence questions precisely.\n\nEvery supporting_evidence_id and contradicting_evidence_id must identify evidence present in this exact request.\n\nTreat source_excerpt as observed repository source evidence. Evidence records that expose only identity, kind, hash, and byte size are metadata-only in this invocation: do not invent, infer, or claim knowledge of their hidden canonical payload bodies.\n\nDo not create a claim, epistemic assessment, World Model assertion, semantic proposition, or semantic-gap closure. This output is a non-authoritative evidence evaluation only.\n\nReturn only the required structured evaluation output.\n"
+    },
+    "investigator": {
+      "bytes": 1191,
+      "sha256": "sha256:d71eafb0e9d7fff0ead56c6b26a4e9732eb6502de7dc4c5bf6b754b897faa3b4",
+      "utf8": "Resolve only the supplied repository WHAT_IT_IS semantic gap using the exact evidence present in the InvestigationRequest.\n\nDo not invent repository content, paths, symbols, behavior, relationships, or evidence.\n\nIf the current evidence is insufficient to form a materially supported primary-purpose hypothesis, return PROPOSE_INVESTIGATION with the smallest concrete investigation questions needed to obtain decisive read-only repository evidence.\n\nPrefer questions that can identify exact source passages establishing, qualifying, or contradicting the repository's primary software purpose.\n\nWhen the visible evidence is sufficient to state a bounded primary-purpose interpretation, return PROPOSE_HYPOTHESIS with one concise hypothesis and concrete test questions that could confirm or falsify it from repository evidence.\n\nIf the evidence genuinely cannot support progress, use the existing insufficient-evidence or refinement disposition rather than inventing certainty.\n\nDo not create a claim, epistemic assessment, World Model assertion, semantic proposition, or semantic-gap closure. Model output is proposal authority only.\n\nReturn only the required structured investigator output.\n"
+    },
+    "typed_planner": {
+      "bytes": 1333,
+      "sha256": "sha256:39be6f282333af9ea61c01fae2418e0b414d62d3b08044322ff48deeb945fe21",
+      "utf8": "Translate the supplied investigation questions only into legal typed Horizon investigation operations using the supplied operation-semantics contract.\n\nUse the smallest bounded read-only operations that can answer each question.\n\nPrefer READ_SOURCE when an exact source path is already defensible from visible evidence. If an exact integer source end is already established, use that bounded end. If the path and starting point are known but the true source end is not established, use READ_SOURCE with end_line=null so Horizon resolves the frozen observed EOF rather than inventing an integer end line. Use SEARCH_SOURCE when the exact source location is not yet known. INSPECT_SYMBOL may be used when a known symbol definition materially answers the question.\n\nPrior READ_SOURCE operational context may contain only a bounded semantic projection of the earlier source read. Treat omitted lines as unknown; do not infer their contents.\n\nDo not invent repository paths, line numbers, symbols, call coordinates, or hidden source content.\n\nDo not use RESOLVE_CALL in this certification exam because the autonomous coordinator intentionally fails closed for InvestigationCallObservation until a canonical call-observation evidence bridge exists.\n\nDo not mutate the repository.\n\nReturn only the required structured typed-planner output.\n"
+    }
+  },
+  "model": {
+    "max_output_tokens": 4096,
+    "model_id": "gpt-6-astra",
+    "provider": "OPENAI",
+    "reasoning_effort": "high",
+    "sdk_max_retries": 0,
+    "store": false,
+    "temperature": null,
+    "timeout_seconds": 300,
+    "wrapper_retries": 0
+  },
+  "next_authorized_stage": "Derive and offline-certify an exact 025ZZE-3D-bound durable live harness from the R50 self-bootstrapping reference runner. The new harness must consume this R51 seal, use only the fresh 3D namespace, preserve 3A/3B/3C forever, bind the R45/R46 semantic repair, retain the R50 deterministic import bootstrap, and make zero provider calls during certification. Do not execute the paid 3D exam in the harness-certification stage.",
+  "offline_reference": {
+    "3d_live_supported_outcome_predeclared": false,
+    "agent_card_delivery_predeclared_as_existing": false,
+    "final_supported_outcome_predeclared": false,
+    "live_model_must_choose_identical_paths": false,
+    "r46_exact_3b_missing_question_count": 3,
+    "r46_legal_final_plan_step_count": 6,
+    "r46_reference_read_paths": [
+      "src/horizon/world_model/repository_semantic_store.py",
+      "tests/unit/world_model/test_repository_semantic_store.py",
+      "src/horizon/world_model/repository_deterministic.py",
+      "tests/unit/cards/test_repository_world_model_projection.py",
+      "src/horizon/cards/repository.py",
+      "pyproject.toml"
+    ],
+    "r50_import_bootstrap_certified": true,
+    "r50_reference_live_authorized": false
+  },
+  "repair_authority": {
+    "r33": "source hypothesis and selected source basis preserved",
+    "r34": "final-round source basis requires material READ_SOURCE",
+    "r35": "READ_SOURCE supports deterministic observed EOF",
+    "r36": "STILL_INCOMPLETE missing questions drive next round",
+    "r37": "prior READ_SOURCE semantic context reaches next planner",
+    "r38": "R33-R37 coherent two-round loop certified offline",
+    "r44": "3B BOUNDED_STOP diagnosed as final-round evidence addressability gap and permanently closed",
+    "r45": "bounded deterministic repository address hints added as non-evidentiary planner navigation authority",
+    "r46": "exact 3B missing questions offline-certified to consume address hints into a legal six-step READ_SOURCE plan through the real investigation executor",
+    "r49": "3C permanently closed after a pre-provider-dispatch ModuleNotFoundError; provider calls and spend remained zero",
+    "r50": "deterministic live-runner repository/src self-bootstrap certified offline with PYTHONPATH absent and launch cwd outside the repository"
+  },
+  "runner_authority": {
+    "branch": "feat/autonomous-semantic-understanding-025",
+    "certified_production_head": "2b948e6e41850c6f36ed2735cfb3b17bbf8b2a69",
+    "final_round_consumption_authority_head": "f275083cd56c734abf0dd23b0d34113ef1b849de",
+    "new_3d_bound_harness_required": true,
+    "preregistration_host_head": "664dec86d1dfe067b846017801449a745a598492",
+    "production_src_matches_r50_authority": true,
+    "production_src_tree": "3107f5267aa18aaf2a70645ca9e8fbd14a0b5bae",
+    "r43_harness_historical_only": true,
+    "r48_3c_runner_direct_reuse_forbidden": true,
+    "r50_reference_runner_is_derivation_authority": true,
+    "r50_reference_runner_live_authorized": false,
+    "r50_reference_runner_path": "artifacts/investigator/025zze3c-r50-live-runner-import-bootstrap-reference.py",
+    "r50_reference_runner_sha256": "sha256:afa03c1ca3f128fd8e2580e5283dd2d4384f1e0d35232fe2aaca2680e68c725b"
+  },
+  "runner_import_bootstrap_contract": {
+    "authority_stage": "025ZZE-3C-R50",
+    "certificate_path": "artifacts/investigator/025zze3c-r50-live-runner-import-bootstrap-certification.json",
+    "certificate_sha256": "sha256:fdb91c2b055e6e3a9d669b8bd1777aa2c36ff3f2e50a18b24cc914ab4b8a9c78",
+    "certification_id": "live-runner-import-bootstrap-certification:1a1ce4d8eace0424440635f7ae55be386ad6bce73569dda7b346d5da4f63e1b2",
+    "reference_runner_path": "artifacts/investigator/025zze3c-r50-live-runner-import-bootstrap-reference.py",
+    "reference_runner_sha256": "sha256:afa03c1ca3f128fd8e2580e5283dd2d4384f1e0d35232fe2aaca2680e68c725b",
+    "required_for_3d_harness": true,
+    "requirements": {
+      "3d_bound_runner_offline_certification_required": true,
+      "bootstrap_before_first_horizon_import": true,
+      "exact_repository_src_first_on_sys_path": true,
+      "git_toplevel_bootstrap_dependency_forbidden": true,
+      "launch_cwd_dependency_forbidden": true,
+      "reference_runner_direct_live_reuse_forbidden": true,
+      "repository_root_from_runner_file_location": true,
+      "shell_pythonpath_dependency_forbidden": true
+    }
+  },
+  "safe_non_success_contract": {
+    "BOUNDED_STOP": "valid safe outcome if evidence remains incomplete after round 2 of 2",
+    "CONTRADICTED": "stop without promotion",
+    "budget_exhaustion": "stop before next unauthorized provider call",
+    "invalid_model_output": "stop without promotion",
+    "pre_provider_runtime_failure": "preserve namespace state, close the attempt, make no retry, and preregister a fresh namespace only after the runtime defect is independently repaired and certified",
+    "provider_failure": "preserve state and stop without automatic retry"
+  },
+  "schema_version": 1,
+  "seal_id": "fresh-autonomous-semantic-self-test-seal:fe14612f44cb260e66c80226882566139fb80b6d06abe1dd8d92b1a3f9af3394",
+  "success_contract": {
+    "coordinator_disposition": "PROMOTED",
+    "final_evaluation_verdict": "SUPPORTED",
+    "prefect_repository_mutations": 0,
+    "semantic_overlay_persisted": true,
+    "supporting_evidence_material_only": true,
+    "target_repository_mutations": 0,
+    "what_it_is_closed": true
+  },
+  "target": {
+    "base_investigation_request_id": "investigation-request:fe6c0526a0667730eba56abe4dc465b958cac79616d78842857198e76a5b5d61",
+    "base_world_model_snapshot_id": "world-model-snapshot:44d0df5367ae7e6a1fa212e80cf6a79eab422cda3dec9b56ed0166944365faff",
+    "clean": true,
+    "commit": "6151aad2081d9a849a6aac7a6081a2d7b32c4334",
+    "initial_evidence_ids": [
+      "declared-python-dependency-set:96d09be949466add9c704196f5ef3c2fbb8d72589b613323ebfe8baf5d16aaca",
+      "git-blob-evidence:04f33da4024e2f63cebd242911b3e16d24683443eb14506a6f24ef3fccf62075"
+    ],
+    "name": "Horizon self target",
+    "path": "/Users/vineetpandey/dev/horizon/.targets/horizon-self-025zze2",
+    "remote_free": true,
+    "repository_observation_id": "git-observation:a453d58352a0769d5fbc954c808c977f2e0a65eb095d862d5f3f8a9566cab5b5",
+    "semantic_overlay_path": "/Users/vineetpandey/.horizon/state/repository-semantic-world-model/repository-semantic-overlay-d329d3b43241ca002e16779b83f7caa2de0e729d9c078f71c5952261c3297def.json",
+    "semantic_overlay_present_at_preregistration": false,
+    "tree": "373ebadeac1ad41fa2532c113f4a850ca379d962",
+    "what_it_is_gap_id": "repository-semantic-gap:b530b9c5bd7f0108fe555ddbd2d74250c07ca5e854e2e1ddda5dcc030fb01e5d",
+    "what_it_is_question_id": "repository-semantic-gap-question:627bdd67d2987320db7e045a86ea8c87a4c256ab4bf3c44c86b90c52d8775ab8"
+  }
+}
