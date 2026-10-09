@@ -1,0 +1,148 @@
+{
+  "authority": {
+    "frozen_target_head": "6151aad2081d9a849a6aac7a6081a2d7b32c4334",
+    "frozen_target_tree": "373ebadeac1ad41fa2532c113f4a850ca379d962",
+    "r45_certificate_sha256": "sha256:fb1f15a8ffe31d87f5ee083674294af203c8d6fc34d2e0a720d76af157e47fea",
+    "r45_certification_id": "planner-addressability-offline-certification:ce79abfef17fa181a40733789a3253eb5a1520a5982557b491acb1f6944ccf40",
+    "r46_certificate_sha256": "sha256:604df18c74bb15f5656674b6b9740f3952a99e9aababfc9b8b3e504c2e0383b9",
+    "r46_certification_id": "final-round-address-hint-consumption-certification:1e4fe612e2b99e741f9393dd84d76ea2b9cc716ed252616bd1265016ff3e143a",
+    "r54_certificate_sha256": "sha256:3591ca337b12f2940f668ba3fec47e6829c18f277161abe44b132f7cf56affea",
+    "r54_certification_id": "typed-planner-plan-time-budget-contract-certification:a1291ce200b9f8544f1132268b6eecf77225ef8aafeac55e0b31162102536598"
+  },
+  "budget_contract": {
+    "canonical_input_hash": "sha256:643474d2133975b5d8adc5a3811ea375ecd0e201d444a5fac322d73e85816e2f",
+    "changed_budget_changes_canonical_input_hash": true,
+    "changed_budget_changes_invocation_id": true,
+    "invocation_id": "semantic-gap-typed-planner-invocation:92303e3c5ac9f10a9f88aec278ce2d34e00ff8c060f69757408dae93975210e6",
+    "invocation_max_plan_total_seconds": 120,
+    "legal_120_second_plan_valid": true,
+    "over_budget_rejected_before_plan_compilation": true,
+    "over_budget_rejection_reason": "planner output aggregate max_seconds exceeds pre-registered plan time budget",
+    "over_budget_seconds": 126,
+    "provider_payload_plan_budget": {
+      "max_total_seconds": 120
+    },
+    "silent_clipping": false
+  },
+  "certification": {
+    "kind": "OFFLINE_FINAL_ROUND_ADDRESSABILITY_BUDGET_COMPOSITION",
+    "stage": "025ZZE-3D-R55",
+    "status": "PASS"
+  },
+  "certification_id": "final-round-addressability-budget-composition-certification:51fa0b496db02b9a445d9713558d293049c6c44699b9dadb01c925e131989d60",
+  "certifier": {
+    "path": "artifacts/investigator/025zze3d-r55-combined-final-round-offline-certifier.py",
+    "sha256": "sha256:a75453c90bce676f8aeabd92477f127012ecffd410c00bd0209c3c09e2a8c1e2"
+  },
+  "exact_final_round": {
+    "address_hint_selected_path_count": 5,
+    "address_hints_id": "typed-planner-repository-address-hints:466f6b74f99eabb1ab0f10d01f21511c90e3660b1d934999b71586ca6d94a569",
+    "aggregate_plan_seconds": 120,
+    "compiled_plan_id": "investigation-plan:24bb68403b3cba805ccb4e2a0a8685179ce1da085fc378184f139c6d7ca8efc7",
+    "current_hypothesis_round": 2,
+    "final_hypothesis_round": true,
+    "max_hypothesis_rounds": 2,
+    "per_step_max_seconds": 20,
+    "plan_step_count": 6,
+    "planning_question_count": 3,
+    "planning_questions": [
+      "At frozen commit 6151aad2081d9a849a6aac7a6081a2d7b32c4334, which implementation or test passages establish what software-understanding assertions build_repository_deterministic_world_model produces and RepositorySemanticWorldModelStore.load restores, beyond the visible inventory and Card projection logic?",
+      "At that commit, which implementation or test passages demonstrate how changes in repository source or evidence are incorporated into updated World Model state and regenerated Cards over time, rather than only constructing a Card from a supplied snapshot?",
+      "At that commit, which implementation or test passages demonstrate how AI agents receive or retrieve Cards or other software-understanding context, beyond render_repository_card returning a string and the investigator specification describing intended access?"
+    ],
+    "python_repository_index_id": "python-repository-index:e157b8ec4d3c227cffaf4430172630e75c7a6612fda5452f62a9671df2547e0d",
+    "sealed_max_total_seconds": 120,
+    "selected_read_source_paths": [
+      "src/horizon/world_model/repository_semantic_store.py",
+      "tests/unit/world_model/test_repository_semantic_store.py",
+      "src/horizon/world_model/repository_deterministic.py",
+      "tests/unit/cards/test_repository_world_model_projection.py",
+      "src/horizon/cards/repository.py",
+      "pyproject.toml"
+    ],
+    "source_basis_paths": [
+      "pyproject.toml"
+    ]
+  },
+  "material_evidence": {
+    "all_reads_end_at_observed_eof": true,
+    "canonical_evidence_count": 6,
+    "read_source_count": 6,
+    "records": [
+      {
+        "ends_at_observed_eof": true,
+        "evidence_id": "investigation-source-observation:bbeafbc3e3e4763c3242a4eb24277b9e5e25d0301f10f62a3d6576d1eda36f90",
+        "observation_id": "investigation-source-observation:bbeafbc3e3e4763c3242a4eb24277b9e5e25d0301f10f62a3d6576d1eda36f90",
+        "observed_source_line_count": 21,
+        "path": "pyproject.toml"
+      },
+      {
+        "ends_at_observed_eof": true,
+        "evidence_id": "investigation-source-observation:4221be1a463fd4485108806f2889edd700ead08a2e310d6ee04f5d767c306c4c",
+        "observation_id": "investigation-source-observation:4221be1a463fd4485108806f2889edd700ead08a2e310d6ee04f5d767c306c4c",
+        "observed_source_line_count": 445,
+        "path": "tests/unit/world_model/test_repository_semantic_store.py"
+      },
+      {
+        "ends_at_observed_eof": true,
+        "evidence_id": "investigation-source-observation:934c84b9a2792a6a8ee8d82432fc0ca0a6b9fc457d024270cd350d8810ec492c",
+        "observation_id": "investigation-source-observation:934c84b9a2792a6a8ee8d82432fc0ca0a6b9fc457d024270cd350d8810ec492c",
+        "observed_source_line_count": 759,
+        "path": "src/horizon/cards/repository.py"
+      },
+      {
+        "ends_at_observed_eof": true,
+        "evidence_id": "investigation-source-observation:9f8eb10070273e53066f6b9328d73dc5f1d0899f83759cd5db844d5ed6ae775b",
+        "observation_id": "investigation-source-observation:9f8eb10070273e53066f6b9328d73dc5f1d0899f83759cd5db844d5ed6ae775b",
+        "observed_source_line_count": 664,
+        "path": "tests/unit/cards/test_repository_world_model_projection.py"
+      },
+      {
+        "ends_at_observed_eof": true,
+        "evidence_id": "investigation-source-observation:7eabce8c3966222c925914b283979af655666efbdd510cb48131ed66f69d6ba1",
+        "observation_id": "investigation-source-observation:7eabce8c3966222c925914b283979af655666efbdd510cb48131ed66f69d6ba1",
+        "observed_source_line_count": 497,
+        "path": "src/horizon/world_model/repository_deterministic.py"
+      },
+      {
+        "ends_at_observed_eof": true,
+        "evidence_id": "investigation-source-observation:228672bcbfe0f9c700e13703358ecdcd346ee3c2447a7369d565350ebc2510b3",
+        "observation_id": "investigation-source-observation:228672bcbfe0f9c700e13703358ecdcd346ee3c2447a7369d565350ebc2510b3",
+        "observed_source_line_count": 1620,
+        "path": "src/horizon/world_model/repository_semantic_store.py"
+      }
+    ]
+  },
+  "next_authorized_stage": "Commit and push this exact R55 offline combined certification. Only after R55 is durable may a fresh 025ZZE-3E preregistration be considered. R55 itself does not authorize or execute any paid provider call.",
+  "not_proved": {
+    "ai_agent_card_delivery_exists": true,
+    "final_evaluator_will_return_supported": true,
+    "gpt_6_astra_will_choose_this_legal_plan_live": true
+  },
+  "proved": {
+    "canonical_material_evidence_created_offline": true,
+    "final_round_material_path_validator_passes": true,
+    "over_budget_plan_rejected_at_typed_planner_boundary": true,
+    "r45_exact_address_hints_recomputed_on_frozen_target": true,
+    "r46_selected_final_round_paths_still_addressable": true,
+    "r46_source_basis_path_covered": true,
+    "r54_budget_visible_in_exact_planner_invocation": true,
+    "r54_budget_visible_in_provider_facing_payload": true,
+    "real_investigation_executor_materializes_all_six_reads": true,
+    "six_step_final_round_fits_exact_120_second_budget": true,
+    "strict_deterministic_plan_compiler_accepts_legal_plan": true
+  },
+  "safety": {
+    "3d_namespace_reused": false,
+    "3d_replayed": false,
+    "OPENAI_API_KEY_read": false,
+    "frozen_target_mutations": 0,
+    "paid_calls": 0,
+    "paid_spend_usd": "0",
+    "provider_network_calls": 0,
+    "semantic_overlay_created": false,
+    "third_hypothesis_round_added": false,
+    "world_model_mutations": 0
+  },
+  "schema_version": 1
+}
