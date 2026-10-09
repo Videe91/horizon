@@ -1,0 +1,194 @@
+{
+  "adaptive_loop_contract": {
+    "final_round_requirement": "every unresolved exact question has material READ_SOURCE coverage and every selected source-backed hypothesis basis path is READ_SOURCE",
+    "hypothesis_source": "fresh investigator output from this attempt",
+    "initial_state": "start from frozen target initial evidence only",
+    "prior_read_visibility": "next planner receives bounded semantic operational context for prior READ_SOURCE evidence",
+    "promotion_requirement": "SUPPORTED is insufficient alone; all supporting evidence IDs used for automatic promotion must be executed material READ_SOURCE evidence",
+    "round_1_questions": "source hypothesis test questions",
+    "round_exhaustion": "STILL_INCOMPLETE on hypothesis round 2 of 2 must return BOUNDED_STOP with no further provider call",
+    "still_incomplete_transition": "exact evaluator missing_evidence_questions become the next hypothesis-round planning questions",
+    "unknown_source_end_policy": "use READ_SOURCE end_line=null rather than guessing an integer end when true source EOF is not established"
+  },
+  "attempt": {
+    "attempt_id": "horizon-self-025zze3a",
+    "attempt_kind": "FRESH_AUTONOMOUS_SEMANTIC_UNDERSTANDING_ATTEMPT",
+    "continuation_of_025zze2": false,
+    "historical_call_9_reuse_forbidden": true,
+    "historical_closed_attempt_provider_calls": 8,
+    "local_provider_call_ordinal_starts_at": 1
+  },
+  "attempt_spool_protocol": {
+    "after_each_completed_provider_response": [
+      "persist exact provider response to a new response spool file",
+      "flush and fsync response spool before semantic validation",
+      "append RESPONSE_SPOOLED event to attempt ledger",
+      "flush and fsync ledger"
+    ],
+    "after_provider_exception": [
+      "append FAILED event with exception class and message",
+      "flush and fsync ledger",
+      "perform no automatic retry",
+      "preserve all attempt state for forensic recovery"
+    ],
+    "attempt_ledger_path": "/tmp/horizon-025zze3a-live-attempt-ledger.jsonl",
+    "before_each_provider_request": [
+      "verify local provider-call ordinal does not exceed max_provider_calls",
+      "verify remaining aggregate cost authority is positive",
+      "append ATTEMPT event to ledger before network dispatch",
+      "flush and fsync ledger"
+    ],
+    "before_first_credential_load": [
+      "create fresh live lock using exclusive creation",
+      "reverify runner HEAD and clean tree",
+      "reverify frozen Horizon target HEAD, cleanliness and remote-free state",
+      "reverify Prefect frozen HEAD and cleanliness",
+      "reverify semantic overlay absent"
+    ],
+    "final_result_spool_path": "/tmp/horizon-025zze3a-live-result.json",
+    "fresh_namespace_absent_at_preregistration": true,
+    "live_lock_path": "/tmp/horizon-025zze3a-live.lock",
+    "rerun_policy": "If the fresh lock, ledger, response spool, result spool, or semantic overlay exists after a dispatched attempt, do not casually rerun. Inspect and certify the preserved state first.",
+    "response_spool_directory": "/tmp/horizon-025zze3a-live-response-spool"
+  },
+  "boundary": {
+    "live_execution_authorized_inside_r39": false,
+    "live_execution_performed": false,
+    "paid_calls_this_stage": 0,
+    "provider_calls_this_stage": 0,
+    "repository_operations_this_stage": 0,
+    "semantic_promotions_this_stage": 0,
+    "world_model_mutations_this_stage": 0
+  },
+  "certification": {
+    "mode": "FRESH_REPAIRED_HORIZON_SELF_TEST_PREREGISTRATION",
+    "stage": "025ZZE-3A-R39",
+    "status": "PASS"
+  },
+  "control_repository": {
+    "clean": true,
+    "commit": "2338265f658845a9bef8ce7baf07519b89846dc8",
+    "must_remain_unmodified_during_horizon_self_test": true,
+    "name": "Prefect",
+    "path": "/Users/vineetpandey/dev/horizon/.targets/prefect",
+    "tree": "053e8a0bea66705e8eaca1a4162efe7671e9604e"
+  },
+  "coordinator_limits": {
+    "max_evidence_record_bytes": 2000000,
+    "max_hypothesis_rounds": 2,
+    "max_investigator_rounds": 3,
+    "max_plan_steps": 6,
+    "max_plan_total_seconds": 120,
+    "max_provider_calls": 9,
+    "max_total_evidence_bytes": 8000000,
+    "max_total_model_cost_usd": "2.700000"
+  },
+  "cost_authority": {
+    "aggregate_exam_cap_usd": "2.700000",
+    "authorization_policy": "Every model call receives only the coordinator's remaining aggregate attempt budget. Legacy fixed per-call $0.30 authority is not used.",
+    "exam_budget_scope": "THIS_FRESH_ATTEMPT_ONLY",
+    "historical_025zze2_spend_charged_to_this_attempt": false,
+    "pricing_policy": "Conservatively meter every GPT-6 Astra call using Standard long-context token rates regardless of actual input size.",
+    "pricing_usd_per_million_tokens": {
+      "cache_write_per_million": "25.00",
+      "cached_input_per_million": "2.00",
+      "input_per_million": "20.00",
+      "output_per_million": "75.00"
+    },
+    "pricing_verified_date": "2026-10-09",
+    "short_context_threshold_input_tokens": 272000
+  },
+  "historical_authority": {
+    "closed_attempt_r32": {
+      "closed_global_provider_call_ordinal": 8,
+      "must_not_be_continued": true,
+      "path": "artifacts/investigator/025zze2c-r32-final-bounded-stop-certification.json",
+      "sha256": "sha256:36ed7149a8fb36e60a2cdd88017cb11d5dfb0f90f5436a12966882f97a8f323a"
+    },
+    "offline_repair_certification_r38": {
+      "path": "artifacts/investigator/025zze2c-r38-repaired-loop-offline-certification.json",
+      "sha256": "sha256:f87e648dd6061faf55abcd75db69b6baf86772de9937ec86d00751dcfe88ec88"
+    }
+  },
+  "instructions": {
+    "hypothesis_evaluator": {
+      "bytes": 1443,
+      "sha256": "sha256:0d776662f5e4d17834dca18d9233df01ef7bcc8bf2b5d0e82a23043d2a22a896",
+      "utf8": "Evaluate the supplied source hypothesis only against the evidence visible in the supplied hypothesis-evaluation request.\n\nUse the exact verdict vocabulary and structured-output schema supplied by Horizon.\n\nReturn SUPPORTED only when the visible evidence materially supports the hypothesis, resolves the supplied test questions for the semantic-gap question, contains no material contradiction, and leaves no material evidence question unresolved.\n\nReturn CONTRADICTED only when the visible evidence materially contradicts the hypothesis, supplies no supporting evidence that prevents that conclusion, and leaves no material evidence question unresolved.\n\nReturn STILL_INCOMPLETE whenever the evidence is mixed, insufficient, indirect, or leaves any material question unresolved. In that case, state the remaining evidence questions precisely.\n\nEvery supporting_evidence_id and contradicting_evidence_id must identify evidence present in this exact request.\n\nTreat source_excerpt as observed repository source evidence. Evidence records that expose only identity, kind, hash, and byte size are metadata-only in this invocation: do not invent, infer, or claim knowledge of their hidden canonical payload bodies.\n\nDo not create a claim, epistemic assessment, World Model assertion, semantic proposition, or semantic-gap closure. This output is a non-authoritative evidence evaluation only.\n\nReturn only the required structured evaluation output.\n"
+    },
+    "investigator": {
+      "bytes": 1191,
+      "sha256": "sha256:d71eafb0e9d7fff0ead56c6b26a4e9732eb6502de7dc4c5bf6b754b897faa3b4",
+      "utf8": "Resolve only the supplied repository WHAT_IT_IS semantic gap using the exact evidence present in the InvestigationRequest.\n\nDo not invent repository content, paths, symbols, behavior, relationships, or evidence.\n\nIf the current evidence is insufficient to form a materially supported primary-purpose hypothesis, return PROPOSE_INVESTIGATION with the smallest concrete investigation questions needed to obtain decisive read-only repository evidence.\n\nPrefer questions that can identify exact source passages establishing, qualifying, or contradicting the repository's primary software purpose.\n\nWhen the visible evidence is sufficient to state a bounded primary-purpose interpretation, return PROPOSE_HYPOTHESIS with one concise hypothesis and concrete test questions that could confirm or falsify it from repository evidence.\n\nIf the evidence genuinely cannot support progress, use the existing insufficient-evidence or refinement disposition rather than inventing certainty.\n\nDo not create a claim, epistemic assessment, World Model assertion, semantic proposition, or semantic-gap closure. Model output is proposal authority only.\n\nReturn only the required structured investigator output.\n"
+    },
+    "typed_planner": {
+      "bytes": 1333,
+      "sha256": "sha256:39be6f282333af9ea61c01fae2418e0b414d62d3b08044322ff48deeb945fe21",
+      "utf8": "Translate the supplied investigation questions only into legal typed Horizon investigation operations using the supplied operation-semantics contract.\n\nUse the smallest bounded read-only operations that can answer each question.\n\nPrefer READ_SOURCE when an exact source path is already defensible from visible evidence. If an exact integer source end is already established, use that bounded end. If the path and starting point are known but the true source end is not established, use READ_SOURCE with end_line=null so Horizon resolves the frozen observed EOF rather than inventing an integer end line. Use SEARCH_SOURCE when the exact source location is not yet known. INSPECT_SYMBOL may be used when a known symbol definition materially answers the question.\n\nPrior READ_SOURCE operational context may contain only a bounded semantic projection of the earlier source read. Treat omitted lines as unknown; do not infer their contents.\n\nDo not invent repository paths, line numbers, symbols, call coordinates, or hidden source content.\n\nDo not use RESOLVE_CALL in this certification exam because the autonomous coordinator intentionally fails closed for InvestigationCallObservation until a canonical call-observation evidence bridge exists.\n\nDo not mutate the repository.\n\nReturn only the required structured typed-planner output.\n"
+    }
+  },
+  "model": {
+    "max_output_tokens": 4096,
+    "model_id": "gpt-6-astra",
+    "provider": "OPENAI",
+    "reasoning_effort": "high",
+    "sdk_max_retries": 0,
+    "store": false,
+    "temperature": null,
+    "timeout_seconds": 300,
+    "wrapper_retries": 0
+  },
+  "next_authorized_stage": "Construct and certify the exact fresh live execution harness against this R39 seal. Do not dispatch any provider request until that harness independently revalidates every start guard and exact sealed configuration.",
+  "repair_authority": {
+    "r33": "source hypothesis and selected source basis preserved",
+    "r34": "final-round source basis requires material READ_SOURCE",
+    "r35": "READ_SOURCE supports deterministic observed EOF",
+    "r36": "STILL_INCOMPLETE missing questions drive next round",
+    "r37": "prior READ_SOURCE semantic context reaches next planner",
+    "r38": "R33-R37 coherent two-round loop certified offline"
+  },
+  "runner_authority": {
+    "branch": "feat/autonomous-semantic-understanding-025",
+    "certified_production_head": "24c9241012fa805855fd7755322fbc1d3bea9d41",
+    "production_src_matches_r38_certified_product": true,
+    "production_src_tree": "83bf5c9029729a3311023fe2133f2a04321136d0",
+    "runner_head": "b3265e493b40bb61902b90996a14c6e9a9ac8462"
+  },
+  "safe_non_success_contract": {
+    "BOUNDED_STOP": "valid safe outcome if evidence remains incomplete after round 2 of 2",
+    "CONTRADICTED": "stop without promotion",
+    "budget_exhaustion": "stop before next unauthorized provider call",
+    "invalid_model_output": "stop without promotion",
+    "provider_failure": "preserve state and stop without automatic retry"
+  },
+  "schema_version": 1,
+  "seal_id": "fresh-autonomous-semantic-self-test-seal:e6b5fe766bce96c1f6b9e971a2568df65362d794472a1e1091a5efc867ae2e54",
+  "success_contract": {
+    "coordinator_disposition": "PROMOTED",
+    "final_evaluation_verdict": "SUPPORTED",
+    "prefect_repository_mutations": 0,
+    "semantic_overlay_persisted": true,
+    "supporting_evidence_material_only": true,
+    "target_repository_mutations": 0,
+    "what_it_is_closed": true
+  },
+  "target": {
+    "base_investigation_request_id": "investigation-request:fe6c0526a0667730eba56abe4dc465b958cac79616d78842857198e76a5b5d61",
+    "base_world_model_snapshot_id": "world-model-snapshot:44d0df5367ae7e6a1fa212e80cf6a79eab422cda3dec9b56ed0166944365faff",
+    "clean": true,
+    "commit": "6151aad2081d9a849a6aac7a6081a2d7b32c4334",
+    "initial_evidence_ids": [
+      "declared-python-dependency-set:96d09be949466add9c704196f5ef3c2fbb8d72589b613323ebfe8baf5d16aaca",
+      "git-blob-evidence:04f33da4024e2f63cebd242911b3e16d24683443eb14506a6f24ef3fccf62075"
+    ],
+    "name": "Horizon self target",
+    "path": "/Users/vineetpandey/dev/horizon/.targets/horizon-self-025zze2",
+    "remote_free": true,
+    "repository_observation_id": "git-observation:a453d58352a0769d5fbc954c808c977f2e0a65eb095d862d5f3f8a9566cab5b5",
+    "semantic_overlay_path": "/Users/vineetpandey/.horizon/state/repository-semantic-world-model/repository-semantic-overlay-d329d3b43241ca002e16779b83f7caa2de0e729d9c078f71c5952261c3297def.json",
+    "semantic_overlay_present_at_preregistration": false,
+    "tree": "373ebadeac1ad41fa2532c113f4a850ca379d962",
+    "what_it_is_gap_id": "repository-semantic-gap:b530b9c5bd7f0108fe555ddbd2d74250c07ca5e854e2e1ddda5dcc030fb01e5d",
+    "what_it_is_question_id": "repository-semantic-gap-question:627bdd67d2987320db7e045a86ea8c87a4c256ab4bf3c44c86b90c52d8775ab8"
+  }
+}
